@@ -74,9 +74,9 @@ export const catalogApi = {
   getTokenReference({tokenPath, fdsVersion}) {
     const version = resolveVersion(fdsVersion);
     if (version.error) return version;
-    const item = catalog.items.find((candidate) => candidate.kind === 'token' && candidate.tokenPath === tokenPath && candidate.status === 'approved' && candidate.fdsVersion === version.resolvedFdsVersion);
+    const item = catalog.items.find((candidate) => candidate.kind === 'token' && [candidate.tokenPath, candidate.cssVariable, ...(candidate.aliases ?? [])].includes(tokenPath) && candidate.status === 'approved' && candidate.fdsVersion === version.resolvedFdsVersion);
     if (!item) return unavailableError(tokenPath, fdsVersion, version.resolvedFdsVersion);
-    return {...version, id: item.id, approvalStatus: item.status, fdsVersion: item.fdsVersion, tokenPath: item.tokenPath, dtcgValue: item.dtcgValue, cssVariable: item.cssVariable, aliasUsedBy: item.aliasUsedBy, permittedUsage: item.permittedUsage, dependencies: item.dependencies, accessibility: item.accessibility, source: item.source};
+    return {...version, id: item.id, approvalStatus: item.status, fdsVersion: item.fdsVersion, requestedTokenPath: tokenPath, tokenPath: item.tokenPath, aliases: item.aliases, layer: item.layer, dtcgValue: item.dtcgValue, sourceValue: item.sourceValue, resolvedValue: item.resolvedValue, cssVariable: item.cssVariable, aliasUsedBy: item.aliasUsedBy, referencedBy: item.referencedBy, permittedUsage: item.permittedUsage, dependencies: item.dependencies, accessibility: item.accessibility, source: item.source};
   },
   getAdoptionRecipe({itemId, fdsVersion, mode = 'package'}) {
     const version = resolveVersion(fdsVersion);
@@ -105,7 +105,7 @@ export async function createMcpServer() {
   register('get_component', 'Get FDS component', 'Get one approved component API, immutable code snapshot, dependencies, states, and accessibility constraints.', v.strictObject({id: idField, fdsVersion: versionField}), catalogApi.getComponent);
   register('get_template', 'Get FDS template', 'Get one approved fake-data template, allowed composition, immutable code snapshot, and accessibility constraints.', v.strictObject({id: idField, fdsVersion: versionField}), catalogApi.getTemplate);
   register('get_prompt', 'Get FDS prompt', 'Get one approved bounded prompt and its fake-data restriction. Never invokes sampling.', v.strictObject({id: idField, fdsVersion: versionField}), catalogApi.getPrompt);
-  register('get_token_reference', 'Get FDS token reference', 'Get one approved DTCG token reference, CSS variable, alias, and permitted usage.', v.strictObject({tokenPath: idField, fdsVersion: versionField}), catalogApi.getTokenReference);
+  register('get_token_reference', 'Get FDS token reference', 'Get one approved FDS token by canonical path, shorthand, or CSS variable, including its source value, resolved value, references, and permitted usage.', v.strictObject({tokenPath: idField, fdsVersion: versionField}), catalogApi.getTokenReference);
   register('get_adoption_recipe', 'Get FDS adoption recipe', 'Get approved package or owned-copy adoption instructions with exact version and drift warning.', v.strictObject({itemId: idField, fdsVersion: versionField, mode: v.optional(v.picklist(['package', 'copy']))}), catalogApi.getAdoptionRecipe);
   await Promise.all([addListAllDocumentationTool(server), addGetDocumentationTool(server), addGetStoryDocumentationTool(server)]);
   return server;

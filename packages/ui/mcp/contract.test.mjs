@@ -30,14 +30,31 @@ before(async () => {
 
 after(async () => new Promise((resolve, reject) => httpServer.close((error) => error ? reject(error) : resolve())));
 
-test('six catalog contracts resolve approved immutable records', async () => {
+test('catalog contracts resolve approved records and all 257 tokens', async () => {
   const artifact = JSON.parse(await readFile(new URL('../dist/fds-catalog.json', import.meta.url), 'utf8'));
   assert.equal(artifact.currentApprovedVersion, '0.1.1');
+  const tokenItems = artifact.items.filter((item) => item.kind === 'token');
+  assert.equal(tokenItems.length, 257);
+  for (const item of tokenItems) {
+    const result = catalogApi.getTokenReference({tokenPath: item.cssVariable});
+    assert.equal(result.error, undefined, `${item.cssVariable} did not resolve`);
+    assert.equal(result.tokenPath, item.tokenPath);
+  }
   assert.equal(catalogApi.searchCatalog({query: ''}).items.every((item) => item.approvalStatus === 'approved'), true);
+  const tokenSearch = catalogApi.searchCatalog({query: 'token', kind: 'token', limit: 50});
+  assert.equal(tokenSearch.total, 257);
+  assert.equal(tokenSearch.count, 50);
+  assert.equal(tokenSearch.hasMore, true);
+  const pagedIds = [];
+  for (let offset = 0; offset < tokenSearch.total; offset += 50) pagedIds.push(...catalogApi.searchCatalog({query: 'token', kind: 'token', limit: 50, offset}).items.map((item) => item.id));
+  assert.equal(new Set(pagedIds).size, 257);
   assert.match(catalogApi.getComponent({id: 'component.button'}).codeSnapshot, /export const Button/);
   assert.match(catalogApi.getTemplate({id: 'template.list-and-review'}).codeSnapshot, /function ListAndReview/);
   assert.match(catalogApi.getPrompt({id: 'prompt.codex-prototype'}).fakeDataRestriction, /Never include production/);
   assert.equal(catalogApi.getTokenReference({tokenPath: 'color.blue.600'}).cssVariable, '--fds-primitive-color-blue-600');
+  assert.equal(catalogApi.getTokenReference({tokenPath: 'color.action.primary'}).tokenPath, 'semantic.color.action.primary');
+  assert.equal(catalogApi.getTokenReference({tokenPath: '--fds-button-height-medium'}).resolvedValue, '32px');
+  assert.equal(catalogApi.getTokenReference({tokenPath: 'compat.font.family.body'}).sourceValue, 'var(--fds-font-family-body)');
   assert.match(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'copy'}).driftWarning, /adopting team owns/);
 });
 
@@ -84,18 +101,34 @@ test('Streamable HTTP supports the catalog and complete Storybook documentation'
   assert.deepEqual(listed.message.result.tools.map((tool) => tool.name).sort(), expectedTools);
   for (const tool of listed.message.result.tools.filter((tool) => catalogTools.includes(tool.name))) assert.deepEqual(tool.annotations, {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false});
 
-  const called = await rpc('tools/call', {name: 'get_component', arguments: {id: 'component.button'}});
-  assert.equal(called.message.result.structuredContent.approvalStatus, 'approved');
-  assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.1.1');
+  const toolCalls = [
+    ['search_catalog', {query: 'token', kind: 'token', limit: 5}],
+    ['get_component', {id: 'component.button'}],
+    ['get_template', {id: 'template.list-and-review'}],
+    ['get_prompt', {id: 'prompt.codex-prototype'}],
+    ['get_token_reference', {tokenPath: '--fds-color-action-primary'}],
+    ['get_adoption_recipe', {itemId: 'component.button'}],
+    ['list-all-documentation', {withStoryIds: true}],
+    ['get-documentation', {id: 'components-actions-button'}],
+    ['get-documentation-for-story', {componentId: 'components-actions-button', storyName: 'Playground'}],
+  ];
+  const results = new Map();
 
-  const documentation = await rpc('tools/call', {name: 'list-all-documentation', arguments: {withStoryIds: true}}, 2);
-  assert.match(documentation.message.result.content[0].text, /Button/);
-  assert.match(documentation.message.result.content[0].text, /foundations-tokens--primitives/);
-  assert.match(documentation.message.result.content[0].text, /patterns-finance-sales-invoice-summary/);
+  for (const [index, [name, arguments_]] of toolCalls.entries()) {
+    const result = await rpc('tools/call', {name, arguments: arguments_}, index + 10);
+    assert.equal(result.message.result.isError, undefined, `${name} returned an MCP error`);
+    results.set(name, result.message.result);
+  }
 
-  const button = await rpc('tools/call', {name: 'get-documentation', arguments: {id: 'components-actions-button'}}, 3);
-  assert.match(button.message.result.content[0].text, /Button/);
-  assert.match(button.message.result.content[0].text, /tone/);
+  assert.equal(results.get('search_catalog').structuredContent.total, 257);
+  assert.equal(results.get('get_component').structuredContent.approvalStatus, 'approved');
+  assert.match(results.get('get_template').structuredContent.codeSnapshot, /function ListAndReview/);
+  assert.match(results.get('get_prompt').structuredContent.fakeDataRestriction, /Never include production/);
+  assert.equal(results.get('get_token_reference').structuredContent.resolvedValue, '#0067e7');
+  assert.match(results.get('get_adoption_recipe').structuredContent.install, /@fr8labs\/ui@0\.1\.1/);
+  assert.match(results.get('list-all-documentation').content[0].text, /foundations-tokens--primitives/);
+  assert.match(results.get('get-documentation').content[0].text, /tone/);
+  assert.match(results.get('get-documentation-for-story').content[0].text, /Button - Playground/);
 });
 
 test('Vercel handler serves the same MCP over /api/mcp', async () => {

@@ -23,7 +23,29 @@ All tools are read-only. They do not publish, write files, call product APIs, ac
 
 ## Quick start
 
-Requirements: Node.js and an MCP client that supports Streamable HTTP.
+Use the shared Streamable HTTP endpoint. No local server or Node.js installation is required.
+
+```text
+https://fr8labs-fds-mcp.vercel.app/api/mcp
+```
+
+Add it to your MCP client's configuration:
+
+```json
+{
+  "mcpServers": {
+    "fr8labs-fds": {
+      "url": "https://fr8labs-fds-mcp.vercel.app/api/mcp"
+    }
+  }
+}
+```
+
+Restart the client after changing its configuration.
+
+## Run locally
+
+Requirements: Node.js.
 
 From this repository:
 
@@ -38,22 +60,6 @@ The local endpoint is:
 ```text
 http://127.0.0.1:8787/mcp
 ```
-
-## Connect your MCP client
-
-Add the endpoint to your client's MCP configuration. The exact config location depends on the client.
-
-```json
-{
-  "mcpServers": {
-    "fr8labs-fds": {
-      "url": "http://127.0.0.1:8787/mcp"
-    }
-  }
-}
-```
-
-Restart the client after changing its configuration.
 
 ## Try it
 
@@ -74,9 +80,9 @@ Get the List and review template and its fake-data schema.
 ## Pilot status
 
 - Current catalog version: `0.1.1`
-- Local engineering pilot only
+- Shared Engineering pilot hosted on Vercel
 - Approved catalog results only
-- Authentication is deferred until the hosted release
+- Public and unauthenticated; do not add confidential or customer data
 - RootApp validation and final FDS release promotion remain pending
 
 Run the MCP contract checks with:

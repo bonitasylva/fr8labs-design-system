@@ -5,16 +5,11 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {ValibotJsonSchemaAdapter} from '@tmcp/adapter-valibot';
 import {HttpTransport} from '@tmcp/transport-http';
-import {addGetDocumentationTool, addGetStoryDocumentationTool, addListAllDocumentationTool} from '@storybook/mcp';
 import {McpServer} from 'tmcp';
 import * as v from 'valibot';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const catalog = JSON.parse(readFileSync(resolve(packageRoot, 'dist/fds-catalog.json'), 'utf8'));
-const manifests = new Map([
-  ['./manifests/components.json', readFileSync(resolve(packageRoot, 'manifests/components.json'), 'utf8')],
-  ['./manifests/docs.json', readFileSync(resolve(packageRoot, 'manifests/docs.json'), 'utf8')],
-]);
 const supportedVersions = [...new Set(catalog.items.filter((item) => item.status === 'approved').map((item) => item.fdsVersion))].sort();
 const annotations = {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false};
 const versionField = v.optional(v.pipe(v.string(), v.maxLength(30)));
@@ -74,9 +69,9 @@ export const catalogApi = {
   getTokenReference({tokenPath, fdsVersion}) {
     const version = resolveVersion(fdsVersion);
     if (version.error) return version;
-    const item = catalog.items.find((candidate) => candidate.kind === 'token' && [candidate.tokenPath, candidate.cssVariable, ...(candidate.aliases ?? [])].includes(tokenPath) && candidate.status === 'approved' && candidate.fdsVersion === version.resolvedFdsVersion);
+    const item = catalog.items.find((candidate) => candidate.kind === 'token' && candidate.tokenPath === tokenPath && candidate.status === 'approved' && candidate.fdsVersion === version.resolvedFdsVersion);
     if (!item) return unavailableError(tokenPath, fdsVersion, version.resolvedFdsVersion);
-    return {...version, id: item.id, approvalStatus: item.status, fdsVersion: item.fdsVersion, requestedTokenPath: tokenPath, tokenPath: item.tokenPath, aliases: item.aliases, layer: item.layer, dtcgValue: item.dtcgValue, sourceValue: item.sourceValue, resolvedValue: item.resolvedValue, cssVariable: item.cssVariable, aliasUsedBy: item.aliasUsedBy, referencedBy: item.referencedBy, permittedUsage: item.permittedUsage, dependencies: item.dependencies, accessibility: item.accessibility, source: item.source};
+    return {...version, id: item.id, approvalStatus: item.status, fdsVersion: item.fdsVersion, tokenPath: item.tokenPath, dtcgValue: item.dtcgValue, cssVariable: item.cssVariable, aliasUsedBy: item.aliasUsedBy, permittedUsage: item.permittedUsage, dependencies: item.dependencies, accessibility: item.accessibility, source: item.source};
   },
   getAdoptionRecipe({itemId, fdsVersion, mode = 'package'}) {
     const version = resolveVersion(fdsVersion);
@@ -91,30 +86,17 @@ function toolResult(result) {
   return {content: [{type: 'text', text: JSON.stringify(result, null, 2)}], structuredContent: result, ...(result.error ? {isError: true} : {})};
 }
 
-export function storybookManifestProvider(_request, path) {
-  const manifest = manifests.get(path);
-  if (!manifest) throw new Error(`Unsupported Storybook manifest path: ${path}`);
-  return Promise.resolve(manifest);
-}
-
-export async function createMcpServer() {
-  const server = new McpServer({name: 'fr8labs-fds-mcp-server', version: catalog.currentApprovedVersion, description: 'Read-only Fr8Labs FDS catalog and published Storybook documentation.'}, {adapter: new ValibotJsonSchemaAdapter(), capabilities: {tools: {listChanged: true}}}).withContext();
+export function createMcpServer() {
+  const server = new McpServer({name: 'fr8labs-fds-mcp-server', version: catalog.currentApprovedVersion, description: 'Authenticated, versioned, read-only Fr8Labs FDS catalog.'}, {adapter: new ValibotJsonSchemaAdapter(), capabilities: {tools: {}}});
   const register = (name, title, description, schema, handler) => server.tool({name, title, description, schema, annotations}, (input) => toolResult(handler(input)));
 
   register('search_catalog', 'Search FDS catalog', 'Search approved FDS catalog records. Returns approved summaries only and never returns code snapshots.', v.strictObject({query: v.pipe(v.string(), v.minLength(1), v.maxLength(200), v.regex(/\S/, 'Query must contain a non-whitespace character.')), kind: v.optional(v.picklist(['component', 'template', 'prompt', 'token', 'adoption_recipe'])), fdsVersion: versionField, limit: v.optional(v.pipe(v.number(), v.integer(), v.minValue(1), v.maxValue(50))), offset: v.optional(v.pipe(v.number(), v.integer(), v.minValue(0)))}), catalogApi.searchCatalog);
   register('get_component', 'Get FDS component', 'Get one approved component API, immutable code snapshot, dependencies, states, and accessibility constraints.', v.strictObject({id: idField, fdsVersion: versionField}), catalogApi.getComponent);
   register('get_template', 'Get FDS template', 'Get one approved fake-data template, allowed composition, immutable code snapshot, and accessibility constraints.', v.strictObject({id: idField, fdsVersion: versionField}), catalogApi.getTemplate);
   register('get_prompt', 'Get FDS prompt', 'Get one approved bounded prompt and its fake-data restriction. Never invokes sampling.', v.strictObject({id: idField, fdsVersion: versionField}), catalogApi.getPrompt);
-  register('get_token_reference', 'Get FDS token reference', 'Get one approved FDS token by canonical path, shorthand, or CSS variable, including its source value, resolved value, references, and permitted usage.', v.strictObject({tokenPath: idField, fdsVersion: versionField}), catalogApi.getTokenReference);
+  register('get_token_reference', 'Get FDS token reference', 'Get one approved DTCG token reference, CSS variable, alias, and permitted usage.', v.strictObject({tokenPath: idField, fdsVersion: versionField}), catalogApi.getTokenReference);
   register('get_adoption_recipe', 'Get FDS adoption recipe', 'Get approved package or owned-copy adoption instructions with exact version and drift warning.', v.strictObject({itemId: idField, fdsVersion: versionField, mode: v.optional(v.picklist(['package', 'copy']))}), catalogApi.getAdoptionRecipe);
-  await Promise.all([addListAllDocumentationTool(server), addGetDocumentationTool(server), addGetStoryDocumentationTool(server)]);
   return server;
-}
-
-let transportPromise;
-
-function getTransport() {
-  return transportPromise ??= createMcpServer().then((server) => new HttpTransport(server, {path: null, disableSse: true}));
 }
 
 function authorized(header, token) {
@@ -124,20 +106,28 @@ function authorized(header, token) {
   return expected.length === actual.length && timingSafeEqual(expected, actual);
 }
 
-export async function respondToMcpRequest(request, {token, path = '/mcp'} = {}) {
-  if (new URL(request.url).pathname !== path) return new Response(null, {status: 404});
-  if (token && !authorized(request.headers.get('authorization'), token)) {
-    return Response.json({error: 'unauthorized'}, {status: 401, headers: {'www-authenticate': 'Bearer realm="Fr8Labs FDS MCP"'}});
-  }
-  if (request.headers.has('origin')) return Response.json({error: 'browser origins are not allowed'}, {status: 403});
-  return await (await getTransport()).respond(request, {request, manifestProvider: storybookManifestProvider}) ?? new Response(null, {status: 404});
-}
-
 export function createHttpServer({token} = {}) {
+  const transport = new HttpTransport(createMcpServer(), {path: '/mcp', disableSse: true});
   return createNodeServer(async (request, response) => {
     const url = new URL(request.url ?? '/', `http://${request.headers.host ?? '127.0.0.1'}`);
+    if (url.pathname !== '/mcp') {
+      response.writeHead(404).end();
+      return;
+    }
+    if (token && !authorized(request.headers.authorization, token)) {
+      response.writeHead(401, {'content-type': 'application/json', 'www-authenticate': 'Bearer realm="Fr8Labs FDS MCP"'}).end(JSON.stringify({error: 'unauthorized'}));
+      return;
+    }
+    if (request.headers.origin) {
+      response.writeHead(403, {'content-type': 'application/json'}).end(JSON.stringify({error: 'browser origins are not allowed'}));
+      return;
+    }
     const body = request.method === 'POST' ? Buffer.concat(await Array.fromAsync(request)) : undefined;
-    const mcpResponse = await respondToMcpRequest(new Request(url, {method: request.method, headers: request.headers, body, ...(body ? {duplex: 'half'} : {})}), {token});
+    const mcpResponse = await transport.respond(new Request(url, {method: request.method, headers: request.headers, body, ...(body ? {duplex: 'half'} : {})}));
+    if (!mcpResponse) {
+      response.writeHead(404).end();
+      return;
+    }
     response.writeHead(mcpResponse.status, Object.fromEntries(mcpResponse.headers));
     response.end(Buffer.from(await mcpResponse.arrayBuffer()));
   });

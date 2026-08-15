@@ -8,7 +8,6 @@
     "test:mcp": "node --test mcp/contract.test.mjs"
   },
   "dependencies": {
-    "@storybook/mcp": "0.8.0",
     "@tmcp/adapter-valibot": "0.1.6",
     "@tmcp/transport-http": "0.8.6",
     "tmcp": "1.20.0",

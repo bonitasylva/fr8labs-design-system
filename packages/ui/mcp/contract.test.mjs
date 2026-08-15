@@ -4,7 +4,8 @@ import {after, before, test} from 'node:test';
 import vercelHandler from '../api/mcp.mjs';
 import {catalogApi, createHttpServer} from './server.mjs';
 
-const expectedTools = ['get_adoption_recipe', 'get_component', 'get_prompt', 'get_template', 'get_token_reference', 'search_catalog'];
+const catalogTools = ['get_adoption_recipe', 'get_component', 'get_prompt', 'get_template', 'get_token_reference', 'search_catalog'];
+const expectedTools = [...catalogTools, 'get-documentation', 'get-documentation-for-story', 'list-all-documentation'].sort();
 const token = 'local-contract-token';
 let httpServer;
 let endpoint;
@@ -52,7 +53,20 @@ test('version and approval boundaries never return a code snapshot', () => {
   assert.equal(catalogApi.searchCatalog({query: 'sales invoice'}).total, 0);
 });
 
-test('Streamable HTTP supports the local pilot, optional token, and only six read-only tools', async () => {
+test('Storybook manifests cover every published page and story', async () => {
+  const components = JSON.parse(await readFile(new URL('../manifests/components.json', import.meta.url), 'utf8'));
+  const docs = JSON.parse(await readFile(new URL('../manifests/docs.json', import.meta.url), 'utf8'));
+  const entries = Object.values(components.components);
+
+  assert.equal(entries.length + Object.keys(docs.docs).length, 31);
+  assert.equal(entries.reduce((count, entry) => count + (entry.stories?.length ?? 0), 0), 118);
+  assert.ok(components.components['components-actions-button']);
+  assert.ok(components.components['patterns-operations-list-and-review']);
+  assert.ok(components.components['foundations-tokens']);
+  assert.ok(docs.docs['getting-started-welcome--docs']);
+});
+
+test('Streamable HTTP supports the catalog and complete Storybook documentation', async () => {
   const unauthorized = await fetch(endpoint, {method: 'POST', headers: {'content-type': 'application/json'}, body: '{}'});
   assert.equal(unauthorized.status, 401);
 
@@ -68,11 +82,20 @@ test('Streamable HTTP supports the local pilot, optional token, and only six rea
 
   const listed = await rpc('tools/list');
   assert.deepEqual(listed.message.result.tools.map((tool) => tool.name).sort(), expectedTools);
-  for (const tool of listed.message.result.tools) assert.deepEqual(tool.annotations, {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false});
+  for (const tool of listed.message.result.tools.filter((tool) => catalogTools.includes(tool.name))) assert.deepEqual(tool.annotations, {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false});
 
   const called = await rpc('tools/call', {name: 'get_component', arguments: {id: 'component.button'}});
   assert.equal(called.message.result.structuredContent.approvalStatus, 'approved');
   assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.1.1');
+
+  const documentation = await rpc('tools/call', {name: 'list-all-documentation', arguments: {withStoryIds: true}}, 2);
+  assert.match(documentation.message.result.content[0].text, /Button/);
+  assert.match(documentation.message.result.content[0].text, /foundations-tokens--primitives/);
+  assert.match(documentation.message.result.content[0].text, /patterns-finance-sales-invoice-summary/);
+
+  const button = await rpc('tools/call', {name: 'get-documentation', arguments: {id: 'components-actions-button'}}, 3);
+  assert.match(button.message.result.content[0].text, /Button/);
+  assert.match(button.message.result.content[0].text, /tone/);
 });
 
 test('Vercel handler serves the same MCP over /api/mcp', async () => {

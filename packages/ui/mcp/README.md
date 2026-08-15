@@ -1,12 +1,12 @@
 # Fr8Labs FDS MCP
 
-> The approved Fr8Labs Design System catalog as a read-only API for AI assistants.
+> The Fr8Labs Design System catalog and published Storybook documentation as a read-only API for AI assistants.
 
 ## What is this?
 
-Fr8Labs FDS MCP helps an AI assistant find and use approved FDS components, templates, prompts, tokens, and adoption guidance without inventing APIs or reading the whole repository.
+Fr8Labs FDS MCP helps an AI assistant find and use FDS components, patterns, foundations, story scenarios, tokens, prompts, and adoption guidance without inventing APIs or reading the whole repository.
 
-It reads the same versioned catalog represented in Storybook. The pilot exposes approved content only and never modifies FDS or product data.
+The Storybook tools cover all 31 currently published pages and all 118 published story scenarios. The catalog tools remain approval-filtered; published experimental and internal Storybook material stays available as documentation without being presented as approved adoption guidance.
 
 ## Available tools
 
@@ -18,6 +18,9 @@ It reads the same versioned catalog represented in Storybook. The pilot exposes 
 | `get_prompt` | Read a bounded FDS authoring prompt. |
 | `get_token_reference` | Look up an approved token and CSS variable. |
 | `get_adoption_recipe` | Get package or source-copy adoption instructions. |
+| `list-all-documentation` | List every published Storybook component, pattern, foundation, document, and story ID. |
+| `get-documentation` | Read the API, props, guidance, and example stories for one Storybook entry. |
+| `get-documentation-for-story` | Read the usage example for one published story scenario. |
 
 All tools are read-only. They do not publish, write files, call product APIs, access customer data, or invoke AI sampling.
 
@@ -67,7 +70,7 @@ codex mcp list
 
 Add a remote server named `fr8labs-fds`, select **Streamable HTTP**, and use the endpoint above. No authentication headers are currently required. See your client's documentation if its configuration format differs from `mcpServers` JSON.
 
-After installation, confirm that the client shows six read-only tools. Official client guides: [Kiro](https://kiro.dev/docs/mcp/configuration/), [Cursor](https://docs.cursor.com/context/model-context-protocol), [Claude Code](https://code.claude.com/docs/en/mcp), and [Codex](https://developers.openai.com/codex/mcp/).
+After installation, confirm that the client shows nine read-only tools. Official client guides: [Kiro](https://kiro.dev/docs/mcp/configuration/), [Cursor](https://docs.cursor.com/context/model-context-protocol), [Claude Code](https://code.claude.com/docs/en/mcp), and [Codex](https://developers.openai.com/codex/mcp/).
 
 ## Run locally
 
@@ -92,22 +95,23 @@ http://127.0.0.1:8787/mcp
 Ask your AI assistant:
 
 ```text
-Search the FDS catalog for approved action components.
+List all FDS Storybook documentation and include story IDs.
 ```
 
 ```text
-Show me the approved Button API and accessibility constraints.
+Get the documentation for components-actions-button and use its real props and examples.
 ```
 
 ```text
-Get the List and review template and its fake-data schema.
+Show the Foundations/Tokens documentation, including primitive and semantic token usage.
 ```
 
 ## Pilot status
 
 - Current catalog version: `0.1.1`
 - Shared Engineering pilot hosted on Vercel
-- Approved catalog results only
+- Storybook snapshot: 31 published pages and 118 published story scenarios
+- Approval-filtered catalog plus complete published Storybook documentation
 - Public and unauthenticated; do not add confidential or customer data
 - RootApp validation and final FDS release promotion remain pending
 

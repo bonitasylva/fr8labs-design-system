@@ -5,11 +5,16 @@ import {dirname, resolve} from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 import {ValibotJsonSchemaAdapter} from '@tmcp/adapter-valibot';
 import {HttpTransport} from '@tmcp/transport-http';
+import {addGetDocumentationTool, addGetStoryDocumentationTool, addListAllDocumentationTool} from '@storybook/mcp';
 import {McpServer} from 'tmcp';
 import * as v from 'valibot';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const catalog = JSON.parse(readFileSync(resolve(packageRoot, 'dist/fds-catalog.json'), 'utf8'));
+const manifestPaths = new Map([
+  ['./manifests/components.json', resolve(packageRoot, 'manifests/components.json')],
+  ['./manifests/docs.json', resolve(packageRoot, 'manifests/docs.json')],
+]);
 const supportedVersions = [...new Set(catalog.items.filter((item) => item.status === 'approved').map((item) => item.fdsVersion))].sort();
 const annotations = {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false};
 const versionField = v.optional(v.pipe(v.string(), v.maxLength(30)));
@@ -86,8 +91,14 @@ function toolResult(result) {
   return {content: [{type: 'text', text: JSON.stringify(result, null, 2)}], structuredContent: result, ...(result.error ? {isError: true} : {})};
 }
 
-export function createMcpServer() {
-  const server = new McpServer({name: 'fr8labs-fds-mcp-server', version: catalog.currentApprovedVersion, description: 'Authenticated, versioned, read-only Fr8Labs FDS catalog.'}, {adapter: new ValibotJsonSchemaAdapter(), capabilities: {tools: {}}});
+export function storybookManifestProvider(_request, path) {
+  const manifestPath = manifestPaths.get(path);
+  if (!manifestPath) throw new Error(`Unsupported Storybook manifest path: ${path}`);
+  return Promise.resolve(readFileSync(manifestPath, 'utf8'));
+}
+
+export async function createMcpServer() {
+  const server = new McpServer({name: 'fr8labs-fds-mcp-server', version: catalog.currentApprovedVersion, description: 'Read-only Fr8Labs FDS catalog and published Storybook documentation.'}, {adapter: new ValibotJsonSchemaAdapter(), capabilities: {tools: {listChanged: true}}}).withContext();
   const register = (name, title, description, schema, handler) => server.tool({name, title, description, schema, annotations}, (input) => toolResult(handler(input)));
 
   register('search_catalog', 'Search FDS catalog', 'Search approved FDS catalog records. Returns approved summaries only and never returns code snapshots.', v.strictObject({query: v.pipe(v.string(), v.minLength(1), v.maxLength(200), v.regex(/\S/, 'Query must contain a non-whitespace character.')), kind: v.optional(v.picklist(['component', 'template', 'prompt', 'token', 'adoption_recipe'])), fdsVersion: versionField, limit: v.optional(v.pipe(v.number(), v.integer(), v.minValue(1), v.maxValue(50))), offset: v.optional(v.pipe(v.number(), v.integer(), v.minValue(0)))}), catalogApi.searchCatalog);
@@ -96,7 +107,14 @@ export function createMcpServer() {
   register('get_prompt', 'Get FDS prompt', 'Get one approved bounded prompt and its fake-data restriction. Never invokes sampling.', v.strictObject({id: idField, fdsVersion: versionField}), catalogApi.getPrompt);
   register('get_token_reference', 'Get FDS token reference', 'Get one approved DTCG token reference, CSS variable, alias, and permitted usage.', v.strictObject({tokenPath: idField, fdsVersion: versionField}), catalogApi.getTokenReference);
   register('get_adoption_recipe', 'Get FDS adoption recipe', 'Get approved package or owned-copy adoption instructions with exact version and drift warning.', v.strictObject({itemId: idField, fdsVersion: versionField, mode: v.optional(v.picklist(['package', 'copy']))}), catalogApi.getAdoptionRecipe);
+  await Promise.all([addListAllDocumentationTool(server), addGetDocumentationTool(server), addGetStoryDocumentationTool(server)]);
   return server;
+}
+
+let transportPromise;
+
+function getTransport() {
+  return transportPromise ??= createMcpServer().then((server) => new HttpTransport(server, {path: null, disableSse: true}));
 }
 
 function authorized(header, token) {
@@ -112,7 +130,7 @@ export async function respondToMcpRequest(request, {token, path = '/mcp'} = {}) 
     return Response.json({error: 'unauthorized'}, {status: 401, headers: {'www-authenticate': 'Bearer realm="Fr8Labs FDS MCP"'}});
   }
   if (request.headers.has('origin')) return Response.json({error: 'browser origins are not allowed'}, {status: 403});
-  return await new HttpTransport(createMcpServer(), {path, disableSse: true}).respond(request) ?? new Response(null, {status: 404});
+  return await (await getTransport()).respond(request, {request, manifestProvider: storybookManifestProvider}) ?? new Response(null, {status: 404});
 }
 
 export function createHttpServer({token} = {}) {

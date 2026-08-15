@@ -106,28 +106,20 @@ function authorized(header, token) {
   return expected.length === actual.length && timingSafeEqual(expected, actual);
 }
 
+export async function respondToMcpRequest(request, {token, path = '/mcp'} = {}) {
+  if (new URL(request.url).pathname !== path) return new Response(null, {status: 404});
+  if (token && !authorized(request.headers.get('authorization'), token)) {
+    return Response.json({error: 'unauthorized'}, {status: 401, headers: {'www-authenticate': 'Bearer realm="Fr8Labs FDS MCP"'}});
+  }
+  if (request.headers.has('origin')) return Response.json({error: 'browser origins are not allowed'}, {status: 403});
+  return await new HttpTransport(createMcpServer(), {path, disableSse: true}).respond(request) ?? new Response(null, {status: 404});
+}
+
 export function createHttpServer({token} = {}) {
-  const transport = new HttpTransport(createMcpServer(), {path: '/mcp', disableSse: true});
   return createNodeServer(async (request, response) => {
     const url = new URL(request.url ?? '/', `http://${request.headers.host ?? '127.0.0.1'}`);
-    if (url.pathname !== '/mcp') {
-      response.writeHead(404).end();
-      return;
-    }
-    if (token && !authorized(request.headers.authorization, token)) {
-      response.writeHead(401, {'content-type': 'application/json', 'www-authenticate': 'Bearer realm="Fr8Labs FDS MCP"'}).end(JSON.stringify({error: 'unauthorized'}));
-      return;
-    }
-    if (request.headers.origin) {
-      response.writeHead(403, {'content-type': 'application/json'}).end(JSON.stringify({error: 'browser origins are not allowed'}));
-      return;
-    }
     const body = request.method === 'POST' ? Buffer.concat(await Array.fromAsync(request)) : undefined;
-    const mcpResponse = await transport.respond(new Request(url, {method: request.method, headers: request.headers, body, ...(body ? {duplex: 'half'} : {})}));
-    if (!mcpResponse) {
-      response.writeHead(404).end();
-      return;
-    }
+    const mcpResponse = await respondToMcpRequest(new Request(url, {method: request.method, headers: request.headers, body, ...(body ? {duplex: 'half'} : {})}), {token});
     response.writeHead(mcpResponse.status, Object.fromEntries(mcpResponse.headers));
     response.end(Buffer.from(await mcpResponse.arrayBuffer()));
   });

@@ -6,7 +6,7 @@
 
 Fr8Labs FDS MCP helps an AI assistant find and use FDS components, patterns, foundations, story scenarios, tokens, prompts, and adoption guidance without inventing APIs or reading the whole repository.
 
-The Storybook tools cover all 31 currently published pages and all 118 published story scenarios. The catalog tools remain approval-filtered; published experimental and internal Storybook material stays available as documentation without being presented as approved adoption guidance.
+The Storybook tools cover all 31 currently published pages and all 118 published story scenarios. The catalog includes all 257 canonical FDS CSS tokens. Published experimental and internal Storybook material stays available as documentation without being presented as approved adoption guidance.
 
 ## Available tools
 
@@ -16,7 +16,7 @@ The Storybook tools cover all 31 currently published pages and all 118 published
 | `get_component` | Read a component API, code snapshot, states, and accessibility guidance. |
 | `get_template` | Read an approved fake-data workflow template. |
 | `get_prompt` | Read a bounded FDS authoring prompt. |
-| `get_token_reference` | Look up an approved token and CSS variable. |
+| `get_token_reference` | Look up any of the 257 approved tokens by canonical path, shorthand, or CSS variable. |
 | `get_adoption_recipe` | Get package or source-copy adoption instructions. |
 | `list-all-documentation` | List every published Storybook component, pattern, foundation, document, and story ID. |
 | `get-documentation` | Read the API, props, guidance, and example stories for one Storybook entry. |
@@ -103,7 +103,7 @@ Get the documentation for components-actions-button and use its real props and e
 ```
 
 ```text
-Show the Foundations/Tokens documentation, including primitive and semantic token usage.
+Get the token reference for `--fds-color-action-primary`, including its source and resolved values.
 ```
 
 ## Pilot status
@@ -111,6 +111,7 @@ Show the Foundations/Tokens documentation, including primitive and semantic toke
 - Current catalog version: `0.1.1`
 - Shared Engineering pilot hosted on Vercel
 - Storybook snapshot: 31 published pages and 118 published story scenarios
+- Token catalog: 257 primitive, semantic, component, and compatibility records
 - Approval-filtered catalog plus complete published Storybook documentation
 - Public and unauthenticated; do not add confidential or customer data
 - RootApp validation and final FDS release promotion remain pending

@@ -21,15 +21,21 @@ It reads the same versioned catalog represented in Storybook. The pilot exposes 
 
 All tools are read-only. They do not publish, write files, call product APIs, access customer data, or invoke AI sampling.
 
-## Quick start
+## Install in your AI coding agent
 
-Use the shared Streamable HTTP endpoint. No local server or Node.js installation is required.
+The shared endpoint uses Streamable HTTP. No repository clone, local server, or Node.js installation is required.
 
 ```text
 https://fr8labs-fds-mcp.vercel.app/api/mcp
 ```
 
-Add it to your MCP client's configuration:
+### Kiro
+
+Use the [one-click Kiro installer](https://kiro.dev/launch/mcp/add?name=fr8labs-fds&config=%7B%22url%22%3A%22https%3A%2F%2Ffr8labs-fds-mcp.vercel.app%2Fapi%2Fmcp%22%2C%22disabled%22%3Afalse%7D), or add the JSON below to `.kiro/settings/mcp.json` for one workspace or `~/.kiro/settings/mcp.json` for all workspaces.
+
+### Cursor
+
+Add the JSON below to `.cursor/mcp.json` for one project or `~/.cursor/mcp.json` for all projects. Then open **Cursor Settings → Tools & MCP** and enable `fr8labs-fds` if prompted.
 
 ```json
 {
@@ -41,7 +47,27 @@ Add it to your MCP client's configuration:
 }
 ```
 
-Restart the client after changing its configuration.
+### Claude Code
+
+```sh
+claude mcp add --transport http --scope user fr8labs-fds https://fr8labs-fds-mcp.vercel.app/api/mcp
+claude mcp list
+```
+
+### Codex
+
+This config is shared by the Codex CLI, IDE extension, and ChatGPT desktop app on the same Codex host.
+
+```sh
+codex mcp add fr8labs-fds --url https://fr8labs-fds-mcp.vercel.app/api/mcp
+codex mcp list
+```
+
+### Other MCP clients
+
+Add a remote server named `fr8labs-fds`, select **Streamable HTTP**, and use the endpoint above. No authentication headers are currently required. See your client's documentation if its configuration format differs from `mcpServers` JSON.
+
+After installation, confirm that the client shows six read-only tools. Official client guides: [Kiro](https://kiro.dev/docs/mcp/configuration/), [Cursor](https://docs.cursor.com/context/model-context-protocol), [Claude Code](https://code.claude.com/docs/en/mcp), and [Codex](https://developers.openai.com/codex/mcp/).
 
 ## Run locally
 

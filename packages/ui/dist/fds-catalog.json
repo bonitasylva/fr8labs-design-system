@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "currentApprovedVersion": "0.1.1",
+  "items": [
+    {
+      "id": "component.button",
+      "kind": "component",
+      "status": "approved",
+      "fdsVersion": "0.1.1",
+      "title": "Button",
+      "summary": "FDS action control with primary, secondary, tertiary, and danger tones.",
+      "dependencies": [
+        "@fr8labs/ui@0.1.1",
+        "react>=19.0.0"
+      ],
+      "accessibility": [
+        "Use visible action text or provide an accessible name.",
+        "Loading and aria-disabled states block activation without removing the accessible name.",
+        "Use one primary action per action area."
+      ],
+      "source": {
+        "path": "packages/ui/src/components/Button.tsx",
+        "storybookTitle": "Components/Actions/Button",
+        "storybookId": "components-actions-button--playground"
+      },
+      "updatedAt": "2026-08-15",
+      "api": {
+        "import": "import {Button} from '@fr8labs/ui';",
+        "props": {
+          "tone": "'primary' | 'secondary' | 'tertiary' | 'danger'",
+          "size": "'small' | 'medium' | 'large'",
+          "loading": "boolean",
+          "fullWidth": "boolean"
+        }
+      },
+      "states": [
+        "default",
+        "hover",
+        "active",
+        "focus-visible",
+        "loading",
+        "disabled",
+        "aria-disabled"
+      ],
+      "promptId": "prompt.codex-prototype",
+      "codeSnapshot": "import {forwardRef, type ButtonHTMLAttributes, type MouseEventHandler, type ReactNode} from 'react';\n\nexport type ButtonTone = 'primary' | 'secondary' | 'tertiary' | 'danger';\nexport type ButtonSize = 'small' | 'medium' | 'large';\nexport type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {\n  children: ReactNode;\n  tone?: ButtonTone;\n  size?: ButtonSize;\n  loading?: boolean;\n  loadingAnnouncement?: string;\n  fullWidth?: boolean;\n  startIcon?: ReactNode;\n  endIcon?: ReactNode;\n};\n\nexport const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button({children, tone = 'primary', size = 'medium', loading = false, loadingAnnouncement = 'Loading', fullWidth = false, startIcon, endIcon, disabled, className, type = 'button', onClick, 'aria-disabled': ariaDisabled, ...props}, ref) {\n  const spinnerAtEnd = loading && !startIcon && Boolean(endIcon);\n  const inactive = loading || ariaDisabled === true || ariaDisabled === 'true';\n  const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {\n    if (inactive) {\n      event.preventDefault();\n      event.stopPropagation();\n      return;\n    }\n    onClick?.(event);\n  };\n\n  return <><button {...props} ref={ref} type={type} className={['fds-button', `fds-button--${tone}`, `fds-button--${size}`, fullWidth && 'fds-button--full-width', className].filter(Boolean).join(' ')} disabled={disabled} aria-busy={loading || undefined} aria-disabled={inactive || undefined} onClick={handleClick}>{loading && !spinnerAtEnd ? <span className=\"fds-button__spinner\" aria-hidden=\"true\" /> : loading ? null : startIcon}{children}{spinnerAtEnd ? <span className=\"fds-button__spinner\" aria-hidden=\"true\" /> : loading ? null : endIcon}</button><span className=\"fds-visually-hidden\" aria-live=\"polite\" aria-atomic=\"true\">{loading ? loadingAnnouncement : ''}</span></>;\n});\n"
+    },
+    {
+      "id": "template.list-and-review",
+      "kind": "template",
+      "status": "approved",
+      "fdsVersion": "0.1.1",
+      "title": "List and review",
+      "summary": "Approved fake-data workflow for finding records, reviewing status, and opening work that needs attention.",
+      "dependencies": [
+        "@fr8labs/ui@0.1.1",
+        "react>=19.0.0"
+      ],
+      "accessibility": [
+        "Keep page heading, summary, filters, results, and pagination in reading order.",
+        "Give the results table and pagination specific accessible labels.",
+        "Preserve empty results as an explicit state."
+      ],
+      "source": {
+        "path": "packages/ui/src/stories/ListAndReview.stories.tsx",
+        "storybookTitle": "Patterns/Operations/List and review",
+        "storybookId": "patterns-operations-list-and-review--active-results"
+      },
+      "updatedAt": "2026-08-15",
+      "states": [
+        "active-results",
+        "empty-results"
+      ],
+      "slots": [
+        "pageHeader",
+        "summaryMetrics",
+        "filters",
+        "results",
+        "pagination"
+      ],
+      "allowedComponentIds": [
+        "component.button"
+      ],
+      "fakeFixtureSchema": {
+        "shipment": {
+          "id": "synthetic shipment identifier",
+          "mode": "synthetic transport mode",
+          "route": "synthetic origin and destination",
+          "eta": "synthetic date",
+          "status": "draft | pending | approved | blocked"
+        }
+      },
+      "promptId": "prompt.codex-prototype",
+      "codeSnapshot": "import {useState} from 'react';\nimport type {Meta, StoryObj} from '@storybook/react-vite';\nimport {ActionGroup, Button, DataTable, FilterBar, Metric, PageHeader, Pagination, Panel, Select, StatusBadge, TextInput} from '../index';\nimport type {DataTableColumn} from '../index';\nimport './WorkflowPatterns.stories.css';\n\ntype ShipmentRow = {\n  eta: string;\n  id: string;\n  mode: string;\n  route: string;\n  status: 'draft' | 'pending' | 'approved' | 'blocked';\n};\n\nconst shipments: ShipmentRow[] = [\n  {id: 'SHP-260081', mode: 'Ocean · LCL', route: 'Jakarta → Rotterdam', eta: '22 Aug 2026', status: 'pending'},\n  {id: 'SHP-260082', mode: 'Air', route: 'Singapore → Jakarta', eta: '18 Aug 2026', status: 'approved'},\n  {id: 'SHP-260083', mode: 'Ocean · FCL', route: 'Surabaya → Busan', eta: '27 Aug 2026', status: 'blocked'},\n  {id: 'SHP-260084', mode: 'Road', route: 'Jakarta → Bandung', eta: '16 Aug 2026', status: 'draft'},\n];\n\nconst columns: readonly DataTableColumn<ShipmentRow>[] = [\n  {id: 'id', header: 'Shipment', cell: (row) => row.id, width: 'normal'},\n  {id: 'route', header: 'Route', cell: (row) => row.route, width: 'wide'},\n  {id: 'mode', header: 'Mode', cell: (row) => row.mode},\n  {id: 'eta', header: 'ETA', cell: (row) => row.eta},\n  {id: 'status', header: 'Status', cell: (row) => <StatusBadge status={row.status} />},\n];\n\nfunction ListAndReview({empty = false}: {empty?: boolean}) {\n  const [query, setQuery] = useState('');\n  const [status, setStatus] = useState('');\n  const [page, setPage] = useState(1);\n  const rows = empty ? [] : shipments.filter((shipment) => (!query || shipment.id.toLowerCase().includes(query.toLowerCase())) && (!status || shipment.status === status));\n\n  return <main className=\"fds-workflow-pattern\">\n    <PageHeader eyebrow=\"Operations\" title=\"Shipment review\" description=\"Find active shipments, identify exceptions, and open the record that needs attention.\" actions={<ActionGroup><Button tone=\"secondary\">Export</Button><Button>Create shipment</Button></ActionGroup>} />\n    <section className=\"fds-workflow-pattern__metrics\" aria-label=\"Shipment summary\">\n      <Metric label=\"Active shipments\" value=\"128\" density=\"compact\" />\n      <Metric label=\"Due this week\" value=\"17\" density=\"compact\" />\n      <Metric label=\"Blocked\" value=\"4\" description=\"Requires owner action\" density=\"compact\" />\n    </section>\n    <FilterBar onSubmit={(event) => event.preventDefault()} actions={<ActionGroup><Button type=\"button\" tone=\"tertiary\" onClick={() => {setQuery(''); setStatus('');}}>Clear</Button><Button type=\"submit\">Apply filters</Button></ActionGroup>}>\n      <TextInput label=\"Shipment number\" value={query} onChange={setQuery} placeholder=\"SHP-…\" density=\"compact\" />\n      <Select label=\"Status\" value={status} onChange={setStatus} placeholder=\"All statuses\" options={[{label: 'Draft', value: 'draft'}, {label: 'Pending', value: 'pending'}, {label: 'Approved', value: 'approved'}, {label: 'Blocked', value: 'blocked'}]} />\n    </FilterBar>\n    <Panel title=\"Shipments\" description={`${rows.length} synthetic records`}>\n      <div className=\"fds-workflow-pattern__stack\">\n        <DataTable ariaLabel=\"Shipment review results\" columns={columns} rows={rows} getRowKey={(row) => row.id} emptyState={{title: 'No shipments found', description: 'Clear or change the active filters.'}} />\n        <Pagination page={page} pageCount={empty ? 1 : 6} onPageChange={setPage} label=\"Shipment result pages\" />\n      </div>\n    </Panel>\n  </main>;\n}\n\nconst meta = {\n  title: 'Patterns/Operations/List and review',\n  tags: ['autodocs'],\n  parameters: {fds: {approved: true, status: 'approved'}, docs: {description: {component: 'Approved list-and-review template composed from public FDS components and fake shipment data. Use FDSDataGrid instead of DataTable when the workflow needs sorting, editing, selection, or server-backed rows.'}}},\n} satisfies Meta;\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nexport const ActiveResults: Story = {render: () => <ListAndReview />};\nexport const EmptyResult: Story = {render: () => <ListAndReview empty />};\n"
+    },
+    {
+      "id": "prompt.codex-prototype",
+      "kind": "prompt",
+      "status": "approved",
+      "fdsVersion": "0.1.1",
+      "title": "Codex FDS prototype",
+      "summary": "Bounded prompt for an FDS Storybook prototype using fake freight data only.",
+      "dependencies": [
+        "@fr8labs/ui@0.1.1"
+      ],
+      "accessibility": [
+        "Show applicable status, loading, empty, and error states.",
+        "Keep the workflow keyboard-operable and visibly labelled."
+      ],
+      "source": {
+        "path": "prompts/codex-prototype-prompt.md"
+      },
+      "updatedAt": "2026-08-15",
+      "inputs": [
+        "workflow name",
+        "product area",
+        "user role",
+        "main task"
+      ],
+      "allowedIds": [
+        "component.button",
+        "template.list-and-review"
+      ],
+      "fakeDataRestriction": "Use bundled or newly authored synthetic freight data only. Never include production, customer, shipment, invoice, finance, credential, or other sensitive data.",
+      "prompt": "# Codex Prototype Prompt\n\nUse this prompt to request a FDS UI prototype after the component API exists.\n\n```text\nCreate a Storybook prototype for [workflow name] using only FDS UI components from `@fr8labs/ui`.\n\nContext:\n- Product area: [shipment / invoice / approval / document / report]\n- User role: [ops / accounting / manager]\n- Main task: [task]\n- Data: use fake freight data only\n\nRules:\n- Import from `@fr8labs/ui` only.\n- Do not add another UI runtime.\n- Use dense but legible ERP layout.\n- Show relevant status, loading, empty, and error states.\n- Do not create production app code.\n- Keep the story focused on this workflow only.\n```\n"
+    },
+    {
+      "id": "token.color.blue.600",
+      "kind": "token",
+      "status": "approved",
+      "fdsVersion": "0.1.1",
+      "title": "Blue 600",
+      "summary": "Approved primitive used by the semantic primary-action token.",
+      "dependencies": [
+        "@fr8labs/ui@0.1.1/styles.css"
+      ],
+      "accessibility": [
+        "Consume this primitive through an approved semantic token.",
+        "White on the semantic primary action resolves to 5.13:1 contrast."
+      ],
+      "source": {
+        "path": "docs/fr8-color-primitives.dtcg.json",
+        "storybookTitle": "Foundations/Tokens",
+        "storybookId": "foundations-tokens--primitives"
+      },
+      "updatedAt": "2026-08-15",
+      "tokenPath": "color.blue.600",
+      "dtcgValue": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0.403921568627,
+          0.905882352941
+        ],
+        "alpha": 1,
+        "hex": "#0067E7"
+      },
+      "cssVariable": "--fds-primitive-color-blue-600",
+      "aliasUsedBy": "--fds-color-action-primary",
+      "permittedUsage": "Primitive reference only; product and component CSS use the semantic --fds-color-action-primary alias."
+    },
+    {
+      "id": "recipe.component.button",
+      "kind": "adoption_recipe",
+      "status": "approved",
+      "fdsVersion": "0.1.1",
+      "title": "Adopt Button",
+      "summary": "Package or owned-copy adoption instructions for the approved Button.",
+      "dependencies": [
+        "@fr8labs/ui@0.1.1",
+        "react>=19.0.0"
+      ],
+      "accessibility": [
+        "Retain the Button accessible-name, loading, disabled, focus, and action-hierarchy constraints."
+      ],
+      "source": {
+        "path": "packages/ui/README.md"
+      },
+      "updatedAt": "2026-08-15",
+      "targetId": "component.button",
+      "modes": {
+        "package": {
+          "install": "npm install @fr8labs/ui@0.1.1",
+          "imports": [
+            "import {Button} from '@fr8labs/ui';",
+            "import '@fr8labs/ui/styles.css';"
+          ],
+          "instructions": [
+            "Wrap the application with FdsProvider once.",
+            "Use Button through the public @fr8labs/ui export."
+          ]
+        },
+        "copy": {
+          "instructions": [
+            "Copy the approved snapshot for component.button and record source FDS version 0.1.1.",
+            "Keep the source item ID in the copied file header."
+          ],
+          "driftWarning": "The adopting team owns local changes, drift, security fixes, accessibility fixes, and upgrades after copying."
+        }
+      }
+    },
+    {
+      "id": "template.sales-invoice-summary",
+      "kind": "template",
+      "status": "experimental",
+      "fdsVersion": "0.1.1",
+      "title": "Sales Invoice Summary",
+      "summary": "Experimental finance pattern; excluded from approved MCP results.",
+      "dependencies": [
+        "@fr8labs/ui@0.1.1",
+        "react>=19.0.0"
+      ],
+      "accessibility": [
+        "Not approved for adoption."
+      ],
+      "source": {
+        "path": "packages/ui/src/stories/SalesInvoiceSummary.stories.tsx",
+        "storybookTitle": "Patterns/Finance/Sales Invoice Summary",
+        "storybookId": "patterns-finance-sales-invoice-summary--normal-invoice"
+      },
+      "updatedAt": "2026-08-15"
+    }
+  ]
+}

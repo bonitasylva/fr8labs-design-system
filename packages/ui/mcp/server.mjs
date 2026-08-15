@@ -11,9 +11,9 @@ import * as v from 'valibot';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const catalog = JSON.parse(readFileSync(resolve(packageRoot, 'dist/fds-catalog.json'), 'utf8'));
-const manifestPaths = new Map([
-  ['./manifests/components.json', resolve(packageRoot, 'manifests/components.json')],
-  ['./manifests/docs.json', resolve(packageRoot, 'manifests/docs.json')],
+const manifests = new Map([
+  ['./manifests/components.json', readFileSync(resolve(packageRoot, 'manifests/components.json'), 'utf8')],
+  ['./manifests/docs.json', readFileSync(resolve(packageRoot, 'manifests/docs.json'), 'utf8')],
 ]);
 const supportedVersions = [...new Set(catalog.items.filter((item) => item.status === 'approved').map((item) => item.fdsVersion))].sort();
 const annotations = {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false};
@@ -92,9 +92,9 @@ function toolResult(result) {
 }
 
 export function storybookManifestProvider(_request, path) {
-  const manifestPath = manifestPaths.get(path);
-  if (!manifestPath) throw new Error(`Unsupported Storybook manifest path: ${path}`);
-  return Promise.resolve(readFileSync(manifestPath, 'utf8'));
+  const manifest = manifests.get(path);
+  if (!manifest) throw new Error(`Unsupported Storybook manifest path: ${path}`);
+  return Promise.resolve(manifest);
 }
 
 export async function createMcpServer() {

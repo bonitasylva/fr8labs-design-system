@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {after, before, test} from 'node:test';
+import vercelHandler from '../api/mcp.mjs';
 import {catalogApi, createHttpServer} from './server.mjs';
 
 const expectedTools = ['get_adoption_recipe', 'get_component', 'get_prompt', 'get_template', 'get_token_reference', 'search_catalog'];
@@ -72,4 +73,10 @@ test('Streamable HTTP supports the local pilot, optional token, and only six rea
   const called = await rpc('tools/call', {name: 'get_component', arguments: {id: 'component.button'}});
   assert.equal(called.message.result.structuredContent.approvalStatus, 'approved');
   assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.1.1');
+});
+
+test('Vercel handler serves the same MCP over /api/mcp', async () => {
+  const response = await vercelHandler.fetch(new Request('https://example.vercel.app/api/mcp', {method: 'POST', headers: {'content-type': 'application/json', 'accept': 'application/json, text/event-stream'}, body: JSON.stringify({jsonrpc: '2.0', id: 1, method: 'initialize', params: {protocolVersion: '2025-03-26', capabilities: {}, clientInfo: {name: 'fds-vercel-test', version: '1.0.0'}}})}));
+  assert.equal(response.status, 200);
+  assert.equal(eventData(await response.text()).result.serverInfo.name, 'fr8labs-fds-mcp-server');
 });

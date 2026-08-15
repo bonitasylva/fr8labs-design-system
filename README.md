@@ -1,10 +1,8 @@
 # Fr8Labs FDS MCP
 
-> The approved Fr8Labs Design System catalog as a read-only API for AI assistants.
-
 ## What is this?
 
-Fr8Labs FDS MCP helps an AI assistant find and use approved FDS components, templates, prompts, tokens, and adoption guidance without inventing APIs or reading the whole repository.
+Fr8Labs FDS MCP helps an AI agents find and use approved FDS components, templates, prompts, tokens, and adoption guidance without inventing APIs or reading the whole repository.
 
 It reads the same versioned catalog represented in Storybook. The pilot exposes approved content only and never modifies FDS or product data.
 
@@ -12,11 +10,11 @@ It reads the same versioned catalog represented in Storybook. The pilot exposes 
 
 | Tool | Use it to |
 | --- | --- |
-| `search_catalog` | Find approved catalog items. |
+| `search_catalog` | Find catalog items. |
 | `get_component` | Read a component API, code snapshot, states, and accessibility guidance. |
-| `get_template` | Read an approved fake-data workflow template. |
+| `get_template` | Read a fake-data workflow template. |
 | `get_prompt` | Read a bounded FDS authoring prompt. |
-| `get_token_reference` | Look up an approved token and CSS variable. |
+| `get_token_reference` | Look up a token and CSS variable. |
 | `get_adoption_recipe` | Get package or source-copy adoption instructions. |
 
 All tools are read-only. They do not publish, write files, call product APIs, access customer data, or invoke AI sampling.
@@ -57,7 +55,7 @@ Restart the client after changing its configuration.
 
 ## Try it
 
-Ask your AI assistant:
+Ask your AI:
 
 ```text
 Search the FDS catalog for approved action components.

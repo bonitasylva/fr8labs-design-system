@@ -1,0 +1,16 @@
+{
+  "name": "sandbox-fds-tokens",
+  "version": "0.1.1",
+  "description": "Framework-neutral Fr8Labs Design System CSS tokens.",
+  "files": [
+    "tokens.css",
+    "README.md"
+  ],
+  "sideEffects": [
+    "./tokens.css"
+  ],
+  "exports": {
+    ".": "./tokens.css",
+    "./tokens.css": "./tokens.css"
+  }
+}

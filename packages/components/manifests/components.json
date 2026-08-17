@@ -8,18 +8,18 @@
       "jsDocTags": {},
       "error": {
         "name": "No component found",
-        "message": "We could not detect the component from your story file. Specify meta.component.\n  596 | }\n  597 |\n> 598 | const meta = {\n      | ^\n  599 |   title: 'Foundations/Tokens',\n  600 |   parameters: {\n  601 |     layout: 'fullscreen',\n\n./src/stories/TokenFoundation.stories.tsx:\nimport type {Meta, StoryObj} from '@storybook/react-vite';\nimport './TokenFoundation.stories.css';\n\ntype TokenGroupData = {\n  category: string;\n  title: string;\n  description: string;\n  preview?: 'color';\n  tokens: readonly (readonly [name: string, value: string])[];\n};\n\nconst primitiveGroups: readonly TokenGroupData[] = [\n  {\n    category: 'Color',\n    title: 'Base',\n    description: 'Foundation values for default surfaces and intentionally absent color.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-white', '#ffffff'],\n      ['--fds-primitive-color-transparent', 'transparent'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Blue',\n    description: 'The FDS brand and action scale, ordered from lighter to darker.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-blue-500', '#008de4'],\n      ['--fds-primitive-color-blue-600', '#0067e7'],\n      ['--fds-primitive-color-blue-700', '#023c9b'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Neutral',\n    description: 'The surface, border, muted-content, and default-content scale.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-neutral-50', '#f6f8fb'],\n      ['--fds-primitive-color-neutral-300', '#e3eaf1'],\n      ['--fds-primitive-color-neutral-400', '#c8d2dc'],\n      ['--fds-primitive-color-neutral-500', '#8496a8'],\n      ['--fds-primitive-color-neutral-600', '#5e758d'],\n      ['--fds-primitive-color-neutral-700', '#525252'],\n      ['--fds-primitive-color-neutral-900', '#002245'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Info',\n    description: 'Light surface and dark text values for informational feedback.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-info-50', '#eaf3ff'],\n      ['--fds-primitive-color-info-700', '#00458c'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Success',\n    description: 'Light surface and dark text values for successful outcomes.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-success-100', '#c5e5c0'],\n      ['--fds-primitive-color-success-700', '#007004'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Warning',\n    description: 'Light surface and dark text values for cautionary feedback.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-warning-100', '#f8da9d'],\n      ['--fds-primitive-color-warning-800', '#745b00'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Error',\n    description: 'Surface, action, and strong text values for errors and danger.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-error-100', '#facecb'],\n      ['--fds-primitive-color-error-400', '#d13f31'],\n      ['--fds-primitive-color-error-700', '#a50c25'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status borders',\n    description: 'Quiet outlines for success, warning, and danger status badges.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-status-success-border', '#cfeadf'],\n      ['--fds-primitive-color-status-warning-border', '#ebe3cd'],\n      ['--fds-primitive-color-status-danger-border', '#f6d9d6'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Interaction and overlay',\n    description: 'Alpha values for icons, hover feedback, and modal backdrops.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-icon-default', 'rgb(0 34 69 / 74%)'],\n      ['--fds-primitive-color-icon-disabled', 'rgb(0 34 69 / 38%)'],\n      ['--fds-primitive-color-icon-hover', 'rgb(0 34 69 / 4%)'],\n      ['--fds-primitive-color-action-hover', 'rgb(0 103 231 / 8%)'],\n      ['--fds-primitive-color-overlay', 'rgb(0 34 69 / 45%)'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Font family and weights',\n    description: 'The raw font family and weight values behind the functional type roles.',\n    tokens: [\n      ['--fds-primitive-font-sans', 'IBM Plex Sans Condensed, Arial Narrow, Arial, sans-serif'],\n      ['--fds-primitive-font-weight-regular', '400'],\n      ['--fds-primitive-font-weight-medium', '500'],\n      ['--fds-primitive-font-weight-semibold', '600'],\n      ['--fds-primitive-font-weight-bold', '700'],\n    ],\n  },\n  {\n    category: 'Spacing',\n    title: 'Scale',\n    description: 'The shared 4px-based rhythm for layout and component spacing.',\n    tokens: [\n      ['--fds-primitive-space-1', '4px'],\n      ['--fds-primitive-space-2', '8px'],\n      ['--fds-primitive-space-3', '12px'],\n      ['--fds-primitive-space-4', '16px'],\n      ['--fds-primitive-space-5', '24px'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Scale',\n    description: 'Raw dimensions used by type, controls, icons, data rows, and overlays.',\n    tokens: [\n      ['--fds-primitive-size-11', '11px'],\n      ['--fds-primitive-size-12', '12px'],\n      ['--fds-primitive-size-13', '13px'],\n      ['--fds-primitive-size-14', '14px'],\n      ['--fds-primitive-size-16', '16px'],\n      ['--fds-primitive-size-18', '18px'],\n      ['--fds-primitive-size-20', '20px'],\n      ['--fds-primitive-size-22', '22px'],\n      ['--fds-primitive-size-24', '24px'],\n      ['--fds-primitive-size-28', '28px'],\n      ['--fds-primitive-size-30', '30px'],\n      ['--fds-primitive-size-32', '32px'],\n      ['--fds-primitive-size-36', '36px'],\n      ['--fds-primitive-size-40', '40px'],\n      ['--fds-primitive-size-48', '48px'],\n      ['--fds-primitive-size-520', '520px'],\n      ['--fds-primitive-size-540', '540px'],\n    ],\n  },\n  {\n    category: 'Shape',\n    title: 'Radius and border',\n    description: 'Raw corner and stroke measurements.',\n    tokens: [\n      ['--fds-primitive-radius-default', '4px'],\n      ['--fds-primitive-radius-full', '999px'],\n      ['--fds-primitive-border-width', '1px'],\n      ['--fds-primitive-border-width-strong', '2px'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'State, focus, motion, and elevation',\n    description: 'Raw focus, disabled-state, interaction timing, and control elevation values.',\n    tokens: [\n      ['--fds-primitive-opacity-disabled', '0.55'],\n      ['--fds-primitive-focus-width', '3px'],\n      ['--fds-primitive-focus-offset', '2px'],\n      ['--fds-primitive-motion-duration-fast', '150ms'],\n      ['--fds-primitive-motion-duration-spinner', '700ms'],\n      ['--fds-primitive-motion-easing-standard', 'ease'],\n      ['--fds-primitive-shadow-control', '0 1px 2px rgb(91 125 160 / 10%)'],\n    ],\n  },\n];\n\nconst semanticGroups: readonly TokenGroupData[] = [\n  {\n    category: 'Color',\n    title: 'Brand',\n    description: 'Non-action brand accent.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-brand-accent', '--fds-primitive-color-blue-500'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Surface',\n    description: 'Default and subtle application backgrounds.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-surface-default', '--fds-primitive-color-white'],\n      ['--fds-color-surface-subtle', '--fds-primitive-color-neutral-50'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Text',\n    description: 'Default, muted, and inverse content.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-text-default', '--fds-primitive-color-neutral-900'],\n      ['--fds-color-text-muted', '--fds-primitive-color-neutral-700'],\n      ['--fds-color-text-inverse', '--fds-primitive-color-white'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Icon',\n    description: 'Default and disabled icon states.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-icon-default', '--fds-primitive-color-icon-default'],\n      ['--fds-color-icon-disabled', '--fds-primitive-color-icon-disabled'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Border',\n    description: 'Default, subtle, and accessible interactive boundaries.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-border-default', '--fds-primitive-color-neutral-400'],\n      ['--fds-color-border-subtle', '--fds-primitive-color-neutral-300'],\n      ['--fds-color-border-interactive', '--fds-primitive-color-neutral-500'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Field',\n    description: 'Form backgrounds, boundaries, and validation.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-field-background', '--fds-color-surface-default'],\n      ['--fds-color-field-background-disabled', '--fds-color-surface-subtle'],\n      ['--fds-color-field-border', '--fds-primitive-color-neutral-600'],\n      ['--fds-color-field-border-error', '--fds-primitive-color-error-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Overlay',\n    description: 'Backdrop behind modal surfaces.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-overlay-backdrop', '--fds-primitive-color-overlay'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Action',\n    description: 'Primary and danger interaction states.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-action-primary', '--fds-primitive-color-blue-600'],\n      ['--fds-color-action-primary-active', '--fds-primitive-color-blue-700'],\n      ['--fds-color-action-primary-hover', '--fds-primitive-color-action-hover'],\n      ['--fds-color-action-danger', '--fds-primitive-color-error-400'],\n      ['--fds-color-action-danger-active', '--fds-primitive-color-error-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Focus',\n    description: 'Visible keyboard focus indicator.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-focus-ring', '--fds-color-action-primary'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Info',\n    description: 'Informational surface and readable foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-info-surface', '--fds-primitive-color-info-50'],\n      ['--fds-color-feedback-info-text', '--fds-primitive-color-info-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Success',\n    description: 'Successful outcome surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-success-surface', '--fds-primitive-color-success-100'],\n      ['--fds-color-feedback-success-text', '--fds-primitive-color-success-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Warning',\n    description: 'Cautionary surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-warning-surface', '--fds-primitive-color-warning-100'],\n      ['--fds-color-feedback-warning-text', '--fds-primitive-color-warning-800'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Error',\n    description: 'Error surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-error-surface', '--fds-primitive-color-error-100'],\n      ['--fds-color-feedback-error-text', '--fds-primitive-color-error-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Neutral',\n    description: 'Surface, border, and text for neutral workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-neutral-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-neutral-border', '--fds-primitive-color-neutral-300'],\n      ['--fds-color-status-neutral-text', '--fds-primitive-color-neutral-600'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Warning',\n    description: 'Surface, border, and text for warning workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-warning-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-warning-border', '--fds-primitive-color-status-warning-border'],\n      ['--fds-color-status-warning-text', '--fds-color-feedback-warning-text'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Success',\n    description: 'Surface, border, and text for successful workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-success-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-success-border', '--fds-primitive-color-status-success-border'],\n      ['--fds-color-status-success-text', '--fds-color-feedback-success-text'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Danger',\n    description: 'Surface, border, and text for danger workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-danger-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-danger-border', '--fds-primitive-color-status-danger-border'],\n      ['--fds-color-status-danger-text', '--fds-color-action-danger'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Business · Risk',\n    description: 'Blocked-risk surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-risk-blocked-surface', '--fds-color-status-warning-surface'],\n      ['--fds-color-risk-blocked-text', '--fds-color-status-warning-text'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Business · Finance',\n    description: 'Positive and negative financial values.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-finance-positive', '--fds-color-feedback-success-text'],\n      ['--fds-color-finance-negative', '--fds-color-feedback-error-text'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Font family',\n    description: 'Shared body and interface font stack.',\n    tokens: [\n      ['--fds-font-family-body', '--fds-primitive-font-sans'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Headings',\n    description: 'Page, section, and subsection hierarchy.',\n    tokens: [\n      ['--fds-font-size-page-title', '--fds-primitive-size-20'],\n      ['--fds-line-height-page-title', '--fds-primitive-size-28'],\n      ['--fds-font-size-section-heading', '--fds-primitive-size-18'],\n      ['--fds-line-height-section-heading', '--fds-primitive-size-24'],\n      ['--fds-font-size-subheading', '--fds-primitive-size-16'],\n      ['--fds-line-height-subheading', '--fds-primitive-size-22'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Body',\n    description: 'Primary application text and form values at 14/20.',\n    tokens: [\n      ['--fds-font-size-body', '--fds-primitive-size-14'],\n      ['--fds-line-height-body', '--fds-primitive-size-20'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Data',\n    description: 'Dense table cells and operational data at 13/18.',\n    tokens: [\n      ['--fds-font-size-data', '--fds-primitive-size-13'],\n      ['--fds-line-height-data', '--fds-primitive-size-18'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Label',\n    description: 'Field and column labels at 12/16, usually semibold.',\n    tokens: [\n      ['--fds-font-size-label', '--fds-primitive-size-12'],\n      ['--fds-line-height-label', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Supporting',\n    description: 'Captions, help text, and supporting copy at 12/16.',\n    tokens: [\n      ['--fds-font-size-caption', '--fds-primitive-size-12'],\n      ['--fds-line-height-caption', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Metadata',\n    description: 'Timestamps and compact metadata at 11/16.',\n    tokens: [\n      ['--fds-font-size-metadata', '--fds-primitive-size-11'],\n      ['--fds-line-height-metadata', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Weight',\n    description: 'Body, emphasis, heading, and strong text roles.',\n    tokens: [\n      ['--fds-font-weight-body', '--fds-primitive-font-weight-regular'],\n      ['--fds-font-weight-emphasis', '--fds-primitive-font-weight-medium'],\n      ['--fds-font-weight-heading', '--fds-primitive-font-weight-semibold'],\n      ['--fds-font-weight-strong', '--fds-primitive-font-weight-bold'],\n    ],\n  },\n  {\n    category: 'Spacing',\n    title: 'Scale',\n    description: 'Stable layout roles used by components instead of raw measurements.',\n    tokens: [\n      ['--fds-space-1', '--fds-primitive-space-1'],\n      ['--fds-space-2', '--fds-primitive-space-2'],\n      ['--fds-space-3', '--fds-primitive-space-3'],\n      ['--fds-space-4', '--fds-primitive-space-4'],\n      ['--fds-space-5', '--fds-primitive-space-5'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Control',\n    description: 'Compact, default, and action control dimensions.',\n    tokens: [\n      ['--fds-size-control-default', '--fds-primitive-size-32'],\n      ['--fds-size-control-compact', '--fds-primitive-size-28'],\n      ['--fds-size-control-action', '--fds-primitive-size-40'],\n      ['--fds-size-control-action-small', '--fds-primitive-size-24'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Icon',\n    description: 'Icon glyph dimensions and interactive hit targets.',\n    tokens: [\n      ['--fds-size-icon-16', '--fds-primitive-size-16'],\n      ['--fds-size-icon-20', '--fds-primitive-size-20'],\n      ['--fds-size-icon-24', '--fds-primitive-size-24'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Overlay',\n    description: 'Default dialog and drawer widths.',\n    tokens: [\n      ['--fds-size-overlay-dialog', '--fds-primitive-size-520'],\n      ['--fds-size-overlay-drawer', '--fds-primitive-size-540'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Data',\n    description: 'Dense data-table header and row heights.',\n    tokens: [\n      ['--fds-size-data-header', '--fds-primitive-size-36'],\n      ['--fds-size-data-row', '--fds-primitive-size-32'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Toggle',\n    description: 'Toggle track and thumb dimensions.',\n    tokens: [\n      ['--fds-size-toggle-track', '--fds-primitive-size-36'],\n      ['--fds-size-toggle-thumb', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Shape',\n    title: 'Radius and border',\n    description: 'Stable corner and border roles used by components instead of raw measurements.',\n    tokens: [\n      ['--fds-radius-control', '--fds-primitive-radius-default'],\n      ['--fds-radius-container', '--fds-primitive-radius-default'],\n      ['--fds-radius-pill', '--fds-primitive-radius-full'],\n      ['--fds-border-default', '--fds-primitive-border-width'],\n      ['--fds-border-strong', '--fds-primitive-border-width-strong'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'State',\n    description: 'Shared disabled-state opacity.',\n    tokens: [\n      ['--fds-opacity-disabled', '--fds-primitive-opacity-disabled'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'Focus',\n    description: 'Visible keyboard focus width and offset.',\n    tokens: [\n      ['--fds-focus-ring-width', '--fds-primitive-focus-width'],\n      ['--fds-focus-ring-offset', '--fds-primitive-focus-offset'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'Motion',\n    description: 'Shared durations and easing for UI feedback.',\n    tokens: [\n      ['--fds-motion-duration-fast', '--fds-primitive-motion-duration-fast'],\n      ['--fds-motion-duration-spinner', '--fds-primitive-motion-duration-spinner'],\n      ['--fds-motion-easing-standard', '--fds-primitive-motion-easing-standard'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'Elevation',\n    description: 'Subtle elevation for interactive controls.',\n    tokens: [\n      ['--fds-shadow-control', '--fds-primitive-shadow-control'],\n    ],\n  },\n];\n\nfunction TokenGroup({group, valueHeading}: {group: TokenGroupData; valueHeading: string}) {\n  return <article className=\"fds-token-docs__group\">\n    <div className=\"fds-token-docs__group-heading\">\n      <p className=\"fds-token-docs__kicker\">{group.category}</p>\n      <h3>{group.title}</h3>\n      <p>{group.description}</p>\n    </div>\n    <div className=\"fds-token-docs__table-wrap\">\n      <table>\n        <thead><tr>\n          {group.preview && <th scope=\"col\">Preview</th>}\n          <th scope=\"col\">Token</th>\n          <th scope=\"col\">{valueHeading}</th>\n        </tr></thead>\n        <tbody>{group.tokens.map(([name, value]) => <tr key={name}>\n          {group.preview && <td><span className=\"fds-token-docs__color\" style={{background: `var(${name})`}} /></td>}\n          <th scope=\"row\"><code>{name}</code></th>\n          <td><code>{value}</code></td>\n        </tr>)}</tbody>\n      </table>\n    </div>\n  </article>;\n}\n\nconst meta = {\n  title: 'Foundations/Tokens',\n  parameters: {\n    layout: 'fullscreen',\n    docs: {description: {component: 'Approved default FDS v1 token foundation. Components consume semantic roles; raw values remain in primitives, and component tokens exist only for stable repeated decisions.'}},\n  },\n} satisfies Meta;\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nexport const Primitives: Story = {\n  parameters: {docs: {description: {story: 'All approved raw FDS values, grouped by visual property.'}}},\n  render: () => <main className=\"fds-token-docs\">\n    <header>\n      <p className=\"fds-token-docs__eyebrow\">Layer 1 · Default FDS theme</p>\n      <h2>Primitive tokens</h2>\n      <p className=\"fds-token-docs__intro\">Literal values with no product meaning. They form the source scales for color, spacing, size, shape, typography, motion, and elevation.</p>\n    </header>\n\n    <section aria-label=\"Primitive token reference\">\n      {primitiveGroups.map((group) => <TokenGroup group={group} valueHeading=\"Raw value\" key={group.title} />)}\n    </section>\n  </main>,\n};\n\nexport const Semantics: Story = {\n  parameters: {docs: {description: {story: 'All approved purpose-based FDS roles and their source mappings.'}}},\n  render: () => <main className=\"fds-token-docs\">\n    <header>\n      <p className=\"fds-token-docs__eyebrow\">Layer 2 · Default FDS theme</p>\n      <h2>Semantic tokens</h2>\n      <p className=\"fds-token-docs__intro\">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from.</p>\n    </header>\n\n    <section aria-label=\"Semantic token reference\">\n      {semanticGroups.map((group) => <TokenGroup group={group} valueHeading=\"Resolves to\" key={group.title} />)}\n      <p className=\"fds-token-docs__note\">White on primary is 5.13:1; white on active is 9.90:1. Legacy accent remains a non-action role because white on it is 3.54:1.</p>\n    </section>\n  </main>,\n};\n"
+        "message": "We could not detect the component from your story file. Specify meta.component.\n  596 | }\n  597 |\n> 598 | const meta = {\n      | ^\n  599 |   title: 'Foundations/Tokens',\n  600 |   parameters: {\n  601 |     layout: 'fullscreen',\n\n./src/stories/TokenFoundation.stories.tsx:\nimport type {Meta, StoryObj} from '@storybook/react-vite';\nimport './TokenFoundation.stories.css';\n\ntype TokenGroupData = {\n  category: string;\n  title: string;\n  description: string;\n  preview?: 'color';\n  tokens: readonly (readonly [name: string, value: string])[];\n};\n\nconst primitiveGroups: readonly TokenGroupData[] = [\n  {\n    category: 'Color',\n    title: 'Base',\n    description: 'Foundation values for default surfaces and intentionally absent color.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-white', '#ffffff'],\n      ['--fds-primitive-color-transparent', 'transparent'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Blue',\n    description: 'The FDS brand and action scale, ordered from lighter to darker.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-blue-500', '#008de4'],\n      ['--fds-primitive-color-blue-600', '#0067e7'],\n      ['--fds-primitive-color-blue-700', '#023c9b'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Neutral',\n    description: 'The surface, border, muted-content, and default-content scale.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-neutral-50', '#f6f8fb'],\n      ['--fds-primitive-color-neutral-300', '#e3eaf1'],\n      ['--fds-primitive-color-neutral-400', '#c8d2dc'],\n      ['--fds-primitive-color-neutral-500', '#8496a8'],\n      ['--fds-primitive-color-neutral-600', '#5e758d'],\n      ['--fds-primitive-color-neutral-700', '#525252'],\n      ['--fds-primitive-color-neutral-900', '#002245'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Info',\n    description: 'Light surface and dark text values for informational feedback.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-info-50', '#eaf3ff'],\n      ['--fds-primitive-color-info-700', '#00458c'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Success',\n    description: 'Light surface and dark text values for successful outcomes.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-success-100', '#c5e5c0'],\n      ['--fds-primitive-color-success-700', '#007004'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Warning',\n    description: 'Light surface and dark text values for cautionary feedback.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-warning-100', '#f8da9d'],\n      ['--fds-primitive-color-warning-800', '#745b00'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Error',\n    description: 'Surface, action, and strong text values for errors and danger.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-error-100', '#facecb'],\n      ['--fds-primitive-color-error-400', '#d13f31'],\n      ['--fds-primitive-color-error-700', '#a50c25'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status borders',\n    description: 'Quiet outlines for success, warning, and danger status badges.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-status-success-border', '#cfeadf'],\n      ['--fds-primitive-color-status-warning-border', '#ebe3cd'],\n      ['--fds-primitive-color-status-danger-border', '#f6d9d6'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Interaction and overlay',\n    description: 'Alpha values for icons, hover feedback, and modal backdrops.',\n    preview: 'color',\n    tokens: [\n      ['--fds-primitive-color-icon-default', 'rgb(0 34 69 / 74%)'],\n      ['--fds-primitive-color-icon-disabled', 'rgb(0 34 69 / 38%)'],\n      ['--fds-primitive-color-icon-hover', 'rgb(0 34 69 / 4%)'],\n      ['--fds-primitive-color-action-hover', 'rgb(0 103 231 / 8%)'],\n      ['--fds-primitive-color-overlay', 'rgb(0 34 69 / 45%)'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Font family and weights',\n    description: 'The raw font family and weight values behind the functional type roles.',\n    tokens: [\n      ['--fds-primitive-font-sans', 'IBM Plex Sans Condensed, Arial Narrow, Arial, sans-serif'],\n      ['--fds-primitive-font-weight-regular', '400'],\n      ['--fds-primitive-font-weight-medium', '500'],\n      ['--fds-primitive-font-weight-semibold', '600'],\n      ['--fds-primitive-font-weight-bold', '700'],\n    ],\n  },\n  {\n    category: 'Spacing',\n    title: 'Scale',\n    description: 'The shared 4px-based rhythm for layout and component spacing.',\n    tokens: [\n      ['--fds-primitive-space-1', '4px'],\n      ['--fds-primitive-space-2', '8px'],\n      ['--fds-primitive-space-3', '12px'],\n      ['--fds-primitive-space-4', '16px'],\n      ['--fds-primitive-space-5', '24px'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Scale',\n    description: 'Raw dimensions used by type, controls, icons, data rows, and overlays.',\n    tokens: [\n      ['--fds-primitive-size-11', '11px'],\n      ['--fds-primitive-size-12', '12px'],\n      ['--fds-primitive-size-13', '13px'],\n      ['--fds-primitive-size-14', '14px'],\n      ['--fds-primitive-size-16', '16px'],\n      ['--fds-primitive-size-18', '18px'],\n      ['--fds-primitive-size-20', '20px'],\n      ['--fds-primitive-size-22', '22px'],\n      ['--fds-primitive-size-24', '24px'],\n      ['--fds-primitive-size-28', '28px'],\n      ['--fds-primitive-size-30', '30px'],\n      ['--fds-primitive-size-32', '32px'],\n      ['--fds-primitive-size-36', '36px'],\n      ['--fds-primitive-size-40', '40px'],\n      ['--fds-primitive-size-48', '48px'],\n      ['--fds-primitive-size-520', '520px'],\n      ['--fds-primitive-size-540', '540px'],\n    ],\n  },\n  {\n    category: 'Shape',\n    title: 'Radius and border',\n    description: 'Raw corner and stroke measurements.',\n    tokens: [\n      ['--fds-primitive-radius-default', '4px'],\n      ['--fds-primitive-radius-full', '999px'],\n      ['--fds-primitive-border-width', '1px'],\n      ['--fds-primitive-border-width-strong', '2px'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'State, focus, motion, and elevation',\n    description: 'Raw focus, disabled-state, interaction timing, and control elevation values.',\n    tokens: [\n      ['--fds-primitive-opacity-disabled', '0.55'],\n      ['--fds-primitive-focus-width', '3px'],\n      ['--fds-primitive-focus-offset', '2px'],\n      ['--fds-primitive-motion-duration-fast', '150ms'],\n      ['--fds-primitive-motion-duration-spinner', '700ms'],\n      ['--fds-primitive-motion-easing-standard', 'ease'],\n      ['--fds-primitive-shadow-control', '0 1px 2px rgb(91 125 160 / 10%)'],\n    ],\n  },\n];\n\nconst semanticGroups: readonly TokenGroupData[] = [\n  {\n    category: 'Color',\n    title: 'Brand',\n    description: 'Non-action brand accent.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-brand-accent', '--fds-primitive-color-blue-500'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Surface',\n    description: 'Default and subtle application backgrounds.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-surface-default', '--fds-primitive-color-white'],\n      ['--fds-color-surface-subtle', '--fds-primitive-color-neutral-50'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Text',\n    description: 'Default, muted, and inverse content.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-text-default', '--fds-primitive-color-neutral-900'],\n      ['--fds-color-text-muted', '--fds-primitive-color-neutral-700'],\n      ['--fds-color-text-inverse', '--fds-primitive-color-white'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Icon',\n    description: 'Default and disabled icon states.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-icon-default', '--fds-primitive-color-icon-default'],\n      ['--fds-color-icon-disabled', '--fds-primitive-color-icon-disabled'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Border',\n    description: 'Default, subtle, and accessible interactive boundaries.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-border-default', '--fds-primitive-color-neutral-400'],\n      ['--fds-color-border-subtle', '--fds-primitive-color-neutral-300'],\n      ['--fds-color-border-interactive', '--fds-primitive-color-neutral-500'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Field',\n    description: 'Form backgrounds, boundaries, and validation.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-field-background', '--fds-color-surface-default'],\n      ['--fds-color-field-background-disabled', '--fds-color-surface-subtle'],\n      ['--fds-color-field-border', '--fds-primitive-color-neutral-600'],\n      ['--fds-color-field-border-error', '--fds-primitive-color-error-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Overlay',\n    description: 'Backdrop behind modal surfaces.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-overlay-backdrop', '--fds-primitive-color-overlay'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Action',\n    description: 'Primary and danger interaction states.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-action-primary', '--fds-primitive-color-blue-600'],\n      ['--fds-color-action-primary-active', '--fds-primitive-color-blue-700'],\n      ['--fds-color-action-primary-hover', '--fds-primitive-color-action-hover'],\n      ['--fds-color-action-danger', '--fds-primitive-color-error-400'],\n      ['--fds-color-action-danger-active', '--fds-primitive-color-error-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Focus',\n    description: 'Visible keyboard focus indicator.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-focus-ring', '--fds-color-action-primary'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Info',\n    description: 'Informational surface and readable foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-info-surface', '--fds-primitive-color-info-50'],\n      ['--fds-color-feedback-info-text', '--fds-primitive-color-info-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Success',\n    description: 'Successful outcome surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-success-surface', '--fds-primitive-color-success-100'],\n      ['--fds-color-feedback-success-text', '--fds-primitive-color-success-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Warning',\n    description: 'Cautionary surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-warning-surface', '--fds-primitive-color-warning-100'],\n      ['--fds-color-feedback-warning-text', '--fds-primitive-color-warning-800'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Feedback · Error',\n    description: 'Error surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-feedback-error-surface', '--fds-primitive-color-error-100'],\n      ['--fds-color-feedback-error-text', '--fds-primitive-color-error-700'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Neutral',\n    description: 'Surface, border, and text for neutral workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-neutral-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-neutral-border', '--fds-primitive-color-neutral-300'],\n      ['--fds-color-status-neutral-text', '--fds-primitive-color-neutral-600'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Warning',\n    description: 'Surface, border, and text for warning workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-warning-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-warning-border', '--fds-primitive-color-status-warning-border'],\n      ['--fds-color-status-warning-text', '--fds-color-feedback-warning-text'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Success',\n    description: 'Surface, border, and text for successful workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-success-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-success-border', '--fds-primitive-color-status-success-border'],\n      ['--fds-color-status-success-text', '--fds-color-feedback-success-text'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Status · Danger',\n    description: 'Surface, border, and text for danger workflow status.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-status-danger-surface', '--fds-color-surface-default'],\n      ['--fds-color-status-danger-border', '--fds-primitive-color-status-danger-border'],\n      ['--fds-color-status-danger-text', '--fds-color-action-danger'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Business · Risk',\n    description: 'Blocked-risk surface and foreground.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-risk-blocked-surface', '--fds-color-status-warning-surface'],\n      ['--fds-color-risk-blocked-text', '--fds-color-status-warning-text'],\n    ],\n  },\n  {\n    category: 'Color',\n    title: 'Business · Finance',\n    description: 'Positive and negative financial values.',\n    preview: 'color',\n    tokens: [\n      ['--fds-color-finance-positive', '--fds-color-feedback-success-text'],\n      ['--fds-color-finance-negative', '--fds-color-feedback-error-text'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Font family',\n    description: 'Shared body and interface font stack.',\n    tokens: [\n      ['--fds-font-family-body', '--fds-primitive-font-sans'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Headings',\n    description: 'Page, section, and subsection hierarchy.',\n    tokens: [\n      ['--fds-font-size-page-title', '--fds-primitive-size-20'],\n      ['--fds-line-height-page-title', '--fds-primitive-size-28'],\n      ['--fds-font-size-section-heading', '--fds-primitive-size-18'],\n      ['--fds-line-height-section-heading', '--fds-primitive-size-24'],\n      ['--fds-font-size-subheading', '--fds-primitive-size-16'],\n      ['--fds-line-height-subheading', '--fds-primitive-size-22'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Body',\n    description: 'Primary application text and form values at 14/20.',\n    tokens: [\n      ['--fds-font-size-body', '--fds-primitive-size-14'],\n      ['--fds-line-height-body', '--fds-primitive-size-20'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Data',\n    description: 'Dense table cells and operational data at 13/18.',\n    tokens: [\n      ['--fds-font-size-data', '--fds-primitive-size-13'],\n      ['--fds-line-height-data', '--fds-primitive-size-18'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Label',\n    description: 'Field and column labels at 12/16, usually semibold.',\n    tokens: [\n      ['--fds-font-size-label', '--fds-primitive-size-12'],\n      ['--fds-line-height-label', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Supporting',\n    description: 'Captions, help text, and supporting copy at 12/16.',\n    tokens: [\n      ['--fds-font-size-caption', '--fds-primitive-size-12'],\n      ['--fds-line-height-caption', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Metadata',\n    description: 'Timestamps and compact metadata at 11/16.',\n    tokens: [\n      ['--fds-font-size-metadata', '--fds-primitive-size-11'],\n      ['--fds-line-height-metadata', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Typography',\n    title: 'Weight',\n    description: 'Body, emphasis, heading, and strong text roles.',\n    tokens: [\n      ['--fds-font-weight-body', '--fds-primitive-font-weight-regular'],\n      ['--fds-font-weight-emphasis', '--fds-primitive-font-weight-medium'],\n      ['--fds-font-weight-heading', '--fds-primitive-font-weight-semibold'],\n      ['--fds-font-weight-strong', '--fds-primitive-font-weight-bold'],\n    ],\n  },\n  {\n    category: 'Spacing',\n    title: 'Scale',\n    description: 'Stable layout roles used by components instead of raw measurements.',\n    tokens: [\n      ['--fds-space-1', '--fds-primitive-space-1'],\n      ['--fds-space-2', '--fds-primitive-space-2'],\n      ['--fds-space-3', '--fds-primitive-space-3'],\n      ['--fds-space-4', '--fds-primitive-space-4'],\n      ['--fds-space-5', '--fds-primitive-space-5'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Control',\n    description: 'Compact, default, and action control dimensions.',\n    tokens: [\n      ['--fds-size-control-default', '--fds-primitive-size-32'],\n      ['--fds-size-control-compact', '--fds-primitive-size-28'],\n      ['--fds-size-control-action', '--fds-primitive-size-40'],\n      ['--fds-size-control-action-small', '--fds-primitive-size-24'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Icon',\n    description: 'Icon glyph dimensions and interactive hit targets.',\n    tokens: [\n      ['--fds-size-icon-16', '--fds-primitive-size-16'],\n      ['--fds-size-icon-20', '--fds-primitive-size-20'],\n      ['--fds-size-icon-24', '--fds-primitive-size-24'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Overlay',\n    description: 'Default dialog and drawer widths.',\n    tokens: [\n      ['--fds-size-overlay-dialog', '--fds-primitive-size-520'],\n      ['--fds-size-overlay-drawer', '--fds-primitive-size-540'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Data',\n    description: 'Dense data-table header and row heights.',\n    tokens: [\n      ['--fds-size-data-header', '--fds-primitive-size-36'],\n      ['--fds-size-data-row', '--fds-primitive-size-32'],\n    ],\n  },\n  {\n    category: 'Size',\n    title: 'Toggle',\n    description: 'Toggle track and thumb dimensions.',\n    tokens: [\n      ['--fds-size-toggle-track', '--fds-primitive-size-36'],\n      ['--fds-size-toggle-thumb', '--fds-primitive-size-16'],\n    ],\n  },\n  {\n    category: 'Shape',\n    title: 'Radius and border',\n    description: 'Stable corner and border roles used by components instead of raw measurements.',\n    tokens: [\n      ['--fds-radius-control', '--fds-primitive-radius-default'],\n      ['--fds-radius-container', '--fds-primitive-radius-default'],\n      ['--fds-radius-pill', '--fds-primitive-radius-full'],\n      ['--fds-border-default', '--fds-primitive-border-width'],\n      ['--fds-border-strong', '--fds-primitive-border-width-strong'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'State',\n    description: 'Shared disabled-state opacity.',\n    tokens: [\n      ['--fds-opacity-disabled', '--fds-primitive-opacity-disabled'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'Focus',\n    description: 'Visible keyboard focus width and offset.',\n    tokens: [\n      ['--fds-focus-ring-width', '--fds-primitive-focus-width'],\n      ['--fds-focus-ring-offset', '--fds-primitive-focus-offset'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'Motion',\n    description: 'Shared durations and easing for UI feedback.',\n    tokens: [\n      ['--fds-motion-duration-fast', '--fds-primitive-motion-duration-fast'],\n      ['--fds-motion-duration-spinner', '--fds-primitive-motion-duration-spinner'],\n      ['--fds-motion-easing-standard', '--fds-primitive-motion-easing-standard'],\n    ],\n  },\n  {\n    category: 'Interaction',\n    title: 'Elevation',\n    description: 'Subtle elevation for interactive controls.',\n    tokens: [\n      ['--fds-shadow-control', '--fds-primitive-shadow-control'],\n    ],\n  },\n];\n\nfunction TokenGroup({group, valueHeading}: {group: TokenGroupData; valueHeading: string}) {\n  return <article className=\"fds-token-docs__group\">\n    <div className=\"fds-token-docs__group-heading\">\n      <p className=\"fds-token-docs__kicker\">{group.category}</p>\n      <h3>{group.title}</h3>\n      <p>{group.description}</p>\n    </div>\n    <div className=\"fds-token-docs__table-wrap\">\n      <table>\n        <thead><tr>\n          {group.preview && <th scope=\"col\">Preview</th>}\n          <th scope=\"col\">Token</th>\n          <th scope=\"col\">{valueHeading}</th>\n        </tr></thead>\n        <tbody>{group.tokens.map(([name, value]) => <tr key={name}>\n          {group.preview && <td><span className=\"fds-token-docs__color\" style={{background: `var(${name})`}} /></td>}\n          <th scope=\"row\"><code>{name}</code></th>\n          <td><code>{value}</code></td>\n        </tr>)}</tbody>\n      </table>\n    </div>\n  </article>;\n}\n\nconst meta = {\n  title: 'Foundations/Tokens',\n  parameters: {\n    layout: 'fullscreen',\n    docs: {description: {component: 'Approved default FDS v1 token foundation. Components consume semantic roles; raw values remain in primitives, and component tokens exist only for stable repeated decisions.'}},\n  },\n} satisfies Meta;\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nexport const Primitives: Story = {\n  parameters: {docs: {description: {story: 'All approved raw FDS values, grouped by visual property.'}}},\n  render: () => <main className=\"fds-token-docs\">\n    <header>\n      <p className=\"fds-token-docs__eyebrow\">Layer 1 · Default FDS theme</p>\n      <h2>Primitive tokens</h2>\n      <p className=\"fds-token-docs__intro\">Literal values with no product meaning. They form the source scales for color, spacing, size, shape, typography, motion, and elevation.</p>\n    </header>\n\n    <section aria-label=\"Primitive token reference\">\n      {primitiveGroups.map((group) => <TokenGroup group={group} valueHeading=\"Raw value\" key={`${group.category}-${group.title}`} />)}\n    </section>\n  </main>,\n};\n\nexport const Semantics: Story = {\n  parameters: {docs: {description: {story: 'All approved purpose-based FDS roles and their source mappings.'}}},\n  render: () => <main className=\"fds-token-docs\">\n    <header>\n      <p className=\"fds-token-docs__eyebrow\">Layer 2 · Default FDS theme</p>\n      <h2>Semantic tokens</h2>\n      <p className=\"fds-token-docs__intro\">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from.</p>\n    </header>\n\n    <section aria-label=\"Semantic token reference\">\n      {semanticGroups.map((group) => <TokenGroup group={group} valueHeading=\"Resolves to\" key={`${group.category}-${group.title}`} />)}\n      <p className=\"fds-token-docs__note\">White on primary is 5.13:1; white on active is 9.90:1. Legacy accent remains a non-action role because white on it is 3.54:1.</p>\n    </section>\n  </main>,\n};\n"
       },
       "stories": [
         {
           "id": "foundations-tokens--primitives",
           "name": "Primitives",
-          "snippet": "const Primitives = () => <main className=\"fds-token-docs\">\n  <header>\n    <p className=\"fds-token-docs__eyebrow\">Layer 1 · Default FDS theme</p>\n    <h2>Primitive tokens</h2>\n    <p className=\"fds-token-docs__intro\">Literal values with no product meaning. They form the source scales for color, spacing, size, shape, typography, motion, and elevation.</p>\n  </header>\n\n  <section aria-label=\"Primitive token reference\">\n    {primitiveGroups.map((group) => <TokenGroup group={group} valueHeading=\"Raw value\" key={group.title} />)}\n  </section>\n</main>;"
+          "snippet": "const Primitives = () => <main className=\"fds-token-docs\">\n  <header>\n    <p className=\"fds-token-docs__eyebrow\">Layer 1 · Default FDS theme</p>\n    <h2>Primitive tokens</h2>\n    <p className=\"fds-token-docs__intro\">Literal values with no product meaning. They form the source scales for color, spacing, size, shape, typography, motion, and elevation.</p>\n  </header>\n\n  <section aria-label=\"Primitive token reference\">\n    {primitiveGroups.map((group) => <TokenGroup group={group} valueHeading=\"Raw value\" key={`${group.category}-${group.title}`} />)}\n  </section>\n</main>;"
         },
         {
           "id": "foundations-tokens--semantics",
           "name": "Semantics",
-          "snippet": "const Semantics = () => <main className=\"fds-token-docs\">\n  <header>\n    <p className=\"fds-token-docs__eyebrow\">Layer 2 · Default FDS theme</p>\n    <h2>Semantic tokens</h2>\n    <p className=\"fds-token-docs__intro\">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from.</p>\n  </header>\n\n  <section aria-label=\"Semantic token reference\">\n    {semanticGroups.map((group) => <TokenGroup group={group} valueHeading=\"Resolves to\" key={group.title} />)}\n    <p className=\"fds-token-docs__note\">White on primary is 5.13:1; white on active is 9.90:1. Legacy accent remains a non-action role because white on it is 3.54:1.</p>\n  </section>\n</main>;"
+          "snippet": "const Semantics = () => <main className=\"fds-token-docs\">\n  <header>\n    <p className=\"fds-token-docs__eyebrow\">Layer 2 · Default FDS theme</p>\n    <h2>Semantic tokens</h2>\n    <p className=\"fds-token-docs__intro\">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from.</p>\n  </header>\n\n  <section aria-label=\"Semantic token reference\">\n    {semanticGroups.map((group) => <TokenGroup group={group} valueHeading=\"Resolves to\" key={`${group.category}-${group.title}`} />)}\n    <p className=\"fds-token-docs__note\">White on primary is 5.13:1; white on active is 9.90:1. Legacy accent remains a non-action role because white on it is 3.54:1.</p>\n  </section>\n</main>;"
         }
       ],
       "docs": {
@@ -33,6 +33,24 @@
         }
       }
     },
+    "foundations-icons": {
+      "id": "foundations-icons",
+      "name": "Icons",
+      "path": "./src/stories/Icons.stories.tsx",
+      "jsDocTags": {},
+      "error": {
+        "name": "No component found",
+        "message": "We could not detect the component from your story file. Specify meta.component.\n  22 | ] as const;\n  23 |\n> 24 | const meta: Meta<{size: 16 | 20}> = {\n     | ^\n  25 |   title: 'Foundations/Icons',\n  26 |   args: {size: 20},\n  27 |   argTypes: {size: {control: 'inline-radio', options: [16, 20]}},\n\n./src/stories/Icons.stories.tsx:\nimport type {Meta, StoryObj} from '@storybook/react-vite';\nimport {Icon} from 'sandbox-fds-icons';\n\nconst iconNames = [\n  'add',\n  'arrow_forward',\n  'calendar_month',\n  'chevron_left',\n  'chevron_right',\n  'close',\n  'delete',\n  'download',\n  'edit',\n  'expand_more',\n  'help',\n  'info',\n  'menu',\n  'more_vert',\n  'refresh',\n  'search_off',\n  'upload',\n] as const;\n\nconst meta: Meta<{size: 16 | 20}> = {\n  title: 'Foundations/Icons',\n  args: {size: 20},\n  argTypes: {size: {control: 'inline-radio', options: [16, 20]}},\n  parameters: {\n    docs: {\n      description: {\n        component: 'Icons currently used by FDS components and stories. The icon package renders Material Symbols Sharp by name; adding a name here makes current FDS usage visible without expanding the package API.',\n      },\n    },\n  },\n};\nexport default meta;\ntype Story = StoryObj<{size: 16 | 20}>;\n\nexport const CurrentUsage: Story = {\n  render: ({size}) => (\n    <section aria-labelledby=\"fds-icons-heading\" style={{display: 'grid', gap: 'var(--fds-space-5)'}}>\n      <header style={{display: 'grid', gap: 'var(--fds-space-2)'}}>\n        <h2 id=\"fds-icons-heading\" style={{margin: 0}}>Icons</h2>\n        <p style={{margin: 0}}>Names currently used across FDS components and documented examples.</p>\n      </header>\n      <ul style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(10rem, 1fr))', gap: 'var(--fds-space-3)', margin: 0, padding: 0, listStyle: 'none'}}>\n        {iconNames.map((name) => (\n          <li key={name} style={{display: 'flex', alignItems: 'center', gap: 'var(--fds-space-3)', padding: 'var(--fds-space-3)', border: 'var(--fds-border-default) solid var(--fds-color-border-default)', borderRadius: 'var(--fds-radius-control)'}}>\n            <Icon name={name} size={size} />\n            <code>{name}</code>\n          </li>\n        ))}\n      </ul>\n    </section>\n  ),\n};\n"
+      },
+      "stories": [
+        {
+          "id": "foundations-icons--current-usage",
+          "name": "Current Usage",
+          "snippet": "const CurrentUsage = ({size}) => (\n  <section aria-labelledby=\"fds-icons-heading\" style={{display: 'grid', gap: 'var(--fds-space-5)'}}>\n    <header style={{display: 'grid', gap: 'var(--fds-space-2)'}}>\n      <h2 id=\"fds-icons-heading\" style={{margin: 0}}>Icons</h2>\n      <p style={{margin: 0}}>Names currently used across FDS components and documented examples.</p>\n    </header>\n    <ul style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(10rem, 1fr))', gap: 'var(--fds-space-3)', margin: 0, padding: 0, listStyle: 'none'}}>\n      {iconNames.map((name) => (\n        <li key={name} style={{display: 'flex', alignItems: 'center', gap: 'var(--fds-space-3)', padding: 'var(--fds-space-3)', border: 'var(--fds-border-default) solid var(--fds-color-border-default)', borderRadius: 'var(--fds-radius-control)'}}>\n          <Icon name={name} size={size} />\n          <code>{name}</code>\n        </li>\n      ))}\n    </ul>\n  </section>\n);"
+        }
+      ],
+      "import": "import { Icon } from \"sandbox-fds-components\";"
+    },
     "components-actions-actiongroup": {
       "id": "components-actions-actiongroup",
       "name": "ActionGroup",
@@ -42,7 +60,7 @@
         "description": "",
         "methods": [],
         "displayName": "ActionGroup",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/ActionGroup.tsx",
+        "definedInFile": "./src/components/ActionGroup.tsx",
         "actualName": "ActionGroup",
         "exportName": "ActionGroup",
         "props": {
@@ -99,7 +117,7 @@
           "snippet": "const Wrapping = () => <ActionGroup align=\"end\"><><Button tone=\"tertiary\">Save draft</Button><Button tone=\"secondary\">Preview invoice</Button><Button>Send for approval</Button></></ActionGroup>;"
         }
       ],
-      "import": "import { ActionGroup, Button, IconButton } from \"@fr8labs/ui\";",
+      "import": "import { ActionGroup, Button, Icon, IconButton } from \"sandbox-fds-components\";",
       "docs": {
         "components-actions-actiongroup--docs": {
           "id": "components-actions-actiongroup--docs",
@@ -120,7 +138,7 @@
         "description": "",
         "methods": [],
         "displayName": "Button",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Button.tsx",
+        "definedInFile": "./src/components/Button.tsx",
         "actualName": "Button",
         "exportName": "Button",
         "props": {
@@ -295,7 +313,7 @@
           "snippet": "const KeyboardFocus = () => <Button tone=\"secondary\">Focused button</Button>;"
         }
       ],
-      "import": "import { Button } from \"@fr8labs/ui\";",
+      "import": "import { Button, Icon } from \"sandbox-fds-components\";",
       "docs": {
         "components-actions-button--docs": {
           "id": "components-actions-button--docs",
@@ -316,7 +334,7 @@
         "description": "",
         "methods": [],
         "displayName": "IconButton",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/IconButton.tsx",
+        "definedInFile": "./src/components/IconButton.tsx",
         "actualName": "IconButton",
         "exportName": "IconButton",
         "props": {
@@ -436,40 +454,40 @@
         {
           "id": "components-actions-iconbutton--playground",
           "name": "Playground",
-          "snippet": "const Playground = () => <IconButton\n    aria-label=\"Refresh shipment\"\n    tone=\"tertiary\"\n    size=\"medium\"\n    loading={false}\n    loadingAnnouncement=\"Refreshing shipment\"\n    disabled={false}><MaterialSymbol>refresh</MaterialSymbol></IconButton>;"
+          "snippet": "const Playground = () => <IconButton\n    aria-label=\"Refresh shipment\"\n    tone=\"tertiary\"\n    size=\"medium\"\n    loading={false}\n    loadingAnnouncement=\"Refreshing shipment\"\n    disabled={false}><Icon name=\"refresh\" /></IconButton>;"
         },
         {
           "id": "components-actions-iconbutton--tones",
           "name": "Tones",
-          "snippet": "const Tones = () => <div style={row}>\n  <IconButton aria-label=\"Add shipment\" tone=\"primary\"><MaterialSymbol>add</MaterialSymbol></IconButton>\n  <IconButton aria-label=\"Download document\" tone=\"secondary\"><MaterialSymbol>download</MaterialSymbol></IconButton>\n  <IconButton aria-label=\"Edit shipment\"><MaterialSymbol>edit</MaterialSymbol></IconButton>\n  <IconButton aria-label=\"Delete shipment\" tone=\"danger\"><MaterialSymbol>delete</MaterialSymbol></IconButton>\n</div>;"
+          "snippet": "const Tones = () => <div style={row}>\n  <IconButton aria-label=\"Add shipment\" tone=\"primary\"><Icon name=\"add\" /></IconButton>\n  <IconButton aria-label=\"Download document\" tone=\"secondary\"><Icon name=\"download\" /></IconButton>\n  <IconButton aria-label=\"Edit shipment\"><Icon name=\"edit\" /></IconButton>\n  <IconButton aria-label=\"Delete shipment\" tone=\"danger\"><Icon name=\"delete\" /></IconButton>\n</div>;"
         },
         {
           "id": "components-actions-iconbutton--sizes",
           "name": "Sizes",
-          "snippet": "const Sizes = () => <div style={row}>\n  <IconButton aria-label=\"Previous page\" size=\"small\"><MaterialSymbol>chevron_left</MaterialSymbol></IconButton>\n  <IconButton aria-label=\"Refresh shipment\"><MaterialSymbol>refresh</MaterialSymbol></IconButton>\n  <IconButton aria-label=\"Open navigation\" size=\"large\"><MaterialSymbol>menu</MaterialSymbol></IconButton>\n</div>;"
+          "snippet": "const Sizes = () => <div style={row}>\n  <IconButton aria-label=\"Previous page\" size=\"small\"><Icon name=\"chevron_left\" /></IconButton>\n  <IconButton aria-label=\"Refresh shipment\"><Icon name=\"refresh\" /></IconButton>\n  <IconButton aria-label=\"Open navigation\" size=\"large\"><Icon name=\"menu\" /></IconButton>\n</div>;"
         },
         {
           "id": "components-actions-iconbutton--loading",
           "name": "Loading",
-          "snippet": "const Loading = () => <IconButton aria-label=\"Refresh shipment\" loading loadingAnnouncement=\"Refreshing shipment\" onClick={() => {throw new Error('Loading icon button activated');}}><MaterialSymbol>refresh</MaterialSymbol></IconButton>;"
+          "snippet": "const Loading = () => <IconButton aria-label=\"Refresh shipment\" loading loadingAnnouncement=\"Refreshing shipment\" onClick={() => {throw new Error('Loading icon button activated');}}><Icon name=\"refresh\" /></IconButton>;"
         },
         {
           "id": "components-actions-iconbutton--disabled",
           "name": "Disabled",
-          "snippet": "const Disabled = () => <div style={row}>\n  <IconButton aria-label=\"Delete shipment\" disabled><MaterialSymbol>delete</MaterialSymbol></IconButton>\n  <IconButton aria-label=\"Refresh unavailable\" aria-disabled=\"true\" onClick={() => {throw new Error('ARIA-disabled icon button activated');}}><MaterialSymbol>refresh</MaterialSymbol></IconButton>\n</div>;"
+          "snippet": "const Disabled = () => <div style={row}>\n  <IconButton aria-label=\"Delete shipment\" disabled><Icon name=\"delete\" /></IconButton>\n  <IconButton aria-label=\"Refresh unavailable\" aria-disabled=\"true\" onClick={() => {throw new Error('ARIA-disabled icon button activated');}}><Icon name=\"refresh\" /></IconButton>\n</div>;"
         },
         {
           "id": "components-actions-iconbutton--keyboard-focus",
           "name": "Keyboard Focus",
-          "snippet": "const KeyboardFocus = () => <IconButton aria-label=\"More shipment actions\" tone=\"secondary\"><MaterialSymbol>more_vert</MaterialSymbol></IconButton>;"
+          "snippet": "const KeyboardFocus = () => <IconButton aria-label=\"More shipment actions\" tone=\"secondary\"><Icon name=\"more_vert\" /></IconButton>;"
         },
         {
           "id": "components-actions-iconbutton--native-passthrough",
           "name": "Native Passthrough",
-          "snippet": "const NativePassthrough = () => <IconButton aria-label=\"Refresh shipment\" data-testid=\"refresh-shipment\" sx={{marginInlineStart: 8}}><MaterialSymbol>refresh</MaterialSymbol></IconButton>;"
+          "snippet": "const NativePassthrough = () => <IconButton aria-label=\"Refresh shipment\" data-testid=\"refresh-shipment\" sx={{marginInlineStart: 8}}><Icon name=\"refresh\" /></IconButton>;"
         }
       ],
-      "import": "import { IconButton } from \"@fr8labs/ui\";",
+      "import": "import { Icon, IconButton } from \"sandbox-fds-components\";",
       "docs": {
         "components-actions-iconbutton--docs": {
           "id": "components-actions-iconbutton--docs",
@@ -490,7 +508,7 @@
         "description": "",
         "methods": [],
         "displayName": "Checkbox",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Checkbox.tsx",
+        "definedInFile": "./src/components/Checkbox.tsx",
         "actualName": "Checkbox",
         "exportName": "Checkbox",
         "props": {
@@ -604,7 +622,7 @@
           "snippet": "const LabelAndDescription = () => { const [checked, setChecked] = useState(false); return <Checkbox label=\"Add customs clearance\" checked={checked} onChange={setChecked} description=\"Includes broker charges in the freight estimate.\" />; };"
         }
       ],
-      "import": "import { Checkbox } from \"@fr8labs/ui\";"
+      "import": "import { Checkbox } from \"sandbox-fds-components\";"
     },
     "components-inputs-checkboxgroup": {
       "id": "components-inputs-checkboxgroup",
@@ -615,7 +633,7 @@
         "description": "",
         "methods": [],
         "displayName": "CheckboxGroup",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/CheckboxGroup.tsx",
+        "definedInFile": "./src/components/CheckboxGroup.tsx",
         "actualName": "CheckboxGroup",
         "exportName": "CheckboxGroup",
         "props": {
@@ -783,202 +801,54 @@
           "snippet": "const OptionIntegrity = () => <CheckboxGroup\n    label=\"Included services\"\n    values={['missing']}\n    onChange={() => {}}\n    options={[...options, {label: 'Duplicate freight', value: 'freight'}, {label: 'Reserved empty value', value: ''}]} />;"
         }
       ],
-      "import": "import { CheckboxGroup } from \"@fr8labs/ui\";"
+      "import": "import { CheckboxGroup } from \"sandbox-fds-components\";"
     },
-    "components-inputs-inlineinput": {
-      "id": "components-inputs-inlineinput",
-      "name": "InlineInput",
-      "path": "./src/stories/InlineInput.stories.tsx",
+    "components-inputs-datetimepicker": {
+      "id": "components-inputs-datetimepicker",
+      "name": "DateTimePicker",
+      "path": "./src/stories/DateTimePicker.stories.tsx",
       "jsDocTags": {},
       "reactDocgen": {
         "description": "",
         "methods": [],
-        "displayName": "InlineInput",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/InlineInput.tsx",
-        "actualName": "InlineInput",
-        "exportName": "InlineInput",
-        "props": {
-          "label": {
-            "required": true,
-            "tsType": {
-              "name": "string"
-            },
-            "description": ""
-          },
-          "value": {
-            "required": true,
-            "tsType": {
-              "name": "string"
-            },
-            "description": ""
-          },
-          "onChange": {
-            "required": true,
-            "tsType": {
-              "name": "signature",
-              "type": "function",
-              "raw": "(value: string) => void",
-              "signature": {
-                "arguments": [
-                  {
-                    "type": {
-                      "name": "string"
-                    },
-                    "name": "value"
-                  }
-                ],
-                "return": {
-                  "name": "void"
-                }
-              }
-            },
-            "description": ""
-          },
-          "placeholder": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": ""
-          },
-          "density": {
-            "required": false,
-            "tsType": {
-              "name": "union",
-              "raw": "'default' | 'compact'",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "'default'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'compact'"
-                }
-              ]
-            },
-            "description": "",
-            "defaultValue": {
-              "value": "'default'",
-              "computed": false
-            }
-          },
-          "disabled": {
-            "required": false,
-            "tsType": {
-              "name": "boolean"
-            },
-            "description": ""
-          },
-          "error": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": ""
-          },
-          "helpText": {
-            "required": false,
-            "tsType": {
-              "name": "string"
-            },
-            "description": ""
-          },
-          "inputMode": {
-            "required": false,
-            "tsType": {
-              "name": "union",
-              "raw": "'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url'",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "'decimal'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'email'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'numeric'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'search'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'tel'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'text'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'url'"
-                }
-              ]
-            },
-            "description": ""
-          },
-          "textAlign": {
-            "required": false,
-            "tsType": {
-              "name": "union",
-              "raw": "'start' | 'end'",
-              "elements": [
-                {
-                  "name": "literal",
-                  "value": "'start'"
-                },
-                {
-                  "name": "literal",
-                  "value": "'end'"
-                }
-              ]
-            },
-            "description": "",
-            "defaultValue": {
-              "value": "'end'",
-              "computed": false
-            }
-          }
-        }
+        "displayName": "DateTimePicker",
+        "definedInFile": "./src/components/DateTimePicker.tsx",
+        "actualName": "DateTimePicker",
+        "exportName": "DateTimePicker"
       },
       "stories": [
         {
-          "id": "components-inputs-inlineinput--default",
-          "name": "Default",
-          "snippet": "const Default = () => <EditableInput />;"
+          "id": "components-inputs-datetimepicker--single-date-time",
+          "name": "Single Date Time",
+          "snippet": "const SingleDateTime = () => <ControlledPicker\n    label=\"Date\"\n    value=\"\"\n    onChange={() => {}}\n    range={false}\n    showTime\n    timezone=\"PST\"\n    locale=\"en-US\"\n    step={900}\n    description=\"Enter a value directly or use the calendar button.\" />;"
         },
         {
-          "id": "components-inputs-inlineinput--compact",
-          "name": "Compact",
-          "snippet": "const Compact = () => <InlineInput\n    label=\"Ocean freight amount\"\n    value=\"1,250.00\"\n    onChange={() => {}}\n    density=\"compact\"\n    inputMode=\"decimal\" />;"
+          "id": "components-inputs-datetimepicker--single-date",
+          "name": "Single Date",
+          "snippet": "const SingleDate = () => <ControlledPicker\n    label=\"Date\"\n    value=\"\"\n    onChange={() => {}}\n    range={false}\n    showTime={false}\n    locale=\"en-US\" />;"
         },
         {
-          "id": "components-inputs-inlineinput--value-entered",
-          "name": "Value Entered",
-          "snippet": "const ValueEntered = () => <EditableInput initialValue=\"12,480.00\" />;"
+          "id": "components-inputs-datetimepicker--date-time-range",
+          "name": "Date Time Range",
+          "snippet": "const DateTimeRange = () => <ControlledPicker\n    range\n    showTime\n    label=\"Shipment window\"\n    value={{start: '', end: ''}}\n    onChange={() => {}}\n    timezone=\"PST\"\n    locale=\"en-US\"\n    startName=\"shipmentStart\"\n    endName=\"shipmentEnd\"\n    step={900}\n    description=\"Enter the range directly or use the calendar button.\" />;"
         },
         {
-          "id": "components-inputs-inlineinput--disabled",
+          "id": "components-inputs-datetimepicker--date-range",
+          "name": "Date Range",
+          "snippet": "const DateRange = () => <ControlledPicker\n    range\n    showTime={false}\n    label=\"Travel dates\"\n    value={{start: '', end: ''}}\n    onChange={() => {}}\n    locale=\"en-US\" />;"
+        },
+        {
+          "id": "components-inputs-datetimepicker--validation-error",
+          "name": "Validation Error",
+          "snippet": "const ValidationError = () => <DateTimePicker\n    label=\"Delivery appointment\"\n    value=\"\"\n    onChange={() => {}}\n    timezone=\"WIB\"\n    isRequired\n    error=\"Enter the delivery date and time.\" />;"
+        },
+        {
+          "id": "components-inputs-datetimepicker--disabled",
           "name": "Disabled",
-          "snippet": "const Disabled = () => <InlineInput label=\"Posted amount\" value=\"12,480.00\" onChange={() => {}} disabled />;"
-        },
-        {
-          "id": "components-inputs-inlineinput--error-and-help",
-          "name": "Error And Help",
-          "snippet": "const ErrorAndHelp = () => <InlineInput\n    label=\"Ocean freight amount\"\n    value=\"0\"\n    onChange={() => {}}\n    error=\"Enter an amount greater than zero.\"\n    helpText=\"Enter the supplier invoice amount.\"\n    inputMode=\"decimal\" />;"
-        },
-        {
-          "id": "components-inputs-inlineinput--keyboard-editing-and-focus",
-          "name": "Keyboard Editing And Focus",
-          "snippet": "const KeyboardEditingAndFocus = () => <EditableInput initialValue=\"1,250.00\" />;"
+          "snippet": "const Disabled = () => <DateTimePicker\n    label=\"Delivery appointment\"\n    value=\"\"\n    onChange={() => {}}\n    timezone=\"WIB\"\n    isDisabled\n    disabledMessage=\"Choose a delivery location before setting the appointment.\" />;"
         }
       ],
-      "import": "import { InlineInput } from \"@fr8labs/ui\";"
+      "import": "import { DateTimePicker } from \"sandbox-fds-components\";"
     },
     "components-inputs-radio": {
       "id": "components-inputs-radio",
@@ -989,7 +859,7 @@
         "description": "",
         "methods": [],
         "displayName": "Radio",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Radio.tsx",
+        "definedInFile": "./src/components/Radio.tsx",
         "actualName": "Radio",
         "exportName": "Radio",
         "props": {
@@ -1088,7 +958,7 @@
           "snippet": "const Disabled = () => <Radio\n    label=\"Ocean\"\n    value=\"ocean\"\n    checked\n    onChange={() => {}}\n    name=\"shipment-mode\"\n    isDisabled />;"
         }
       ],
-      "import": "import { Radio } from \"@fr8labs/ui\";"
+      "import": "import { Radio } from \"sandbox-fds-components\";"
     },
     "components-inputs-radiogroup": {
       "id": "components-inputs-radiogroup",
@@ -1099,7 +969,7 @@
         "description": "",
         "methods": [],
         "displayName": "RadioGroup",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/RadioGroup.tsx",
+        "definedInFile": "./src/components/RadioGroup.tsx",
         "actualName": "RadioGroup",
         "exportName": "RadioGroup",
         "props": {
@@ -1255,7 +1125,7 @@
           "snippet": "const OptionIntegrity = () => <RadioGroup\n    label=\"Shipment mode\"\n    value=\"missing\"\n    onChange={() => {}}\n    options={[...options, {label: 'Duplicate ocean', value: 'ocean'}, {label: 'Reserved empty value', value: ''}]} />;"
         }
       ],
-      "import": "import { RadioGroup } from \"@fr8labs/ui\";"
+      "import": "import { RadioGroup } from \"sandbox-fds-components\";"
     },
     "components-inputs-select": {
       "id": "components-inputs-select",
@@ -1266,7 +1136,7 @@
         "description": "",
         "methods": [],
         "displayName": "Select",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Select.tsx",
+        "definedInFile": "./src/components/Select.tsx",
         "actualName": "Select",
         "exportName": "Select",
         "props": {
@@ -1422,7 +1292,7 @@
           "snippet": "const OptionIntegrity = () => <Select\n    label=\"Carrier\"\n    value=\"missing\"\n    onChange={() => {}}\n    options={[...options, {label: 'Duplicate MSC', value: 'msc'}, {label: 'Reserved empty value', value: ''}]}\n    placeholder=\"Select a carrier\" />;"
         }
       ],
-      "import": "import { Select } from \"@fr8labs/ui\";"
+      "import": "import { Select } from \"sandbox-fds-components\";"
     },
     "components-inputs-switch": {
       "id": "components-inputs-switch",
@@ -1433,7 +1303,7 @@
         "description": "",
         "methods": [],
         "displayName": "Switch",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Switch.tsx",
+        "definedInFile": "./src/components/Switch.tsx",
         "actualName": "Switch",
         "exportName": "Switch",
         "props": {
@@ -1513,7 +1383,135 @@
           "snippet": "const DisabledWithReason = () => <Switch\n    label=\"Inherited setting\"\n    checked\n    onChange={() => {}}\n    description=\"Notify the shipment owner immediately.\"\n    isDisabled\n    disabledMessage=\"This setting is inherited from the master job.\" />;"
         }
       ],
-      "import": "import { Switch } from \"@fr8labs/ui\";"
+      "import": "import { Switch } from \"sandbox-fds-components\";"
+    },
+    "components-inputs-textarea": {
+      "id": "components-inputs-textarea",
+      "name": "Textarea",
+      "path": "./src/stories/Textarea.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Textarea",
+        "definedInFile": "./src/components/Textarea.tsx",
+        "actualName": "Textarea",
+        "exportName": "Textarea",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "onChange": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(value: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "value"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "description": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "error": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "isRequired": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "isDisabled": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "readOnly": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "placeholder": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "rows": {
+            "required": false,
+            "tsType": {
+              "name": "number"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "4",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-inputs-textarea--playground",
+          "name": "Playground",
+          "snippet": "const Playground = () => <Textarea\n    label=\"Handling instructions\"\n    value=\"\"\n    onChange={() => {}}\n    description=\"Visible to the operations team.\"\n    placeholder=\"Add handling instructions\" />;"
+        },
+        {
+          "id": "components-inputs-textarea--controlled-value",
+          "name": "Controlled Value",
+          "snippet": "const ControlledValue = () => {\n  const [value, setValue] = useState('Keep cargo dry and call the consignee before delivery.');\n  return <Textarea label=\"Handling instructions\" value={value} onChange={setValue} description=\"Visible to the operations team.\" />;\n};"
+        },
+        {
+          "id": "components-inputs-textarea--validation",
+          "name": "Validation",
+          "snippet": "const Validation = () => <Textarea\n    label=\"Review note\"\n    value=\"\"\n    onChange={() => {}}\n    description=\"Explain why the shipment needs another review.\"\n    placeholder=\"Add handling instructions\"\n    isRequired\n    error=\"Enter a review note.\" />;"
+        },
+        {
+          "id": "components-inputs-textarea--read-only-and-disabled",
+          "name": "Read Only And Disabled",
+          "snippet": "const ReadOnlyAndDisabled = () => <div style={{display: 'grid', gap: 16, minWidth: 320}}><Textarea label=\"Source instructions\" value=\"Copied from the master job.\" onChange={() => {}} readOnly description=\"Read-only source value.\" /><Textarea label=\"Inherited instructions\" value=\"Keep cargo dry.\" onChange={() => {}} isDisabled description=\"Inherited from the shipment.\" /></div>;"
+        }
+      ],
+      "import": "import { Textarea } from \"sandbox-fds-components\";"
     },
     "components-inputs-textinput": {
       "id": "components-inputs-textinput",
@@ -1524,7 +1522,7 @@
         "description": "",
         "methods": [],
         "displayName": "TextInput",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/TextInput.tsx",
+        "definedInFile": "./src/components/TextInput.tsx",
         "actualName": "TextInput",
         "exportName": "TextInput",
         "props": {
@@ -1644,7 +1642,7 @@
           "snippet": "const States = () => <InputStates />;"
         }
       ],
-      "import": "import { TextInput } from \"@fr8labs/ui\";"
+      "import": "import { TextInput } from \"sandbox-fds-components\";"
     },
     "components-feedback-emptystate": {
       "id": "components-feedback-emptystate",
@@ -1655,7 +1653,7 @@
         "description": "",
         "methods": [],
         "displayName": "EmptyState",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/EmptyState.tsx",
+        "definedInFile": "./src/components/EmptyState.tsx",
         "actualName": "EmptyState",
         "exportName": "EmptyState",
         "props": {
@@ -1727,7 +1725,7 @@
         {
           "id": "components-feedback-emptystate--no-matches",
           "name": "No Matches",
-          "snippet": "const NoMatches = () => <EmptyState\n    title=\"No shipments found\"\n    description=\"Try changing or clearing the active filters.\"\n    icon={<span className=\"material-symbols-sharp\">search_off</span>}\n    action={<Button tone=\"tertiary\">Clear filters</Button>} />;"
+          "snippet": "const NoMatches = () => <EmptyState\n    title=\"No shipments found\"\n    description=\"Try changing or clearing the active filters.\"\n    icon={<Icon name=\"search_off\" />}\n    action={<Button tone=\"tertiary\">Clear filters</Button>} />;"
         },
         {
           "id": "components-feedback-emptystate--first-record",
@@ -1735,7 +1733,7 @@
           "snippet": "const FirstRecord = () => <EmptyState\n    title=\"No shipments yet\"\n    description=\"Create the first shipment when the booking details are ready.\"\n    action={<Button>Create shipment</Button>} />;"
         }
       ],
-      "import": "import { Button, EmptyState } from \"@fr8labs/ui\";"
+      "import": "import { Button, EmptyState, Icon } from \"sandbox-fds-components\";"
     },
     "components-feedback-inlinealert": {
       "id": "components-feedback-inlinealert",
@@ -1746,7 +1744,7 @@
         "description": "",
         "methods": [],
         "displayName": "InlineAlert",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/InlineAlert.tsx",
+        "definedInFile": "./src/components/InlineAlert.tsx",
         "actualName": "InlineAlert",
         "exportName": "InlineAlert",
         "props": {
@@ -1847,7 +1845,7 @@
           "snippet": "const ConstrainedWidth = () => <InlineAlert\n    tone=\"warning\"\n    title=\"Reference needs review\"\n    description=\"The supplier reference SUPPLIER-REFERENCE-2026-08-15-000184 cannot be matched.\"\n    action={<Button size=\"small\">Review</Button>} />;"
         }
       ],
-      "import": "import { Button, InlineAlert } from \"@fr8labs/ui\";"
+      "import": "import { Button, InlineAlert } from \"sandbox-fds-components\";"
     },
     "components-feedback-statusbadge": {
       "id": "components-feedback-statusbadge",
@@ -1858,7 +1856,7 @@
         "description": "",
         "methods": [],
         "displayName": "StatusBadge",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/StatusBadge.tsx",
+        "definedInFile": "./src/components/StatusBadge.tsx",
         "actualName": "StatusBadge",
         "exportName": "StatusBadge",
         "props": {
@@ -1921,7 +1919,7 @@
           "snippet": "const ProductFacingLabel = () => <StatusBadge status=\"approved\" label=\"EDI ready\" />;"
         }
       ],
-      "import": "import { StatusBadge } from \"@fr8labs/ui\";"
+      "import": "import { StatusBadge } from \"sandbox-fds-components\";"
     },
     "components-data-display-avatar": {
       "id": "components-data-display-avatar",
@@ -1932,7 +1930,7 @@
         "description": "",
         "methods": [],
         "displayName": "Avatar",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Avatar.tsx",
+        "definedInFile": "./src/components/Avatar.tsx",
         "actualName": "Avatar",
         "exportName": "Avatar",
         "props": {
@@ -1986,7 +1984,7 @@
           "snippet": "const SizesAndFallbacks = () => <div style={{display: 'flex', alignItems: 'center', gap: 12}}><Avatar name=\"Ayu Pratama\" size=\"small\" /><Avatar name=\"Broken image\" src=\"/missing-avatar.png\" /><Avatar name=\"   \" /><span>Small, failed-image, and missing-name boundaries.</span></div>;"
         }
       ],
-      "import": "import { Avatar } from \"@fr8labs/ui\";"
+      "import": "import { Avatar } from \"sandbox-fds-components\";"
     },
     "components-data-display-datatable": {
       "id": "components-data-display-datatable",
@@ -1997,7 +1995,7 @@
         "description": "",
         "methods": [],
         "displayName": "DataTable",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/DataTable.tsx",
+        "definedInFile": "./src/components/DataTable.tsx",
         "actualName": "DataTable",
         "exportName": "DataTable",
         "props": {
@@ -2113,7 +2111,7 @@
           "snippet": "const LongPartnerTextAndNumericAlignment = () => <DataTable ariaLabel=\"Charge allocation review\" columns={columns} rows={[{...charges[0], id: 'charge-long-partner', partner: 'Mediterranean Shipping Company S.A. Jakarta export operations office', amount: 'USD 12,480.00'}]} getRowKey={getRowKey} />;"
         }
       ],
-      "import": "import { DataTable, StatusBadge } from \"@fr8labs/ui\";"
+      "import": "import { DataTable, StatusBadge } from \"sandbox-fds-components\";"
     },
     "components-data-display-fdsdatagrid": {
       "id": "components-data-display-fdsdatagrid",
@@ -2124,7 +2122,7 @@
         "description": "",
         "methods": [],
         "displayName": "FDSDataGrid",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/FDSDataGrid.tsx",
+        "definedInFile": "./src/components/FDSDataGrid.tsx",
         "actualName": "FDSDataGrid",
         "exportName": "FDSDataGrid",
         "props": {
@@ -2317,7 +2315,202 @@
           "snippet": "const NarrowComparison = () => <div style={{maxWidth: 480}}><FDSDataGrid ariaLabel=\"Shipment review\" columns={columns} rows={shipments} getRowId={(row) => row.id} /></div>;"
         }
       ],
-      "import": "import { ActionGroup, Button, FDSDataGrid, StatusBadge } from \"@fr8labs/ui\";"
+      "import": "import { ActionGroup, Button, FDSDataGrid, StatusBadge } from \"sandbox-fds-components\";"
+    },
+    "components-data-display-inlineinput": {
+      "id": "components-data-display-inlineinput",
+      "name": "InlineInput",
+      "path": "./src/stories/InlineInput.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "InlineInput",
+        "definedInFile": "./src/components/InlineInput.tsx",
+        "actualName": "InlineInput",
+        "exportName": "InlineInput",
+        "props": {
+          "label": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "value": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "onChange": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(value: string) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "string"
+                    },
+                    "name": "value"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "placeholder": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "density": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'default' | 'compact'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'default'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'compact'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'default'",
+              "computed": false
+            }
+          },
+          "disabled": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": ""
+          },
+          "error": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "helpText": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "inputMode": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'decimal' | 'email' | 'numeric' | 'search' | 'tel' | 'text' | 'url'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'decimal'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'email'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'numeric'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'search'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'tel'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'text'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'url'"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "textAlign": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'start' | 'end'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'start'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'end'"
+                }
+              ]
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'end'",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-data-display-inlineinput--editable-amount",
+          "name": "Editable Amount",
+          "snippet": "const EditableAmount = () => <EditableInput />;"
+        },
+        {
+          "id": "components-data-display-inlineinput--compact-cell",
+          "name": "Compact Cell",
+          "snippet": "const CompactCell = () => <InlineInput\n    label=\"Ocean freight amount\"\n    value=\"1,250.00\"\n    onChange={() => {}}\n    density=\"compact\"\n    inputMode=\"decimal\" />;"
+        },
+        {
+          "id": "components-data-display-inlineinput--value-entered",
+          "name": "Value Entered",
+          "snippet": "const ValueEntered = () => <EditableInput initialValue=\"12,480.00\" />;"
+        },
+        {
+          "id": "components-data-display-inlineinput--disabled-cell",
+          "name": "Disabled Cell",
+          "snippet": "const DisabledCell = () => <InlineInput label=\"Posted amount\" value=\"12,480.00\" onChange={() => {}} disabled />;"
+        },
+        {
+          "id": "components-data-display-inlineinput--cell-validation",
+          "name": "Cell Validation",
+          "snippet": "const CellValidation = () => <InlineInput\n    label=\"Ocean freight amount\"\n    value=\"0\"\n    onChange={() => {}}\n    error=\"Enter an amount greater than zero.\"\n    helpText=\"Enter the supplier invoice amount.\"\n    inputMode=\"decimal\" />;"
+        },
+        {
+          "id": "components-data-display-inlineinput--keyboard-editing-and-focus",
+          "name": "Keyboard Editing And Focus",
+          "snippet": "const KeyboardEditingAndFocus = () => <EditableInput initialValue=\"1,250.00\" />;"
+        }
+      ],
+      "import": "import { InlineInput } from \"sandbox-fds-components\";"
     },
     "components-data-display-metric": {
       "id": "components-data-display-metric",
@@ -2328,7 +2521,7 @@
         "description": "",
         "methods": [],
         "displayName": "Metric",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Metric.tsx",
+        "definedInFile": "./src/components/Metric.tsx",
         "actualName": "Metric",
         "exportName": "Metric",
         "props": {
@@ -2474,7 +2667,93 @@
           "snippet": "const CompactFreightAccounting = () => <Metric\n    label=\"Ocean freight\"\n    value=\"USD 12,480.00\"\n    description=\"AP · OFR-LCL · MSC-2026-7842\"\n    change={{direction: 'up', tone: 'unfavorable', value: '2.3% over quoted cost'}}\n    density=\"compact\" />;"
         }
       ],
-      "import": "import { Metric } from \"@fr8labs/ui\";"
+      "import": "import { Metric } from \"sandbox-fds-components\";"
+    },
+    "components-navigation-pagination": {
+      "id": "components-navigation-pagination",
+      "name": "Pagination",
+      "path": "./src/stories/Pagination.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Pagination",
+        "definedInFile": "./src/components/Pagination.tsx",
+        "actualName": "Pagination",
+        "exportName": "Pagination",
+        "props": {
+          "page": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "pageCount": {
+            "required": true,
+            "tsType": {
+              "name": "number"
+            },
+            "description": ""
+          },
+          "onPageChange": {
+            "required": true,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "(page: number) => void",
+              "signature": {
+                "arguments": [
+                  {
+                    "type": {
+                      "name": "number"
+                    },
+                    "name": "page"
+                  }
+                ],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": ""
+          },
+          "label": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'Pagination'",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-navigation-pagination--playground",
+          "name": "Playground",
+          "snippet": "const Playground = () => <Pagination\n    page={1}\n    pageCount={6}\n    onPageChange={() => {}}\n    label=\"Shipment result pages\" />;"
+        },
+        {
+          "id": "components-navigation-pagination--controlled-navigation",
+          "name": "Controlled Navigation",
+          "snippet": "const ControlledNavigation = () => {\n  const [page, setPage] = useState(2);\n  return <Pagination page={page} pageCount={6} onPageChange={setPage} label=\"Shipment result pages\" />;\n};"
+        },
+        {
+          "id": "components-navigation-pagination--boundary-pages",
+          "name": "Boundary Pages",
+          "snippet": "const BoundaryPages = () => <div style={{display: 'grid', gap: 24}}><Pagination page={1} pageCount={6} onPageChange={() => {}} label=\"First-page boundary\" /><Pagination page={6} pageCount={6} onPageChange={() => {}} label=\"Last-page boundary\" /></div>;"
+        },
+        {
+          "id": "components-navigation-pagination--invalid-bounds-normalize",
+          "name": "Invalid Bounds Normalize",
+          "snippet": "const InvalidBoundsNormalize = () => <Pagination\n    page={-4}\n    pageCount={0}\n    onPageChange={() => {}}\n    label=\"Normalized pagination boundary\" />;"
+        }
+      ],
+      "import": "import { Pagination } from \"sandbox-fds-components\";"
     },
     "components-navigation-tabs": {
       "id": "components-navigation-tabs",
@@ -2485,7 +2764,7 @@
         "description": "",
         "methods": [],
         "displayName": "Tabs",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Tabs.tsx",
+        "definedInFile": "./src/components/Tabs.tsx",
         "actualName": "Tabs",
         "exportName": "Tabs",
         "props": {
@@ -2546,7 +2825,140 @@
           "snippet": "const UnavailableSection = () => <ShipmentTabs tabs={[items[0], {...items[1], disabled: true}, items[2]]} />;"
         }
       ],
-      "import": "import { Tabs } from \"@fr8labs/ui\";"
+      "import": "import { Tabs } from \"sandbox-fds-components\";"
+    },
+    "components-layout-filterbar": {
+      "id": "components-layout-filterbar",
+      "name": "FilterBar",
+      "path": "./src/stories/FilterBar.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "FilterBar",
+        "definedInFile": "./src/components/FilterBar.tsx",
+        "actualName": "FilterBar",
+        "exportName": "FilterBar",
+        "props": {
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "actions": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "label": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "",
+            "defaultValue": {
+              "value": "'Filters'",
+              "computed": false
+            }
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-layout-filterbar--playground",
+          "name": "Playground",
+          "snippet": "const Playground = () => <FilterBar\n    actions={<Button type=\"submit\">Apply filters</Button>}\n    label=\"Shipment filters\"\n    onSubmit={(event) => event.preventDefault()}>{fields}</FilterBar>;"
+        },
+        {
+          "id": "components-layout-filterbar--controlled-submission",
+          "name": "Controlled Submission",
+          "snippet": "const ControlledSubmission = () => <ControlledFilters />;"
+        },
+        {
+          "id": "components-layout-filterbar--narrow-wrapping",
+          "name": "Narrow Wrapping",
+          "snippet": "const NarrowWrapping = () => <ControlledFilters />;"
+        }
+      ],
+      "import": "import { ActionGroup, Button, FilterBar, Select, TextInput } from \"sandbox-fds-components\";"
+    },
+    "components-layout-pageheader": {
+      "id": "components-layout-pageheader",
+      "name": "PageHeader",
+      "path": "./src/stories/PageHeader.stories.tsx",
+      "jsDocTags": {},
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "PageHeader",
+        "definedInFile": "./src/components/PageHeader.tsx",
+        "actualName": "PageHeader",
+        "exportName": "PageHeader",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "description": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "eyebrow": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "actions": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "breadcrumbs": {
+            "required": false,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          }
+        }
+      },
+      "stories": [
+        {
+          "id": "components-layout-pageheader--title-and-description",
+          "name": "Title And Description",
+          "snippet": "const TitleAndDescription = () => <PageHeader\n    eyebrow=\"Operations\"\n    title=\"Shipment review\"\n    description=\"Find active shipments and resolve exceptions.\" />;"
+        },
+        {
+          "id": "components-layout-pageheader--breadcrumbs-and-actions",
+          "name": "Breadcrumbs And Actions",
+          "snippet": "const BreadcrumbsAndActions = () => <PageHeader\n    eyebrow=\"Operations\"\n    title=\"Shipment review\"\n    description=\"Find active shipments and resolve exceptions.\"\n    breadcrumbs={breadcrumbs}\n    actions={actions} />;"
+        },
+        {
+          "id": "components-layout-pageheader--narrow-wrapping",
+          "name": "Narrow Wrapping",
+          "snippet": "const NarrowWrapping = () => <PageHeader\n    eyebrow=\"Operations\"\n    title=\"Shipment review\"\n    description=\"Find active shipments and resolve exceptions.\"\n    actions={actions} />;"
+        },
+        {
+          "id": "components-layout-pageheader--long-content",
+          "name": "Long Content",
+          "snippet": "const LongContent = () => <PageHeader\n    eyebrow=\"Operations\"\n    title=\"International multimodal shipment review and exception resolution\"\n    description=\"Review operational details, documents, and outstanding actions before the shipment can proceed.\"\n    actions={actions} />;"
+        }
+      ],
+      "import": "import { ActionGroup, Button, PageHeader } from \"sandbox-fds-components\";"
     },
     "components-layout-panel": {
       "id": "components-layout-panel",
@@ -2557,7 +2969,7 @@
         "description": "",
         "methods": [],
         "displayName": "Panel",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Panel.tsx",
+        "definedInFile": "./src/components/Panel.tsx",
         "actualName": "Panel",
         "exportName": "Panel",
         "props": {
@@ -2620,7 +3032,7 @@
           "snippet": "const CompactFreightContent = () => <Panel eyebrow=\"JOB-SEA-24018\" title=\"Jakarta to Rotterdam consolidation\" description=\"Ocean export · LCL consol\" actions={<StatusBadge status=\"pending\" label=\"Pending documents\" />}><dl style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(8rem, 1fr))', gap: '0.75rem', margin: 0}}><div><dt>HBL</dt><dd>HBL-JKT-9918</dd></div><div><dt>MBL</dt><dd>MBL-MSC-7821</dd></div><div><dt>ETA</dt><dd>2026-08-14</dd></div><div><dt>Mode</dt><dd>Ocean export</dd></div></dl></Panel>;"
         }
       ],
-      "import": "import { Button, Panel, StatusBadge } from \"@fr8labs/ui\";"
+      "import": "import { Button, Panel, StatusBadge } from \"sandbox-fds-components\";"
     },
     "components-overlays-dialog": {
       "id": "components-overlays-dialog",
@@ -2631,7 +3043,7 @@
         "description": "",
         "methods": [],
         "displayName": "Dialog",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Dialog.tsx",
+        "definedInFile": "./src/components/Dialog.tsx",
         "actualName": "Dialog",
         "exportName": "Dialog",
         "props": {
@@ -2746,7 +3158,7 @@
           "snippet": "const KeyboardCloseAndFocusRestore = () => <Example description=\"Press Escape, then confirm focus returns to the trigger.\" />;"
         }
       ],
-      "import": "import { Button, Dialog } from \"@fr8labs/ui\";",
+      "import": "import { Button, Dialog } from \"sandbox-fds-components\";",
       "docs": {
         "components-overlays-dialog--docs": {
           "id": "components-overlays-dialog--docs",
@@ -2767,7 +3179,7 @@
         "description": "",
         "methods": [],
         "displayName": "Drawer",
-        "definedInFile": "/Users/fr8labs/Documents/fr8labs/design-system/packages/ui/src/components/Drawer.tsx",
+        "definedInFile": "./src/components/Drawer.tsx",
         "actualName": "Drawer",
         "exportName": "Drawer",
         "props": {
@@ -2877,7 +3289,7 @@
           "snippet": "const KeyboardCloseAndFocusRestore = () => <Example />;"
         }
       ],
-      "import": "import { Button, Drawer, TextInput } from \"@fr8labs/ui\";",
+      "import": "import { Button, Drawer, TextInput } from \"sandbox-fds-components\";",
       "docs": {
         "components-overlays-drawer--docs": {
           "id": "components-overlays-drawer--docs",
@@ -2889,71 +3301,129 @@
         }
       }
     },
-    "patterns-composition-core-compositions": {
-      "id": "patterns-composition-core-compositions",
-      "name": "Corecompositions",
-      "path": "./src/stories/CoreComponents.stories.tsx",
+    "components-overlays-popover": {
+      "id": "components-overlays-popover",
+      "name": "Popover",
+      "path": "./src/stories/Popover.stories.tsx",
       "jsDocTags": {},
-      "error": {
-        "name": "No component found",
-        "message": "We could not detect the component from your story file. Specify meta.component.\n  3 | import {ActionGroup, Avatar, Button, EmptyState, FilterBar, PageHeader, Pagination, RadioGroup, Select, Switch, Textarea} from '../index';\n  4 |\n> 5 | const meta = {title: 'Patterns/Composition/Core compositions', tags: ['autodocs']} satisfies Meta;\n    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  6 | export default meta;\n  7 | type Story = StoryObj<typeof meta>;\n  8 |\n\n./src/stories/CoreComponents.stories.tsx:\nimport {useState} from 'react';\nimport type {Meta, StoryObj} from '@storybook/react-vite';\nimport {ActionGroup, Avatar, Button, EmptyState, FilterBar, PageHeader, Pagination, RadioGroup, Select, Switch, Textarea} from '../index';\n\nconst meta = {title: 'Patterns/Composition/Core compositions', tags: ['autodocs']} satisfies Meta;\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nfunction FormControls() {\n  const [notes, setNotes] = useState('');\n  const [mode, setMode] = useState('ocean');\n  const [alerts, setAlerts] = useState(true);\n  return <div style={{display: 'grid', gap: 16, maxWidth: 480}}><Textarea label=\"Review notes\" value={notes} onChange={setNotes} description=\"Visible to the approval team.\" error={notes.length > 0 && notes.length < 4 ? 'Enter at least four characters.' : undefined} /><RadioGroup label=\"Shipment mode\" value={mode} onChange={setMode} options={[{label: 'Ocean', value: 'ocean'}, {label: 'Air', value: 'air'}]} /><Switch label=\"Exception alerts\" description=\"Notify the shipment owner.\" checked={alerts} onChange={setAlerts} /><Switch label=\"Inherited setting\" checked isDisabled disabledMessage=\"This setting is inherited from the master job.\" onChange={() => {}} /></div>;\n}\n\nfunction Compositions() {\n  const [page, setPage] = useState(1);\n  const [submitted, setSubmitted] = useState(false);\n  return <div style={{display: 'grid', gap: 24}}><PageHeader eyebrow=\"Shipment job\" title=\"SHP-260081\" description=\"Jakarta to Rotterdam\" actions={<ActionGroup><Button size=\"small\" tone=\"secondary\">Export</Button><Button size=\"small\">Update shipment</Button></ActionGroup>} /><FilterBar onSubmit={(event) => {event.preventDefault(); setSubmitted(true);}} actions={<Button size=\"small\" type=\"submit\">Apply filters</Button>}><label>Search<input className=\"fds-control\" name=\"query\" aria-label=\"Search shipments\" /></label><label>Status<select className=\"fds-control\" name=\"status\" defaultValue=\"\"><option value=\"\">All statuses</option><option>Pending</option></select></label></FilterBar>{submitted ? <span role=\"status\">Filters applied.</span> : null}<div style={{display: 'flex', alignItems: 'center', gap: 8}}><Avatar name=\"Ayu Pratama\" /><Avatar name=\"Broken Image\" src=\"/missing-avatar.png\" /><span>Owner avatars, including image fallback</span></div><EmptyState title=\"No shipments found\" description=\"Change the filters or create a shipment job.\" action={<Button>Create shipment</Button>} /><Pagination page={page} pageCount={4} onPageChange={setPage} /><Pagination page={-4} pageCount={0} onPageChange={() => {}} label=\"Empty result pagination boundary\" /></div>;\n}\n\nfunction FailureStates() {\n  const [mode, setMode] = useState('');\n  return <div style={{display: 'grid', gap: 16, maxWidth: 420}}><Select label=\"Loading carrier\" value=\"\" onChange={() => {}} options={[]} isLoading /><Select label=\"No carrier matches\" value=\"\" onChange={() => {}} options={[]} /><RadioGroup label=\"Shipment mode\" value={mode} onChange={setMode} options={[{label: 'Ocean', value: 'ocean'}, {label: 'Air', value: 'air'}]} error=\"Select a shipment mode.\" /><Textarea label=\"Disabled notes\" value=\"Inherited from shipment\" onChange={() => {}} isDisabled /></div>;\n}\n\nexport const FormStates: Story = {render: () => <FormControls />};\nexport const CompositionStates: Story = {render: () => <Compositions />};\nexport const LoadingEmptyFailureAndBoundaries: Story = {render: () => <FailureStates />};\n"
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Popover",
+        "definedInFile": "./src/components/Popover.tsx",
+        "actualName": "Popover",
+        "exportName": "Popover",
+        "props": {
+          "title": {
+            "required": true,
+            "tsType": {
+              "name": "string"
+            },
+            "description": ""
+          },
+          "trigger": {
+            "required": true,
+            "tsType": {
+              "name": "ReactElement",
+              "elements": [
+                {
+                  "name": "ButtonHTMLAttributes",
+                  "elements": [
+                    {
+                      "name": "HTMLButtonElement"
+                    }
+                  ],
+                  "raw": "ButtonHTMLAttributes<HTMLButtonElement>"
+                }
+              ],
+              "raw": "ReactElement<PopoverTriggerProps>"
+            },
+            "description": ""
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          }
+        }
       },
       "stories": [
         {
-          "id": "patterns-composition-core-compositions--form-states",
-          "name": "Form States",
-          "snippet": "const FormStates = () => <FormControls />;"
+          "id": "components-overlays-popover--shipment-summary",
+          "name": "Shipment Summary",
+          "snippet": "const ShipmentSummary = () => <Popover\n    title=\"Shipment summary\"\n    trigger={<Button tone=\"secondary\">Quick view</Button>}>{content}</Popover>;"
         },
         {
-          "id": "patterns-composition-core-compositions--composition-states",
-          "name": "Composition States",
-          "snippet": "const CompositionStates = () => <Compositions />;"
-        },
-        {
-          "id": "patterns-composition-core-compositions--loading-empty-failure-and-boundaries",
-          "name": "Loading Empty Failure And Boundaries",
-          "snippet": "const LoadingEmptyFailureAndBoundaries = () => <FailureStates />;"
+          "id": "components-overlays-popover--supporting-details",
+          "name": "Supporting Details",
+          "snippet": "const SupportingDetails = () => <Popover\n    title=\"Charge details\"\n    trigger={<Button tone=\"tertiary\">View charge basis</Button>}><p style={{margin: 0}}>Ocean freight is calculated per container and excludes destination handling.</p></Popover>;"
         }
       ],
-      "import": "import {\n    ActionGroup,\n    Avatar,\n    Button,\n    EmptyState,\n    FilterBar,\n    PageHeader,\n    Pagination,\n    RadioGroup,\n    Select,\n    Switch,\n    Textarea,\n} from \"@fr8labs/ui\";"
+      "import": "import { Button, Popover } from \"sandbox-fds-components\";"
     },
-    "patterns-finance-sales-invoice-summary": {
-      "id": "patterns-finance-sales-invoice-summary",
-      "name": "SalesInvoiceSummary",
-      "path": "./src/stories/SalesInvoiceSummary.stories.tsx",
+    "components-overlays-tooltip": {
+      "id": "components-overlays-tooltip",
+      "name": "Tooltip",
+      "path": "./src/stories/Tooltip.stories.tsx",
       "jsDocTags": {},
-      "error": {
-        "name": "No component found",
-        "message": "We could not detect the component from your story file. Specify meta.component.\n  34 | const longValueInvoice: Invoice = {...normalInvoice, invoiceNo: 'INV-AR-2026-00481-INDONESIA-CONSOLIDATION', jobNo: 'JKT-EXP-260701-MULTI-CONSIGNEE-CONSOLIDATION', customer: 'PT Nusantara Logistik dan Perdagangan Internasional Tbk', partner: 'Mediterranean Shipping Company (Indonesia) Pte. Ltd. — Jakarta Branch', amountDue: 'USD 1,248,480.00'};\n  35 |\n> 36 | const meta = {\n     | ^\n  37 |   title: 'Patterns/Finance/Sales Invoice Summary',\n  38 |   tags: ['autodocs', 'experimental'],\n  39 |   parameters: {\n\n./src/stories/SalesInvoiceSummary.stories.tsx:\nimport {useState} from 'react';\nimport type {Meta, StoryObj} from '@storybook/react-vite';\nimport {Button, Dialog, InlineAlert, Metric, Panel, StatusBadge} from '../index';\nimport './SalesInvoiceSummary.stories.css';\n\ntype Invoice = {\n  amountDue: string;\n  amountPaid: string;\n  customer: string;\n  dueDate: string;\n  invoiceNo: string;\n  jobNo: string;\n  partner: string;\n  paymentNote?: string;\n  status: 'pending' | 'overdue' | 'paid';\n  statusLabel: string;\n};\n\nconst normalInvoice: Invoice = {\n  invoiceNo: 'INV-AR-2026-00481',\n  jobNo: 'JKT-EXP-260701',\n  customer: 'PT Nusantara Example',\n  partner: 'MSC Indonesia',\n  status: 'pending',\n  statusLabel: 'OPEN',\n  dueDate: '18 Jul 2026',\n  amountDue: 'USD 12,480.00',\n  amountPaid: 'USD 3,500.00',\n  paymentNote: 'Last payment 2 Jul 2026',\n};\n\nconst overdueInvoice: Invoice = {...normalInvoice, status: 'overdue', statusLabel: 'OVERDUE', dueDate: '18 Jun 2026', paymentNote: '30 days past due'};\nconst paidInvoice: Invoice = {...normalInvoice, status: 'paid', statusLabel: 'PAID', amountDue: 'USD 0.00', amountPaid: 'USD 12,480.00', paymentNote: 'Paid in full 2 Jul 2026'};\nconst longValueInvoice: Invoice = {...normalInvoice, invoiceNo: 'INV-AR-2026-00481-INDONESIA-CONSOLIDATION', jobNo: 'JKT-EXP-260701-MULTI-CONSIGNEE-CONSOLIDATION', customer: 'PT Nusantara Logistik dan Perdagangan Internasional Tbk', partner: 'Mediterranean Shipping Company (Indonesia) Pte. Ltd. — Jakarta Branch', amountDue: 'USD 1,248,480.00'};\n\nconst meta = {\n  title: 'Patterns/Finance/Sales Invoice Summary',\n  tags: ['autodocs', 'experimental'],\n  parameters: {\n    fds: {approved: false, status: 'experimental'},\n    docs: {description: {component: 'Experimental freight accounting pattern composed only from public FDS UI components and synthetic data.'}},\n  },\n} satisfies Meta;\n\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nfunction SalesInvoiceSummary({invoice}: {invoice: Invoice}) {\n  const [identityOpen, setIdentityOpen] = useState(false);\n  const isOverdue = invoice.status === 'overdue';\n\n  return <main className=\"fds-sales-invoice-summary\" aria-label=\"Sales invoice summary\">\n    {isOverdue ? <InlineAlert tone=\"warning\" title=\"Payment follow-up required\">Invoice {invoice.invoiceNo} is overdue by 30 days. Contact the customer before the next credit review.</InlineAlert> : null}\n    <Panel eyebrow=\"Sales invoice\" title={invoice.invoiceNo} description={`Job ${invoice.jobNo} · ${invoice.customer}`} actions={<Button size=\"small\" onClick={() => setIdentityOpen(true)}>View identity</Button>}>\n      <section className=\"fds-sales-invoice-summary__metrics\" aria-label=\"Invoice financial summary\">\n        <Metric label=\"Status\" value={<StatusBadge status={invoice.status} label={invoice.statusLabel} />} density=\"compact\" />\n        <Metric label=\"Due date\" value={invoice.dueDate} density=\"compact\" />\n        <Metric label=\"Amount due\" value={invoice.amountDue} density=\"compact\" />\n        <Metric label=\"Amount paid\" value={invoice.amountPaid} description={invoice.paymentNote} density=\"compact\" />\n      </section>\n    </Panel>\n    <Dialog title=\"Invoice identity\" description=\"Read-only synthetic invoice identity details.\" isOpen={identityOpen} onOpenChange={setIdentityOpen} actions={<Button onClick={() => setIdentityOpen(false)}>Close</Button>}>\n      <dl className=\"fds-sales-invoice-summary__identity\">\n        <div><dt>Invoice no.</dt><dd>{invoice.invoiceNo}</dd></div>\n        <div><dt>Job no.</dt><dd>{invoice.jobNo}</dd></div>\n        <div><dt>Customer</dt><dd>{invoice.customer}</dd></div>\n        <div><dt>Billing partner</dt><dd>{invoice.partner}</dd></div>\n        <div><dt>Currency</dt><dd>USD</dd></div>\n      </dl>\n    </Dialog>\n  </main>;\n}\n\nexport const NormalInvoice: Story = {render: () => <SalesInvoiceSummary invoice={normalInvoice} />};\nexport const OverdueWarning: Story = {render: () => <SalesInvoiceSummary invoice={overdueInvoice} />};\nexport const PaidInvoice: Story = {render: () => <SalesInvoiceSummary invoice={paidInvoice} />};\nexport const LongInvoiceAndPartnerValues: Story = {render: () => <SalesInvoiceSummary invoice={longValueInvoice} />};\nexport const Compact1024: Story = {render: () => <SalesInvoiceSummary invoice={normalInvoice} />, parameters: {docs: {description: {story: 'At 1024px, the metrics compact to two columns.'}}}};\n"
+      "reactDocgen": {
+        "description": "",
+        "methods": [],
+        "displayName": "Tooltip",
+        "definedInFile": "./src/components/Tooltip.tsx",
+        "actualName": "Tooltip",
+        "exportName": "Tooltip",
+        "props": {
+          "content": {
+            "required": true,
+            "tsType": {
+              "name": "ReactNode"
+            },
+            "description": ""
+          },
+          "children": {
+            "required": true,
+            "tsType": {
+              "name": "ReactElement",
+              "elements": [
+                {
+                  "name": "signature",
+                  "type": "object",
+                  "raw": "{'aria-describedby'?: string}",
+                  "signature": {
+                    "properties": [
+                      {
+                        "key": "aria-describedby",
+                        "value": {
+                          "name": "string",
+                          "required": false
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "raw": "ReactElement<TooltipTriggerProps>"
+            },
+            "description": ""
+          }
+        }
       },
       "stories": [
         {
-          "id": "patterns-finance-sales-invoice-summary--normal-invoice",
-          "name": "Normal Invoice",
-          "snippet": "const NormalInvoice = () => <SalesInvoiceSummary invoice={normalInvoice} />;"
+          "id": "components-overlays-tooltip--supporting-text",
+          "name": "Supporting Text",
+          "snippet": "const SupportingText = () => <Tooltip content=\"Copied references expire after 24 hours.\"><IconButton aria-label=\"Reference expiry details\">{icon('info')}</IconButton></Tooltip>;"
         },
         {
-          "id": "patterns-finance-sales-invoice-summary--overdue-warning",
-          "name": "Overdue Warning",
-          "snippet": "const OverdueWarning = () => <SalesInvoiceSummary invoice={overdueInvoice} />;"
-        },
-        {
-          "id": "patterns-finance-sales-invoice-summary--paid-invoice",
-          "name": "Paid Invoice",
-          "snippet": "const PaidInvoice = () => <SalesInvoiceSummary invoice={paidInvoice} />;"
-        },
-        {
-          "id": "patterns-finance-sales-invoice-summary--long-invoice-and-partner-values",
-          "name": "Long Invoice And Partner Values",
-          "snippet": "const LongInvoiceAndPartnerValues = () => <SalesInvoiceSummary invoice={longValueInvoice} />;"
-        },
-        {
-          "id": "patterns-finance-sales-invoice-summary--compact-1024",
-          "name": "Compact 1024",
-          "snippet": "const Compact1024 = () => <SalesInvoiceSummary invoice={normalInvoice} />;"
+          "id": "components-overlays-tooltip--field-explanation",
+          "name": "Field Explanation",
+          "snippet": "const FieldExplanation = () => <Tooltip content=\"The carrier booking number, not the house bill number.\"><IconButton aria-label=\"Booking number help\">{icon('help')}</IconButton></Tooltip>;"
         }
       ],
-      "import": "import { Button, Dialog, InlineAlert, Metric, Panel, StatusBadge } from \"@fr8labs/ui\";"
+      "import": "import { Icon, IconButton, Tooltip } from \"sandbox-fds-components\";"
     },
     "patterns-operations-create-and-edit": {
       "id": "patterns-operations-create-and-edit",
@@ -2976,7 +3446,7 @@
           "snippet": "const ValidationFailure = () => <CreateEditForm showErrors />;"
         }
       ],
-      "import": "import {\n    ActionGroup,\n    Button,\n    CheckboxGroup,\n    InlineAlert,\n    PageHeader,\n    Panel,\n    RadioGroup,\n    Select,\n    Switch,\n    Textarea,\n    TextInput,\n} from \"@fr8labs/ui\";"
+      "import": "import {\n    ActionGroup,\n    Button,\n    CheckboxGroup,\n    InlineAlert,\n    PageHeader,\n    Panel,\n    RadioGroup,\n    Select,\n    Switch,\n    Textarea,\n    TextInput,\n} from \"sandbox-fds-components\";"
     },
     "patterns-operations-list-and-review": {
       "id": "patterns-operations-list-and-review",
@@ -2999,7 +3469,7 @@
           "snippet": "const EmptyResult = () => <ListAndReview empty />;"
         }
       ],
-      "import": "import {\n    ActionGroup,\n    Button,\n    DataTable,\n    FilterBar,\n    Metric,\n    PageHeader,\n    Pagination,\n    Panel,\n    Select,\n    StatusBadge,\n    TextInput,\n} from \"@fr8labs/ui\";"
+      "import": "import {\n    ActionGroup,\n    Button,\n    DataTable,\n    FilterBar,\n    Metric,\n    PageHeader,\n    Pagination,\n    Panel,\n    Select,\n    StatusBadge,\n    TextInput,\n} from \"sandbox-fds-components\";"
     },
     "patterns-operations-record-detail-and-review": {
       "id": "patterns-operations-record-detail-and-review",
@@ -3022,29 +3492,11 @@
           "snippet": "const CompletedReview = () => <RecordDetailReview approved />;"
         }
       ],
-      "import": "import {\n    ActionGroup,\n    Button,\n    DataTable,\n    Drawer,\n    InlineAlert,\n    Metric,\n    PageHeader,\n    Panel,\n    StatusBadge,\n    Textarea,\n} from \"@fr8labs/ui\";"
-    },
-    "internal-quality-css-isolation": {
-      "id": "internal-quality-css-isolation",
-      "name": "CSSisolation",
-      "path": "./src/stories/CssIsolation.stories.tsx",
-      "jsDocTags": {},
-      "error": {
-        "name": "No component found",
-        "message": "We could not detect the component from your story file. Specify meta.component.\n   7 | import {FdsProvider} from '../provider';\n   8 |\n>  9 | const meta = {title: 'Internal/Quality/CSS isolation', parameters: {fdsProvider: false}} satisfies Meta;\n     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  10 | export default meta;\n  11 | type Story = StoryObj<typeof meta>;\n  12 |\n\n./src/stories/CssIsolation.stories.tsx:\nimport {useState} from 'react';\nimport type {Meta, StoryObj} from '@storybook/react-vite';\nimport {Button} from '../components/Button';\nimport {IconButton} from '../components/IconButton';\nimport {Dialog} from '../components/Dialog';\nimport {Drawer} from '../components/Drawer';\nimport {FdsProvider} from '../provider';\n\nconst meta = {title: 'Internal/Quality/CSS isolation', parameters: {fdsProvider: false}} satisfies Meta;\nexport default meta;\ntype Story = StoryObj<typeof meta>;\n\nfunction Example() {\n  const [dialogOpen, setDialogOpen] = useState(false);\n  const [drawerOpen, setDrawerOpen] = useState(false);\n  return <><section data-testid=\"outside-fds\"><h2>Unrelated consumer content</h2><p>This remains owned by the application.</p></section><FdsProvider><section data-testid=\"inside-fds\"><h2>FDS content</h2><Button onClick={() => setDialogOpen(true)}>Open dialog</Button><Button onClick={() => setDrawerOpen(true)}>Open drawer</Button><IconButton aria-label=\"Open drawer\" onClick={() => setDrawerOpen(true)}><span className=\"material-symbols-sharp\" aria-hidden=\"true\">menu</span></IconButton><Dialog title=\"Scoped dialog\" isOpen={dialogOpen} onOpenChange={setDialogOpen}><p>Dialog styles remain in the FDS subtree.</p></Dialog><Drawer title=\"Scoped drawer\" isOpen={drawerOpen} onOpenChange={setDrawerOpen}><p>Drawer styles remain in the FDS subtree.</p></Drawer></section></FdsProvider></>;\n}\n\nexport const OutsideUnaffectedAndOverlaysStyled: Story = {render: () => <Example />};\n"
-      },
-      "stories": [
-        {
-          "id": "internal-quality-css-isolation--outside-unaffected-and-overlays-styled",
-          "name": "Outside Unaffected And Overlays Styled",
-          "snippet": "const OutsideUnaffectedAndOverlaysStyled = () => <Example />;"
-        }
-      ],
-      "import": "import { Button, Dialog, Drawer, FdsProvider, IconButton } from \"@fr8labs/ui\";"
+      "import": "import {\n    ActionGroup,\n    Button,\n    DataTable,\n    Drawer,\n    InlineAlert,\n    Metric,\n    PageHeader,\n    Panel,\n    StatusBadge,\n    Textarea,\n} from \"sandbox-fds-components\";"
     }
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 282
+    "durationMs": 250
   }
 }

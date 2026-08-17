@@ -1,0 +1,32 @@
+{
+  "name": "sandbox-fds-icons",
+  "version": "0.1.1",
+  "description": "Fr8Labs Design System icons for React applications.",
+  "type": "module",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "styles.css",
+    "README.md"
+  ],
+  "sideEffects": [
+    "./styles.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./styles.css": "./styles.css"
+  },
+  "types": "./index.d.ts",
+  "scripts": {
+    "test": "node --test test.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0"
+  },
+  "devDependencies": {
+    "react": "19.2.7"
+  }
+}

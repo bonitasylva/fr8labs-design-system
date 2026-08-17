@@ -1,9 +1,10 @@
 {
-  "name": "@fr8labs/fds-mcp-pilot",
+  "name": "sandbox-fds-mcp",
   "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "npm run test:mcp",
     "mcp": "node mcp/server.mjs",
     "test:mcp": "node --test mcp/contract.test.mjs"
   },
@@ -12,6 +13,9 @@
     "@tmcp/adapter-valibot": "0.1.6",
     "@tmcp/transport-http": "0.8.6",
     "tmcp": "1.20.0",
-    "valibot": "1.2.0"
+    "valibot": "^1.4.2"
+  },
+  "overrides": {
+    "valibot": "$valibot"
   }
 }

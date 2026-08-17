@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run test:mcp",
     "mcp": "node mcp/server.mjs",
     "test:mcp": "node --test mcp/contract.test.mjs"
   },

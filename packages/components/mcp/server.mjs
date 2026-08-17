@@ -19,6 +19,8 @@ const supportedVersions = [...new Set(catalog.items.filter((item) => item.status
 const annotations = {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false};
 const versionField = v.optional(v.pipe(v.string(), v.maxLength(30)));
 const idField = v.pipe(v.string(), v.minLength(1), v.maxLength(160));
+const maxBodyBytes = 1024 * 1024;
+const maxBatchSize = 20;
 
 const versionError = (requestedFdsVersion) => ({
   error: {code: 'FDS_VERSION_UNAVAILABLE', message: `FDS version ${requestedFdsVersion} is not retained.`, supportedVersions},
@@ -130,13 +132,48 @@ export async function respondToMcpRequest(request, {token, path = '/mcp'} = {}) 
     return Response.json({error: 'unauthorized'}, {status: 401, headers: {'www-authenticate': 'Bearer realm="Fr8Labs FDS MCP"'}});
   }
   if (request.headers.has('origin')) return Response.json({error: 'browser origins are not allowed'}, {status: 403});
-  return await (await getTransport()).respond(request, {request, manifestProvider: storybookManifestProvider}) ?? new Response(null, {status: 404});
+  let checkedRequest = request;
+  if (request.method === 'POST') {
+    const declaredLength = Number(request.headers.get('content-length') ?? 0);
+    if (declaredLength > maxBodyBytes) return Response.json({error: 'request body too large'}, {status: 413});
+    const reader = request.body?.getReader();
+    const chunks = [];
+    let length = 0;
+    while (reader) {
+      const {done, value} = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > maxBodyBytes) {
+        await reader.cancel();
+        return Response.json({error: 'request body too large'}, {status: 413});
+      }
+      chunks.push(value);
+    }
+    const body = Buffer.concat(chunks.map((chunk) => Buffer.from(chunk)), length);
+    try {
+      const message = JSON.parse(body.toString('utf8'));
+      if (Array.isArray(message) && message.length > maxBatchSize) return Response.json({error: 'JSON-RPC batch too large'}, {status: 413});
+    } catch {}
+    checkedRequest = new Request(request.url, {method: request.method, headers: request.headers, body, duplex: 'half'});
+  }
+  return await (await getTransport()).respond(checkedRequest, {request: checkedRequest, manifestProvider: storybookManifestProvider}) ?? new Response(null, {status: 404});
 }
 
 export function createHttpServer({token} = {}) {
   return createNodeServer(async (request, response) => {
     const url = new URL(request.url ?? '/', `http://${request.headers.host ?? '127.0.0.1'}`);
-    const body = request.method === 'POST' ? Buffer.concat(await Array.fromAsync(request)) : undefined;
+    const chunks = [];
+    let length = 0;
+    for await (const chunk of request) {
+      length += chunk.length;
+      if (length > maxBodyBytes) {
+        response.writeHead(413, {'content-type': 'application/json'});
+        response.end(JSON.stringify({error: 'request body too large'}));
+        return;
+      }
+      chunks.push(chunk);
+    }
+    const body = request.method === 'POST' ? Buffer.concat(chunks, length) : undefined;
     const mcpResponse = await respondToMcpRequest(new Request(url, {method: request.method, headers: request.headers, body, ...(body ? {duplex: 'half'} : {})}), {token});
     response.writeHead(mcpResponse.status, Object.fromEntries(mcpResponse.headers));
     response.end(Buffer.from(await mcpResponse.arrayBuffer()));

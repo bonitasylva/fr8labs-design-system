@@ -1,0 +1,111 @@
+import {Meta, Source} from '@storybook/addon-docs/blocks';
+import './Welcome.css';
+
+<Meta title="Getting Started/MCP pilot" />
+
+<main className="fds-root fds-welcome fds-mcp-pilot">
+  <p className="fds-welcome__version">Fr8Labs Design System</p>
+  <h1>MCP pilot</h1>
+  <p className="fds-welcome__lede">Test whether an AI assistant can find and apply approved FDS guidance. MCP provides read-only catalog access; it does not install the package or modify product code.</p>
+
+  <hr className="fds-welcome__rule" />
+
+  <div className="fds-welcome__grid">
+    <section>
+      <h2>Use the shared pilot</h2>
+      <Source language="text" code={`https://fr8labs-fds-mcp.vercel.app/api/mcp`} />
+      <p>Use the hosted endpoint to test the published FDS catalog and Storybook documentation. No repository clone or local server is required.</p>
+    </section>
+
+    <section>
+      <h2>Run current source locally</h2>
+      <Source
+        language="sh"
+        code={`cd packages/components
+npm install
+npm run mcp`}
+      />
+      <p>Use <code>http://127.0.0.1:8787/mcp</code> when validating source changes before deployment.</p>
+    </section>
+  </div>
+
+  <section>
+    <h2>Configure the MCP client</h2>
+    <Source
+      language="json"
+      code={`{
+  "mcpServers": {
+    "fr8labs-fds": {
+      "url": "https://fr8labs-fds-mcp.vercel.app/api/mcp"
+    }
+  }
+}`}
+    />
+    <p>Restart the client after adding the server. Use the local URL instead when testing source changes; both endpoints expose the same nine read-only tools.</p>
+  </section>
+
+  <hr className="fds-welcome__rule" />
+
+  <section>
+    <h2>Available tools</h2>
+    <dl className="fds-mcp-pilot__tools">
+      <div>
+        <dt><code>search_catalog</code></dt>
+        <dd>Find approved records by query, kind, or FDS version.</dd>
+      </div>
+      <div>
+        <dt><code>get_component</code></dt>
+        <dd>Return an approved component API, dependencies, states, accessibility constraints, and code snapshot.</dd>
+      </div>
+      <div>
+        <dt><code>get_template</code></dt>
+        <dd>Return an approved fake-data template, allowed composition, accessibility constraints, and code snapshot.</dd>
+      </div>
+      <div>
+        <dt><code>get_prompt</code></dt>
+        <dd>Return an approved bounded prompt and its fake-data restriction without running it.</dd>
+      </div>
+      <div>
+        <dt><code>get_token_reference</code></dt>
+        <dd>Resolve an approved token to its CSS variable, alias, and permitted use.</dd>
+      </div>
+      <div>
+        <dt><code>get_adoption_recipe</code></dt>
+        <dd>Return versioned package or owned-copy instructions and the related drift warning.</dd>
+      </div>
+      <div>
+        <dt><code>list-all-documentation</code></dt>
+        <dd>List the IDs for every published Storybook component, pattern, foundation, document, and story.</dd>
+      </div>
+      <div>
+        <dt><code>get-documentation</code></dt>
+        <dd>Return the API, props, guidance, and example stories for one Storybook entry.</dd>
+      </div>
+      <div>
+        <dt><code>get-documentation-for-story</code></dt>
+        <dd>Return the usage example for one published story scenario.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <hr className="fds-welcome__rule" />
+
+  <section>
+    <h2>Run the pilot</h2>
+    <ol>
+      <li>Ask: “List all FDS Storybook documentation and include story IDs.”</li>
+      <li>Ask: “Get the documentation for <code>components-actions-button</code> and use its real props and examples.”</li>
+      <li>Ask: “Get the approved Button catalog record and package adoption recipe.”</li>
+      <li>Confirm the recipe matches the <a href="/?path=/docs/getting-started-installation--docs" target="_top">FDS installation guide</a>.</li>
+      <li>Use the returned guidance in a disposable Vite application and verify that the sample compiles and renders.</li>
+    </ol>
+    <p>Use synthetic data only. Do not send customer, shipment, invoice, credential, or production data through the pilot.</p>
+  </section>
+
+  <hr className="fds-welcome__rule" />
+
+  <section>
+    <h2>Report the result</h2>
+    <p>Record the MCP client, prompts, returned FDS version and item IDs, and final outcome. Include any guidance that was missing, confusing, or incorrect.</p>
+  </section>
+</main>

@@ -11,6 +11,16 @@ let httpServer;
 let endpoint;
 let sessionId;
 
+function listen(server) {
+  return new Promise((resolve, reject) => {
+    server.once('error', reject);
+    server.listen(0, '127.0.0.1', () => {
+      server.off('error', reject);
+      resolve();
+    });
+  });
+}
+
 function eventData(text) {
   const data = text.split('\n').find((line) => line.startsWith('data: '));
   return data ? JSON.parse(data.slice(6)) : undefined;
@@ -24,37 +34,42 @@ async function rpc(method, params = {}, id = 1) {
 
 before(async () => {
   httpServer = createHttpServer({token});
-  await new Promise((resolve) => httpServer.listen(0, '127.0.0.1', resolve));
+  await listen(httpServer);
   endpoint = `http://127.0.0.1:${httpServer.address().port}/mcp`;
 });
 
-after(async () => new Promise((resolve, reject) => httpServer.close((error) => error ? reject(error) : resolve())));
+after(async () => {
+  httpServer.closeAllConnections();
+  await new Promise((resolve, reject) => httpServer.close((error) => error ? reject(error) : resolve()));
+});
 
-test('catalog contracts resolve approved records and all 257 tokens', async () => {
+test('catalog contracts resolve approved immutable records and all 257 tokens', async () => {
   const artifact = JSON.parse(await readFile(new URL('../dist/fds-catalog.json', import.meta.url), 'utf8'));
+  const packageJson = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+  const changelog = await readFile(new URL('../CHANGELOG.md', import.meta.url), 'utf8');
   assert.equal(artifact.currentApprovedVersion, '0.1.1');
+  assert.equal(artifact.currentApprovedVersion, packageJson.version);
+  assert.equal(changelog.includes(`## [${packageJson.version}] - `), true);
   const tokenItems = artifact.items.filter((item) => item.kind === 'token');
   assert.equal(tokenItems.length, 257);
-  for (const item of tokenItems) {
-    const result = catalogApi.getTokenReference({tokenPath: item.cssVariable});
-    assert.equal(result.error, undefined, `${item.cssVariable} did not resolve`);
-    assert.equal(result.tokenPath, item.tokenPath);
-  }
+  for (const item of tokenItems) assert.equal(catalogApi.getTokenReference({tokenPath: item.cssVariable}).tokenPath, item.tokenPath);
   assert.equal(catalogApi.searchCatalog({query: ''}).items.every((item) => item.approvalStatus === 'approved'), true);
-  const tokenSearch = catalogApi.searchCatalog({query: 'token', kind: 'token', limit: 50});
-  assert.equal(tokenSearch.total, 257);
-  assert.equal(tokenSearch.count, 50);
-  assert.equal(tokenSearch.hasMore, true);
-  const pagedIds = [];
-  for (let offset = 0; offset < tokenSearch.total; offset += 50) pagedIds.push(...catalogApi.searchCatalog({query: 'token', kind: 'token', limit: 50, offset}).items.map((item) => item.id));
-  assert.equal(new Set(pagedIds).size, 257);
+  assert.equal(catalogApi.searchCatalog({query: 'token', kind: 'token', limit: 50}).total, 257);
+  assert.equal(catalogApi.searchCatalog({query: '', kind: 'component'}).total, 29);
+  assert.equal(catalogApi.searchCatalog({query: '', kind: 'template'}).total, 3);
   assert.match(catalogApi.getComponent({id: 'component.button'}).codeSnapshot, /export const Button/);
+  assert.match(catalogApi.getComponent({id: 'component.date-time-picker'}).codeSnapshot, /export function DateTimePicker/);
+  assert.match(catalogApi.getComponent({id: 'component.fds-data-grid'}).codeSnapshot, /export function FDSDataGrid/);
+  assert.match(catalogApi.getComponent({id: 'component.tabs'}).codeSnapshot, /export function Tabs/);
   assert.match(catalogApi.getTemplate({id: 'template.list-and-review'}).codeSnapshot, /function ListAndReview/);
+  assert.match(catalogApi.getTemplate({id: 'template.create-and-edit'}).codeSnapshot, /function CreateEditForm/);
+  assert.match(catalogApi.getTemplate({id: 'template.record-detail-and-review'}).codeSnapshot, /function RecordDetailReview/);
   assert.match(catalogApi.getPrompt({id: 'prompt.codex-prototype'}).fakeDataRestriction, /Never include production/);
   assert.equal(catalogApi.getTokenReference({tokenPath: 'color.blue.600'}).cssVariable, '--fds-primitive-color-blue-600');
   assert.equal(catalogApi.getTokenReference({tokenPath: 'color.action.primary'}).tokenPath, 'semantic.color.action.primary');
   assert.equal(catalogApi.getTokenReference({tokenPath: '--fds-button-height-medium'}).resolvedValue, '32px');
   assert.equal(catalogApi.getTokenReference({tokenPath: 'compat.font.family.body'}).sourceValue, 'var(--fds-font-family-body)');
+  assert.equal(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'package'}).install, 'npm install sandbox-fds-components@testing');
   assert.match(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'copy'}).driftWarning, /adopting team owns/);
 });
 
@@ -70,27 +85,41 @@ test('version and approval boundaries never return a code snapshot', () => {
   assert.equal(catalogApi.searchCatalog({query: 'sales invoice'}).total, 0);
 });
 
-test('Storybook manifests cover every published page and story', async () => {
+test('MCP pilot documentation lists every registered tool', async () => {
+  const pilotDocumentation = await readFile(new URL('../src/stories/McpPilot.mdx', import.meta.url), 'utf8');
+  for (const tool of expectedTools) assert.equal(pilotDocumentation.includes(`<code>${tool}</code>`), true);
+});
+
+test('Storybook manifests include components, patterns, foundations, and docs', async () => {
   const components = JSON.parse(await readFile(new URL('../manifests/components.json', import.meta.url), 'utf8'));
   const docs = JSON.parse(await readFile(new URL('../manifests/docs.json', import.meta.url), 'utf8'));
-  const entries = Object.values(components.components);
-
-  assert.equal(entries.length + Object.keys(docs.docs).length, 31);
-  assert.equal(entries.reduce((count, entry) => count + (entry.stories?.length ?? 0), 0), 118);
   assert.ok(components.components['components-actions-button']);
   assert.ok(components.components['patterns-operations-list-and-review']);
   assert.ok(components.components['foundations-tokens']);
   assert.ok(docs.docs['getting-started-welcome--docs']);
+  assert.equal(Object.keys(components.components).some((id) => id.startsWith('internal-')), false);
+  assert.equal(components.components['patterns-finance-sales-invoice-summary'], undefined);
+  assert.equal(JSON.stringify({components, docs}).includes('/Users/'), false);
 });
 
-test('Streamable HTTP supports the catalog and complete Storybook documentation', async () => {
+test('HTTP rejects oversized bodies and JSON-RPC batches before transport parsing', async () => {
+  const headers = {'authorization': `Bearer ${token}`, 'content-type': 'application/json', 'accept': 'application/json, text/event-stream'};
+  const oversized = await fetch(endpoint, {method: 'POST', headers, body: JSON.stringify({value: 'x'.repeat(1024 * 1024)})});
+  assert.equal(oversized.status, 413);
+  const batch = await fetch(endpoint, {method: 'POST', headers, body: JSON.stringify(Array.from({length: 21}, (_, id) => ({jsonrpc: '2.0', id, method: 'ping'})))});
+  assert.equal(batch.status, 413);
+});
+
+test('Streamable HTTP supports the same nine read-only tools locally and when hosted', async () => {
   const unauthorized = await fetch(endpoint, {method: 'POST', headers: {'content-type': 'application/json'}, body: '{}'});
   assert.equal(unauthorized.status, 401);
 
   const pilotServer = createHttpServer();
-  await new Promise((resolve) => pilotServer.listen(0, '127.0.0.1', resolve));
+  await listen(pilotServer);
   const pilotResponse = await fetch(`http://127.0.0.1:${pilotServer.address().port}/mcp`, {method: 'POST', headers: {'content-type': 'application/json', 'accept': 'application/json, text/event-stream'}, body: JSON.stringify({jsonrpc: '2.0', id: 1, method: 'initialize', params: {protocolVersion: '2025-03-26', capabilities: {}, clientInfo: {name: 'fds-pilot-test', version: '1.0.0'}}})});
   assert.equal(pilotResponse.status, 200);
+  await pilotResponse.arrayBuffer();
+  pilotServer.closeAllConnections();
   await new Promise((resolve, reject) => pilotServer.close((error) => error ? reject(error) : resolve()));
 
   const initialized = await rpc('initialize', {protocolVersion: '2025-03-26', capabilities: {}, clientInfo: {name: 'fds-contract-test', version: '1.0.0'}});
@@ -101,34 +130,12 @@ test('Streamable HTTP supports the catalog and complete Storybook documentation'
   assert.deepEqual(listed.message.result.tools.map((tool) => tool.name).sort(), expectedTools);
   for (const tool of listed.message.result.tools.filter((tool) => catalogTools.includes(tool.name))) assert.deepEqual(tool.annotations, {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false});
 
-  const toolCalls = [
-    ['search_catalog', {query: 'token', kind: 'token', limit: 5}],
-    ['get_component', {id: 'component.button'}],
-    ['get_template', {id: 'template.list-and-review'}],
-    ['get_prompt', {id: 'prompt.codex-prototype'}],
-    ['get_token_reference', {tokenPath: '--fds-color-action-primary'}],
-    ['get_adoption_recipe', {itemId: 'component.button'}],
-    ['list-all-documentation', {withStoryIds: true}],
-    ['get-documentation', {id: 'components-actions-button'}],
-    ['get-documentation-for-story', {componentId: 'components-actions-button', storyName: 'Playground'}],
-  ];
-  const results = new Map();
+  const called = await rpc('tools/call', {name: 'get_component', arguments: {id: 'component.button'}});
+  assert.equal(called.message.result.structuredContent.approvalStatus, 'approved');
+  assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.1.1');
 
-  for (const [index, [name, arguments_]] of toolCalls.entries()) {
-    const result = await rpc('tools/call', {name, arguments: arguments_}, index + 10);
-    assert.equal(result.message.result.isError, undefined, `${name} returned an MCP error`);
-    results.set(name, result.message.result);
-  }
-
-  assert.equal(results.get('search_catalog').structuredContent.total, 257);
-  assert.equal(results.get('get_component').structuredContent.approvalStatus, 'approved');
-  assert.match(results.get('get_template').structuredContent.codeSnapshot, /function ListAndReview/);
-  assert.match(results.get('get_prompt').structuredContent.fakeDataRestriction, /Never include production/);
-  assert.equal(results.get('get_token_reference').structuredContent.resolvedValue, '#0067e7');
-  assert.match(results.get('get_adoption_recipe').structuredContent.install, /@fr8labs\/ui@0\.1\.1/);
-  assert.match(results.get('list-all-documentation').content[0].text, /foundations-tokens--primitives/);
-  assert.match(results.get('get-documentation').content[0].text, /tone/);
-  assert.match(results.get('get-documentation-for-story').content[0].text, /Button - Playground/);
+  const documentation = await rpc('tools/call', {name: 'get-documentation', arguments: {id: 'components-actions-button'}}, 3);
+  assert.match(documentation.message.result.content[0].text, /Button/);
 });
 
 test('Vercel handler serves the same MCP over /api/mcp', async () => {

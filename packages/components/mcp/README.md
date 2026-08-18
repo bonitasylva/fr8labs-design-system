@@ -1,7 +1,5 @@
 # Fr8Labs FDS MCP
 
-> The approved Fr8Labs Design System catalog as a read-only API for AI assistants.
-
 ## What is this?
 
 Fr8Labs FDS MCP helps an AI assistant find and use approved FDS catalog guidance and published Storybook documentation without inventing APIs or reading the whole repository.

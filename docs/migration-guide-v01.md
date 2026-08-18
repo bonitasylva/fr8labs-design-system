@@ -8,6 +8,12 @@ Create a practical path from legacy UI to Fr8Labs Design System (FDS) UI without
 
 Testing surfaces import Fr8Labs-owned components from `sandbox-fds-components`. Do not add another UI runtime behind product-facing FDS APIs.
 
+## Setup Rule
+
+Install `sandbox-fds-components`, `sandbox-fds-icons`, and `sandbox-fds-tokens`.
+Import `sandbox-fds-components/styles.css` once at the application entry point
+and wrap the migrated surface in `FdsProvider`.
+
 ## Figma Rule
 
 If Figma links/files are provided later, treat them as legacy product references only. Use them to understand workflows, screen density, repeated patterns, component gaps, migration risks, and business behavior.
@@ -26,19 +32,22 @@ Do not copy the old visual design, colors, spacing, or component decisions as th
 
 - Legacy button variants -> FDS `Button` and `IconButton`.
 - Legacy status labels -> FDS `StatusBadge`.
-- Legacy filters -> FDS filter bar composition.
-- Legacy data tables -> FDS table wrapper.
-- Legacy invoice lines -> FDS charge table composition.
-- Legacy side forms -> FDS drawer/panel composition.
-- Legacy alerts -> FDS inline alert/toast.
+- Legacy filters -> FDS `FilterBar` composition.
+- Legacy simple, read-only tables -> FDS `DataTable`.
+- Legacy complex operational tables -> FDS `FDSDataGrid`.
+- Legacy invoice lines -> FDS `DataTable` composition, or `FDSDataGrid` when operational grid features are required.
+- Legacy side forms -> FDS `Drawer` and `Panel` composition.
+- Legacy alerts -> FDS `InlineAlert` or `Notification`.
 
 ## Refactor Checklist
 
 - Does the screen import only from `sandbox-fds-components` for design-system components?
-- Are raw colors removed from the migrated surface?
+- Is `sandbox-fds-components/styles.css` imported once and the surface wrapped in `FdsProvider`?
+- Are copied raw colors removed in favour of published semantic or component tokens?
 - Are statuses semantic, not visual-only?
 - Are labels visible for form controls?
 - Are disabled/loading/error states covered?
+- Do existing alerts that must remain visible use `InlineAlert persistent`?
 - Are fake stories or examples available for review?
 - Does the change avoid unrelated cleanup?
 

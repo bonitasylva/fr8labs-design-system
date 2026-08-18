@@ -1,0 +1,35 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import './Welcome.css';
+
+<Meta title="Getting Started/Welcome" />
+
+<main className="fds-root fds-welcome fds-welcome-home sb-unstyled">
+  <header className="fds-welcome-home__hero">
+    <p className="fds-welcome__version">sandbox-fds-components · v0.1.2</p>
+    <h1>Fr8Labs Design System</h1>
+    <p className="fds-welcome__lede">The shared UI foundation for consistent, accessible, and audit-friendly freight workflows.</p>
+  </header>
+
+  <section className="fds-welcome-home__overview" aria-labelledby="welcome-overview-title">
+    <div>
+      <p className="fds-welcome-home__kicker">What FDS provides</p>
+      <h2 id="welcome-overview-title">Reusable decisions for freight products</h2>
+      <p>FDS packages repeated interface decisions so product teams can assemble workflows without rebuilding controls, states, or interaction rules.</p>
+    </div>
+    <dl className="fds-welcome-home__facts">
+      <div><dt>Foundations</dt><dd>Shared tokens and visual rules</dd></div>
+      <div><dt>Components</dt><dd>Reusable interface controls</dd></div>
+      <div><dt>Patterns</dt><dd>Approved workflow compositions</dd></div>
+    </dl>
+  </section>
+
+  <section className="fds-welcome-home__adoption" aria-labelledby="welcome-adoption-title">
+    <p className="fds-welcome-home__kicker">Working method</p>
+    <h2 id="welcome-adoption-title">Adopt from the workflow outward</h2>
+    <ol className="fds-welcome-home__steps sb-unstyled">
+      <li><span aria-hidden="true">01</span><strong>Start with the workflow</strong><p>Define the task, user role, real freight content, and required states.</p></li>
+      <li><span aria-hidden="true">02</span><strong>Assemble approved parts</strong><p>Combine the documented parts that support the task.</p></li>
+      <li><span aria-hidden="true">03</span><strong>Validate in product</strong><p>Test responsive layout, keyboard paths, accessible names, and workflow meaning before release.</p></li>
+    </ol>
+  </section>
+</main>

@@ -1,0 +1,51 @@
+import {Canvas, Controls, Meta} from '@storybook/addon-docs/blocks';
+import * as IconButtonStories from './IconButton.stories';
+
+<Meta of={IconButtonStories} />
+
+# IconButton
+
+IconButton is a compact action for a familiar icon whose meaning remains clear without visible text. Prefer a labeled `Button` when the icon needs explanation.
+
+## Playground
+
+Use Controls to test the supported tone, size, loading, disabled, and accessible-name contract.
+
+<Canvas of={IconButtonStories.Playground} />
+<Controls of={IconButtonStories.Playground} />
+
+## Tones
+
+Use the same hierarchy as Button: primary for the one dominant action, secondary for supporting actions, tertiary for compact low-emphasis actions, and danger only when the destructive outcome is clear from context. The icon, accessible name, and surrounding context—not color alone—communicate the action.
+
+<Canvas of={IconButtonStories.Tones} />
+
+## Sizes
+
+- **Small · 28px:** dense toolbars, tables, and pagination.
+- **Medium · 32px:** default standalone and form-adjacent actions.
+- **Large · 40px:** prominent or touch-oriented actions.
+
+Do not mix sizes inside one action group.
+
+<Canvas of={IconButtonStories.Sizes} />
+
+## Loading
+
+Loading replaces the icon with progress, blocks repeat activation, preserves focus and the accessible name, and announces `loadingAnnouncement`.
+
+<Canvas of={IconButtonStories.Loading} />
+
+## Disabled and focus
+
+Use `disabled` when an action is unavailable. Use `aria-disabled` only when the control must remain focusable, and explain the reason nearby. Hover, active, and focus are interaction states; use Tab to verify the visible focus ring.
+
+<Canvas of={IconButtonStories.Disabled} />
+<Canvas of={IconButtonStories.KeyboardFocus} />
+
+## Accessibility
+
+- Supply either `aria-label` or `aria-labelledby`; the icon itself is decorative.
+- Use a recognizable icon whose visual meaning matches the accessible name.
+- Prefer visible text when the action is unfamiliar, ambiguous, or consequential.
+- Do not rely on tone alone to distinguish adjacent actions.

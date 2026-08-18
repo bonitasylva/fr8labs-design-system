@@ -1,0 +1,62 @@
+.fds-sales-invoice-summary {
+  display: grid;
+  gap: var(--spacing-3);
+  max-width: 72rem;
+  padding: var(--spacing-3);
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fds-sales-invoice-summary__metrics,
+.fds-sales-invoice-summary__identity {
+  display: grid;
+  gap: var(--spacing-2);
+  margin: 0;
+}
+
+.fds-sales-invoice-summary__metrics {
+  grid-template-columns: 0.8fr repeat(3, minmax(0, 1fr));
+}
+
+.fds-sales-invoice-summary .fds-metric,
+.fds-sales-invoice-summary__identity > div {
+  min-width: 0;
+}
+
+.fds-sales-invoice-summary .fds-metric__value {
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.fds-sales-invoice-summary__identity > div {
+  display: grid;
+  gap: var(--spacing-1);
+}
+
+.fds-sales-invoice-summary__identity dt {
+  color: var(--fds-text-secondary);
+  font-size: var(--text-supporting-size);
+  line-height: var(--text-supporting-leading);
+}
+
+.fds-sales-invoice-summary__identity dd {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 64rem) {
+  .fds-sales-invoice-summary__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 36rem) {
+  .fds-sales-invoice-summary {
+    padding: var(--spacing-2);
+  }
+
+  .fds-sales-invoice-summary__metrics {
+    grid-template-columns: 1fr;
+  }
+}

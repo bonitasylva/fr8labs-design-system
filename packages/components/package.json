@@ -1,18 +1,95 @@
 {
-  "name": "sandbox-fds-mcp",
-  "version": "0.1.1",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "mcp": "node mcp/server.mjs",
-    "test:mcp": "node --test mcp/contract.test.mjs"
+  "name": "sandbox-fds-components",
+  "version": "0.1.2",
+  "description": "Fr8Labs Design System testing components for browser-based React applications.",
+  "license": "Apache-2.0",
+  "homepage": "https://fr8labs-fds-storybook.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonitasylva/fr8labs-design-system.git",
+    "directory": "packages/components"
   },
-  "dependencies": {
+  "bugs": {
+    "url": "https://github.com/bonitasylva/fr8labs-design-system/issues"
+  },
+  "keywords": [
+    "fr8labs",
+    "design-system",
+    "react",
+    "vite"
+  ],
+  "type": "module",
+  "files": [
+    "dist/components",
+    "dist/index.d.ts",
+    "dist/index.js",
+    "dist/provider.d.ts",
+    "dist/styles.css",
+    "README.md",
+    "CHANGELOG.md",
+    "src/fonts/OFL.txt"
+  ],
+  "sideEffects": [
+    "./dist/styles.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "tag": "testing"
+  },
+  "scripts": {
+    "build:catalog": "node scripts/build-catalog.mjs",
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "check:package": "node --test scripts/package.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run check:tokens && vite build && node scripts/scope-css.mjs && tsc -p tsconfig.build.json && npm run build:catalog",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build && node scripts/sync-mcp-manifests.mjs",
+    "test-storybook": "vitest --project=storybook",
+    "build:mcp": "npm run build-storybook && npm run build:catalog",
+    "mcp": "npm run build:mcp && node mcp/server.mjs",
+    "test:mcp": "npm run build:mcp && node --test mcp/contract.test.mjs"
+  },
+  "peerDependencies": {
+    "ag-grid-community": "32.3.3",
+    "ag-grid-react": "32.3.3",
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "devDependencies": {
+    "sandbox-fds-icons": "file:../icons",
+    "sandbox-fds-tokens": "file:../tokens",
+    "@storybook/addon-a11y": "10.5.8",
+    "@storybook/addon-docs": "10.5.8",
+    "@storybook/addon-links": "10.5.8",
+    "@storybook/addon-mcp": "0.7.0",
+    "@storybook/addon-vitest": "10.5.8",
     "@storybook/mcp": "0.8.0",
+    "@storybook/react-vite": "10.5.8",
     "@tmcp/adapter-valibot": "0.1.6",
     "@tmcp/transport-http": "0.8.6",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.3",
+    "@vitest/browser-playwright": "4.1.10",
+    "ag-grid-community": "32.3.3",
+    "ag-grid-react": "32.3.3",
+    "playwright": "1.62.1",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "storybook": "10.5.8",
     "tmcp": "1.20.0",
-    "valibot": "^1.4.2"
+    "typescript": "6.0.3",
+    "valibot": "^1.4.2",
+    "vite": "8.1.3",
+    "vitest": "4.1.10"
   },
   "overrides": {
     "valibot": "$valibot"

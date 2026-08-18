@@ -1,0 +1,75 @@
+import {Canvas, Controls, Meta} from '@storybook/addon-docs/blocks';
+import * as ButtonStories from './Button.stories';
+
+<Meta of={ButtonStories} />
+
+# Button
+
+Buttons trigger actions. Use links for navigation, short verb-first labels, and one primary action per decision area.
+
+## Playground
+
+Use Controls to test the supported variant, size, loading, width, disabled, and label contract.
+
+<Canvas of={ButtonStories.Playground} />
+<Controls of={ButtonStories.Playground} />
+
+## Variants
+
+Use primary for the dominant action, secondary for supporting actions, tertiary for low-emphasis actions, and danger only for destructive confirmation.
+
+<Canvas of={ButtonStories.Variants} />
+
+## Full width
+
+Use `fullWidth` only inside a constrained form or narrow responsive layout.
+
+<Canvas of={ButtonStories.FullWidth} />
+
+## Sizes
+
+- **Small · 28px:** dense toolbars, filters, tables, and pagination.
+- **Medium · 32px:** default forms and standalone actions.
+- **Large · 40px:** prominent page-level actions.
+
+Do not mix sizes inside one button group.
+
+<Canvas of={ButtonStories.Sizes} />
+
+## Icon placement
+
+Use a leading icon to reinforce the action. Use a trailing icon when it communicates direction, disclosure, or the result of activating the button. Keep the visible label; use `IconButton` for icon-only actions.
+
+<Canvas of={ButtonStories.IconPlacement} />
+
+### Menu trigger
+
+Use a trailing disclosure icon and `aria-haspopup="menu"` when a button opens an action menu. The menu implementation must own open state, arrow-key navigation, Escape, focus movement, and focus return; FDS does not yet expose a standalone action-menu component.
+
+<Canvas of={ButtonStories.MenuTrigger} />
+
+## Keyboard shortcut
+
+A shortcut hint is optional, visual help. It does not register the shortcut. Show it only when the application has wired the command, and keep it out of the button's accessible name.
+
+<Canvas of={ButtonStories.KeyboardShortcut} />
+
+## Loading
+
+Loading prevents repeat activation while preserving the visible label and keyboard focus. The spinner replaces the leading icon, the trailing icon when no leading icon exists, or occupies the leading slot when the button has no icon. Use `loadingAnnouncement` to announce specific progress without changing the label.
+
+<Canvas of={ButtonStories.LoadingStates} />
+
+## Disabled and focus
+
+Use `disabled` when an action is unavailable. Use `aria-disabled` only when the control must remain focusable, and explain the reason nearby. Hover, active, and focus are interaction states; use Tab to verify the visible focus ring.
+
+<Canvas of={ButtonStories.Disabled} />
+<Canvas of={ButtonStories.KeyboardFocus} />
+
+## Accessibility
+
+- Use the native button for actions and a link for navigation.
+- Write a short, specific, verb-first label.
+- Keep focus visible and do not disable a loading button in a way that drops focus.
+- A displayed shortcut must match a real keyboard command and must not replace the visible label.

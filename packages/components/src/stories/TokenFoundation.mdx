@@ -1,0 +1,38 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import {Button, StatusBadge, TextInput} from '../index';
+import * as TokenStories from './TokenFoundation.stories';
+
+<Meta of={TokenStories} />
+
+# Tokens
+
+The approved default FDS v1 token foundation uses light mode, IBM Plex Sans Condensed, and compact desktop density. Components consume semantic roles; raw values remain in primitives, and component tokens exist only for stable repeated decisions. Dark mode is outside the current testing foundation.
+
+<main className="fds-root fds-token-docs">
+  <section aria-labelledby="token-model">
+    <h2 id="token-model">How the token layers work</h2>
+    <ol className="fds-token-docs__layers">
+      <li><strong>Primitive</strong><span>Raw value</span><code>--fds-primitive-color-blue-600: #0067e7</code></li>
+      <li><strong>Semantic</strong><span>Purpose-based role</span><code>--fds-color-action-primary → blue-600</code></li>
+      <li><strong>Component</strong><span>Stable component decision</span><code>--fds-button-primary-background → action-primary</code></li>
+    </ol>
+    <p className="fds-token-docs__note">Product and component code should use semantic or component tokens. Primitive tokens are the source scale, not the consumer API.</p>
+  </section>
+
+  <section aria-labelledby="token-states">
+    <div className="fds-token-docs__section-heading">
+      <div><p className="fds-token-docs__kicker">In use</p><h2 id="token-states">Semantic roles in components</h2></div>
+      <p>Components consume the roles above so interaction and workflow meaning remain consistent.</p>
+    </div>
+    <div className="fds-token-docs__states">
+      <div><Button>Primary action</Button><Button tone="danger">Danger action</Button></div>
+      <div><StatusBadge status="approved" /><StatusBadge status="pending" /><StatusBadge status="blocked" /></div>
+      <div className="fds-token-docs__field"><TextInput label="Shipment reference" value="SHP-260081" onChange={() => {}} /><TextInput label="Invalid reference" value="" onChange={() => {}} error="Enter a shipment reference." /></div>
+    </div>
+  </section>
+
+  <nav className="fds-token-docs__links" aria-label="Token references">
+    <a href="/?path=/story/foundations-tokens--primitives" target="_top">Browse primitive tokens</a>
+    <a href="/?path=/story/foundations-tokens--semantics" target="_top">Browse semantic tokens</a>
+  </nav>
+</main>

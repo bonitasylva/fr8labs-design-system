@@ -1,0 +1,3 @@
+import type {ReactNode} from 'react';
+export type PanelProps = {eyebrow?: string; title?: string; description?: string; actions?: ReactNode; children: ReactNode};
+export function Panel({eyebrow, title, description, actions, children}: PanelProps) {return <section className="fds-panel">{eyebrow || title || description || actions ? <header className="fds-panel__header"><div>{eyebrow ? <div className="fds-panel__eyebrow">{eyebrow}</div> : null}{title ? <h2 className="fds-panel__title">{title}</h2> : null}{description ? <p className="fds-panel__description">{description}</p> : null}</div>{actions ? <div className="fds-panel__actions">{actions}</div> : null}</header> : null}{children}</section>;}

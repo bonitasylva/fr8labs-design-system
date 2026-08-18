@@ -1,0 +1,45 @@
+import {Meta, Source} from '@storybook/addon-docs/blocks';
+import './Welcome.css';
+
+<Meta title="Getting Started/Installation" />
+
+<main className="fds-root fds-welcome fds-installation">
+  <p className="fds-welcome__version">FDS testing packages · components v0.1.2 · icons/tokens v0.1.1</p>
+  <h1>Installation</h1>
+  <p className="fds-welcome__lede">Install the approved FDS release artifact in a supported browser application.</p>
+
+  <hr className="fds-welcome__rule" />
+
+  <div className="fds-welcome__grid">
+    <section>
+      <h2>Before you install</h2>
+      <ul>
+        <li>Use React and React DOM 19 or newer in a Vite browser application.</li>
+        <li>Use AG Grid Community and AG Grid React 32.3.3.</li>
+        <li>Use the <code>testing</code> npm tag while Engineering validates version 0.1.2.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Install the testing release</h2>
+      <Source language="sh" code="npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing" />
+      <p>Install all three public packages for the complete component, icon, and token testing surface. The <code>testing</code> tag is for Engineering validation.</p>
+    </section>
+  </div>
+
+  <hr className="fds-welcome__rule" />
+
+  <section>
+    <h2>Set up the application</h2>
+    <Source
+      language="tsx"
+      code={`import {Button, FdsProvider} from 'sandbox-fds-components';
+import 'sandbox-fds-components/styles.css';
+
+<FdsProvider>
+  <Button>Save shipment</Button>
+</FdsProvider>`}
+    />
+    <p>Verify that the application compiles, the FDS typeface and button styles load, and the button has a visible keyboard focus state.</p>
+  </section>
+</main>

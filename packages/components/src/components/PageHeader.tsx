@@ -1,0 +1,3 @@
+import type {ReactNode} from 'react';
+export type PageHeaderProps = {title: string; description?: string; eyebrow?: string; actions?: ReactNode; breadcrumbs?: ReactNode};
+export function PageHeader({title, description, eyebrow, actions, breadcrumbs}: PageHeaderProps) {return <header className="fds-page-header">{breadcrumbs ? <nav aria-label="Breadcrumb">{breadcrumbs}</nav> : null}<div className="fds-page-header__row"><div>{eyebrow ? <div className="fds-page-header__eyebrow">{eyebrow}</div> : null}<h1>{title}</h1>{description ? <p>{description}</p> : null}</div>{actions ? <div className="fds-page-header__actions">{actions}</div> : null}</div></header>;}

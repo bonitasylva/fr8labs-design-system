@@ -1,0 +1,41 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import './Welcome.css';
+
+<Meta title="Getting Started/Component Overview" />
+
+export const componentGroups = [
+  {name: 'Actions', description: 'Controls that initiate or arrange user actions.', components: ['Button', 'IconButton', 'ActionGroup']},
+  {name: 'Inputs', description: 'Controls for entering and selecting workflow data.', components: ['TextInput', 'Textarea', 'DateTimePicker', 'Select', 'Checkbox', 'CheckboxGroup', 'Radio', 'RadioGroup', 'Switch']},
+  {name: 'Feedback', description: 'Status and guidance that explain the current workflow state.', components: ['StatusBadge', 'InlineAlert', 'EmptyState']},
+  {name: 'Data display', description: 'Read-only values, summaries, and operational datasets.', components: ['Metric', 'Avatar', 'DataTable', 'FDSDataGrid', 'InlineInput']},
+  {name: 'Navigation', description: 'Controls for moving within related content or result sets.', components: ['Pagination', 'Tabs']},
+  {name: 'Layout', description: 'Structures for grouping page content and workflow controls.', components: ['PageHeader', 'FilterBar', 'Panel']},
+  {name: 'Overlays', description: 'Temporary surfaces for focused details and actions.', components: ['Dialog', 'Drawer', 'Tooltip', 'Popover']},
+];
+
+<main className="fds-root fds-welcome fds-component-overview">
+  <p className="fds-welcome__version">sandbox-fds-components · v0.1.2</p>
+  <h1>Component overview</h1>
+  <p className="fds-welcome__lede">Browse the current public FDS component surface by its approved category.</p>
+
+  <hr className="fds-welcome__rule" />
+
+  {componentGroups.map((group) => {
+    const groupSlug = group.name.toLowerCase().replaceAll(' ', '-');
+    return (
+      <section key={group.name} className="fds-component-overview__group" aria-labelledby={`component-group-${groupSlug}`}>
+        <h2 id={`component-group-${groupSlug}`}>{group.name}</h2>
+        <p>{group.description}</p>
+        <ul className="fds-component-overview__list sb-unstyled">
+          {group.components.map((component) => (
+            <li key={component}>
+              <a href={`/?path=/docs/components-${groupSlug}-${component.toLowerCase()}--docs`} target="_top">
+                <strong>{component}</strong>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+</main>

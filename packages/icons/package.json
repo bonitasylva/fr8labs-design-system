@@ -2,6 +2,7 @@
   "name": "sandbox-fds-icons",
   "version": "0.1.1",
   "description": "Fr8Labs Design System icons for React applications.",
+  "license": "Apache-2.0",
   "type": "module",
   "files": [
     "index.js",

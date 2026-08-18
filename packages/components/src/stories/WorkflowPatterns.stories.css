@@ -1,0 +1,70 @@
+.fds-root .fds-workflow-pattern {
+  container-type: inline-size;
+  display: grid;
+  gap: var(--fds-space-5);
+  padding: var(--fds-space-5);
+}
+
+.fds-root .fds-workflow-pattern__metrics,
+.fds-root .fds-workflow-pattern__fields,
+.fds-root .fds-workflow-pattern__split {
+  display: grid;
+  gap: var(--fds-space-3);
+}
+
+.fds-root .fds-workflow-pattern__metrics {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.fds-root .fds-workflow-pattern__fields {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.fds-root .fds-workflow-pattern__split {
+  grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
+}
+
+.fds-root .fds-workflow-pattern__stack,
+.fds-root .fds-workflow-pattern__section {
+  display: grid;
+  gap: var(--fds-space-3);
+}
+
+.fds-root .fds-workflow-pattern__section + .fds-workflow-pattern__section {
+  margin-top: var(--fds-space-5);
+}
+
+.fds-root .fds-workflow-pattern__section h3 {
+  margin: 0;
+  font-size: var(--fds-font-size-subheading);
+  line-height: var(--fds-line-height-subheading);
+}
+
+.fds-root .fds-workflow-pattern__details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--fds-space-3) var(--fds-space-5);
+  margin: 0;
+}
+
+.fds-root .fds-workflow-pattern__details div {
+  min-width: 0;
+}
+
+.fds-root .fds-workflow-pattern__details dt {
+  color: var(--fds-color-text-muted);
+  font-size: var(--fds-font-size-label);
+  line-height: var(--fds-line-height-label);
+}
+
+.fds-root .fds-workflow-pattern__details dd {
+  margin: var(--fds-space-1) 0 0;
+  overflow-wrap: anywhere;
+}
+
+@container (max-width: 52rem) {
+  .fds-root .fds-workflow-pattern__split,
+  .fds-root .fds-workflow-pattern__details {
+    grid-template-columns: 1fr;
+  }
+}

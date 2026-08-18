@@ -1,0 +1,49 @@
+import {Meta, Source} from '@storybook/addon-docs/blocks';
+import './Welcome.css';
+
+<Meta title="Getting Started/Contributing" />
+
+<main className="fds-root fds-welcome fds-contributing">
+  <p className="fds-welcome__version">Fr8Labs Design System</p>
+  <h1>Contributing</h1>
+  <p className="fds-welcome__lede">Keep reusable decisions in FDS and feature-specific work in the product that owns the workflow.</p>
+
+  <hr className="fds-welcome__rule" />
+
+  <div className="fds-welcome__grid">
+    <section>
+      <h2>Choose the right home</h2>
+      <ul>
+        <li>Reuse an existing component or pattern before adding another one.</li>
+        <li>Put reusable components, tokens, and interaction rules in FDS.</li>
+        <li>Put feature-specific concrete prototypes in the prototyping project.</li>
+        <li>Treat sandbox work as exploration until it is explicitly approved.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Use the Storybook hierarchy</h2>
+      <ul>
+        <li><code>Components/&lt;Category&gt;/&lt;Component&gt;</code></li>
+        <li><code>Patterns/&lt;Workflow category&gt;/&lt;Pattern&gt;</code></li>
+        <li><code>Foundations/&lt;Foundation&gt;</code></li>
+        <li><code>Internal/&lt;Purpose&gt;/&lt;Check&gt;</code></li>
+      </ul>
+      <p>Name story exports after the scenario, state, or decision they demonstrate.</p>
+    </section>
+  </div>
+
+  <hr className="fds-welcome__rule" />
+
+  <section>
+    <h2>Verify before review</h2>
+    <Source
+      language="sh"
+      code={`npm run typecheck
+npm run build
+npm run build-storybook
+npm run test-storybook -- --run`}
+    />
+    <p>Passing checks confirms implementation quality; reusable design still requires explicit review and approval.</p>
+  </section>
+</main>

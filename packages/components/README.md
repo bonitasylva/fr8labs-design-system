@@ -1,21 +1,20 @@
 # sandbox-fds-components
 
-Internal Fr8Labs Design System (FDS) components for browser-based React applications. This is a browser/Vite-only package for the approved v0.1 component surface; it is not a Node or SSR package.
+Testing release of Fr8Labs Design System (FDS) components for browser-based React applications. This package supports the approved v0.1 component surface in Vite applications; it does not support Node rendering or SSR.
 
 ## Requirements
 
 - React and React DOM 19 or later.
 - AG Grid Community and React `32.3.3`. Enterprise licensing remains application-owned.
 - A browser application built with Vite.
-- Import `sandbox-fds-components/styles.css` once in the application entry point.
-- The component stylesheet bundles `sandbox-fds-tokens` and `sandbox-fds-icons/styles.css`; standalone consumers can install either package without the component library.
-- IBM Plex Sans Condensed is bundled with the package under the SIL Open Font License.
 
-Install the release artifact after it is created:
+## Installation
 
 ```sh
-npm install ./fr8labs-components-0.1.1.tgz
+npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing
 ```
+
+Install all three testing packages so the application can consume components, icons, and framework-neutral tokens through their public package APIs.
 
 ## Setup
 
@@ -40,31 +39,13 @@ createRoot(document.getElementById('root')!).render(<App />);
 
 `FdsProvider` is package setup: it scopes FDS styles and the default theme to its subtree. It remains documented here rather than appearing as a catalog component.
 
+Import `sandbox-fds-components/styles.css` once in the application entry point. It includes the FDS tokens and icon styles. IBM Plex Sans Condensed is bundled under the SIL Open Font License; Material Symbols Sharp currently loads from Google Fonts.
+
 Import only from `sandbox-fds-components` during Engineering testing. Components are Fr8Labs-owned native React and CSS; consumers do not need MUI, Tailwind, shadcn, or another UI runtime.
 
-## Storybook
+## Documentation
 
-Run `npm run storybook` for local documentation or `npm run build-storybook` for the static build.
-
-- `@storybook/addon-docs` provides autodocs, MDX guidance, Canvas, Controls tables, and source snippets.
-- `@storybook/addon-a11y` runs axe accessibility checks; violations are configured as errors.
-- Storybook 10 supplies Controls, Actions, Viewport, Backgrounds, Measure, Outline, and Toolbars as zero-config essentials.
-
-Add another addon only when FDS has the corresponding workflow—for example, add Vitest when interaction tests are authored, or Themes when a second approved theme exists.
-
-### Information architecture
-
-Storybook titles expose the hierarchy instead of making readers infer it from a component or token name:
-
-- Components: `Components/<Category>/<Component>`
-- Patterns: `Patterns/<Workflow category>/<Pattern>`
-- Internal checks: `Internal/<Purpose>/<Check>`
-- Foundations: `Foundations/<Foundation>`
-- Orientation: `Getting Started/<Page>`
-
-Use the public component categories below. Story exports describe a scenario, state, or documented decision; they do not repeat the category or component name. Within a documentation page, repeated values use category → subgroup → item, as demonstrated by the primitive and semantic token stories.
-
-When an item and its group own different semantics or state, expose and document them separately—for example, `Checkbox`/`CheckboxGroup`, `Radio`/`RadioGroup`, and `Button`/`ActionGroup`. Do not add a group component where the group has no distinct behavior.
+Use the [hosted Storybook](https://fr8labs-fds-storybook.vercel.app/) for component guidance, examples, and testing-release notes.
 
 ## Button
 
@@ -121,4 +102,4 @@ Use semantic labels, visible text, and keyboard-operable controls. Supply `aria-
 
 ## Support and rollback
 
-v0.1 supports browser/Vite React 19 applications only. Node rendering and SSR are unsupported. To roll back, remove the tarball dependency, remove the FDS CSS import and provider, and restore the previous UI dependency/version in the consuming application.
+v0.1 supports browser/Vite React 19 applications only. Node rendering and SSR are unsupported. To roll back, run `npm uninstall sandbox-fds-components`, remove the FDS CSS import and provider, and restore the previous UI dependency/version in the consuming application.

@@ -2,6 +2,10 @@
 
 Framework-neutral Fr8Labs Design System CSS custom properties.
 
+```sh
+npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing
+```
+
 ```css
 @import 'sandbox-fds-tokens/tokens.css';
 ```

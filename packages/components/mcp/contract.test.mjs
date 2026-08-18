@@ -47,7 +47,7 @@ test('catalog contracts resolve approved immutable records and all 257 tokens', 
   const artifact = JSON.parse(await readFile(new URL('../dist/fds-catalog.json', import.meta.url), 'utf8'));
   const packageJson = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
   const changelog = await readFile(new URL('../CHANGELOG.md', import.meta.url), 'utf8');
-  assert.equal(artifact.currentApprovedVersion, '0.1.1');
+  assert.equal(artifact.currentApprovedVersion, '0.1.2');
   assert.equal(artifact.currentApprovedVersion, packageJson.version);
   assert.equal(changelog.includes(`## [${packageJson.version}] - `), true);
   const tokenItems = artifact.items.filter((item) => item.kind === 'token');
@@ -69,14 +69,14 @@ test('catalog contracts resolve approved immutable records and all 257 tokens', 
   assert.equal(catalogApi.getTokenReference({tokenPath: 'color.action.primary'}).tokenPath, 'semantic.color.action.primary');
   assert.equal(catalogApi.getTokenReference({tokenPath: '--fds-button-height-medium'}).resolvedValue, '32px');
   assert.equal(catalogApi.getTokenReference({tokenPath: 'compat.font.family.body'}).sourceValue, 'var(--fds-font-family-body)');
-  assert.equal(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'package'}).install, 'npm install sandbox-fds-components@testing');
+  assert.equal(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'package'}).install, 'npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing');
   assert.match(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'copy'}).driftWarning, /adopting team owns/);
 });
 
 test('version and approval boundaries never return a code snapshot', () => {
   const unavailableVersion = catalogApi.getComponent({id: 'component.button', fdsVersion: '9.9.9'});
   assert.equal(unavailableVersion.error.code, 'FDS_VERSION_UNAVAILABLE');
-  assert.deepEqual(unavailableVersion.error.supportedVersions, ['0.1.1']);
+  assert.deepEqual(unavailableVersion.error.supportedVersions, ['0.1.2']);
   assert.equal('codeSnapshot' in unavailableVersion, false);
 
   const experimental = catalogApi.getTemplate({id: 'template.sales-invoice-summary'});
@@ -100,6 +100,7 @@ test('Storybook manifests include components, patterns, foundations, and docs', 
   assert.equal(Object.keys(components.components).some((id) => id.startsWith('internal-')), false);
   assert.equal(components.components['patterns-finance-sales-invoice-summary'], undefined);
   assert.equal(JSON.stringify({components, docs}).includes('/Users/'), false);
+  assert.equal(JSON.stringify({components, docs}).includes('No component found'), false);
 });
 
 test('HTTP rejects oversized bodies and JSON-RPC batches before transport parsing', async () => {
@@ -132,7 +133,7 @@ test('Streamable HTTP supports the same nine read-only tools locally and when ho
 
   const called = await rpc('tools/call', {name: 'get_component', arguments: {id: 'component.button'}});
   assert.equal(called.message.result.structuredContent.approvalStatus, 'approved');
-  assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.1.1');
+  assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.1.2');
 
   const documentation = await rpc('tools/call', {name: 'get-documentation', arguments: {id: 'components-actions-button'}}, 3);
   assert.match(documentation.message.result.content[0].text, /Button/);

@@ -1,0 +1,25 @@
+import {create} from 'storybook/theming';
+
+export const fdsTheme = create({
+  base: 'light',
+  brandTitle: 'FDS Studio · @fr8labs/components',
+  brandUrl: '/?path=/docs/getting-started-welcome--docs',
+  brandTarget: '_self',
+  fontBase: '"IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif',
+  fontCode: 'ui-monospace, SFMono-Regular, Consolas, monospace',
+  colorPrimary: '#0067e7',
+  colorSecondary: '#023c9b',
+  appBg: '#f6f8fb',
+  appContentBg: '#ffffff',
+  appBorderColor: '#c8d2dc',
+  appBorderRadius: 4,
+  textColor: '#002245',
+  textMutedColor: '#525252',
+  barTextColor: '#5e758d',
+  barSelectedColor: '#0067e7',
+  barBg: '#ffffff',
+  inputBg: '#ffffff',
+  inputBorder: '#5e758d',
+  inputTextColor: '#002245',
+  inputBorderRadius: 4,
+});

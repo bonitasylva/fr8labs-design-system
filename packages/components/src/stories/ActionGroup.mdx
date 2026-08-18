@@ -1,0 +1,39 @@
+import {Canvas, Controls, Meta} from '@storybook/addon-docs/blocks';
+import * as ActionGroupStories from './ActionGroup.stories';
+
+<Meta of={ActionGroupStories} />
+
+# ActionGroup
+
+ActionGroup arranges related, independent actions with consistent spacing, wrapping, and alignment. It is a layout composition, not a single composite control.
+
+## Action order
+
+Place supporting actions first and the primary action last. Use no more than one primary action in a group.
+
+<Canvas of={ActionGroupStories.SupportingThenPrimary} />
+<Controls of={ActionGroupStories.SupportingThenPrimary} />
+
+## Alignment
+
+End alignment is the default for confirmation and page-level actions. Use start alignment where actions follow content or form fields in reading order.
+
+<Canvas of={ActionGroupStories.StartAligned} />
+
+## Mixed actions
+
+Mix labeled and icon-only actions only when their relationship and the icon meaning remain clear. Prefer labeled buttons for unfamiliar or consequential actions.
+
+<Canvas of={ActionGroupStories.MixedActions} />
+
+## Wrapping
+
+The group wraps without changing DOM or keyboard order. Verify that the visual order still reads from supporting to primary at the narrowest supported width.
+
+<Canvas of={ActionGroupStories.Wrapping} />
+
+## Boundaries
+
+- Use ActionGroup for related actions, not merely controls that happen to be close together.
+- Use separate buttons because each action remains independently operable.
+- Do not use ActionGroup for selection, tabs, a joined split button, or a menu; those require complete interaction contracts of their own.

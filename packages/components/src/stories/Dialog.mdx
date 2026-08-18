@@ -1,0 +1,35 @@
+import {Canvas, Meta} from '@storybook/addon-docs/blocks';
+import * as DialogStories from './Dialog.stories';
+
+<Meta of={DialogStories} />
+
+# Dialog
+
+Dialog presents one short, focused task above the current page. Use a page when the content needs navigation, multiple sections, or a durable URL.
+
+## Context
+
+Use a concise visible title. Add a description only when it helps the user decide or act.
+
+<Canvas of={DialogStories.TitleAndDescription} />
+
+## Actions
+
+Place supporting actions before one primary action. Use `role="alertdialog"` only for an urgent confirmation that needs immediate attention; a danger button alone does not require it.
+For destructive confirmations, place the safest enabled action first; an `alertdialog` moves initial focus there.
+
+<Canvas of={DialogStories.ConfirmationActions} />
+<Canvas of={DialogStories.DestructiveConfirmation} />
+
+## Dismissal and focus
+
+The native modal keeps focus inside, focuses the first control, closes with Escape or the visible close button, and returns focus to the trigger. Backdrop dismissal is on by default; set `dismissOnBackdrop={false}` when an outside click could discard unsaved work.
+
+<Canvas of={DialogStories.KeyboardCloseAndFocusRestore} />
+
+## Accessibility
+
+- Keep the title visible and specific.
+- Keep a visible close control even when footer actions are present.
+- Put live status messages inside the dialog while it is open.
+- Verify Tab and Shift+Tab remain inside and Escape returns focus to the trigger.

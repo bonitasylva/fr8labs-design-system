@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "currentApprovedVersion": "0.1.2",
+  "items": [
+    {
+      "id": "component.button",
+      "kind": "component",
+      "status": "approved",
+      "fdsVersion": "0.1.2",
+      "title": "Button",
+      "summary": "FDS action control with primary, secondary, tertiary, and danger tones.",
+      "dependencies": ["sandbox-fds-components@0.1.2", "react>=19.0.0"],
+      "accessibility": [
+        "Use visible action text or provide an accessible name.",
+        "Loading and aria-disabled states block activation without removing the accessible name.",
+        "Use one primary action per action area."
+      ],
+      "source": {
+        "path": "packages/components/src/components/Button.tsx",
+        "storybookTitle": "Components/Actions/Button",
+        "storybookId": "components-actions-button--playground"
+      },
+      "updatedAt": "2026-08-15",
+      "api": {
+        "import": "import {Button} from 'sandbox-fds-components';",
+        "props": {
+          "tone": "'primary' | 'secondary' | 'tertiary' | 'danger'",
+          "size": "'small' | 'medium' | 'large'",
+          "loading": "boolean",
+          "fullWidth": "boolean"
+        }
+      },
+      "states": ["default", "hover", "active", "focus-visible", "loading", "disabled", "aria-disabled"],
+      "promptId": "prompt.codex-prototype"
+    },
+    {
+      "id": "template.list-and-review",
+      "kind": "template",
+      "status": "approved",
+      "fdsVersion": "0.1.2",
+      "title": "List and review",
+      "summary": "Approved fake-data workflow for finding records, reviewing status, and opening work that needs attention.",
+      "dependencies": ["sandbox-fds-components@0.1.2", "react>=19.0.0"],
+      "accessibility": [
+        "Keep page heading, summary, filters, results, and pagination in reading order.",
+        "Give the results table and pagination specific accessible labels.",
+        "Preserve empty results as an explicit state."
+      ],
+      "source": {
+        "path": "packages/components/src/stories/ListAndReview.stories.tsx",
+        "storybookTitle": "Patterns/Operations/List and review",
+        "storybookId": "patterns-operations-list-and-review--active-results"
+      },
+      "updatedAt": "2026-08-15",
+      "states": ["active-results", "empty-results"],
+      "slots": ["pageHeader", "summaryMetrics", "filters", "results", "pagination"],
+      "allowedComponentIds": [
+        "component.button"
+      ],
+      "fakeFixtureSchema": {
+        "shipment": {
+          "id": "synthetic shipment identifier",
+          "mode": "synthetic transport mode",
+          "route": "synthetic origin and destination",
+          "eta": "synthetic date",
+          "status": "draft | pending | approved | blocked"
+        }
+      },
+      "promptId": "prompt.codex-prototype"
+    },
+    {
+      "id": "prompt.codex-prototype",
+      "kind": "prompt",
+      "status": "approved",
+      "fdsVersion": "0.1.2",
+      "title": "Codex FDS prototype",
+      "summary": "Bounded prompt for an FDS Storybook prototype using fake freight data only.",
+      "dependencies": ["sandbox-fds-components@0.1.2"],
+      "accessibility": ["Show applicable status, loading, empty, and error states.", "Keep the workflow keyboard-operable and visibly labelled."],
+      "source": {
+        "path": "prompts/codex-prototype-prompt.md"
+      },
+      "updatedAt": "2026-08-15",
+      "inputs": ["workflow name", "product area", "user role", "main task"],
+      "allowedIds": ["component.button", "template.list-and-review"],
+      "fakeDataRestriction": "Use bundled or newly authored synthetic freight data only. Never include production, customer, shipment, invoice, finance, credential, or other sensitive data."
+    },
+    {
+      "id": "token.color.blue.600",
+      "kind": "token",
+      "status": "approved",
+      "fdsVersion": "0.1.2",
+      "title": "Blue 600",
+      "summary": "Approved primitive used by the semantic primary-action token.",
+      "dependencies": ["sandbox-fds-components@0.1.2/styles.css"],
+      "accessibility": ["Consume this primitive through an approved semantic token.", "White on the semantic primary action resolves to 5.13:1 contrast."],
+      "source": {
+        "path": "packages/tokens/tokens.css",
+        "storybookTitle": "Foundations/Tokens",
+        "storybookId": "foundations-tokens--primitives"
+      },
+      "updatedAt": "2026-08-15",
+      "tokenPath": "color.blue.600",
+      "dtcgValue": {
+        "colorSpace": "srgb",
+        "components": [0, 0.403921568627, 0.905882352941],
+        "alpha": 1,
+        "hex": "#0067E7"
+      },
+      "cssVariable": "--fds-primitive-color-blue-600",
+      "aliasUsedBy": "--fds-color-action-primary",
+      "permittedUsage": "Primitive reference only; product and component CSS use the semantic --fds-color-action-primary alias."
+    },
+    {
+      "id": "recipe.component.button",
+      "kind": "adoption_recipe",
+      "status": "approved",
+      "fdsVersion": "0.1.2",
+      "title": "Adopt Button",
+      "summary": "Package or owned-copy adoption instructions for the approved Button.",
+      "dependencies": ["sandbox-fds-components@0.1.2", "react>=19.0.0"],
+      "accessibility": ["Retain the Button accessible-name, loading, disabled, focus, and action-hierarchy constraints."],
+      "source": {
+        "path": "packages/components/README.md"
+      },
+      "updatedAt": "2026-08-15",
+      "targetId": "component.button",
+      "modes": {
+        "package": {
+          "install": "npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing",
+          "imports": ["import {Button} from 'sandbox-fds-components';", "import 'sandbox-fds-components/styles.css';"],
+          "instructions": ["Wrap the application with FdsProvider once.", "Use Button through the public sandbox-fds-components testing export."]
+        },
+        "copy": {
+          "instructions": ["Copy the approved snapshot for component.button and record source FDS version 0.1.2.", "Keep the source item ID in the copied file header."],
+          "driftWarning": "The adopting team owns local changes, drift, security fixes, accessibility fixes, and upgrades after copying."
+        }
+      }
+    },
+    {
+      "id": "template.sales-invoice-summary",
+      "kind": "template",
+      "status": "experimental",
+      "fdsVersion": "0.1.2",
+      "title": "Sales Invoice Summary",
+      "summary": "Experimental finance pattern; excluded from approved MCP results.",
+      "dependencies": ["sandbox-fds-components@0.1.2", "react>=19.0.0"],
+      "accessibility": ["Not approved for adoption."],
+      "source": {
+        "path": "packages/components/src/stories/SalesInvoiceSummary.stories.tsx",
+        "storybookTitle": "Patterns/Finance/Sales Invoice Summary",
+        "storybookId": "patterns-finance-sales-invoice-summary--normal-invoice"
+      },
+      "updatedAt": "2026-08-15"
+    }
+  ]
+}

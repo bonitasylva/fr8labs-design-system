@@ -1,0 +1,43 @@
+import {Meta} from '@storybook/addon-docs/blocks';
+import './Welcome.css';
+
+<Meta title="Getting Started/Changelog" />
+
+<main className="fds-root fds-welcome fds-changelog">
+  <p className="fds-welcome__version">Current testing release · sandbox-fds-components v0.1.2</p>
+  <h1>Changelog</h1>
+  <p className="fds-welcome__lede">See what changed in each package version.</p>
+
+  <hr className="fds-welcome__rule" />
+
+  <section aria-labelledby="release-0-1-2">
+    <p><strong>18 Aug 2026</strong></p>
+    <h2 id="release-0-1-2">0.1.2</h2>
+    <h3>Fixed</h3>
+    <ul>
+      <li>Corrected the npm installation and setup documentation.</li>
+      <li>Removed internal catalog content from the npm package artifact.</li>
+      <li>Added explicit testing-release and repository metadata.</li>
+    </ul>
+  </section>
+
+  <hr className="fds-welcome__rule" />
+
+  <section aria-labelledby="release-0-1-1">
+    <p><strong>2026-07-14</strong></p>
+    <h2 id="release-0-1-1">0.1.1</h2>
+    <h3>Added</h3>
+    <ul>
+      <li>First approved pilot release of the <code>sandbox-fds-components</code> package.</li>
+    </ul>
+    <p>For compatibility and setup, use the <a href="/?path=/docs/getting-started-installation--docs" target="_top">FDS installation guide</a>.</p>
+  </section>
+
+  <hr className="fds-welcome__rule" />
+
+  <section>
+    <h2>Versioning policy</h2>
+    <p>This package follows Semantic Versioning. While the major version is 0, its public contract may change between minor releases, so review every changelog entry before upgrading.</p>
+    <p>The canonical release history is <code>packages/components/CHANGELOG.md</code>. Update it with <code>package.json</code> and the approved catalog whenever the package version changes.</p>
+  </section>
+</main>

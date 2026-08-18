@@ -1,0 +1,37 @@
+import {Canvas, Meta} from '@storybook/addon-docs/blocks';
+import * as DrawerStories from './Drawer.stories';
+
+<Meta of={DrawerStories} />
+
+# Drawer
+
+Drawer is a modal right-side sheet for a quick preview, configuration, or bounded operational edit while preserving page context. Use a page for long or multi-step work.
+
+## Default
+
+The drawer is 540px wide on regular viewports, anchored to the right edge, and modal over the complete application surface.
+
+<Canvas of={DrawerStories.DefaultRightSideDrawer} />
+
+## Forms and unsaved work
+
+Use a drawer only for a short, single-column form. Set `dismissOnBackdrop={false}` whenever an outside click could discard edits; Cancel and the close button remain explicit exits.
+
+<Canvas of={DrawerStories.FormContent} />
+
+## Overflow
+
+Only the body scrolls when content exceeds the viewport; the title, close control, and actions remain available.
+
+<Canvas of={DrawerStories.LongScrollableContent} />
+
+## Responsive placement
+
+At 768px and below, the drawer becomes edge-to-edge. At larger widths it remains right-aligned and leaves the dimmed page visible as context.
+Use the Storybook viewport toolbar on the Default story to inspect both boundaries.
+
+## Keyboard and focus
+
+Drawer uses the same native modal contract as Dialog: focus moves inside, Tab remains contained, Escape closes, and focus returns to the trigger.
+
+<Canvas of={DrawerStories.KeyboardCloseAndFocusRestore} />

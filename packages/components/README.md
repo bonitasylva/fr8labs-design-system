@@ -84,13 +84,13 @@ Use the [hosted Storybook](https://fr8labs-fds-storybook.vercel.app/) for compon
 
 - Actions: `Button`, `IconButton`, `ActionGroup`
 - Inputs: `TextInput`, `Textarea`, `DateTimePicker`, `Select`, `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `Switch`
-- Feedback: `StatusBadge`, `InlineAlert`, `EmptyState`
+- Feedback: `StatusBadge`, `InlineAlert`, `Notification`, `EmptyState`
 - Data display: `Metric`, `Avatar`, `DataTable`, `FDSDataGrid`, `InlineInput`
 - Navigation: `Pagination`, `Tabs`
 - Layout: `PageHeader`, `FilterBar`, `Panel`
 - Overlays: `Dialog`, `Drawer`, `Tooltip`, `Popover`
 
-The package also exports the documented component prop and support types: `ButtonProps`, `ButtonSize`, `ButtonTone`, `IconButtonProps`, `IconButtonSize`, `IconButtonSx`, `IconButtonTone`, `TextInputProps`, `TextareaProps`, `DateTimePickerProps`, `DateTimeRangeValue`, `Status`, `StatusBadgeProps`, `SelectOption`, `SelectProps`, `CheckboxProps`, `CheckboxOption`, `CheckboxGroupProps`, `RadioProps`, `RadioOption`, `RadioGroupProps`, `SwitchProps`, `AvatarProps`, `PanelProps`, `EmptyStateProps`, `PaginationProps`, `TabsItem`, `TabsProps`, `ActionGroupProps`, `PageHeaderProps`, `FilterBarProps`, `DialogProps`, `DrawerProps`, `TooltipProps`, `PopoverProps`, `InlineAlertProps`, `InlineAlertTone`, `InlineInputDensity`, `InlineInputProps`, `MetricChange`, `MetricProps`, `DataTableAlignment`, `DataTableColumn`, `DataTableColumnWidth`, `DataTableEmptyState`, and `DataTableProps`.
+The package also exports the documented component prop and support types: `ButtonProps`, `ButtonSize`, `ButtonTone`, `IconButtonProps`, `IconButtonSize`, `IconButtonSx`, `IconButtonTone`, `TextInputProps`, `TextareaProps`, `DateTimePickerProps`, `DateTimeRangeValue`, `Status`, `StatusBadgeProps`, `SelectOption`, `SelectProps`, `CheckboxProps`, `CheckboxOption`, `CheckboxGroupProps`, `RadioProps`, `RadioOption`, `RadioGroupProps`, `SwitchProps`, `AvatarProps`, `PanelProps`, `EmptyStateProps`, `PaginationProps`, `TabsItem`, `TabsProps`, `ActionGroupProps`, `PageHeaderProps`, `FilterBarProps`, `DialogProps`, `DrawerProps`, `TooltipProps`, `PopoverProps`, `InlineAlertProps`, `InlineAlertSize`, `InlineAlertTone`, `NotificationProps`, `InlineInputDensity`, `InlineInputProps`, `MetricChange`, `MetricProps`, `DataTableAlignment`, `DataTableColumn`, `DataTableColumnWidth`, `DataTableEmptyState`, and `DataTableProps`.
 
 `DataTable` is for simple, non-interactive tables, summaries, and short read-only lists. `FDSDataGrid` is the bounded AG Grid `32.3.3` pilot for complex operational lists: it owns FDS density and theme, pinned identifiers, sort/filter/resize, optional checkbox selection, and loading/empty states. Enterprise features, editing, saved views, export, and server-side row models remain application decisions or later pilot work. The public grid types are `FDSDataGridProps`, `FDSDataGridColumn`, `FDSDataGridDensity`, `FDSDataGridAlignment`, and `FDSDataGridEmptyState`.
 
@@ -102,4 +102,4 @@ Use semantic labels, visible text, and keyboard-operable controls. Supply `aria-
 
 ## Support and rollback
 
-v0.1 supports browser/Vite React 19 applications only. Node rendering and SSR are unsupported. To roll back, run `npm uninstall sandbox-fds-components`, remove the FDS CSS import and provider, and restore the previous UI dependency/version in the consuming application.
+The current pre-1.0 package supports browser/Vite React 19 applications only. Node rendering and SSR are unsupported. To roll back, run `npm uninstall sandbox-fds-components`, remove the FDS CSS import and provider, and restore the previous UI dependency/version in the consuming application.

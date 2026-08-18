@@ -1,33 +1,27 @@
-# Component Scope v0.1
+# Component Scope
 
-## Core Components
+The current public surface is `sandbox-fds-components` v0.2.0. It supersedes the initial v0.1 planning target of 8–12 components.
 
-Target 8-12 components:
+## Public Components
 
-1. Button
-2. Icon button
-3. Text input
-4. Select
-5. Checkbox
-6. Badge/status tag
-7. `FDSDataGrid`: FDS-styled AG Grid integration for complex operational and accounting grids
-8. Tabs
-9. Modal/dialog
-10. Drawer/side panel
-11. Inline alert
-12. Card/panel
+- Actions: `Button`, `IconButton`, `ActionGroup`
+- Inputs: `TextInput`, `Textarea`, `DateTimePicker`, `Select`, `Checkbox`, `CheckboxGroup`, `Radio`, `RadioGroup`, `Switch`
+- Feedback: `StatusBadge`, `InlineAlert`, `Notification`, `EmptyState`
+- Data display: `Metric`, `Avatar`, `DataTable`, `FDSDataGrid`, `InlineInput`
+- Navigation: `Pagination`, `Tabs`
+- Layout: `PageHeader`, `FilterBar`, `Panel`
+- Overlays: `Dialog`, `Drawer`, `Tooltip`, `Popover`
 
-All 12 slots are implemented, publicly exported, and approved. Native `Select` satisfies the selection slot, and `InlineAlert` satisfies the feedback slot. A searchable combobox or transient Toast requires a validated workflow before it enters scope.
+All 30 components are publicly exported and documented in Storybook. `FdsProvider` is the package setup API rather than a catalog component. A searchable combobox, menu, or additional feedback primitive requires a validated workflow before it enters scope.
 
 ## Freight-Specific Compositions
 
-The approved workflow patterns are list-and-review, create/edit form, and record-detail/review. The items below remain candidate freight compositions rather than v0.1 completion requirements:
+The approved workflow patterns are list-and-review, create/edit form, and record-detail/review. The items below remain candidate freight compositions rather than current completion requirements:
 
 - Shipment summary header.
 - Charge table.
 - Approval step list.
 - Document preview shell.
-- Filter bar.
 - Status timeline.
 
 ## API Direction
@@ -45,17 +39,17 @@ FDS UI components should expose product-friendly props and hide implementation c
 - Use AG Grid behind `FDSDataGrid` for complex, high-density operational and accounting grids.
 - The approved `FDSDataGrid` slice owns shared tokens, density, row/header sizing, sort/filter/resize, pinned identifiers, selection, loading/empty states, and accessibility defaults. Editing, specialised cell contracts, pagination, and saved views require a separately approved pilot. Product screens must not style or configure AG Grid independently.
 
-Testing examples import these components from `sandbox-fds-components`.
+Examples import these components from `sandbox-fds-components`.
 
-## Exclusions For v0.1
+## Current Exclusions
 
 - Full chart system.
 - Drag-and-drop workflow builders.
-- Custom date picker unless native/input-based options fail.
+- A custom calendar picker beyond the current native/input-based `DateTimePicker`.
 - Full WYSIWYG document editor.
 - Custom table virtualization beyond AG Grid.
 - Complete mobile app design system.
 
-## Acceptance For v0.1 Scope
+## Acceptance For New Components
 
-A component belongs in v0.1 only if it appears in at least one pilot prototype or blocks migration from a repeated legacy pattern.
+A new component enters the public scope only when it solves a repeated product workflow that cannot be covered safely by an existing component, composition, or native browser control. It must also ship with a documented API, accessibility behavior, Storybook examples, and verification.

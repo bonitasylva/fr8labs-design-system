@@ -14,7 +14,7 @@ function CreateEditForm({showErrors = false}: {showErrors?: boolean}) {
 
   return <main className="fds-workflow-pattern">
     <PageHeader eyebrow="Shipment job" title="Create shipment" description="Capture the minimum operational details before adding cargo, documents, and charges." />
-    {invalid ? <InlineAlert tone="error" title="Shipment cannot be created" description="Complete the required fields marked below." /> : null}
+    {invalid ? <InlineAlert tone="error" title="Shipment cannot be created" description="Complete the required fields marked below." persistent /> : null}
     <form className="fds-workflow-pattern__stack" onSubmit={(event) => event.preventDefault()}>
       <Panel title="Job details" description="Required identifiers and ownership.">
         <div className="fds-workflow-pattern__fields">

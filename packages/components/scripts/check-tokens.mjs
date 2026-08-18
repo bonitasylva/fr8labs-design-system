@@ -3,6 +3,7 @@ import {join} from 'node:path';
 
 const sourceRoot = new URL('../src/', import.meta.url);
 const tokenSource = await readFile(new URL('../../tokens/tokens.css', import.meta.url), 'utf8');
+const breakpoints = JSON.parse(await readFile(new URL('../../tokens/breakpoints.json', import.meta.url), 'utf8'));
 const cssFiles = await findCss(sourceRoot);
 const componentCss = (await Promise.all(cssFiles.filter((file) => !file.endsWith('tokens.css')).map((file) => readFile(file, 'utf8')))).join('\n');
 const definitions = new Map([...tokenSource.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].map((match) => [match[1], match[2].trim()]));
@@ -36,9 +37,20 @@ const expected = {
   '--fds-button-height-large': '40px',
   '--fds-table-row-height': '32px',
   '--fds-table-header-height': '36px',
+  '--fds-size-container-form': '48rem',
+  '--fds-size-container-reading': '72ch',
+  '--fds-size-container-page': '80rem',
 };
 
 for (const [name, value] of Object.entries(expected)) assert(resolve(name) === value, `${name} must resolve to ${value}`);
+
+assert(JSON.stringify(breakpoints) === JSON.stringify({
+  base: {value: '0rem', pixels: 0},
+  small: {value: '40rem', pixels: 640},
+  medium: {value: '48rem', pixels: 768},
+  large: {value: '64rem', pixels: 1024},
+  wide: {value: '80rem', pixels: 1280},
+}), 'Breakpoint scale changed without updating its contract check');
 
 for (const [foreground, background, minimum] of [
   ['--fds-color-text-default', '--fds-color-surface-default', 4.5],
@@ -50,14 +62,21 @@ for (const [foreground, background, minimum] of [
   ['--fds-button-danger-foreground', '--fds-button-danger-background', 4.5],
   ['--fds-button-danger-foreground', '--fds-button-danger-background-hover', 4.5],
   ['--fds-color-field-border', '--fds-color-field-background', 3],
+  ['--fds-color-feedback-info-content-text', '--fds-color-feedback-info-surface', 4.5],
   ['--fds-color-feedback-info-text', '--fds-color-feedback-info-surface', 4.5],
+  ['--fds-color-feedback-success-content-text', '--fds-color-feedback-success-surface', 4.5],
   ['--fds-color-feedback-success-text', '--fds-color-feedback-success-surface', 4.5],
+  ['--fds-color-feedback-warning-content-text', '--fds-color-feedback-warning-surface', 4.5],
   ['--fds-color-feedback-warning-text', '--fds-color-feedback-warning-surface', 4.5],
+  ['--fds-color-feedback-error-content-text', '--fds-color-feedback-error-surface', 4.5],
   ['--fds-color-feedback-error-text', '--fds-color-feedback-error-surface', 4.5],
   ['--fds-color-status-neutral-text', '--fds-color-status-neutral-surface', 4.5],
   ['--fds-color-status-success-text', '--fds-color-status-success-surface', 4.5],
   ['--fds-color-status-warning-text', '--fds-color-status-warning-surface', 4.5],
   ['--fds-color-status-danger-text', '--fds-color-status-danger-surface', 4.5],
+  ['--fds-color-status-success-border', '--fds-color-status-success-surface', 3],
+  ['--fds-color-status-warning-border', '--fds-color-status-warning-surface', 3],
+  ['--fds-color-status-danger-border', '--fds-color-status-danger-surface', 3],
 ]) assert(contrast(resolve(foreground), resolve(background)) >= minimum, `${foreground} fails ${minimum}:1 on ${background}`);
 
 console.log(`Validated ${definitions.size} tokens across ${cssFiles.length} CSS files.`);

@@ -16,6 +16,16 @@
           "id": "foundations-tokens--semantics",
           "name": "Semantics",
           "snippet": "const Semantics = () => <main className=\"fds-token-docs\">\n  <header>\n    <p className=\"fds-token-docs__eyebrow\">Layer 2 · Default FDS theme</p>\n    <h2>Semantic tokens</h2>\n    <p className=\"fds-token-docs__intro\">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from.</p>\n  </header>\n\n  <section aria-label=\"Semantic token reference\">\n    {semanticGroups.map((group) => <TokenGroup group={group} valueHeading=\"Resolves to\" key={`${group.category}-${group.title}`} />)}\n    <p className=\"fds-token-docs__note\">White on primary is 5.13:1; white on active is 9.90:1. Legacy accent remains a non-action role because white on it is 3.54:1.</p>\n  </section>\n</main>;"
+        },
+        {
+          "id": "foundations-tokens--breakpoints",
+          "name": "Breakpoints",
+          "snippet": "const Breakpoints = () => <main className=\"fds-token-docs fds-breakpoint-docs\">\n  <header>\n    <p className=\"fds-token-docs__eyebrow\">Responsive foundation</p>\n    <h2>Breakpoints</h2>\n    <p className=\"fds-token-docs__intro\">FDS starts compact and treats 1024 × 768 as the required desktop baseline. These min-width references coordinate page composition; wider screens add breathing room, not essential functionality.</p>\n  </header>\n\n  <section aria-label=\"Breakpoint reference\">\n    <div className=\"fds-token-docs__table-wrap\">\n      <table>\n        <thead><tr><th scope=\"col\">Breakpoint</th><th scope=\"col\">Starts at</th><th scope=\"col\">Layout intent</th></tr></thead>\n        <tbody>{breakpointGuidance.map(({name, value, pixels, reference, use}) => <tr key={name}>\n          <th className=\"fds-breakpoint-docs__name\" scope=\"row\"><span>{name}</span><code>{reference}</code></th>\n          <td className=\"fds-breakpoint-docs__value\"><code>{value}</code> <span className=\"fds-breakpoint-docs__pixels\">({pixels}px)</span></td>\n          <td>{use}</td>\n        </tr>)}</tbody>\n      </table>\n    </div>\n    <p className=\"fds-token-docs__note\">Use a component or container-specific breakpoint when its own content breaks before or after one of these viewport thresholds.</p>\n  </section>\n\n  <section aria-labelledby=\"container-widths\">\n    <h3 id=\"container-widths\">Width behavior on large screens</h3>\n    <div className=\"fds-token-docs__table-wrap\">\n      <table className=\"fds-breakpoint-docs__containers\">\n        <thead><tr><th scope=\"col\">Content</th><th scope=\"col\">Maximum</th><th scope=\"col\">Behavior</th></tr></thead>\n        <tbody>\n          <tr><th scope=\"row\">Forms<br /><code>--fds-size-container-form</code></th><td><code>48rem</code></td><td>Remain aligned to the page grid; inputs do not stretch across the viewport.</td></tr>\n          <tr><th scope=\"row\">Reading<br /><code>--fds-size-container-reading</code></th><td><code>72ch</code></td><td>Keep paragraphs and guidance at a readable line length.</td></tr>\n          <tr><th scope=\"row\">Standard pages<br /><code>--fds-size-container-page</code></th><td><code>80rem</code></td><td>Keep page regions related while the shell and background continue to fill the viewport.</td></tr>\n          <tr><th scope=\"row\">Data workspaces</th><td>Fluid</td><td>Use available width for tables and operational canvases; constrain their internal columns instead.</td></tr>\n        </tbody>\n      </table>\n    </div>\n  </section>\n\n  <section aria-labelledby=\"breakpoint-usage\">\n    <h3 id=\"breakpoint-usage\">How to apply the scale</h3>\n    <ul className=\"fds-breakpoint-docs__rules\">\n      <li><strong>Build the base layout first.</strong><span>Preserve the task, reading order, and primary action before adding columns.</span></li>\n      <li><strong>Change layout when content needs it.</strong><span>Do not target a device name or add a breakpoint only to match the scale.</span></li>\n      <li><strong>Keep 1024 × 768 complete.</strong><span>Dense freight workflows must remain usable without page-level horizontal scrolling.</span></li>\n      <li><strong>Treat 1280px and above as enhancement.</strong><span>Add context or space; do not hide required controls below it.</span></li>\n    </ul>\n    <pre className=\"fds-breakpoint-docs__code\"><code>{`.page-content {\\n  inline-size: min(100%, var(--fds-size-container-page));\\n  margin-inline: auto;\\n}\\n\\n.form-content {\\n  inline-size: min(100%, var(--fds-size-container-form));\\n}\\n\\n@media (min-width: 64rem) { /* breakpoints.large */\\n  .shipment-workspace { grid-template-columns: 16rem minmax(0, 1fr); }\\n}`}</code></pre>\n  </section>\n</main>;"
+        },
+        {
+          "id": "foundations-tokens--token-names",
+          "name": "Token names",
+          "snippet": "const TokenNames = () => renderTokenNamingGuide();"
         }
       ],
       "docs": {
@@ -38,10 +48,10 @@
         {
           "id": "foundations-icons--current-usage",
           "name": "Current Usage",
-          "snippet": "const CurrentUsage = ({size}) => (\n  <section aria-labelledby=\"fds-icons-heading\" style={{display: 'grid', gap: 'var(--fds-space-5)'}}>\n    <header style={{display: 'grid', gap: 'var(--fds-space-2)'}}>\n      <h2 id=\"fds-icons-heading\" style={{margin: 0}}>Icons</h2>\n      <p style={{margin: 0}}>Names currently used across FDS components and documented examples.</p>\n    </header>\n    <ul style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(10rem, 1fr))', gap: 'var(--fds-space-3)', margin: 0, padding: 0, listStyle: 'none'}}>\n      {iconNames.map((name) => (\n        <li key={name} style={{display: 'flex', alignItems: 'center', gap: 'var(--fds-space-3)', padding: 'var(--fds-space-3)', border: 'var(--fds-border-default) solid var(--fds-color-border-default)', borderRadius: 'var(--fds-radius-control)'}}>\n          <Icon name={name} size={size} />\n          <code>{name}</code>\n        </li>\n      ))}\n    </ul>\n  </section>\n);"
+          "snippet": "const CurrentUsage = ({size}) => <IconsDocumentation size={size} />;"
         }
       ],
-      "import": "import { Icon } from \"sandbox-fds-components\";"
+      "import": "import { Icon, TextInput } from \"sandbox-fds-components\";"
     },
     "components-actions-actiongroup": {
       "id": "components-actions-actiongroup",
@@ -1745,7 +1755,7 @@
             "tsType": {
               "name": "ReactNode"
             },
-            "description": ""
+            "description": "Supporting message content. `description` takes precedence when both are provided."
           },
           "tone": {
             "required": false,
@@ -1771,7 +1781,7 @@
                 }
               ]
             },
-            "description": "",
+            "description": "Sets the status color, icon, and announcement urgency.",
             "defaultValue": {
               "value": "'error'",
               "computed": false
@@ -1782,21 +1792,108 @@
             "tsType": {
               "name": "ReactNode"
             },
-            "description": ""
+            "description": "Optionally summarizes the message."
           },
           "description": {
             "required": false,
             "tsType": {
               "name": "ReactNode"
             },
-            "description": ""
+            "description": "Provides the core contextual guidance."
+          },
+          "list": {
+            "required": false,
+            "tsType": {
+              "name": "Array",
+              "elements": [
+                {
+                  "name": "ReactNode"
+                }
+              ],
+              "raw": "ReactNode[]"
+            },
+            "description": "Structures related details beneath the supporting message."
           },
           "action": {
             "required": false,
             "tsType": {
               "name": "ReactNode"
             },
-            "description": ""
+            "description": "Provides one direct follow-up or recovery action using a non-primary button."
+          },
+          "size": {
+            "required": false,
+            "tsType": {
+              "name": "union",
+              "raw": "'small' | 'medium' | 'large'",
+              "elements": [
+                {
+                  "name": "literal",
+                  "value": "'small'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'medium'"
+                },
+                {
+                  "name": "literal",
+                  "value": "'large'"
+                }
+              ]
+            },
+            "description": "Scales the type, icon, and internal spacing together.",
+            "defaultValue": {
+              "value": "'medium'",
+              "computed": false
+            }
+          },
+          "highEmphasis": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Uses a strong status surface when extra attention or separation is required.",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          },
+          "persistent": {
+            "required": false,
+            "tsType": {
+              "name": "boolean"
+            },
+            "description": "Removes the dismiss action; the implementing workflow must remove the message when resolved.",
+            "defaultValue": {
+              "value": "false",
+              "computed": false
+            }
+          },
+          "dismissIconAriaLabel": {
+            "required": false,
+            "tsType": {
+              "name": "string"
+            },
+            "description": "Labels the dismiss button for assistive technology.",
+            "defaultValue": {
+              "value": "'Dismiss'",
+              "computed": false
+            }
+          },
+          "onDismiss": {
+            "required": false,
+            "tsType": {
+              "name": "signature",
+              "type": "function",
+              "raw": "() => void",
+              "signature": {
+                "arguments": [],
+                "return": {
+                  "name": "void"
+                }
+              }
+            },
+            "description": "Runs after the user dismisses the message."
           }
         }
       },
@@ -1819,7 +1916,7 @@
         {
           "id": "components-feedback-inlinealert--error",
           "name": "Error",
-          "snippet": "const Error = () => <InlineAlert tone=\"error\">Ocean freight must be greater than zero before approval.</InlineAlert>;"
+          "snippet": "const Error = () => <InlineAlert tone=\"error\" persistent>Ocean freight must be greater than zero before approval.</InlineAlert>;"
         },
         {
           "id": "components-feedback-inlinealert--title-and-description",
@@ -1827,14 +1924,39 @@
           "snippet": "const TitleAndDescription = () => <InlineAlert\n    tone=\"warning\"\n    title=\"Approval required\"\n    description=\"An accounting approver must review this invoice before it can be posted.\" />;"
         },
         {
-          "id": "components-feedback-inlinealert--optional-action",
-          "name": "Optional Action",
-          "snippet": "const OptionalAction = () => <InlineAlert\n    tone=\"error\"\n    title=\"Posting blocked\"\n    description=\"Resolve the tax code mismatch to continue.\"\n    action={<Button size=\"small\">Review charge</Button>} />;"
+          "id": "components-feedback-inlinealert--complete-message",
+          "name": "Complete Message",
+          "snippet": "const CompleteMessage = () => <InlineAlert\n    tone=\"success\"\n    title=\"Transaction successful\"\n    description=\"The invoice was approved and its accounting balance was updated.\"\n    list={['Invoice: INV-24018', 'Approved by: Sample Reviewer']}\n    action={<Button size=\"small\" tone=\"tertiary\">View invoice</Button>} />;"
+        },
+        {
+          "id": "components-feedback-inlinealert--high-emphasis",
+          "name": "High Emphasis",
+          "snippet": "const HighEmphasis = () => <InlineAlert\n    tone=\"success\"\n    highEmphasis\n    title=\"Report ready for review\"\n    description=\"Download it from the dashboard or open it directly below.\"\n    action={<Button size=\"small\" tone=\"tertiary\">View report</Button>} />;"
+        },
+        {
+          "id": "components-feedback-inlinealert--sizes",
+          "name": "Sizes",
+          "snippet": "const Sizes = () => <div style={{display: 'grid', gap: 'var(--fds-space-4)'}}>\n  {(['small', 'medium', 'large'] as const).map((size) => <InlineAlert key={size} tone=\"warning\" size={size} title={`${size[0].toUpperCase()}${size.slice(1)}`} persistent>Internal padding, text, and icon size scale together.</InlineAlert>)}\n</div>;"
+        },
+        {
+          "id": "components-feedback-inlinealert--persistent-error",
+          "name": "Persistent Error",
+          "snippet": "const PersistentError = () => <InlineAlert\n    tone=\"error\"\n    persistent\n    title=\"Correct all errors to continue\"\n    list={['Last name is required.', 'The charge currency is formatted incorrectly.', 'The password must contain a number and a special character.']} />;"
+        },
+        {
+          "id": "components-feedback-inlinealert--error-with-action",
+          "name": "Error With Action",
+          "snippet": "const ErrorWithAction = () => <InlineAlert\n    tone=\"error\"\n    persistent\n    description=\"Resolve the tax code mismatch before posting this invoice.\"\n    action={<Button size=\"small\" tone=\"tertiary\">Review charge</Button>} />;"
+        },
+        {
+          "id": "components-feedback-inlinealert--dismissible",
+          "name": "Dismissible",
+          "snippet": "const Dismissible = () => <InlineAlert\n    tone=\"info\"\n    title=\"Software update available\"\n    description=\"The update includes security and workflow improvements.\"\n    dismissIconAriaLabel=\"Dismiss message\" />;"
         },
         {
           "id": "components-feedback-inlinealert--constrained-width",
           "name": "Constrained Width",
-          "snippet": "const ConstrainedWidth = () => <InlineAlert\n    tone=\"warning\"\n    title=\"Reference needs review\"\n    description=\"The supplier reference SUPPLIER-REFERENCE-2026-08-15-000184 cannot be matched.\"\n    action={<Button size=\"small\">Review</Button>} />;"
+          "snippet": "const ConstrainedWidth = () => <InlineAlert\n    tone=\"warning\"\n    title=\"Reference needs review\"\n    description=\"The supplier reference SUPPLIER-REFERENCE-2026-08-15-000184 cannot be matched.\"\n    action={<Button size=\"small\" tone=\"tertiary\">Review</Button>} />;"
         }
       ],
       "import": "import { Button, InlineAlert } from \"sandbox-fds-components\";"
@@ -3477,6 +3599,6 @@
   },
   "meta": {
     "docgen": "react-docgen",
-    "durationMs": 269
+    "durationMs": 553
   }
 }

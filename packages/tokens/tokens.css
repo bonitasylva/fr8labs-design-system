@@ -23,26 +23,31 @@
   --fds-primitive-color-blue-500: #008de4;
   --fds-primitive-color-blue-600: #0067e7;
   --fds-primitive-color-blue-700: #023c9b;
+  --fds-primitive-color-primary-border: rgb(0 34 69 / 16%);
   --fds-primitive-color-neutral-50: #f6f8fb;
   --fds-primitive-color-neutral-100: #eef2f6;
   --fds-primitive-color-neutral-300: #e3eaf1;
   --fds-primitive-color-neutral-400: #c8d2dc;
   --fds-primitive-color-neutral-500: #8496a8;
   --fds-primitive-color-neutral-600: #5e758d;
-  --fds-primitive-color-neutral-700: #525252;
+  --fds-primitive-color-neutral-700: #3f556b;
   --fds-primitive-color-neutral-900: #002245;
   --fds-primitive-color-info-50: #eaf3ff;
+  --fds-primitive-color-info-600: #2f3f4f;
   --fds-primitive-color-info-700: #00458c;
-  --fds-primitive-color-success-100: #c5e5c0;
-  --fds-primitive-color-success-700: #007004;
-  --fds-primitive-color-warning-100: #f8da9d;
-  --fds-primitive-color-warning-800: #745b00;
-  --fds-primitive-color-error-100: #facecb;
-  --fds-primitive-color-error-400: #d13f31;
-  --fds-primitive-color-error-700: #a50c25;
-  --fds-primitive-color-status-success-border: #cfeadf;
-  --fds-primitive-color-status-warning-border: #ebe3cd;
-  --fds-primitive-color-status-danger-border: #f6d9d6;
+  --fds-primitive-color-success-100: #e6f6eb;
+  --fds-primitive-color-success-600: #31433a;
+  --fds-primitive-color-success-700: #193b2d;
+  --fds-primitive-color-warning-100: #fff4d5;
+  --fds-primitive-color-warning-700: #4a4236;
+  --fds-primitive-color-warning-800: #4f3422;
+  --fds-primitive-color-error-100: #ffebec;
+  --fds-primitive-color-error-400: #c8393a;
+  --fds-primitive-color-error-600: #4a3538;
+  --fds-primitive-color-error-700: #641723;
+  --fds-primitive-color-status-success-border: #62a179;
+  --fds-primitive-color-status-warning-border: #a68d5b;
+  --fds-primitive-color-status-danger-border: #d36f69;
   --fds-primitive-color-icon-default: rgb(0 34 69 / 74%);
   --fds-primitive-color-icon-disabled: rgb(0 34 69 / 38%);
   --fds-primitive-color-icon-hover: rgb(0 34 69 / 4%);
@@ -75,6 +80,9 @@
   --fds-primitive-size-48: 48px;
   --fds-primitive-size-520: 520px;
   --fds-primitive-size-540: 540px;
+  --fds-primitive-size-768: 48rem;
+  --fds-primitive-size-1280: 80rem;
+  --fds-primitive-measure-72: 72ch;
   --fds-primitive-focus-width: 3px;
   --fds-primitive-focus-offset: 2px;
   --fds-primitive-font-sans: "IBM Plex Sans Condensed", "Arial Narrow", Arial, sans-serif;
@@ -85,7 +93,8 @@
   --fds-primitive-motion-duration-fast: 150ms;
   --fds-primitive-motion-duration-spinner: 700ms;
   --fds-primitive-motion-easing-standard: ease;
-  --fds-primitive-shadow-control: 0 1px 2px rgb(91 125 160 / 10%);
+  --fds-primitive-shadow-control: 0 1px 1px rgb(91 125 160 / 4%), 0 1px 2px rgb(91 125 160 / 3%);
+  --fds-primitive-shadow-overlay: 0 0 0 1px rgb(0 0 0 / 6%), 0 4px 10px -2px rgb(0 0 0 / 10%), 0 12px 28px -8px rgb(0 0 0 / 14%);
 
   /* Semantics: components consume roles, never primitives directly. */
   --fds-font-family-body: var(--fds-primitive-font-sans);
@@ -140,12 +149,16 @@
   --fds-color-field-border: var(--fds-primitive-color-neutral-600);
   --fds-color-field-border-error: var(--fds-primitive-color-error-700);
   --fds-color-feedback-info-surface: var(--fds-primitive-color-info-50);
+  --fds-color-feedback-info-content-text: var(--fds-primitive-color-info-600);
   --fds-color-feedback-info-text: var(--fds-primitive-color-info-700);
   --fds-color-feedback-success-surface: var(--fds-primitive-color-success-100);
+  --fds-color-feedback-success-content-text: var(--fds-primitive-color-success-600);
   --fds-color-feedback-success-text: var(--fds-primitive-color-success-700);
   --fds-color-feedback-warning-surface: var(--fds-primitive-color-warning-100);
+  --fds-color-feedback-warning-content-text: var(--fds-primitive-color-warning-700);
   --fds-color-feedback-warning-text: var(--fds-primitive-color-warning-800);
   --fds-color-feedback-error-surface: var(--fds-primitive-color-error-100);
+  --fds-color-feedback-error-content-text: var(--fds-primitive-color-error-600);
   --fds-color-feedback-error-text: var(--fds-primitive-color-error-700);
   --fds-color-status-neutral-surface: var(--fds-color-surface-default);
   --fds-color-status-neutral-border: var(--fds-primitive-color-neutral-300);
@@ -174,6 +187,9 @@
   --fds-size-icon-24: var(--fds-primitive-size-24);
   --fds-size-overlay-dialog: var(--fds-primitive-size-520);
   --fds-size-overlay-drawer: var(--fds-primitive-size-540);
+  --fds-size-container-form: var(--fds-primitive-size-768);
+  --fds-size-container-reading: var(--fds-primitive-measure-72);
+  --fds-size-container-page: var(--fds-primitive-size-1280);
   --fds-size-data-header: var(--fds-primitive-size-36);
   --fds-size-data-row: var(--fds-primitive-size-32);
   --fds-size-toggle-track: var(--fds-primitive-size-36);
@@ -186,6 +202,7 @@
   --fds-motion-duration-spinner: var(--fds-primitive-motion-duration-spinner);
   --fds-motion-easing-standard: var(--fds-primitive-motion-easing-standard);
   --fds-shadow-control: var(--fds-primitive-shadow-control);
+  --fds-shadow-overlay: var(--fds-primitive-shadow-overlay);
 
   /* Component tokens: only stable, repeated component decisions. */
   --fds-button-height-small: var(--fds-primitive-size-28);
@@ -194,11 +211,12 @@
   --fds-button-padding-inline-small: var(--fds-space-3);
   --fds-button-padding-inline-medium: var(--fds-space-3);
   --fds-button-padding-inline-large: var(--fds-space-3);
-  --fds-button-gap: var(--fds-space-1);
+  --fds-button-gap: var(--fds-space-2);
   --fds-button-border-width: var(--fds-border-default);
   --fds-button-radius: var(--fds-radius-control);
   --fds-button-shadow: var(--fds-shadow-control);
   --fds-button-primary-background: var(--fds-color-action-primary);
+  --fds-button-primary-border: var(--fds-primitive-color-primary-border);
   --fds-button-primary-background-active: var(--fds-color-action-primary-active);
   --fds-button-primary-foreground: var(--fds-color-text-inverse);
   --fds-button-secondary-background: var(--fds-color-surface-subtle);
@@ -256,12 +274,16 @@
   --fds-status-blocked-background: var(--fds-color-risk-blocked-surface);
   --fds-status-blocked-foreground: var(--fds-color-risk-blocked-text);
   --fds-alert-info-background: var(--fds-color-feedback-info-surface);
+  --fds-alert-info-content: var(--fds-color-feedback-info-content-text);
   --fds-alert-info-foreground: var(--fds-color-feedback-info-text);
   --fds-alert-success-background: var(--fds-color-feedback-success-surface);
+  --fds-alert-success-content: var(--fds-color-feedback-success-content-text);
   --fds-alert-success-foreground: var(--fds-color-feedback-success-text);
   --fds-alert-warning-background: var(--fds-color-feedback-warning-surface);
+  --fds-alert-warning-content: var(--fds-color-feedback-warning-content-text);
   --fds-alert-warning-foreground: var(--fds-color-feedback-warning-text);
   --fds-alert-error-background: var(--fds-color-feedback-error-surface);
+  --fds-alert-error-content: var(--fds-color-feedback-error-content-text);
   --fds-alert-error-foreground: var(--fds-color-feedback-error-text);
   --fds-backdrop: var(--fds-color-overlay-backdrop);
   --fds-ring: var(--fds-color-focus-ring);

@@ -1,0 +1,7 @@
+{
+  "base": {"value": "0rem", "pixels": 0},
+  "small": {"value": "40rem", "pixels": 640},
+  "medium": {"value": "48rem", "pixels": 768},
+  "large": {"value": "64rem", "pixels": 1024},
+  "wide": {"value": "80rem", "pixels": 1280}
+}

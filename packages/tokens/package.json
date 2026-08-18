@@ -1,10 +1,11 @@
 {
   "name": "sandbox-fds-tokens",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Framework-neutral Fr8Labs Design System CSS tokens.",
   "license": "Apache-2.0",
   "files": [
     "tokens.css",
+    "breakpoints.json",
     "README.md"
   ],
   "sideEffects": [
@@ -12,6 +13,7 @@
   ],
   "exports": {
     ".": "./tokens.css",
-    "./tokens.css": "./tokens.css"
+    "./tokens.css": "./tokens.css",
+    "./breakpoints.json": "./breakpoints.json"
   }
 }

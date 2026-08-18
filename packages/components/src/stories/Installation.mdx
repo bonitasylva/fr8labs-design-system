@@ -4,42 +4,94 @@ import './Welcome.css';
 <Meta title="Getting Started/Installation" />
 
 <main className="fds-root fds-welcome fds-installation">
-  <p className="fds-welcome__version">FDS testing packages · components v0.1.2 · icons/tokens v0.1.1</p>
-  <h1>Installation</h1>
-  <p className="fds-welcome__lede">Install the approved FDS release artifact in a supported browser application.</p>
+  <header className="fds-installation__hero">
+    <p className="fds-installation__eyebrow">Getting started · Testing release</p>
+    <h1>Install FDS</h1>
+    <p className="fds-welcome__lede">Add the shared components, icons, and tokens to a React browser application, then verify the setup before you build.</p>
+    <dl className="fds-welcome-home__route fds-welcome-home__route--facts sb-unstyled" aria-label="Current testing release">
+      <div><dt>Release channel</dt><dd><code>testing</code></dd></div>
+      <div><dt>Components and tokens</dt><dd>v0.2.0</dd></div>
+      <div><dt>Icons</dt><dd>v0.1.1</dd></div>
+    </dl>
+  </header>
 
-  <hr className="fds-welcome__rule" />
-
-  <div className="fds-welcome__grid">
-    <section>
-      <h2>Before you install</h2>
-      <ul>
-        <li>Use React and React DOM 19 or newer in a Vite browser application.</li>
-        <li>Use AG Grid Community and AG Grid React 32.3.3.</li>
-        <li>Use the <code>testing</code> npm tag while Engineering validates version 0.1.2.</li>
-      </ul>
+  <div className="fds-installation__steps">
+    <section className="fds-installation__step" aria-labelledby="installation-requirements">
+      <span className="fds-installation__step-number" aria-hidden="true">01</span>
+      <div className="fds-installation__step-content">
+        <p className="fds-installation__step-label">Requirements</p>
+        <h2 id="installation-requirements">Check your application</h2>
+        <p>Use a Vite browser application with the supported runtime and data-grid dependencies.</p>
+        <ul className="fds-installation__checklist">
+          <li>React and React DOM 19 or newer</li>
+          <li>AG Grid Community and AG Grid React 32.3.3</li>
+          <li>Access to the <code>testing</code> npm release channel</li>
+        </ul>
+      </div>
     </section>
 
-    <section>
-      <h2>Install the testing release</h2>
-      <Source language="sh" code="npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing" />
-      <p>Install all three public packages for the complete component, icon, and token testing surface. The <code>testing</code> tag is for Engineering validation.</p>
+    <section className="fds-installation__step" aria-labelledby="installation-packages">
+      <span className="fds-installation__step-number" aria-hidden="true">02</span>
+      <div className="fds-installation__step-content">
+        <p className="fds-installation__step-label">Packages</p>
+        <h2 id="installation-packages">Install the complete testing surface</h2>
+        <p>Install all three packages together so components resolve their shared icon and token dependencies.</p>
+        <div className="fds-installation__code">
+          <Source language="sh" code="npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing" />
+        </div>
+      </div>
     </section>
-  </div>
 
-  <hr className="fds-welcome__rule" />
-
-  <section>
-    <h2>Set up the application</h2>
-    <Source
-      language="tsx"
-      code={`import {Button, FdsProvider} from 'sandbox-fds-components';
+    <section className="fds-installation__step" aria-labelledby="installation-setup">
+      <span className="fds-installation__step-number" aria-hidden="true">03</span>
+      <div className="fds-installation__step-content">
+        <p className="fds-installation__step-label">Application setup</p>
+        <h2 id="installation-setup">Load FDS once at the application root</h2>
+        <p>Import the component stylesheet, then wrap the application with <code>FdsProvider</code>. The component stylesheet already includes the icon and token styles.</p>
+        <div className="fds-installation__code">
+          <Source
+            language="tsx"
+            code={`import {Button, FdsProvider} from 'sandbox-fds-components';
+import {Icon} from 'sandbox-fds-icons';
 import 'sandbox-fds-components/styles.css';
 
 <FdsProvider>
-  <Button>Save shipment</Button>
+  <Button startIcon={<Icon name="download" />}>Export shipment</Button>
 </FdsProvider>`}
-    />
-    <p>Verify that the application compiles, the FDS typeface and button styles load, and the button has a visible keyboard focus state.</p>
-  </section>
+          />
+        </div>
+      </div>
+    </section>
+
+    <section className="fds-installation__step" aria-labelledby="installation-verify">
+      <span className="fds-installation__step-number" aria-hidden="true">04</span>
+      <div className="fds-installation__step-content">
+        <p className="fds-installation__step-label">Verification</p>
+        <h2 id="installation-verify">Confirm the setup</h2>
+        <p>Run the application and check the rendered example before adopting more components.</p>
+        <ul className="fds-installation__checklist">
+          <li>The application compiles without package or stylesheet errors</li>
+          <li>The FDS typeface and button styles load</li>
+          <li>The icon renders and the button shows a visible keyboard focus state</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <aside className="fds-installation__optional" aria-labelledby="installation-token-only">
+    <p className="fds-installation__step-label">Optional setup</p>
+    <h2 id="installation-token-only">Using tokens without React components</h2>
+    <p>Import the token stylesheet directly only when the application does not load <code>sandbox-fds-components/styles.css</code>.</p>
+    <div className="fds-installation__code">
+      <Source language="css" code="@import 'sandbox-fds-tokens/tokens.css';" />
+    </div>
+  </aside>
+
+  <footer className="fds-installation__footer">
+    <p>Setup complete? Continue with the catalog or review the token foundation.</p>
+    <div>
+      <a href="?path=/docs/getting-started-component-overview--docs">Browse components</a>
+      <a href="?path=/docs/foundations-tokens--docs">Review tokens</a>
+    </div>
+  </footer>
 </main>

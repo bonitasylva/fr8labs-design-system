@@ -1,5 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {Icon} from 'sandbox-fds-icons';
+import {expect, within} from 'storybook/test';
 import {Button} from '../components/Button';
 
 const meta = {
@@ -45,6 +46,15 @@ export const Variants: Story = {
     <Button tone="tertiary">Tertiary button</Button>
     <Button tone="danger">Danger button</Button>
   </div>,
+  play: async ({canvasElement}) => {
+    const primary = within(canvasElement).getByRole('button', {name: 'Primary button'});
+    const style = getComputedStyle(primary);
+    await expect(style.fontWeight).toBe('600');
+    await expect(style.gap).toBe('8px');
+    await expect(style.paddingBlockStart).toBe('0px');
+    await expect(style.borderColor).not.toBe(style.backgroundColor);
+    await expect(style.transitionProperty).toBe('color, background-color, border-color, box-shadow');
+  },
 };
 
 export const Sizes: Story = {

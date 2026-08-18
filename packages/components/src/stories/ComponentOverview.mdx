@@ -1,4 +1,33 @@
 import {Meta} from '@storybook/addon-docs/blocks';
+import {Icon} from 'sandbox-fds-icons';
+import {
+  ActionGroup,
+  Avatar,
+  Button,
+  Checkbox,
+  CheckboxGroup,
+  DateTimePicker,
+  EmptyState,
+  FDSDataGrid,
+  FilterBar,
+  IconButton,
+  InlineAlert,
+  InlineInput,
+  Metric,
+  Notification,
+  PageHeader,
+  Pagination,
+  Panel,
+  Radio,
+  RadioGroup,
+  Select,
+  StatusBadge,
+  Switch,
+  Tabs,
+  Textarea,
+  TextInput,
+  DataTable,
+} from '../index';
 import './Welcome.css';
 
 <Meta title="Getting Started/Component Overview" />
@@ -6,19 +35,73 @@ import './Welcome.css';
 export const componentGroups = [
   {name: 'Actions', description: 'Controls that initiate or arrange user actions.', components: ['Button', 'IconButton', 'ActionGroup']},
   {name: 'Inputs', description: 'Controls for entering and selecting workflow data.', components: ['TextInput', 'Textarea', 'DateTimePicker', 'Select', 'Checkbox', 'CheckboxGroup', 'Radio', 'RadioGroup', 'Switch']},
-  {name: 'Feedback', description: 'Status and guidance that explain the current workflow state.', components: ['StatusBadge', 'InlineAlert', 'EmptyState']},
+  {name: 'Feedback', description: 'Status and guidance that explain the current workflow state.', components: ['StatusBadge', 'InlineAlert', 'Notification', 'EmptyState']},
   {name: 'Data display', description: 'Read-only values, summaries, and operational datasets.', components: ['Metric', 'Avatar', 'DataTable', 'FDSDataGrid', 'InlineInput']},
   {name: 'Navigation', description: 'Controls for moving within related content or result sets.', components: ['Pagination', 'Tabs']},
   {name: 'Layout', description: 'Structures for grouping page content and workflow controls.', components: ['PageHeader', 'FilterBar', 'Panel']},
   {name: 'Overlays', description: 'Temporary surfaces for focused details and actions.', components: ['Dialog', 'Drawer', 'Tooltip', 'Popover']},
 ];
 
+export const noop = () => {};
+export const choiceOptions = [{label: 'Ocean', value: 'ocean'}, {label: 'Air', value: 'air'}];
+export const previewRows = [{id: 'INV-24018', status: 'Approved'}];
+export const previewColumns = [
+  {id: 'id', header: 'Reference', cell: (row) => row.id},
+  {id: 'status', header: 'Status', cell: (row) => row.status},
+];
+export const previewGridColumns = [
+  {field: 'id', header: 'Reference', flex: 1},
+  {field: 'status', header: 'Status', flex: 1},
+];
+
+export function OverlayPreview({kind}) {
+  return <div className={`fds-component-overview__overlay-preview fds-component-overview__overlay-preview--${kind.toLowerCase()}`}>
+    <span>{kind}</span>
+    <strong>{kind === 'Tooltip' ? 'Helpful context' : kind === 'Popover' ? 'Shipment details' : 'Review shipment'}</strong>
+    {kind === 'Dialog' || kind === 'Drawer' ? <small>Cancel&nbsp;&nbsp; Confirm</small> : null}
+  </div>;
+}
+
+export function ComponentPreview({name}) {
+  switch (name) {
+    case 'Button': return <Button size="small">Create shipment</Button>;
+    case 'IconButton': return <IconButton aria-label="Refresh shipment" size="small" tone="secondary"><Icon name="refresh" /></IconButton>;
+    case 'ActionGroup': return <ActionGroup><Button size="small" tone="secondary">Cancel</Button><Button size="small">Save</Button></ActionGroup>;
+    case 'TextInput': return <TextInput label="Reference" value="INV-24018" onChange={noop} density="compact" />;
+    case 'Textarea': return <Textarea label="Notes" value="Handle with care" onChange={noop} rows={2} />;
+    case 'DateTimePicker': return <DateTimePicker label="Departure" value="2026-08-18" onChange={noop} showTime={false} />;
+    case 'Select': return <Select label="Mode" value="ocean" onChange={noop} options={choiceOptions} />;
+    case 'Checkbox': return <Checkbox label="Include insurance" checked onChange={noop} />;
+    case 'CheckboxGroup': return <CheckboxGroup label="Services" values={['ocean']} onChange={noop} options={choiceOptions} />;
+    case 'Radio': return <Radio label="Ocean" value="ocean" checked onChange={noop} name="overview-mode" />;
+    case 'RadioGroup': return <RadioGroup label="Mode" value="ocean" onChange={noop} options={choiceOptions} />;
+    case 'Switch': return <Switch label="Exception alerts" checked onChange={noop} />;
+    case 'StatusBadge': return <StatusBadge status="approved" />;
+    case 'InlineAlert': return <InlineAlert tone="success" size="small" persistent>Shipment saved.</InlineAlert>;
+    case 'Notification': return <Notification tone="success" title="Created" description="Shipment invoice ready." />;
+    case 'EmptyState': return <EmptyState title="No shipments" description="Create the first record." headingLevel={3} />;
+    case 'Metric': return <Metric label="Total charges" value="USD 12,480" density="compact" />;
+    case 'Avatar': return <Avatar name="Sample Operator" />;
+    case 'DataTable': return <DataTable ariaLabel="Invoice preview" columns={previewColumns} rows={previewRows} getRowKey={(row) => row.id} />;
+    case 'FDSDataGrid': return <FDSDataGrid ariaLabel="Shipment preview" columns={previewGridColumns} rows={previewRows} getRowId={(row) => row.id} height={100} />;
+    case 'InlineInput': return <InlineInput label="Charge amount" value="1,250.00" onChange={noop} density="compact" />;
+    case 'Pagination': return <Pagination page={2} pageCount={5} onPageChange={noop} label="Preview pages" />;
+    case 'Tabs': return <Tabs ariaLabel="Shipment sections" items={[{value: 'summary', label: 'Summary', content: 'Shipment summary'}, {value: 'charges', label: 'Charges', content: 'Charge lines'}]} value="summary" onChange={noop} />;
+    case 'PageHeader': return <PageHeader eyebrow="Operations" title="Shipment review" description="Resolve exceptions." />;
+    case 'FilterBar': return <FilterBar actions={<Button size="small">Apply</Button>}><TextInput label="Reference" value="INV-24018" onChange={noop} density="compact" /></FilterBar>;
+    case 'Panel': return <Panel eyebrow="Shipment" title="Invoice review"><span>Ready for approval.</span></Panel>;
+    case 'Dialog':
+    case 'Drawer':
+    case 'Tooltip':
+    case 'Popover': return <OverlayPreview kind={name} />;
+    default: return null;
+  }
+}
+
 <main className="fds-root fds-welcome fds-component-overview">
-  <p className="fds-welcome__version">sandbox-fds-components · v0.1.2</p>
+  <p className="fds-welcome__version">sandbox-fds-components · v0.2.0</p>
   <h1>Component overview</h1>
   <p className="fds-welcome__lede">Browse the current public FDS component surface by its approved category.</p>
-
-  <hr className="fds-welcome__rule" />
 
   {componentGroups.map((group) => {
     const groupSlug = group.name.toLowerCase().replaceAll(' ', '-');
@@ -28,9 +111,13 @@ export const componentGroups = [
         <p>{group.description}</p>
         <ul className="fds-component-overview__list sb-unstyled">
           {group.components.map((component) => (
-            <li key={component}>
+            <li key={component} className="fds-component-overview__card">
+              <div className="fds-component-overview__preview" aria-hidden="true" inert>
+                <div className="fds-component-overview__preview-content"><ComponentPreview name={component} /></div>
+              </div>
               <a href={`/?path=/docs/components-${groupSlug}-${component.toLowerCase()}--docs`} target="_top">
                 <strong>{component}</strong>
+                <span aria-hidden="true">→</span>
               </a>
             </li>
           ))}

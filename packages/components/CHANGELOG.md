@@ -6,8 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-08-18
+
+### Breaking Changes
+
+- **InlineAlert:** Alerts are dismissible by default. Set `persistent` when a message must remain until its workflow state is resolved. [migration: add `persistent` to existing alerts that must not be dismissed]
+- **Tokens:** Existing neutral, feedback, shadow, and Button token values changed. [migration: reference published semantic or component tokens instead of copied raw values]
+
+### Added
+
+- **Notification:** Added a floating notification component with optional title, lists, embedded links, one action, and dismissal.
+- **InlineAlert:** Added `size`, `highEmphasis`, `list`, `persistent`, `dismissIconAriaLabel`, and `onDismiss` APIs.
+- **Tokens:** Added exported breakpoint data and semantic form, reading, and page-width tokens.
+
 ### Changed
 
+- Refined Button structure, status colors, alert contrast, overlay shadows, and compact responsive behavior.
+- Expanded the icon catalog and refreshed Getting Started, component, icon, and token documentation.
 - Licensed the package under Apache-2.0.
 - Documented the complete three-package Engineering install and surfaced the MCP setup guide.
 

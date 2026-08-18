@@ -4,50 +4,71 @@ import './Welcome.css';
 <Meta title="Getting Started/MCP pilot" />
 
 <main className="fds-root fds-welcome fds-mcp-pilot">
-  <p className="fds-welcome__version">Fr8Labs Design System</p>
-  <h1>MCP pilot</h1>
-  <p className="fds-welcome__lede">Test whether an AI assistant can find and apply approved FDS guidance. MCP provides read-only catalog access; it does not install the package or modify product code.</p>
+  <header className="fds-mcp-pilot__hero">
+    <p className="fds-mcp-pilot__label">Getting started · Read-only public pilot</p>
+    <h1>MCP pilot</h1>
+    <p className="fds-welcome__lede">Test whether an AI assistant can find and apply approved FDS guidance through read-only catalog access.</p>
 
-  <hr className="fds-welcome__rule" />
+    <dl className="fds-welcome-home__route fds-welcome-home__route--facts sb-unstyled" aria-label="Pilot scope">
+      <div><dt>Access</dt><dd>Published FDS catalog and Storybook documentation</dd></div>
+      <div><dt>Permissions</dt><dd>Read-only</dd></div>
+      <div><dt>Data</dt><dd>Synthetic data only</dd></div>
+    </dl>
+  </header>
 
-  <div className="fds-welcome__grid">
-    <section>
-      <h2>Use the shared pilot</h2>
-      <Source language="text" code={`https://fr8labs-fds-mcp.vercel.app/api/mcp`} />
-      <p>Use the hosted endpoint to test the published FDS catalog and Storybook documentation. No repository clone or local server is required.</p>
-    </section>
+  <section className="fds-mcp-pilot__section" aria-labelledby="mcp-connect">
+    <header className="fds-mcp-pilot__section-heading">
+      <p className="fds-mcp-pilot__label">Connect</p>
+      <h2 id="mcp-connect">Use the shared pilot</h2>
+      <p>Connect to the hosted endpoint to test the published FDS catalog and Storybook documentation. No repository clone or local server is required. The endpoint exposes guidance only; it does not install FDS or edit the application.</p>
+    </header>
+    <div className="fds-mcp-pilot__code">
+      <Source language="text" code="https://fr8labs-fds-mcp.vercel.app/api/mcp" />
+    </div>
 
-    <section>
-      <h2>Run current source locally</h2>
-      <Source
-        language="sh"
-        code={`cd packages/components
+    <aside className="fds-mcp-pilot__local" aria-labelledby="mcp-local">
+      <div>
+        <p className="fds-mcp-pilot__label">Local validation</p>
+        <h3 id="mcp-local">Run current source before deployment</h3>
+        <p>Start the local server when validating source changes, then connect the client to <code>http://127.0.0.1:8787/mcp</code>.</p>
+      </div>
+      <div className="fds-mcp-pilot__code">
+        <Source
+          language="sh"
+          code={`cd packages/components
 npm install
 npm run mcp`}
-      />
-      <p>Use <code>http://127.0.0.1:8787/mcp</code> when validating source changes before deployment.</p>
-    </section>
-  </div>
+        />
+      </div>
+    </aside>
+  </section>
 
-  <section>
-    <h2>Configure the MCP client</h2>
-    <Source
-      language="json"
-      code={`{
+  <section className="fds-mcp-pilot__section" aria-labelledby="mcp-configure">
+    <header className="fds-mcp-pilot__section-heading">
+      <p className="fds-mcp-pilot__label">Configure</p>
+      <h2 id="mcp-configure">Add FDS to the MCP client</h2>
+      <p>Add the server, then restart the client. Use the local URL instead when testing source changes; both endpoints expose the same nine read-only tools.</p>
+    </header>
+    <div className="fds-mcp-pilot__code">
+      <Source
+        language="json"
+        code={`{
   "mcpServers": {
     "fr8labs-fds": {
       "url": "https://fr8labs-fds-mcp.vercel.app/api/mcp"
     }
   }
 }`}
-    />
-    <p>Restart the client after adding the server. Use the local URL instead when testing source changes; both endpoints expose the same nine read-only tools.</p>
+      />
+    </div>
   </section>
 
-  <hr className="fds-welcome__rule" />
-
-  <section>
-    <h2>Available tools</h2>
+  <section className="fds-mcp-pilot__section" aria-labelledby="mcp-tools">
+    <header className="fds-mcp-pilot__section-heading">
+      <p className="fds-mcp-pilot__label">Reference</p>
+      <h2 id="mcp-tools">Available tools</h2>
+      <p>Use catalog tools to find approved FDS records and documentation tools to retrieve published guidance and examples.</p>
+    </header>
     <dl className="fds-mcp-pilot__tools">
       <div>
         <dt><code>search_catalog</code></dt>
@@ -88,24 +109,37 @@ npm run mcp`}
     </dl>
   </section>
 
-  <hr className="fds-welcome__rule" />
-
-  <section>
-    <h2>Run the pilot</h2>
-    <ol>
-      <li>Ask: “List all FDS Storybook documentation and include story IDs.”</li>
-      <li>Ask: “Get the documentation for <code>components-actions-button</code> and use its real props and examples.”</li>
-      <li>Ask: “Get the approved Button catalog record and package adoption recipe.”</li>
-      <li>Confirm the recipe matches the <a href="/?path=/docs/getting-started-installation--docs" target="_top">FDS installation guide</a>.</li>
-      <li>Use the returned guidance in a disposable Vite application and verify that the sample compiles and renders.</li>
+  <section className="fds-mcp-pilot__section" aria-labelledby="mcp-run">
+    <header className="fds-mcp-pilot__section-heading">
+      <p className="fds-mcp-pilot__label">Validate</p>
+      <h2 id="mcp-run">Run the pilot</h2>
+      <p>Follow the prompts in order so the assistant discovers the documentation before it applies component guidance.</p>
+    </header>
+    <ol className="fds-mcp-pilot__steps">
+      <li><p>Ask: “List all FDS Storybook documentation and include story IDs.”</p></li>
+      <li><p>Ask: “Get the documentation for <code>components-actions-button</code> and use its real props and examples.”</p></li>
+      <li><p>Ask: “Get the approved Button catalog record and package adoption recipe.”</p></li>
+      <li><p>Confirm the recipe matches the <a href="/?path=/docs/getting-started-installation--docs" target="_top">FDS installation guide</a>.</p></li>
+      <li><p>Use the returned guidance in a disposable Vite application and verify that the sample compiles and renders.</p></li>
     </ol>
-    <p>Use synthetic data only. Do not send customer, shipment, invoice, credential, or production data through the pilot.</p>
+
+    <aside className="fds-mcp-pilot__guardrail" aria-labelledby="mcp-data-boundary">
+      <h3 id="mcp-data-boundary">Keep pilot data synthetic</h3>
+      <p>Do not send customer, shipment, invoice, credential, or production data through the pilot.</p>
+    </aside>
   </section>
 
-  <hr className="fds-welcome__rule" />
-
-  <section>
-    <h2>Report the result</h2>
-    <p>Record the MCP client, prompts, returned FDS version and item IDs, and final outcome. Include any guidance that was missing, confusing, or incorrect.</p>
+  <section className="fds-mcp-pilot__report" aria-labelledby="mcp-report">
+    <div>
+      <p className="fds-mcp-pilot__label">Finish</p>
+      <h2 id="mcp-report">Report the result</h2>
+      <p>Record anything that was missing, confusing, or incorrect so the catalog and documentation can be improved.</p>
+    </div>
+    <ul>
+      <li>MCP client</li>
+      <li>Prompts used</li>
+      <li>Returned FDS version and item IDs</li>
+      <li>Final outcome</li>
+    </ul>
   </section>
 </main>

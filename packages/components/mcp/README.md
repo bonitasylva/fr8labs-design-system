@@ -82,7 +82,7 @@ Get the List and review template and its fake-data schema.
 
 ## Pilot status
 
-- Current catalog version: `0.1.2`
+- Current catalog version: `0.2.0`
 - Shared Engineering pilot snapshot hosted on Vercel
 - Local source builds current Storybook manifests; the hosted endpoint remains the published snapshot until deployment
 - Approved catalog results only

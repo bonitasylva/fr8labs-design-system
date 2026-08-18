@@ -1,0 +1,11 @@
+.fds-notification-preview {
+  display: grid;
+  min-height: 160px;
+  padding: var(--fds-space-4);
+  place-items: center;
+  background: var(--fds-color-surface-subtle);
+}
+
+.fds-notification-preview .fds-notification {
+  position: static;
+}

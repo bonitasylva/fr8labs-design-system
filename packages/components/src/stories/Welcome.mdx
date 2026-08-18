@@ -1,35 +1,75 @@
-import {Meta} from '@storybook/addon-docs/blocks';
+import {Meta, Source} from '@storybook/addon-docs/blocks';
 import './Welcome.css';
 
 <Meta title="Getting Started/Welcome" />
 
+{/*
+THESIS: The Welcome page is an ordered route into FDS, not a generic design-system overview.
+OWN-WORLD: FDS navy ink, operational blue, white space, precise rules, square controls, and IBM Plex Sans Condensed.
+STORY: Designers and engineers install the packages, browse approved parts, then understand how FDS decisions become freight workflows.
+FIRST VIEWPORT: A direct product statement, two ordered actions, and a three-stop route make the next step unmistakable; installation follows immediately.
+FORM: Route manifest, grounded structure 3, surface seed 0b6a301c.
+*/}
+
 <main className="fds-root fds-welcome fds-welcome-home sb-unstyled">
   <header className="fds-welcome-home__hero">
-    <p className="fds-welcome__version">sandbox-fds-components · v0.1.2</p>
-    <h1>Fr8Labs Design System</h1>
-    <p className="fds-welcome__lede">The shared UI foundation for consistent, accessible, and audit-friendly freight workflows.</p>
+    <p className="fds-welcome-home__identity">Fr8Labs Design System</p>
+    <h1>Build freight workflows from shared decisions.</h1>
+    <p className="fds-welcome__lede">FDS gives designers and engineers one documented foundation for accessible controls, consistent interaction rules, and reusable freight-workflow patterns.</p>
+    <div className="fds-welcome-home__actions">
+      <a className="fds-welcome-home__action fds-button fds-button--primary fds-button--medium" href="/?path=/docs/getting-started-installation--docs" target="_top">Install FDS</a>
+      <a className="fds-welcome-home__action fds-button fds-button--secondary fds-button--medium" href="/?path=/docs/getting-started-component-overview--docs" target="_top">Browse components</a>
+    </div>
   </header>
 
-  <section className="fds-welcome-home__overview" aria-labelledby="welcome-overview-title">
-    <div>
-      <p className="fds-welcome-home__kicker">What FDS provides</p>
-      <h2 id="welcome-overview-title">Reusable decisions for freight products</h2>
-      <p>FDS packages repeated interface decisions so product teams can assemble workflows without rebuilding controls, states, or interaction rules.</p>
+  <nav className="fds-welcome-home__route" aria-label="Get started with FDS">
+    <ol className="sb-unstyled">
+      <li><a href="#install-fds"><span>01</span><strong>Install</strong><small>Add the public packages</small></a></li>
+      <li><a href="#browse-fds"><span>02</span><strong>Browse</strong><small>Choose approved parts</small></a></li>
+      <li><a href="#understand-fds"><span>03</span><strong>Understand</strong><small>Apply the system method</small></a></li>
+    </ol>
+  </nav>
+
+  <section id="install-fds" className="fds-welcome-home__stage fds-welcome-home__install" aria-labelledby="welcome-install-title">
+    <p className="fds-welcome-home__step">01 · Install</p>
+    <h2 id="welcome-install-title">Start with the complete testing surface</h2>
+    <p>Install components, icons, and tokens together in a supported React 19 and Vite browser application.</p>
+    <div className="fds-welcome-home__command">
+      <Source language="sh" code="npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing" />
     </div>
-    <dl className="fds-welcome-home__facts">
-      <div><dt>Foundations</dt><dd>Shared tokens and visual rules</dd></div>
-      <div><dt>Components</dt><dd>Reusable interface controls</dd></div>
-      <div><dt>Patterns</dt><dd>Approved workflow compositions</dd></div>
-    </dl>
+    <div className="fds-welcome-home__stage-footer">
+      <a href="/?path=/docs/getting-started-installation--docs" target="_top">Open the installation guide <span aria-hidden="true">→</span></a>
+      <p>Current testing release: components and tokens v0.2.0 · icons v0.1.1</p>
+    </div>
   </section>
 
-  <section className="fds-welcome-home__adoption" aria-labelledby="welcome-adoption-title">
-    <p className="fds-welcome-home__kicker">Working method</p>
-    <h2 id="welcome-adoption-title">Adopt from the workflow outward</h2>
-    <ol className="fds-welcome-home__steps sb-unstyled">
-      <li><span aria-hidden="true">01</span><strong>Start with the workflow</strong><p>Define the task, user role, real freight content, and required states.</p></li>
-      <li><span aria-hidden="true">02</span><strong>Assemble approved parts</strong><p>Combine the documented parts that support the task.</p></li>
-      <li><span aria-hidden="true">03</span><strong>Validate in product</strong><p>Test responsive layout, keyboard paths, accessible names, and workflow meaning before release.</p></li>
+  <section id="browse-fds" className="fds-welcome-home__stage" aria-labelledby="welcome-browse-title">
+    <p className="fds-welcome-home__step">02 · Browse</p>
+    <h2 id="welcome-browse-title">Move from foundations to finished workflows</h2>
+    <p>Use the catalog to find the smallest established decision. Start with components, then use foundations or approved patterns when needed.</p>
+    <div className="fds-welcome-home__directory">
+      <a href="/?path=/docs/getting-started-component-overview--docs" target="_top"><strong>Component library</strong><span aria-hidden="true">→</span><p>Actions, inputs, feedback, data display, navigation, layout, and overlays</p></a>
+      <a href="/?path=/docs/foundations-tokens--docs" target="_top"><strong>Foundations</strong><span aria-hidden="true">→</span><p>Tokens, icon names, visual roles, and implementation vocabulary</p></a>
+      <a href="/?path=/docs/patterns-operations-list-and-review--docs" target="_top"><strong>Workflow patterns</strong><span aria-hidden="true">→</span><p>Approved compositions using synthetic freight data</p></a>
+    </div>
+  </section>
+
+  <section id="understand-fds" className="fds-welcome-home__stage" aria-labelledby="welcome-understand-title">
+    <p className="fds-welcome-home__step">03 · Understand</p>
+    <h2 id="welcome-understand-title">Adopt from the workflow outward</h2>
+    <p>FDS is a working method as much as a component library. Begin with the freight task and finish by validating the assembled workflow in product.</p>
+    <ol className="fds-welcome-home__method sb-unstyled">
+      <li><span aria-hidden="true">01</span><strong>Define the workflow</strong><p>Name the task, user role, real content, and required states.</p></li>
+      <li><span aria-hidden="true">02</span><strong>Assemble approved parts</strong><p>Reuse documented tokens, components, and patterns before adding a new decision.</p></li>
+      <li><span aria-hidden="true">03</span><strong>Validate in product</strong><p>Test responsive layout, keyboard paths, accessible names, and workflow meaning.</p></li>
     </ol>
   </section>
+
+  <footer className="fds-welcome-home__footer">
+    <p>Need release details or contribution rules?</p>
+    <div>
+      <a href="/?path=/docs/getting-started-changelog--docs" target="_top">Read the changelog</a>
+      <a href="/?path=/docs/getting-started-contributing--docs" target="_top">Contribute to FDS</a>
+    </div>
+  </footer>
 </main>

@@ -67,15 +67,24 @@
   justify-content: center;
   gap: var(--fds-button-gap);
   box-sizing: border-box;
+  padding-block: 0;
   border: var(--fds-button-border-width) solid transparent;
   border-radius: var(--fds-button-radius);
+  appearance: none;
   font-family: var(--fds-font-family-body);
   font-size: var(--fds-font-size-body);
-  font-weight: var(--fds-font-weight-strong);
+  font-weight: var(--fds-font-weight-heading);
   line-height: var(--fds-line-height-body);
+  text-align: center;
+  text-decoration: none;
   white-space: nowrap;
   box-shadow: var(--fds-button-shadow);
   cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: var(--fds-motion-duration-fast);
+  transition-timing-function: var(--fds-motion-easing-standard);
 }
 
 .fds-root .fds-button--small {
@@ -96,7 +105,7 @@
 .fds-root .fds-button--full-width { width: 100%; }
 
 .fds-root .fds-button--primary {
-  border-color: var(--fds-button-primary-background);
+  border-color: var(--fds-button-primary-border);
   background-color: var(--fds-button-primary-background);
   color: var(--fds-button-primary-foreground);
 }
@@ -125,6 +134,10 @@
 .fds-root .fds-button--primary:active:not(:disabled, [aria-disabled='true']) {
   border-color: var(--fds-button-primary-background-active);
   background-color: var(--fds-button-primary-background-active);
+}
+
+.fds-root .fds-button--primary:active:not(:disabled, [aria-disabled='true']) {
+  box-shadow: none;
 }
 
 .fds-root .fds-button--secondary:hover:not(:disabled, [aria-disabled='true']),
@@ -366,11 +379,11 @@
 .fds-root .fds-popover__content { padding: var(--fds-space-3); }
 .fds-root .fds-popover:focus-visible { outline: var(--fds-focus-ring-width) solid var(--fds-color-focus-ring); outline-offset: var(--fds-focus-ring-offset); }
 
-@media (max-width: 768px) {
+@media (max-width: 48rem) {
   .fds-root .fds-drawer { width: 100vw; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 40rem) {
   .fds-root .fds-page-header__actions,
   .fds-root .fds-filter-bar__actions { width: 100%; }
   .fds-root .fds-date-time-range-picker__times { grid-template-columns: 1fr; }
@@ -496,35 +509,120 @@
 }
 
 .fds-inline-alert {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
-  padding: var(--spacing-1) var(--spacing-2);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  border: var(--fds-border-default) solid;
   border-radius: var(--radius-container);
-  font-size: var(--text-supporting-size);
-  line-height: var(--text-supporting-leading);
+}
+
+.fds-inline-alert--structured {
+  align-items: flex-start;
 }
 
 .fds-inline-alert--info {
+  border-color: var(--fds-color-border-interactive);
   background: var(--fds-alert-info-background);
-  color: var(--fds-alert-info-foreground);
+  color: var(--fds-alert-info-content);
 }
 
 .fds-inline-alert--success {
+  border-color: var(--fds-status-success-border);
   background: var(--fds-alert-success-background);
-  color: var(--fds-alert-success-foreground);
+  color: var(--fds-alert-success-content);
 }
 
 .fds-inline-alert--warning {
+  border-color: var(--fds-status-warning-border);
   background: var(--fds-alert-warning-background);
-  color: var(--fds-alert-warning-foreground);
+  color: var(--fds-alert-warning-content);
 }
 
 .fds-inline-alert--error {
+  border-color: var(--fds-status-danger-border);
   background: var(--fds-alert-error-background);
+  color: var(--fds-alert-error-content);
+}
+
+.fds-inline-alert--info .fds-inline-alert__status-icon,
+.fds-inline-alert--info .fds-inline-alert__action {
+  color: var(--fds-alert-info-foreground);
+}
+
+.fds-inline-alert--success .fds-inline-alert__status-icon,
+.fds-inline-alert--success .fds-inline-alert__action {
+  color: var(--fds-alert-success-foreground);
+}
+
+.fds-inline-alert--warning .fds-inline-alert__status-icon,
+.fds-inline-alert--warning .fds-inline-alert__action {
+  color: var(--fds-alert-warning-foreground);
+}
+
+.fds-inline-alert--error .fds-inline-alert__status-icon,
+.fds-inline-alert--error .fds-inline-alert__action {
   color: var(--fds-alert-error-foreground);
+}
+
+.fds-inline-alert--info.fds-inline-alert--high-emphasis {
+  border-color: var(--fds-alert-info-foreground);
+  background: var(--fds-alert-info-foreground);
+}
+
+.fds-inline-alert--success.fds-inline-alert--high-emphasis {
+  border-color: var(--fds-alert-success-foreground);
+  background: var(--fds-alert-success-foreground);
+}
+
+.fds-inline-alert--warning.fds-inline-alert--high-emphasis {
+  border-color: var(--fds-alert-warning-foreground);
+  background: var(--fds-alert-warning-foreground);
+}
+
+.fds-inline-alert--error.fds-inline-alert--high-emphasis {
+  border-color: var(--fds-alert-error-foreground);
+  background: var(--fds-alert-error-foreground);
+}
+
+.fds-inline-alert--high-emphasis {
+  color: var(--fds-color-text-inverse);
+}
+
+.fds-inline-alert--high-emphasis .fds-inline-alert__status-icon,
+.fds-inline-alert--high-emphasis .fds-inline-alert__action {
+  color: inherit;
+}
+
+.fds-inline-alert--small {
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  font-size: var(--fds-font-size-caption);
+  line-height: var(--fds-line-height-caption);
+}
+
+.fds-inline-alert--medium {
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  font-size: var(--fds-font-size-data);
+  line-height: var(--fds-line-height-data);
+}
+
+.fds-inline-alert--large {
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  font-size: var(--fds-font-size-body);
+  line-height: var(--fds-line-height-body);
+}
+
+.fds-inline-alert__status-icon,
+.fds-inline-alert__status-icon > .fds-icon {
+  display: block;
+  flex: none;
+}
+
+.fds-inline-alert--large .fds-inline-alert__status-icon > .fds-icon {
+  font-size: var(--fds-size-icon-24);
 }
 
 .fds-inline-alert__content {
@@ -541,8 +639,90 @@
   margin-top: var(--spacing-1);
 }
 
+.fds-inline-alert__list {
+  margin: var(--spacing-2) 0 0;
+  padding-inline-start: var(--spacing-4);
+}
+
 .fds-inline-alert__action {
-  flex: 0 0 auto;
+  margin-top: var(--spacing-3);
+}
+
+.fds-inline-alert__action .fds-button--tertiary {
+  border-color: currentColor;
+  background: transparent;
+  color: inherit;
+}
+
+.fds-inline-alert__action .fds-button--tertiary:hover:not(:disabled, [aria-disabled='true']),
+.fds-inline-alert__action .fds-button--tertiary:active:not(:disabled, [aria-disabled='true']) {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.fds-inline-alert__action > a,
+.fds-inline-alert__list a {
+  color: inherit;
+  font-weight: var(--fds-font-weight-heading);
+  text-underline-offset: 2px;
+}
+
+.fds-notification .fds-inline-alert__description a {
+  color: inherit;
+  font-weight: var(--fds-font-weight-heading);
+  text-underline-offset: 2px;
+}
+
+.fds-inline-alert__action > a:focus-visible,
+.fds-inline-alert__list a:focus-visible {
+  outline: var(--fds-focus-ring-width) solid currentColor;
+  outline-offset: var(--fds-focus-ring-offset);
+}
+
+.fds-notification .fds-inline-alert__description a:focus-visible {
+  outline: var(--fds-focus-ring-width) solid currentColor;
+  outline-offset: var(--fds-focus-ring-offset);
+}
+
+.fds-inline-alert__dismiss {
+  display: grid;
+  place-items: center;
+  width: var(--fds-size-control-default);
+  min-width: var(--fds-size-control-default);
+  height: var(--fds-size-control-default);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.fds-inline-alert--small .fds-inline-alert__dismiss {
+  width: var(--fds-size-control-action-small);
+  min-width: var(--fds-size-control-action-small);
+  height: var(--fds-size-control-action-small);
+}
+
+.fds-inline-alert__dismiss:hover,
+.fds-inline-alert__dismiss:active {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.fds-inline-alert__dismiss:focus-visible {
+  outline: var(--fds-focus-ring-width) solid currentColor;
+  outline-offset: var(--fds-focus-ring-offset);
+}
+
+.fds-notification {
+  position: fixed;
+  z-index: 1000;
+  inset-block-start: var(--spacing-4);
+  inset-inline-end: var(--spacing-4);
+  width: min(24rem, calc(100vw - var(--spacing-4) - var(--spacing-4)));
+}
+
+.fds-notification > .fds-inline-alert {
+  box-shadow: var(--fds-shadow-overlay);
 }
 
 .fds-inline-input {

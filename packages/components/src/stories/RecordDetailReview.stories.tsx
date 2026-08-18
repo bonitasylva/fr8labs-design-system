@@ -24,7 +24,7 @@ function RecordDetailReview({approved = false}: {approved?: boolean}) {
 
   return <main className="fds-workflow-pattern">
     <PageHeader eyebrow="Shipment job" title="SHP-260081" description="Jakarta → Rotterdam · Ocean LCL" actions={<ActionGroup><Button tone="secondary">Export</Button><Button onClick={() => setReviewOpen(true)}>{approved ? 'View review' : 'Review shipment'}</Button></ActionGroup>} />
-    {approved ? <InlineAlert tone="success" title="Shipment approved" description="Operational review completed by Sample Reviewer on 15 Aug 2026." /> : <InlineAlert tone="warning" title="Review required" description="Consignee tax identification is missing before documentation can be completed." action={<Button size="small" onClick={() => setReviewOpen(true)}>Resolve</Button>} />}
+    {approved ? <InlineAlert tone="success" title="Shipment approved" description="Operational review completed by Sample Reviewer on 15 Aug 2026." /> : <InlineAlert tone="warning" title="Review required" description="Consignee tax identification is missing before documentation can be completed." action={<Button size="small" tone="tertiary" onClick={() => setReviewOpen(true)}>Resolve</Button>} />}
     <section className="fds-workflow-pattern__metrics" aria-label="Shipment summary">
       <Metric label="Status" value={<StatusBadge status={approved ? 'approved' : 'pending'} />} density="compact" />
       <Metric label="ETD" value="18 Aug 2026" density="compact" />

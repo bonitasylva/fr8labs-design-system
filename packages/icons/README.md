@@ -3,7 +3,7 @@
 Fr8Labs icons for React applications, independently consumable from the component package.
 
 ```sh
-npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing
+npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens
 ```
 
 ```tsx

@@ -69,7 +69,7 @@ test('catalog contracts resolve approved immutable records and all 279 tokens', 
   assert.equal(catalogApi.getTokenReference({tokenPath: 'color.action.primary'}).tokenPath, 'semantic.color.action.primary');
   assert.equal(catalogApi.getTokenReference({tokenPath: '--fds-button-height-medium'}).resolvedValue, '32px');
   assert.equal(catalogApi.getTokenReference({tokenPath: 'compat.font.family.body'}).sourceValue, 'var(--fds-font-family-body)');
-  assert.equal(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'package'}).install, 'npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing');
+  assert.equal(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'package'}).install, 'npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens');
   assert.match(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'copy'}).driftWarning, /adopting team owns/);
 });
 

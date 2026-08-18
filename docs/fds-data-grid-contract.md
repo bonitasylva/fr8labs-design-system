@@ -4,7 +4,7 @@ Date: 2026-07-13
 
 ## Purpose
 
-`FDSDataGrid` is the FDS-owned integration layer for AG Grid in complex, high-density operational and accounting workflows. It provides a consistent Fr8Labs visual language, accessibility defaults, and product-safe configuration through the current `sandbox-fds-components` testing export.
+`FDSDataGrid` is the FDS-owned integration layer for AG Grid in complex, high-density operational and accounting workflows. It provides a consistent Fr8Labs visual language, accessibility defaults, and product-safe configuration through the current `sandbox-fds-components` public export.
 
 It does not replace AG Grid or recreate its data-grid capabilities.
 
@@ -106,7 +106,7 @@ FDS supplies reusable, documented cell contracts rather than screen-specific ren
 
 ## Product API Direction
 
-The `sandbox-fds-components` testing surface should describe freight work, not raw theme internals:
+The `sandbox-fds-components` public surface should describe freight work, not raw theme internals:
 
 ```tsx
 <FDSDataGrid

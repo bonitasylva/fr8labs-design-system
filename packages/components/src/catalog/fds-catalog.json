@@ -127,9 +127,9 @@
       "targetId": "component.button",
       "modes": {
         "package": {
-          "install": "npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing",
+          "install": "npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens",
           "imports": ["import {Button} from 'sandbox-fds-components';", "import 'sandbox-fds-components/styles.css';"],
-          "instructions": ["Wrap the application with FdsProvider once.", "Use Button through the public sandbox-fds-components testing export."]
+            "instructions": ["Wrap the application with FdsProvider once.", "Use Button through the public sandbox-fds-components export."]
         },
         "copy": {
           "instructions": ["Copy the approved snapshot for component.button and record source FDS version 0.2.0.", "Keep the source item ID in the copied file header."],

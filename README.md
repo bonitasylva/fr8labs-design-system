@@ -2,21 +2,21 @@
 
 Fr8Labs Design System (FDS) provides reusable React components, tokens, icons, freight-workflow examples, Storybook documentation, and a read-only MCP catalog.
 
-The current public packages are testing releases for browser-based React applications:
+The current public packages are pre-1.0 releases for browser-based React applications:
 
 | Package | Version | Purpose |
 | --- | --- | --- |
-| `sandbox-fds-components` | `0.1.2` | React components and bundled FDS styles |
+| `sandbox-fds-components` | `0.2.0` | React components and bundled FDS styles |
 | `sandbox-fds-icons` | `0.1.1` | React icon helpers and icon styles |
-| `sandbox-fds-tokens` | `0.1.1` | Framework-neutral CSS custom properties |
+| `sandbox-fds-tokens` | `0.2.0` | Framework-neutral CSS custom properties |
 
 ## Install all FDS packages
 
 ```sh
-npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing
+npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens
 ```
 
-This installs the complete Engineering testing surface: React components, icons, and framework-neutral tokens.
+This installs the complete FDS package surface: React components, icons, and framework-neutral tokens.
 
 ```tsx
 import {Button, FdsProvider} from 'sandbox-fds-components';
@@ -54,7 +54,7 @@ Restart the MCP client after adding the server. See the [Storybook MCP guide](ht
 
 ## Documentation
 
-- [Storybook](https://fr8labs-fds-storybook.vercel.app/) — components, foundations, workflow examples, and testing-release notes.
+- [Storybook](https://fr8labs-fds-storybook.vercel.app/) — components, foundations, workflow examples, and release notes.
 - [MCP guide](packages/components/mcp/README.md) — hosted and local setup for the approved read-only catalog.
 - [Design principles](docs/principles.md)
 - [Component scope](docs/component-scope-v01.md)
@@ -74,8 +74,8 @@ Examples and MCP prompts use synthetic freight data only. Do not send customer, 
 
 ## Status
 
-The packages remain pre-1.0 testing releases. Review the [component changelog](packages/components/CHANGELOG.md) before upgrading.
+The packages remain pre-1.0 releases. Review the [component changelog](packages/components/CHANGELOG.md) before upgrading.
 
 ## License
 
-Repository source is licensed under [Apache-2.0](LICENSE). The existing npm artifacts predate this repository license update; the updated license metadata will ship in the next package release.
+Repository source and package artifacts are licensed under [Apache-2.0](LICENSE).

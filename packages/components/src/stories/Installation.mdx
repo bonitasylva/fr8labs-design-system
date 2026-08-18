@@ -5,11 +5,11 @@ import './Welcome.css';
 
 <main className="fds-root fds-welcome fds-installation">
   <header className="fds-installation__hero">
-    <p className="fds-installation__eyebrow">Getting started · Testing release</p>
+    <p className="fds-installation__eyebrow">Getting started · Current release</p>
     <h1>Install FDS</h1>
     <p className="fds-welcome__lede">Add the shared components, icons, and tokens to a React browser application, then verify the setup before you build.</p>
-    <dl className="fds-welcome-home__route fds-welcome-home__route--facts sb-unstyled" aria-label="Current testing release">
-      <div><dt>Release channel</dt><dd><code>testing</code></dd></div>
+    <dl className="fds-welcome-home__route fds-welcome-home__route--facts sb-unstyled" aria-label="Current release">
+      <div><dt>Release channel</dt><dd><code>latest</code></dd></div>
       <div><dt>Components and tokens</dt><dd>v0.2.0</dd></div>
       <div><dt>Icons</dt><dd>v0.1.1</dd></div>
     </dl>
@@ -25,7 +25,7 @@ import './Welcome.css';
         <ul className="fds-installation__checklist">
           <li>React and React DOM 19 or newer</li>
           <li>AG Grid Community and AG Grid React 32.3.3</li>
-          <li>Access to the <code>testing</code> npm release channel</li>
+          <li>Access to the public npm registry</li>
         </ul>
       </div>
     </section>
@@ -34,10 +34,10 @@ import './Welcome.css';
       <span className="fds-installation__step-number" aria-hidden="true">02</span>
       <div className="fds-installation__step-content">
         <p className="fds-installation__step-label">Packages</p>
-        <h2 id="installation-packages">Install the complete testing surface</h2>
+        <h2 id="installation-packages">Install the complete FDS surface</h2>
         <p>Install all three packages together so components resolve their shared icon and token dependencies.</p>
         <div className="fds-installation__code">
-          <Source language="sh" code="npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing" />
+          <Source language="sh" code="npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens" />
         </div>
       </div>
     </section>

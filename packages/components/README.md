@@ -1,6 +1,6 @@
 # sandbox-fds-components
 
-Testing release of Fr8Labs Design System (FDS) components for browser-based React applications. This package supports the approved v0.1 component surface in Vite applications; it does not support Node rendering or SSR.
+Pre-1.0 release of Fr8Labs Design System (FDS) components for browser-based React applications. This package supports the approved component surface in Vite applications; it does not support Node rendering or SSR.
 
 ## Requirements
 
@@ -11,10 +11,10 @@ Testing release of Fr8Labs Design System (FDS) components for browser-based Reac
 ## Installation
 
 ```sh
-npm install sandbox-fds-components@testing sandbox-fds-icons@testing sandbox-fds-tokens@testing
+npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens
 ```
 
-Install all three testing packages so the application can consume components, icons, and framework-neutral tokens through their public package APIs.
+Install all three packages so the application can consume components, icons, and framework-neutral tokens through their public package APIs.
 
 ## Setup
 
@@ -45,7 +45,7 @@ Import only from `sandbox-fds-components` during Engineering testing. Components
 
 ## Documentation
 
-Use the [hosted Storybook](https://fr8labs-fds-storybook.vercel.app/) for component guidance, examples, and testing-release notes.
+Use the [hosted Storybook](https://fr8labs-fds-storybook.vercel.app/) for component guidance, examples, and release notes.
 
 ## Button
 

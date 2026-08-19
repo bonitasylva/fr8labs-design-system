@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "currentApprovedVersion": "0.2.0",
+  "currentApprovedVersion": "0.3.0",
   "items": [
     {
       "id": "component.button",
       "kind": "component",
       "status": "approved",
-      "fdsVersion": "0.2.0",
+      "fdsVersion": "0.3.0",
       "title": "Button",
       "summary": "FDS action control with primary, secondary, tertiary, and danger tones.",
-      "dependencies": ["sandbox-fds-components@0.2.0", "react>=19.0.0"],
+      "dependencies": ["sandbox-fds-components@0.3.0", "react>=19.0.0"],
       "accessibility": [
         "Use visible action text or provide an accessible name.",
         "Loading and aria-disabled states block activation without removing the accessible name.",
@@ -37,10 +37,10 @@
       "id": "template.list-and-review",
       "kind": "template",
       "status": "approved",
-      "fdsVersion": "0.2.0",
+      "fdsVersion": "0.3.0",
       "title": "List and review",
       "summary": "Approved fake-data workflow for finding records, reviewing status, and opening work that needs attention.",
-      "dependencies": ["sandbox-fds-components@0.2.0", "react>=19.0.0"],
+      "dependencies": ["sandbox-fds-components@0.3.0", "react>=19.0.0"],
       "accessibility": [
         "Keep page heading, summary, filters, results, and pagination in reading order.",
         "Give the results table and pagination specific accessible labels.",
@@ -72,10 +72,10 @@
       "id": "prompt.codex-prototype",
       "kind": "prompt",
       "status": "approved",
-      "fdsVersion": "0.2.0",
+      "fdsVersion": "0.3.0",
       "title": "Codex FDS prototype",
       "summary": "Bounded prompt for an FDS Storybook prototype using fake freight data only.",
-      "dependencies": ["sandbox-fds-components@0.2.0"],
+      "dependencies": ["sandbox-fds-components@0.3.0"],
       "accessibility": ["Show applicable status, loading, empty, and error states.", "Keep the workflow keyboard-operable and visibly labelled."],
       "source": {
         "path": "prompts/codex-prototype-prompt.md"
@@ -89,10 +89,10 @@
       "id": "token.color.blue.600",
       "kind": "token",
       "status": "approved",
-      "fdsVersion": "0.2.0",
+      "fdsVersion": "0.3.0",
       "title": "Blue 600",
       "summary": "Approved primitive used by the semantic primary-action token.",
-      "dependencies": ["sandbox-fds-components@0.2.0/styles.css"],
+      "dependencies": ["sandbox-fds-components@0.3.0/styles.css"],
       "accessibility": ["Consume this primitive through an approved semantic token.", "White on the semantic primary action resolves to 5.13:1 contrast."],
       "source": {
         "path": "packages/tokens/tokens.css",
@@ -115,10 +115,10 @@
       "id": "recipe.component.button",
       "kind": "adoption_recipe",
       "status": "approved",
-      "fdsVersion": "0.2.0",
+      "fdsVersion": "0.3.0",
       "title": "Adopt Button",
       "summary": "Package or owned-copy adoption instructions for the approved Button.",
-      "dependencies": ["sandbox-fds-components@0.2.0", "react>=19.0.0"],
+      "dependencies": ["sandbox-fds-components@0.3.0", "react>=19.0.0"],
       "accessibility": ["Retain the Button accessible-name, loading, disabled, focus, and action-hierarchy constraints."],
       "source": {
         "path": "packages/components/README.md"
@@ -132,7 +132,7 @@
             "instructions": ["Wrap the application with FdsProvider once.", "Use Button through the public sandbox-fds-components export."]
         },
         "copy": {
-          "instructions": ["Copy the approved snapshot for component.button and record source FDS version 0.2.0.", "Keep the source item ID in the copied file header."],
+          "instructions": ["Copy the approved snapshot for component.button and record source FDS version 0.3.0.", "Keep the source item ID in the copied file header."],
           "driftWarning": "The adopting team owns local changes, drift, security fixes, accessibility fixes, and upgrades after copying."
         }
       }
@@ -141,10 +141,10 @@
       "id": "template.sales-invoice-summary",
       "kind": "template",
       "status": "experimental",
-      "fdsVersion": "0.2.0",
+      "fdsVersion": "0.3.0",
       "title": "Sales Invoice Summary",
       "summary": "Experimental finance pattern; excluded from approved MCP results.",
-      "dependencies": ["sandbox-fds-components@0.2.0", "react>=19.0.0"],
+      "dependencies": ["sandbox-fds-components@0.3.0", "react>=19.0.0"],
       "accessibility": ["Not approved for adoption."],
       "source": {
         "path": "packages/components/src/stories/SalesInvoiceSummary.stories.tsx",

@@ -43,18 +43,18 @@ after(async () => {
   await new Promise((resolve, reject) => httpServer.close((error) => error ? reject(error) : resolve()));
 });
 
-test('catalog contracts resolve approved immutable records and all 279 tokens', async () => {
+test('catalog contracts resolve approved immutable records and all 223 tokens', async () => {
   const artifact = JSON.parse(await readFile(new URL('../dist/fds-catalog.json', import.meta.url), 'utf8'));
   const packageJson = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
   const changelog = await readFile(new URL('../CHANGELOG.md', import.meta.url), 'utf8');
-  assert.equal(artifact.currentApprovedVersion, '0.2.0');
+  assert.equal(artifact.currentApprovedVersion, '0.3.0');
   assert.equal(artifact.currentApprovedVersion, packageJson.version);
   assert.equal(changelog.includes(`## [${packageJson.version}] - `), true);
   const tokenItems = artifact.items.filter((item) => item.kind === 'token');
-  assert.equal(tokenItems.length, 279);
+  assert.equal(tokenItems.length, 223);
   for (const item of tokenItems) assert.equal(catalogApi.getTokenReference({tokenPath: item.cssVariable}).tokenPath, item.tokenPath);
   assert.equal(catalogApi.searchCatalog({query: ''}).items.every((item) => item.approvalStatus === 'approved'), true);
-  assert.equal(catalogApi.searchCatalog({query: 'token', kind: 'token', limit: 50}).total, 279);
+  assert.equal(catalogApi.searchCatalog({query: 'token', kind: 'token', limit: 50}).total, 223);
   assert.equal(catalogApi.searchCatalog({query: '', kind: 'component'}).total, 29);
   assert.equal(catalogApi.searchCatalog({query: '', kind: 'template'}).total, 3);
   assert.match(catalogApi.getComponent({id: 'component.button'}).codeSnapshot, /export const Button/);
@@ -68,7 +68,7 @@ test('catalog contracts resolve approved immutable records and all 279 tokens', 
   assert.equal(catalogApi.getTokenReference({tokenPath: 'color.blue.600'}).cssVariable, '--fds-primitive-color-blue-600');
   assert.equal(catalogApi.getTokenReference({tokenPath: 'color.action.primary'}).tokenPath, 'semantic.color.action.primary');
   assert.equal(catalogApi.getTokenReference({tokenPath: '--fds-button-height-medium'}).resolvedValue, '32px');
-  assert.equal(catalogApi.getTokenReference({tokenPath: 'compat.font.family.body'}).sourceValue, 'var(--fds-font-family-body)');
+  assert.equal(catalogApi.getTokenReference({tokenPath: 'semantic.color.action.primary'}).sourceValue, 'var(--fds-primitive-color-blue-600)');
   assert.equal(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'package'}).install, 'npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens');
   assert.match(catalogApi.getAdoptionRecipe({itemId: 'component.button', mode: 'copy'}).driftWarning, /adopting team owns/);
 });
@@ -76,7 +76,7 @@ test('catalog contracts resolve approved immutable records and all 279 tokens', 
 test('version and approval boundaries never return a code snapshot', () => {
   const unavailableVersion = catalogApi.getComponent({id: 'component.button', fdsVersion: '9.9.9'});
   assert.equal(unavailableVersion.error.code, 'FDS_VERSION_UNAVAILABLE');
-  assert.deepEqual(unavailableVersion.error.supportedVersions, ['0.2.0']);
+  assert.deepEqual(unavailableVersion.error.supportedVersions, ['0.3.0']);
   assert.equal('codeSnapshot' in unavailableVersion, false);
 
   const experimental = catalogApi.getTemplate({id: 'template.sales-invoice-summary'});
@@ -133,7 +133,7 @@ test('Streamable HTTP supports the same nine read-only tools locally and when ho
 
   const called = await rpc('tools/call', {name: 'get_component', arguments: {id: 'component.button'}});
   assert.equal(called.message.result.structuredContent.approvalStatus, 'approved');
-  assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.2.0');
+  assert.equal(called.message.result.structuredContent.resolvedFdsVersion, '0.3.0');
 
   const documentation = await rpc('tools/call', {name: 'get-documentation', arguments: {id: 'components-actions-button'}}, 3);
   assert.match(documentation.message.result.content[0].text, /Button/);

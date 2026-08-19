@@ -13,7 +13,7 @@ test('npm artifact contains only the testing consumer surface', async () => {
   const files = JSON.parse(stdout)[0].files.map(({path}) => path);
 
   assert.equal(packageJson.license, 'Apache-2.0');
-  assert.equal(packageJson.publishConfig.tag, 'testing');
+  assert.deepEqual(packageJson.publishConfig, {access: 'public'});
   assert.match(readme, /npm install sandbox-fds-components sandbox-fds-icons sandbox-fds-tokens/);
   assert.doesNotMatch(readme, /\.tgz|tarball dependency|npm run storybook/);
   assert.ok(files.includes('dist/index.js'));

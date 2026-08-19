@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Promoted components and tokens 0.2.0 to the default npm channel and updated installation guidance to use tagless package names.
 
+## [0.3.0] - 2026-08-19
+
+### Breaking Changes
+
+- **Tokens:** Removed duplicate CSS aliases from bundled styles. [migration: replace aliases such as `--spacing-3` with their `--fds-*` semantic equivalent]
+
+### Changed
+
+- Updated component styles to use canonical FDS tokens only.
+
 ## [0.2.0] - 2026-08-18
 
 ### Breaking Changes

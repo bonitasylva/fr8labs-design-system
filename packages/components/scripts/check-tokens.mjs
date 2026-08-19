@@ -3,6 +3,7 @@ import {join} from 'node:path';
 
 const sourceRoot = new URL('../src/', import.meta.url);
 const tokenSource = await readFile(new URL('../../tokens/tokens.css', import.meta.url), 'utf8');
+const tokenDocs = await readFile(new URL('../src/stories/TokenFoundation.stories.tsx', import.meta.url), 'utf8');
 const breakpoints = JSON.parse(await readFile(new URL('../../tokens/breakpoints.json', import.meta.url), 'utf8'));
 const cssFiles = await findCss(sourceRoot);
 const componentCss = (await Promise.all(cssFiles.filter((file) => !file.endsWith('tokens.css')).map((file) => readFile(file, 'utf8')))).join('\n');
@@ -13,15 +14,41 @@ const missing = [...references].filter((name) => !definitions.has(name));
 assert(missing.length === 0, `Undefined tokens: ${missing.join(', ')}`);
 assert(!/(#[\da-f]{3,8}|rgb\()/i.test(componentCss), 'Raw colors found outside tokens.css');
 
-for (const section of ['Semantics:', 'Component tokens:', 'Compatibility aliases']) {
+for (const section of ['Semantics:', 'Component tokens:']) {
   const body = tokenSource.split(`/* ${section}`)[1]?.split('/* ')[0] ?? '';
   const raw = [...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].filter((match) => !match[2].trim().startsWith('var('));
   assert(raw.length === 0, `${section} must contain aliases only: ${raw.map((match) => match[1]).join(', ')}`);
 }
 
+const componentTokenBody = tokenSource.split('/* Component tokens:')[1]?.split('/* ')[0] ?? '';
+const componentPrimitiveReferences = [...componentTokenBody.matchAll(/(--[\w-]+)\s*:\s*var\((--fds-primitive-[\w-]+)\)/g)];
+assert(componentPrimitiveReferences.length === 0, `Component tokens must reference semantic tokens: ${componentPrimitiveReferences.map(([, name]) => name).join(', ')}`);
+
+for (const name of [
+  '--fds-primitive-color-primary-border',
+  '--fds-primitive-color-status-success-border',
+  '--fds-primitive-color-status-warning-border',
+  '--fds-primitive-color-status-danger-border',
+  '--fds-primitive-color-icon-default',
+  '--fds-primitive-color-icon-disabled',
+  '--fds-primitive-color-icon-hover',
+  '--fds-primitive-color-action-hover',
+  '--fds-primitive-color-overlay',
+  '--fds-primitive-size-30',
+  '--fds-primitive-size-48',
+]) assert(!definitions.has(name), `Legacy or unused primitive token remains: ${name}`);
+
+for (const section of ['Primitives: raw values live only in this section.', 'Semantics: components consume roles, never primitives directly.']) {
+  const body = tokenSource.split(`/* ${section}`)[1]?.split('/* ')[0] ?? '';
+  const undocumented = [...body.matchAll(/(--[\w-]+)\s*:/g)].map((match) => match[1]).filter((name) => !tokenDocs.includes(`['${name}',`));
+  assert(undocumented.length === 0, `Storybook token reference is missing: ${undocumented.join(', ')}`);
+}
+
 const expected = {
   '--fds-color-brand-accent': '#008de4',
   '--fds-color-action-primary': '#0067e7',
+  '--fds-color-action-primary-border': 'rgb(0 34 69 / 16%)',
+  '--fds-color-action-tertiary-background': 'transparent',
   '--fds-color-action-primary-active': '#023c9b',
   '--fds-radius-control': '4px',
   '--fds-font-size-page-title': '20px',

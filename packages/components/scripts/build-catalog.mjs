@@ -146,7 +146,7 @@ const tokens = definitions.map((token) => {
   };
 });
 
-if (tokens.length !== 279) throw new Error(`Expected 279 tokens, generated ${tokens.length}.`);
+if (tokens.length !== 223) throw new Error(`Expected 223 tokens, generated ${tokens.length}.`);
 catalog.items = [...catalog.items.filter((item) => item.kind !== 'token'), ...tokens];
 
 if (catalog.currentApprovedVersion !== packageJson.version) throw new Error(`Catalog version ${catalog.currentApprovedVersion} does not match sandbox-fds-components ${packageJson.version}.`);

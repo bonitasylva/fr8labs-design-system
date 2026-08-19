@@ -96,8 +96,8 @@ Add a remote **HTTP** or **Streamable HTTP** server named `fr8labs-fds` using th
 Run the local server only from this repository when validating unpublished changes:
 
 ```sh
-rtk npm --prefix packages/components install
-rtk npm --prefix packages/components run mcp
+npm --prefix packages/components install
+npm --prefix packages/components run mcp
 ```
 
 Point the local IDE or agent at:
@@ -137,7 +137,7 @@ It cannot edit application code, install FDS, publish anything, access product A
 - No tools appear: restart or reload the MCP client, then check that the server type is HTTP/Streamable HTTP and the URL includes `/api/mcp`.
 - `401 Unauthorized`: do not add a token to a committed configuration. The shared endpoint is normally unauthenticated; contact the FDS owner because the deployment may have changed.
 - `403 browser origins are not allowed`: use an MCP client, not a browser-based fetch or browser extension bridge.
-- The local endpoint does not connect: confirm the MCP client runs on the same host as the FDS server and that `rtk npm --prefix packages/components run mcp` is still running.
+- The local endpoint does not connect: confirm the MCP client runs on the same host as the FDS server and that `npm --prefix packages/components run mcp` is still running.
 - Results look old: refresh the client's MCP tool cache or reconnect. The hosted endpoint reflects the published snapshot, while the local endpoint reflects the checked-out source.
 
 For FDS-specific tool details and contract checks, see the [MCP package guide](../packages/components/mcp/README.md).

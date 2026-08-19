@@ -56,6 +56,7 @@ Restart the MCP client after adding the server. See the [Storybook MCP guide](ht
 
 - [Storybook](https://fr8labs-fds-storybook.vercel.app/) — components, foundations, workflow examples, and release notes.
 - [MCP guide](packages/components/mcp/README.md) — hosted and local setup for the approved read-only catalog.
+- [IDE and agent MCP integration](docs/fds-mcp-ide-agent-integration.md) — Codex, Claude Code, Cursor, Kiro, VS Code, and generic Streamable HTTP setup.
 - [Design principles](docs/principles.md)
 - [Component scope](docs/component-scope-v01.md)
 - [FDSDataGrid contract](docs/fds-data-grid-contract.md)

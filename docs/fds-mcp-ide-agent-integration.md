@@ -21,8 +21,8 @@ In the Codex app or IDE extension, open **MCP servers** from the settings or gea
 Add FDS globally for the current user, then verify that Codex registered the Streamable HTTP server:
 
 ```sh
-rtk codex mcp add fr8labs-fds --url https://fr8labs-fds-mcp.vercel.app/api/mcp
-rtk codex mcp get fr8labs-fds
+codex mcp add fr8labs-fds --url https://fr8labs-fds-mcp.vercel.app/api/mcp
+codex mcp get fr8labs-fds
 ```
 
 Restart or open a new Codex task after adding it. Codex's MCP CLI supports remote servers through `--url`; see the [Codex MCP reference](https://developers.openai.com/codex/mcp/).
@@ -32,8 +32,8 @@ Restart or open a new Codex task after adding it. Codex's MCP CLI supports remot
 Choose `user` for personal cross-project access, or replace it with `project` to create a shareable `.mcp.json` in the current repository:
 
 ```sh
-rtk claude mcp add --transport http --scope user fr8labs-fds https://fr8labs-fds-mcp.vercel.app/api/mcp
-rtk claude mcp get fr8labs-fds
+claude mcp add --transport http --scope user fr8labs-fds https://fr8labs-fds-mcp.vercel.app/api/mcp
+claude mcp get fr8labs-fds
 ```
 
 In Claude Code, run `/mcp` to check its connection. For a committed project configuration, Claude Code will ask each user to approve the server. See the [Claude Code MCP guide](https://code.claude.com/docs/en/mcp).

@@ -62,6 +62,8 @@ Add the endpoint to your client's MCP configuration. The exact config location d
 
 Restart the client after changing its configuration. Use the local URL while validating source changes; both endpoints expose the same nine tools.
 
+For Codex, Claude Code, Cursor, Kiro, VS Code, and other client-specific setup, see the [IDE and agent MCP integration guide](../../../docs/fds-mcp-ide-agent-integration.md).
+
 ## Try it
 
 Ask your AI assistant:

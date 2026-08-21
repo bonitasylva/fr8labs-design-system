@@ -4,9 +4,26 @@ import './Welcome.css';
 <Meta title="Getting Started/Changelog" />
 
 <main className="fds-root fds-welcome fds-changelog">
-  <p className="fds-welcome__version">Current release · components/tokens v0.2.0 · icons v0.1.1</p>
+  <p className="fds-welcome__version">Current release · components/tokens v0.3.0 · icons v0.1.1</p>
   <h1>Changelog</h1>
   <p className="fds-welcome__lede">See what changed in each package version.</p>
+
+  <hr className="fds-welcome__rule" />
+
+  <section aria-labelledby="release-0-3-0">
+    <p><strong>19–21 Aug 2026</strong></p>
+    <h2 id="release-0-3-0">Components/tokens 0.3.0 · icons 0.1.1</h2>
+    <h3>Breaking changes</h3>
+    <ul>
+      <li>Removed duplicate CSS token aliases. Replace aliases such as <code>--spacing-3</code> with their <code>--fds-*</code> semantic equivalent.</li>
+    </ul>
+    <h3>Changed</h3>
+    <ul>
+      <li>Updated component styles to use canonical FDS tokens only.</li>
+      <li>Refined the Token Foundation documentation and added the Design Principles reference for operational workflows.</li>
+      <li>Kept <code>sandbox-fds-icons</code> at 0.1.1 because its package implementation did not change.</li>
+    </ul>
+  </section>
 
   <hr className="fds-welcome__rule" />
 

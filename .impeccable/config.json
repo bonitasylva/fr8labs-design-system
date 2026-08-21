@@ -47,6 +47,15 @@
         ],
         "createdAt": "2026-08-21T08:08:44.163Z",
         "reason": "Responsive Storybook docs title role reserved by DESIGN.md"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "packages/components/src/stories/Welcome.css"
+        ],
+        "createdAt": "2026-08-21T09:28:25.758Z",
+        "reason": "DESIGN.md: larger headline treatment is reserved for Storybook orientation pages"
       }
     ]
   }

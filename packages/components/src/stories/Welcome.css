@@ -90,10 +90,10 @@
   margin: 0;
 }
 
-.fds-installation__steps {
+.fds-installation .fds-installation__steps {
   display: grid;
-  gap: calc(var(--fds-space-5) * 3);
-  margin-top: calc(var(--fds-space-5) * 3);
+  gap: calc(var(--fds-space-5) + var(--fds-space-5) + var(--fds-space-5));
+  margin-top: calc(var(--fds-space-5) + var(--fds-space-5) + var(--fds-space-5));
 }
 
 .fds-installation__step {

@@ -10,6 +10,7 @@ const outputPath = resolve(packageRoot, 'dist/fds-catalog.json');
 const catalog = JSON.parse(await readFile(sourcePath, 'utf8'));
 const packageJson = JSON.parse(await readFile(resolve(packageRoot, 'package.json'), 'utf8'));
 const tokenPackageJson = JSON.parse(await readFile(resolve(tokenPackageRoot, 'package.json'), 'utf8'));
+const themeContract = JSON.parse(await readFile(resolve(tokenPackageRoot, 'theme-contract.json'), 'utf8'));
 const storybookManifest = JSON.parse(await readFile(resolve(packageRoot, 'manifests/components.json'), 'utf8'));
 const publicIndex = await readFile(resolve(packageRoot, 'src/index.ts'), 'utf8');
 const ids = new Set();
@@ -90,6 +91,12 @@ for (const line of rootBody.split('\n')) {
 }
 
 const values = new Map(definitions.map((token) => [token.cssVariable, token.sourceValue]));
+const themeOverrides = new Map(themeContract.overrides.map((override) => [override.cssVariable, override]));
+if (themeContract.defaultTheme !== 'default') throw new Error('Theme contract must identify the shipped default theme.');
+for (const override of themeContract.overrides) {
+  if (!values.has(override.cssVariable)) throw new Error(`Theme override does not exist: ${override.cssVariable}`);
+  if (!/^--fds-(?!primitive-)[\w-]+$/.test(override.cssVariable) || override.cssVariable.startsWith('--fds-button-')) throw new Error(`Theme override must be semantic: ${override.cssVariable}`);
+}
 const referencedBy = new Map(definitions.map((token) => [token.cssVariable, []]));
 for (const token of definitions) {
   const alias = token.sourceValue.match(/^var\((--[\w-]+)\)$/)?.[1];
@@ -122,6 +129,7 @@ const tokens = definitions.map((token) => {
   const shorthand = token.cssVariable.replace(/^--fds-(primitive-)?/, '').replace(/^--/, '').replaceAll('-', '.');
   const aliases = shorthand === path ? [] : [shorthand];
   const consumers = referencedBy.get(token.cssVariable);
+  const themeOverride = themeOverrides.get(token.cssVariable);
   return {
     id: `token.${path}`,
     kind: 'token',
@@ -143,10 +151,11 @@ const tokens = definitions.map((token) => {
     aliasUsedBy: consumers,
     referencedBy: consumers,
     permittedUsage: usage[token.layer],
+    theme: themeOverride ? {defaultTheme: themeContract.defaultTheme, overrideAllowed: true, ...themeOverride} : {defaultTheme: themeContract.defaultTheme, overrideAllowed: false},
   };
 });
 
-if (tokens.length !== 223) throw new Error(`Expected 223 tokens, generated ${tokens.length}.`);
+if (tokens.length !== 284) throw new Error(`Expected 284 tokens, generated ${tokens.length}.`);
 catalog.items = [...catalog.items.filter((item) => item.kind !== 'token'), ...tokens];
 
 if (catalog.currentApprovedVersion !== packageJson.version) throw new Error(`Catalog version ${catalog.currentApprovedVersion} does not match sandbox-fds-components ${packageJson.version}.`);

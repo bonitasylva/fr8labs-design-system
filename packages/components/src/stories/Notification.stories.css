@@ -1,7 +1,7 @@
 .fds-notification-preview {
   display: grid;
   min-height: 160px;
-  padding: var(--fds-space-4);
+  padding: var(--fds-space-16);
   place-items: center;
   background: var(--fds-color-surface-subtle);
 }

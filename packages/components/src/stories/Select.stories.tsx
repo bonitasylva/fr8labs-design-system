@@ -20,7 +20,7 @@ export const ControlledSelection: Story = {
 };
 
 export const AvailabilityStates: Story = {
-  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-4)', minWidth: 320}}><Select label="Loading carrier" value="" onChange={() => {}} options={[]} isLoading /><Select label="Destination location" value="" onChange={() => {}} options={options} /><Select label="Legal entity" value="bluewater" onChange={() => {}} options={options} isDisabled disabledMessage="Legal entity is inherited from the shipment." /></div>,
+  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-16)', minWidth: 320}}><Select label="Loading carrier" value="" onChange={() => {}} options={[]} isLoading /><Select label="Destination location" value="" onChange={() => {}} options={options} /><Select label="Legal entity" value="bluewater" onChange={() => {}} options={options} isDisabled disabledMessage="Legal entity is inherited from the shipment." /></div>,
 };
 
 export const Validation: Story = {args: {label: 'Destination location', description: 'Choose the freight destination.', error: 'Select a destination location.', placeholder: 'No location selected'}};

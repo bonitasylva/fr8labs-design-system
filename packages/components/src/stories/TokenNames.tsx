@@ -133,8 +133,8 @@ export const renderTokenNamingGuide = () => <section className="fds-token-docs f
         <p>Choose by ownership, not convenience: primitives maintain source scales, semantics carry shared UI meaning, and component tokens hold repeated component-specific decisions.</p>
       </div>
       <ol className="fds-token-docs__layers">
-        <li><strong>Primitive</strong><span>Maintained source scale; never used directly by product UI</span><code>--fds-primitive-space-3</code></li>
-        <li><strong>Semantic</strong><span>Shared role used across components and products</span><code>--fds-space-3</code></li>
+        <li><strong>Primitive</strong><span>Maintained source scale; never used directly by product UI</span><code>--fds-primitive-size-12</code></li>
+        <li><strong>Semantic</strong><span>Shared role used across components and products</span><code>--fds-space-12</code></li>
         <li><strong>Component</strong><span>Stable rule repeated within one component</span><code>--fds-button-gap</code></li>
       </ol>
       <p className="fds-token-docs__note">Product code and FDS components use semantic or component tokens. Only token definitions reference primitives.</p>

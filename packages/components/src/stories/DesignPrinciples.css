@@ -10,10 +10,10 @@ body:has(.fds-design-principles) {
 
 .fds-design-principles {
   display: grid;
-  gap: calc(var(--fds-space-5) * 2);
+  gap: calc(var(--fds-space-24) * 2);
   max-width: 76rem;
   margin-inline: auto;
-  padding: calc(var(--fds-space-5) * 2) var(--fds-space-5) calc(var(--fds-space-5) * 3);
+  padding: calc(var(--fds-space-24) * 2) var(--fds-space-24) calc(var(--fds-space-24) * 3);
   color: var(--fds-color-text-default);
 }
 
@@ -29,7 +29,7 @@ body:has(.fds-design-principles) {
 
 .fds-design-principles__hero {
   display: grid;
-  gap: var(--fds-space-4);
+  gap: var(--fds-space-16);
   max-width: 64rem;
 }
 
@@ -71,9 +71,9 @@ body:has(.fds-design-principles) {
 
 .fds-design-principles__facts > div {
   display: grid;
-  gap: var(--fds-space-1);
+  gap: var(--fds-space-4);
   min-width: 0;
-  padding: var(--fds-space-4) var(--fds-space-5);
+  padding: var(--fds-space-16) var(--fds-space-24);
 }
 
 .fds-design-principles__facts > div + div {
@@ -95,22 +95,22 @@ body:has(.fds-design-principles) {
 
 .fds-design-principles__decision-index {
   display: grid;
-  gap: calc(var(--fds-space-5) * 2);
+  gap: calc(var(--fds-space-24) * 2);
 }
 
 .fds-design-principles__section-heading {
   display: grid;
-  gap: var(--fds-space-3);
+  gap: var(--fds-space-12);
 }
 
 .fds-design-principles__gate {
   display: grid;
-  gap: var(--fds-space-5);
+  gap: var(--fds-space-24);
 }
 
 .fds-design-principles__gate-heading {
   display: grid;
-  gap: var(--fds-space-2);
+  gap: var(--fds-space-8);
 }
 
 .fds-design-principles__gate-heading > p {
@@ -121,7 +121,7 @@ body:has(.fds-design-principles) {
 
 .fds-design-principles__review-steps {
   display: grid;
-  gap: var(--fds-space-1);
+  gap: var(--fds-space-4);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -135,9 +135,9 @@ body:has(.fds-design-principles) {
 .fds-design-principles__review-steps article {
   display: grid;
   grid-template-columns: 2.5rem minmax(14rem, 0.7fr) minmax(0, 1.3fr);
-  gap: var(--fds-space-5);
+  gap: var(--fds-space-24);
   align-items: baseline;
-  padding: var(--fds-space-4);
+  padding: var(--fds-space-16);
   border-radius: var(--fds-radius-control);
 }
 
@@ -156,7 +156,7 @@ body:has(.fds-design-principles) {
 
 .fds-design-principles__review-steps article > div {
   display: grid;
-  gap: var(--fds-space-1);
+  gap: var(--fds-space-4);
 }
 
 .fds-design-principles__review-steps h3,
@@ -199,7 +199,7 @@ body:has(.fds-design-principles) {
 
 .fds-design-principles__list {
   display: grid;
-  gap: var(--fds-space-1);
+  gap: var(--fds-space-4);
   padding: 0;
   list-style: none;
 }
@@ -212,9 +212,9 @@ body:has(.fds-design-principles) {
 .fds-design-principles__list article {
   display: grid;
   grid-template-columns: 2.5rem minmax(14rem, 0.7fr) minmax(0, 1.3fr);
-  gap: var(--fds-space-5);
+  gap: var(--fds-space-24);
   align-items: baseline;
-  padding: var(--fds-space-4);
+  padding: var(--fds-space-16);
   border-radius: var(--fds-radius-control);
 }
 
@@ -246,7 +246,7 @@ body:has(.fds-design-principles) {
 
 @media (max-width: 48rem) {
   .fds-design-principles {
-    padding: var(--fds-space-5) var(--fds-space-4) calc(var(--fds-space-5) * 2);
+    padding: var(--fds-space-24) var(--fds-space-16) calc(var(--fds-space-24) * 2);
   }
 
   .fds-design-principles__facts {
@@ -255,8 +255,8 @@ body:has(.fds-design-principles) {
 
   .fds-design-principles__review-steps article {
     grid-template-columns: 2rem minmax(0, 1fr);
-    gap: var(--fds-space-2) var(--fds-space-3);
-    padding: var(--fds-space-3);
+    gap: var(--fds-space-8) var(--fds-space-12);
+    padding: var(--fds-space-12);
   }
 
   .fds-design-principles__review-steps article > span {
@@ -269,13 +269,13 @@ body:has(.fds-design-principles) {
   }
 
   .fds-design-principles__list {
-    gap: var(--fds-space-2);
+    gap: var(--fds-space-8);
   }
 
   .fds-design-principles__list article {
     grid-template-columns: 2rem minmax(0, 1fr);
-    gap: var(--fds-space-2) var(--fds-space-3);
-    padding: var(--fds-space-3);
+    gap: var(--fds-space-8) var(--fds-space-12);
+    padding: var(--fds-space-12);
   }
 
   .fds-design-principles__list article > span {

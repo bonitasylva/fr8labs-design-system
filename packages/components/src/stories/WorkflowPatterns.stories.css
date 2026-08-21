@@ -1,15 +1,15 @@
 .fds-root .fds-workflow-pattern {
   container-type: inline-size;
   display: grid;
-  gap: var(--fds-space-5);
-  padding: var(--fds-space-5);
+  gap: var(--fds-space-24);
+  padding: var(--fds-space-24);
 }
 
 .fds-root .fds-workflow-pattern__metrics,
 .fds-root .fds-workflow-pattern__fields,
 .fds-root .fds-workflow-pattern__split {
   display: grid;
-  gap: var(--fds-space-3);
+  gap: var(--fds-space-12);
 }
 
 .fds-root .fds-workflow-pattern__metrics {
@@ -27,11 +27,11 @@
 .fds-root .fds-workflow-pattern__stack,
 .fds-root .fds-workflow-pattern__section {
   display: grid;
-  gap: var(--fds-space-3);
+  gap: var(--fds-space-12);
 }
 
 .fds-root .fds-workflow-pattern__section + .fds-workflow-pattern__section {
-  margin-top: var(--fds-space-5);
+  margin-top: var(--fds-space-24);
 }
 
 .fds-root .fds-workflow-pattern__section h3 {
@@ -43,7 +43,7 @@
 .fds-root .fds-workflow-pattern__details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--fds-space-3) var(--fds-space-5);
+  gap: var(--fds-space-12) var(--fds-space-24);
   margin: 0;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .fds-root .fds-workflow-pattern__details dd {
-  margin: var(--fds-space-1) 0 0;
+  margin: var(--fds-space-4) 0 0;
   overflow-wrap: anywhere;
 }
 

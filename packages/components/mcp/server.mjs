@@ -78,7 +78,7 @@ export const catalogApi = {
     if (version.error) return version;
     const item = catalog.items.find((candidate) => candidate.kind === 'token' && [candidate.tokenPath, candidate.cssVariable, ...(candidate.aliases ?? [])].includes(tokenPath) && candidate.status === 'approved' && candidate.fdsVersion === version.resolvedFdsVersion);
     if (!item) return unavailableError(tokenPath, fdsVersion, version.resolvedFdsVersion);
-    return {...version, id: item.id, approvalStatus: item.status, fdsVersion: item.fdsVersion, requestedTokenPath: tokenPath, tokenPath: item.tokenPath, aliases: item.aliases, layer: item.layer, dtcgValue: item.dtcgValue, sourceValue: item.sourceValue, resolvedValue: item.resolvedValue, cssVariable: item.cssVariable, aliasUsedBy: item.aliasUsedBy, referencedBy: item.referencedBy, permittedUsage: item.permittedUsage, dependencies: item.dependencies, accessibility: item.accessibility, source: item.source};
+    return {...version, id: item.id, approvalStatus: item.status, fdsVersion: item.fdsVersion, requestedTokenPath: tokenPath, tokenPath: item.tokenPath, aliases: item.aliases, layer: item.layer, dtcgValue: item.dtcgValue, sourceValue: item.sourceValue, resolvedValue: item.resolvedValue, cssVariable: item.cssVariable, aliasUsedBy: item.aliasUsedBy, referencedBy: item.referencedBy, permittedUsage: item.permittedUsage, theme: item.theme, dependencies: item.dependencies, accessibility: item.accessibility, source: item.source};
   },
   getAdoptionRecipe({itemId, fdsVersion, mode = 'package'}) {
     const version = resolveVersion(fdsVersion);

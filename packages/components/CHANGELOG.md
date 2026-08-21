@@ -6,7 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-- Promoted components and tokens 0.2.0 to the default npm channel and updated installation guidance to use tagless package names.
+## [0.4.0] - 2026-08-21
+
+### Breaking Changes
+
+- **Tokens:** Replaced legacy primitive color, sizing, and functional aliases with the canonical primitive, semantic, and component token contract. Consumers that reference primitive names directly must migrate to the documented replacement; product CSS should use semantic roles or the supported component API.
+
+### Added
+
+- Complete raw blue, neutral, green, amber, and red color ramps; breakpoint, shape, and controlled-theme contract tokens.
+- Searchable primitive, semantic, and component token references in Storybook, including explicit component-token usage boundaries.
+
+### Changed
+
+- Reworked feedback/status roles and the supporting component states to use the new semantic color mappings.
+- Aligned token documentation, catalog, MCP output, package guides, and release references to the 0.4.0 contract.
 
 ## [0.3.0] - 2026-08-19
 

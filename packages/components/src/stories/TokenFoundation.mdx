@@ -5,10 +5,10 @@ import * as TokenStories from './TokenFoundation.stories';
 
 # Tokens
 
-<p className="fds-token-docs__intro fds-token-docs__foundation-intro">FDS v1 is a light, compact foundation. Tokens resolve inside an <code>fds-root</code> subtree: product code uses semantic roles, while primitives supply raw values and component tokens stay internal. Dark mode and product overrides are outside this foundation.</p>
+<p className="fds-token-docs__intro fds-token-docs__foundation-intro">FDS v1 is a light, compact foundation. Tokens resolve inside an <code>fds-root</code> subtree: product code uses semantic roles, primitives supply raw scales and functional measurements, and component tokens stay internal. The shipped theme is <code>default</code>; a future tenant theme may override only the approved semantic brand roles, never primitive or component tokens.</p>
 
 {/*
-THESIS: The semantic token is the product decision; primitive and component tokens are supporting mappings owned by FDS.
+THESIS: The semantic token is the product decision; reference primitives and component tokens are supporting mappings owned by FDS.
 OWN-WORLD: FDS canvas, mist, navy data typography, flat borders, and Route Blue only for the active semantic path.
 STORY: The reader starts at the product-facing semantic API, then sees the primitive source and component implementation that FDS owns.
 FIRST VIEWPORT: One Route Blue semantic anchor leads; two quiet FDS-owned mappings support it before the reference table proves the rule.
@@ -26,7 +26,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     <div className="hallmark-token-map" role="list" aria-label="Token ownership flow">
       <article className="hallmark-token-map__node hallmark-token-map__node--source" role="listitem">
         <span className="hallmark-token-map__owner">Maintainer-owned</span>
-        <h3>Primitive source</h3>
+        <h3>Reference primitive</h3>
         <code>--fds-primitive-color-blue-600</code>
         <p className="hallmark-token-map__value"><span className="hallmark-token-map__swatch" aria-hidden="true" />Raw value <code>#0067e7</code></p>
         <span className="hallmark-token-map__connector" aria-hidden="true">→</span>
@@ -44,6 +44,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <h3>Component mapping</h3>
         <code>--fds-button-primary-background</code>
         <p>Internal to the supported FDS component API.</p>
+        <a href="/?path=/story/foundations-tokens--component-tokens" target="_top">Inspect component mappings</a>
       </article>
     </div>
   </section>
@@ -83,6 +84,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <nav className="fds-token-docs__links" aria-label="Token references">
     <a href="/?path=/story/foundations-tokens--primitives" target="_top">Browse primitive tokens</a>
     <a href="/?path=/story/foundations-tokens--semantics" target="_top">Browse semantic tokens</a>
+    <a href="/?path=/story/foundations-tokens--component-tokens" target="_top">Browse component tokens</a>
     <a href="/?path=/story/foundations-tokens--breakpoints" target="_top">Browse breakpoints</a>
     <a href="/?path=/story/foundations-tokens--token-names" target="_top">Read token naming guidance</a>
   </nav>

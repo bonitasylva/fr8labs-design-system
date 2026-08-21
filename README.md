@@ -6,9 +6,9 @@ The current public packages are pre-1.0 releases for browser-based React applica
 
 | Package | Version | Purpose |
 | --- | --- | --- |
-| `sandbox-fds-components` | `0.3.0` | React components and bundled FDS styles |
+| `sandbox-fds-components` | `0.4.0` | React components and bundled FDS styles |
 | `sandbox-fds-icons` | `0.1.1` | React icon helpers and icon styles |
-| `sandbox-fds-tokens` | `0.3.0` | Framework-neutral CSS custom properties |
+| `sandbox-fds-tokens` | `0.4.0` | Framework-neutral CSS custom properties |
 
 ## Install all FDS packages
 

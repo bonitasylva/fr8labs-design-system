@@ -31,7 +31,7 @@ function ControlledFilters() {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('');
   const [message, setMessage] = useState('');
-  return <div style={{display: 'grid', gap: 'var(--fds-space-3)'}}><FilterBar label="Shipment filters" onSubmit={(event) => {event.preventDefault(); setMessage('Filters applied.');}} actions={<ActionGroup><Button type="button" tone="tertiary" onClick={() => {setQuery(''); setStatus(''); setMessage('Filters cleared.');}}>Clear</Button><Button type="submit">Apply filters</Button></ActionGroup>}><TextInput label="Shipment number" value={query} onChange={setQuery} placeholder="SHP-…" density="compact" /><Select label="Status" value={status} onChange={setStatus} placeholder="All statuses" options={statusOptions} /></FilterBar><span role="status">{message}</span></div>;
+  return <div style={{display: 'grid', gap: 'var(--fds-space-12)'}}><FilterBar label="Shipment filters" onSubmit={(event) => {event.preventDefault(); setMessage('Filters applied.');}} actions={<ActionGroup><Button type="button" tone="tertiary" onClick={() => {setQuery(''); setStatus(''); setMessage('Filters cleared.');}}>Clear</Button><Button type="submit">Apply filters</Button></ActionGroup>}><TextInput label="Shipment number" value={query} onChange={setQuery} placeholder="SHP-…" density="compact" /><Select label="Status" value={status} onChange={setStatus} placeholder="All statuses" options={statusOptions} /></FilterBar><span role="status">{message}</span></div>;
 }
 
 export const Playground: Story = {};

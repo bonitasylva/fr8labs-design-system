@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
 import {Icon} from 'sandbox-fds-icons';
-import {expect, within} from 'storybook/test';
+import {expect, userEvent, within} from 'storybook/test';
 import {Button} from '../components/Button';
 
 const meta = {
@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 const icon = (name: string) => <Icon name={name} />;
 const shortcut = (keys: string) => <kbd className="fds-keybinding-hint" aria-hidden="true">{keys}</kbd>;
-const row = {display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--fds-space-2)'} as const;
+const row = {display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--fds-space-8)'} as const;
 
 export const Playground: Story = {};
 
@@ -54,6 +54,8 @@ export const Variants: Story = {
     await expect(style.paddingBlockStart).toBe('0px');
     await expect(style.borderColor).not.toBe(style.backgroundColor);
     await expect(style.transitionProperty).toBe('color, background-color, border-color, box-shadow');
+    await userEvent.hover(primary);
+    await expect(getComputedStyle(primary).backgroundColor).toBe('rgb(0, 84, 189)');
   },
 };
 

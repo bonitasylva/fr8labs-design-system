@@ -19,8 +19,6 @@ export type InlineAlertProps = {
   action?: ReactNode;
   /** Scales the type, icon, and internal spacing together. */
   size?: InlineAlertSize;
-  /** Uses a strong status surface when extra attention or separation is required. */
-  highEmphasis?: boolean;
   /** Removes the dismiss action; the implementing workflow must remove the message when resolved. */
   persistent?: boolean;
   /** Labels the dismiss button for assistive technology. */
@@ -44,7 +42,6 @@ export function InlineAlert({
   list,
   action,
   size = 'medium',
-  highEmphasis = false,
   persistent = false,
   dismissIconAriaLabel = 'Dismiss',
   onDismiss,
@@ -56,7 +53,7 @@ export function InlineAlert({
 
   if (dismissed) return null;
 
-  return <div className={`fds-inline-alert fds-inline-alert--${tone} fds-inline-alert--${size}${highEmphasis ? ' fds-inline-alert--high-emphasis' : ''}${structured ? ' fds-inline-alert--structured' : ''}`} role={role} aria-atomic="true">
+  return <div className={`fds-inline-alert fds-inline-alert--${tone} fds-inline-alert--${size}${structured ? ' fds-inline-alert--structured' : ''}`} role={role} aria-atomic="true">
     <span className="fds-inline-alert__status-icon" aria-hidden="true"><Icon name={toneIcons[tone]} size={size === 'small' ? 16 : 20} /></span>
     <div className="fds-inline-alert__content">
       {title != null ? <strong className="fds-inline-alert__title">{title}</strong> : null}

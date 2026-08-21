@@ -1,0 +1,42 @@
+{
+  "defaultTheme": "default",
+  "overrides": [
+    {
+      "cssVariable": "--fds-color-brand-accent",
+      "scope": "brand",
+      "description": "Non-action brand accent."
+    },
+    {
+      "cssVariable": "--fds-color-action-primary",
+      "scope": "brand",
+      "description": "Primary action background.",
+      "contrast": {
+        "against": "--fds-color-text-inverse",
+        "minimum": 4.5
+      }
+    },
+    {
+      "cssVariable": "--fds-color-action-primary-hover",
+      "scope": "brand",
+      "description": "Primary action hover background.",
+      "contrast": {
+        "against": "--fds-color-text-inverse",
+        "minimum": 4.5
+      }
+    },
+    {
+      "cssVariable": "--fds-color-action-primary-active",
+      "scope": "brand",
+      "description": "Primary action active background.",
+      "contrast": {
+        "against": "--fds-color-text-inverse",
+        "minimum": 4.5
+      }
+    },
+    {
+      "cssVariable": "--fds-color-focus-ring",
+      "scope": "brand",
+      "description": "Visible keyboard focus indicator."
+    }
+  ]
+}

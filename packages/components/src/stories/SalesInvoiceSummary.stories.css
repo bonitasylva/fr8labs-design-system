@@ -1,8 +1,8 @@
 .fds-sales-invoice-summary {
   display: grid;
-  gap: var(--fds-space-3);
+  gap: var(--fds-space-12);
   max-width: 72rem;
-  padding: var(--fds-space-3);
+  padding: var(--fds-space-12);
   margin: 0 auto;
   -webkit-font-smoothing: antialiased;
 }
@@ -10,7 +10,7 @@
 .fds-sales-invoice-summary__metrics,
 .fds-sales-invoice-summary__identity {
   display: grid;
-  gap: var(--fds-space-2);
+  gap: var(--fds-space-8);
   margin: 0;
 }
 
@@ -30,7 +30,7 @@
 
 .fds-sales-invoice-summary__identity > div {
   display: grid;
-  gap: var(--fds-space-1);
+  gap: var(--fds-space-4);
 }
 
 .fds-sales-invoice-summary__identity dt {
@@ -53,7 +53,7 @@
 
 @media (max-width: 36rem) {
   .fds-sales-invoice-summary {
-    padding: var(--fds-space-2);
+    padding: var(--fds-space-8);
   }
 
   .fds-sales-invoice-summary__metrics {

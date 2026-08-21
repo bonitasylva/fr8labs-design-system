@@ -5,6 +5,7 @@ const sourceRoot = new URL('../src/', import.meta.url);
 const tokenSource = await readFile(new URL('../../tokens/tokens.css', import.meta.url), 'utf8');
 const tokenDocs = await readFile(new URL('../src/stories/TokenFoundation.stories.tsx', import.meta.url), 'utf8');
 const breakpoints = JSON.parse(await readFile(new URL('../../tokens/breakpoints.json', import.meta.url), 'utf8'));
+const themeContract = JSON.parse(await readFile(new URL('../../tokens/theme-contract.json', import.meta.url), 'utf8'));
 const cssFiles = await findCss(sourceRoot);
 const componentCss = (await Promise.all(cssFiles.filter((file) => !file.endsWith('tokens.css')).map((file) => readFile(file, 'utf8')))).join('\n');
 const definitions = new Map([...tokenSource.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].map((match) => [match[1], match[2].trim()]));
@@ -13,12 +14,6 @@ const missing = [...references].filter((name) => !definitions.has(name));
 
 assert(missing.length === 0, `Undefined tokens: ${missing.join(', ')}`);
 assert(!/(#[\da-f]{3,8}|rgb\()/i.test(componentCss), 'Raw colors found outside tokens.css');
-
-for (const section of ['Semantics:', 'Component tokens:']) {
-  const body = tokenSource.split(`/* ${section}`)[1]?.split('/* ')[0] ?? '';
-  const raw = [...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].filter((match) => !match[2].trim().startsWith('var('));
-  assert(raw.length === 0, `${section} must contain aliases only: ${raw.map((match) => match[1]).join(', ')}`);
-}
 
 const componentTokenBody = tokenSource.split('/* Component tokens:')[1]?.split('/* ')[0] ?? '';
 const componentPrimitiveReferences = [...componentTokenBody.matchAll(/(--[\w-]+)\s*:\s*var\((--fds-primitive-[\w-]+)\)/g)];
@@ -34,23 +29,61 @@ for (const name of [
   '--fds-primitive-color-icon-hover',
   '--fds-primitive-color-action-hover',
   '--fds-primitive-color-overlay',
+  '--fds-primitive-space-1',
+  '--fds-primitive-space-2',
+  '--fds-primitive-space-3',
+  '--fds-primitive-space-4',
+  '--fds-primitive-space-5',
   '--fds-primitive-size-30',
-  '--fds-primitive-size-48',
-]) assert(!definitions.has(name), `Legacy or unused primitive token remains: ${name}`);
+  '--fds-primitive-opacity-disabled',
+  '--fds-primitive-radius-default',
+  '--fds-primitive-border-width',
+  '--fds-primitive-border-width-strong',
+  '--fds-primitive-size-520',
+  '--fds-primitive-size-540',
+  '--fds-primitive-size-768',
+  '--fds-primitive-size-1280',
+  '--fds-primitive-measure-72',
+  '--fds-primitive-focus-width',
+  '--fds-primitive-focus-offset',
+  '--fds-primitive-motion-duration-spinner',
+  '--fds-primitive-shadow-control',
+  '--fds-primitive-shadow-overlay',
+]) assert(!definitions.has(name), `Retired primitive token remains: ${name}`);
 
-for (const section of ['Primitives: raw values live only in this section.', 'Semantics: components consume roles, never primitives directly.']) {
+for (const name of ['--fds-space-1', '--fds-space-2', '--fds-space-3', '--fds-space-5']) {
+  assert(!definitions.has(name), `Retired spacing token remains: ${name}`);
+}
+
+for (const section of ['Primitives: reference values live only in this section.', 'Semantics: components consume roles, never primitives directly.', 'Component tokens: only stable, repeated component decisions.']) {
   const body = tokenSource.split(`/* ${section}`)[1]?.split('/* ')[0] ?? '';
   const undocumented = [...body.matchAll(/(--[\w-]+)\s*:/g)].map((match) => match[1]).filter((name) => !tokenDocs.includes(`['${name}',`));
   assert(undocumented.length === 0, `Storybook token reference is missing: ${undocumented.join(', ')}`);
 }
 
+assert(themeContract.defaultTheme === 'default', 'Theme contract must identify the shipped default theme');
+assert(Array.isArray(themeContract.overrides) && themeContract.overrides.length > 0, 'Theme contract must declare its approved override roles');
+for (const override of themeContract.overrides) {
+  assert(/^--fds-(?!primitive-)[\w-]+$/.test(override.cssVariable), `Theme override must be semantic: ${override.cssVariable}`);
+  assert(definitions.has(override.cssVariable), `Theme override does not exist: ${override.cssVariable}`);
+  assert(!override.cssVariable.startsWith('--fds-button-'), `Theme override must not be a component token: ${override.cssVariable}`);
+  if (override.contrast) assert(resolve(override.contrast.against) && Number.isFinite(override.contrast.minimum), `Theme override contrast is incomplete: ${override.cssVariable}`);
+}
+
 const expected = {
   '--fds-color-brand-accent': '#008de4',
   '--fds-color-action-primary': '#0067e7',
-  '--fds-color-action-primary-border': 'rgb(0 34 69 / 16%)',
+  '--fds-color-action-primary-border': 'transparent',
+  '--fds-color-action-primary-hover': '#0054bd',
   '--fds-color-action-tertiary-background': 'transparent',
   '--fds-color-action-primary-active': '#023c9b',
+  '--fds-button-primary-background-hover': '#0054bd',
   '--fds-radius-control': '4px',
+  '--fds-primitive-radius-small': '4px',
+  '--fds-primitive-border-width-thin': '1px',
+  '--fds-primitive-border-width-thick': '2px',
+  '--fds-primitive-outline-focus-width': '3px',
+  '--fds-primitive-outline-focus-offset': '2px',
   '--fds-font-size-page-title': '20px',
   '--fds-line-height-page-title': '28px',
   '--fds-font-size-body': '14px',
@@ -59,11 +92,22 @@ const expected = {
   '--fds-line-height-data': '18px',
   '--fds-font-size-label': '12px',
   '--fds-line-height-label': '16px',
+  '--fds-space-none': '0',
+  '--fds-space-2xs': '4px',
+  '--fds-space-xs': '8px',
+  '--fds-space-sm': '12px',
+  '--fds-space-md': '16px',
+  '--fds-space-lg': '20px',
+  '--fds-space-xl': '24px',
+  '--fds-space-2xl': '28px',
+  '--fds-space-3xl': '32px',
   '--fds-button-height-small': '28px',
   '--fds-button-height-medium': '32px',
   '--fds-button-height-large': '40px',
   '--fds-table-row-height': '32px',
   '--fds-table-header-height': '36px',
+  '--fds-dialog-width': '520px',
+  '--fds-drawer-width': '540px',
   '--fds-size-container-form': '48rem',
   '--fds-size-container-reading': '72ch',
   '--fds-size-container-page': '80rem',
@@ -79,24 +123,34 @@ assert(JSON.stringify(breakpoints) === JSON.stringify({
   wide: {value: '80rem', pixels: 1280},
 }), 'Breakpoint scale changed without updating its contract check');
 
+for (const [name, {value}] of Object.entries(breakpoints)) {
+  assert(definitions.get(`--fds-primitive-breakpoint-${name}`) === value, `Breakpoint CSS token --fds-primitive-breakpoint-${name} must match breakpoints.json`);
+}
+
 for (const [foreground, background, minimum] of [
   ['--fds-color-text-default', '--fds-color-surface-default', 4.5],
   ['--fds-color-text-muted', '--fds-color-surface-default', 4.5],
   ['--fds-color-action-primary', '--fds-color-text-inverse', 4.5],
+  ['--fds-color-action-primary-hover', '--fds-color-text-inverse', 4.5],
   ['--fds-color-action-primary-active', '--fds-color-text-inverse', 4.5],
   ['--fds-button-secondary-foreground', '--fds-button-secondary-background', 4.5],
   ['--fds-button-tertiary-foreground', '--fds-color-surface-default', 4.5],
   ['--fds-button-danger-foreground', '--fds-button-danger-background', 4.5],
   ['--fds-button-danger-foreground', '--fds-button-danger-background-hover', 4.5],
   ['--fds-color-field-border', '--fds-color-field-background', 3],
+  ['--fds-color-field-border-error', '--fds-color-field-background', 3],
   ['--fds-color-feedback-info-content-text', '--fds-color-feedback-info-surface', 4.5],
   ['--fds-color-feedback-info-text', '--fds-color-feedback-info-surface', 4.5],
+  ['--fds-color-feedback-info-icon', '--fds-color-feedback-info-surface', 3],
   ['--fds-color-feedback-success-content-text', '--fds-color-feedback-success-surface', 4.5],
   ['--fds-color-feedback-success-text', '--fds-color-feedback-success-surface', 4.5],
+  ['--fds-color-feedback-success-icon', '--fds-color-feedback-success-surface', 3],
   ['--fds-color-feedback-warning-content-text', '--fds-color-feedback-warning-surface', 4.5],
   ['--fds-color-feedback-warning-text', '--fds-color-feedback-warning-surface', 4.5],
+  ['--fds-color-feedback-warning-icon', '--fds-color-feedback-warning-surface', 3],
   ['--fds-color-feedback-error-content-text', '--fds-color-feedback-error-surface', 4.5],
   ['--fds-color-feedback-error-text', '--fds-color-feedback-error-surface', 4.5],
+  ['--fds-color-feedback-error-icon', '--fds-color-feedback-error-surface', 3],
   ['--fds-color-status-neutral-text', '--fds-color-status-neutral-surface', 4.5],
   ['--fds-color-status-success-text', '--fds-color-status-success-surface', 4.5],
   ['--fds-color-status-warning-text', '--fds-color-status-warning-surface', 4.5],

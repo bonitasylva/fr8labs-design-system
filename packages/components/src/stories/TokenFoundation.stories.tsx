@@ -1,4 +1,5 @@
 import type {Meta, StoryObj} from '@storybook/react-vite';
+import {useId, useState} from 'react';
 import breakpoints from 'sandbox-fds-tokens/breakpoints.json';
 import './TokenFoundation.stories.css';
 import {renderTokenNamingGuide} from './TokenNames';
@@ -28,9 +29,17 @@ const primitiveGroups: readonly TokenGroupData[] = [
     description: 'The FDS brand and action scale, ordered from lighter to darker.',
     preview: 'color',
     tokens: [
+      ['--fds-primitive-color-blue-50', '#f0f6fe'],
+      ['--fds-primitive-color-blue-100', '#dbe9fc'],
+      ['--fds-primitive-color-blue-200', '#bcd7f9'],
+      ['--fds-primitive-color-blue-300', '#8dbaf5'],
+      ['--fds-primitive-color-blue-400', '#5b9df1'],
       ['--fds-primitive-color-blue-500', '#008de4'],
       ['--fds-primitive-color-blue-600', '#0067e7'],
-      ['--fds-primitive-color-blue-700', '#023c9b'],
+      ['--fds-primitive-color-blue-700', '#0054bd'],
+      ['--fds-primitive-color-blue-800', '#023c9b'],
+      ['--fds-primitive-color-blue-900', '#0b305b'],
+      ['--fds-primitive-color-blue-950', '#051f3e'],
     ],
   },
   {
@@ -41,81 +50,93 @@ const primitiveGroups: readonly TokenGroupData[] = [
     tokens: [
       ['--fds-primitive-color-neutral-50', '#f6f8fb'],
       ['--fds-primitive-color-neutral-100', '#eef2f6'],
+      ['--fds-primitive-color-neutral-200', '#e9eef4'],
       ['--fds-primitive-color-neutral-300', '#e3eaf1'],
       ['--fds-primitive-color-neutral-400', '#c8d2dc'],
       ['--fds-primitive-color-neutral-500', '#8496a8'],
       ['--fds-primitive-color-neutral-600', '#5e758d'],
       ['--fds-primitive-color-neutral-700', '#3f556b'],
+      ['--fds-primitive-color-neutral-800', '#2f3f4f'],
       ['--fds-primitive-color-neutral-900', '#002245'],
+      ['--fds-primitive-color-neutral-950', '#00162d'],
     ],
   },
   {
     category: 'Color',
-    title: 'Info',
-    description: 'Light surface and dark text values for informational feedback.',
+    title: 'Green',
+    description: 'Raw green values, ordered from lighter to darker.',
     preview: 'color',
     tokens: [
-      ['--fds-primitive-color-info-50', '#eaf3ff'],
-      ['--fds-primitive-color-info-600', '#2f3f4f'],
-      ['--fds-primitive-color-info-700', '#00458c'],
+      ['--fds-primitive-color-green-50', '#f2f8f1'],
+      ['--fds-primitive-color-green-100', '#e4f1e4'],
+      ['--fds-primitive-color-green-200', '#cae4c9'],
+      ['--fds-primitive-color-green-300', '#afd6ae'],
+      ['--fds-primitive-color-green-400', '#94c892'],
+      ['--fds-primitive-color-green-500', '#7abb77'],
+      ['--fds-primitive-color-green-600', '#5fad5c'],
+      ['--fds-primitive-color-green-700', '#4e954b'],
+      ['--fds-primitive-color-green-800', '#407a3e'],
+      ['--fds-primitive-color-green-900', '#315f30'],
+      ['--fds-primitive-color-green-950', '#070e07'],
     ],
   },
   {
     category: 'Color',
-    title: 'Success',
-    description: 'Light surface and dark text values for successful outcomes.',
+    title: 'Amber',
+    description: 'Raw amber values, ordered from lighter to darker.',
     preview: 'color',
     tokens: [
-      ['--fds-primitive-color-success-100', '#e6f6eb'],
-      ['--fds-primitive-color-success-600', '#31433a'],
-      ['--fds-primitive-color-success-700', '#193b2d'],
+      ['--fds-primitive-color-amber-50', '#fff9eb'],
+      ['--fds-primitive-color-amber-100', '#fff3d6'],
+      ['--fds-primitive-color-amber-200', '#ffe8ad'],
+      ['--fds-primitive-color-amber-300', '#ffdc82'],
+      ['--fds-primitive-color-amber-400', '#ffd15c'],
+      ['--fds-primitive-color-amber-500', '#ffc533'],
+      ['--fds-primitive-color-amber-600', '#ffba0a'],
+      ['--fds-primitive-color-amber-700', '#e0a100'],
+      ['--fds-primitive-color-amber-800', '#b88400'],
+      ['--fds-primitive-color-amber-900', '#8f6600'],
+      ['--fds-primitive-color-amber-950', '#140f00'],
     ],
   },
   {
     category: 'Color',
-    title: 'Warning',
-    description: 'Light surface and dark text values for cautionary feedback.',
+    title: 'Red',
+    description: 'Raw red values, ordered from lighter to darker.',
     preview: 'color',
     tokens: [
-      ['--fds-primitive-color-warning-100', '#fff4d5'],
-      ['--fds-primitive-color-warning-700', '#4a4236'],
-      ['--fds-primitive-color-warning-800', '#4f3422'],
+      ['--fds-primitive-color-red-50', '#fdedef'],
+      ['--fds-primitive-color-red-100', '#fadbdf'],
+      ['--fds-primitive-color-red-200', '#f6b7be'],
+      ['--fds-primitive-color-red-300', '#f1939e'],
+      ['--fds-primitive-color-red-400', '#ec6f7d'],
+      ['--fds-primitive-color-red-500', '#e84a5d'],
+      ['--fds-primitive-color-red-600', '#e3263c'],
+      ['--fds-primitive-color-red-700', '#ba182b'],
+      ['--fds-primitive-color-red-800', '#a21526'],
+      ['--fds-primitive-color-red-900', '#7e101d'],
+      ['--fds-primitive-color-red-950', '#120204'],
     ],
   },
   {
-    category: 'Color',
-    title: 'Error',
-    description: 'Surface, action, and strong text values for errors and danger.',
+    category: 'Transparency',
+    title: 'Neutral 900 / 45%',
+    description: 'A translucent raw variant of Neutral 900.',
     preview: 'color',
     tokens: [
-      ['--fds-primitive-color-error-100', '#ffebec'],
-      ['--fds-primitive-color-error-400', '#c8393a'],
-      ['--fds-primitive-color-error-600', '#4a3538'],
-      ['--fds-primitive-color-error-700', '#641723'],
-    ],
-  },
-  {
-    category: 'Color',
-    title: 'Supporting hues',
-    description: 'Raw hues used by semantic status borders.',
-    preview: 'color',
-    tokens: [
-      ['--fds-primitive-color-green-500', '#62a179'],
-      ['--fds-primitive-color-amber-600', '#a68d5b'],
-      ['--fds-primitive-color-red-400', '#d36f69'],
-    ],
-  },
-  {
-    category: 'Color',
-    title: 'Alpha colors',
-    description: 'Transparent neutral and blue values used by semantic interaction roles.',
-    preview: 'color',
-    tokens: [
-      ['--fds-primitive-color-neutral-900-alpha-16', 'rgb(0 34 69 / 16%)'],
-      ['--fds-primitive-color-neutral-900-alpha-74', 'rgb(0 34 69 / 74%)'],
-      ['--fds-primitive-color-neutral-900-alpha-38', 'rgb(0 34 69 / 38%)'],
-      ['--fds-primitive-color-blue-600-alpha-8', 'rgb(0 103 231 / 8%)'],
       ['--fds-primitive-color-neutral-900-alpha-45', 'rgb(0 34 69 / 45%)'],
+    ],
+  },
+  {
+    category: 'Layout',
+    title: 'Breakpoints',
+    description: 'Raw viewport thresholds. CSS variables expose the shared scale; media queries use the matching literal value.',
+    tokens: [
+      ['--fds-primitive-breakpoint-base', '0rem'],
+      ['--fds-primitive-breakpoint-small', '40rem'],
+      ['--fds-primitive-breakpoint-medium', '48rem'],
+      ['--fds-primitive-breakpoint-large', '64rem'],
+      ['--fds-primitive-breakpoint-wide', '80rem'],
     ],
   },
   {
@@ -131,26 +152,21 @@ const primitiveGroups: readonly TokenGroupData[] = [
     ],
   },
   {
-    category: 'Spacing',
-    title: 'Scale',
-    description: 'The shared 4px-based rhythm for layout and component spacing.',
-    tokens: [
-      ['--fds-primitive-space-1', '4px'],
-      ['--fds-primitive-space-2', '8px'],
-      ['--fds-primitive-space-3', '12px'],
-      ['--fds-primitive-space-4', '16px'],
-      ['--fds-primitive-space-5', '24px'],
-    ],
-  },
-  {
     category: 'Size',
-    title: 'Scale',
-    description: 'Raw dimensions used by type, controls, icons, data rows, and overlays.',
+    title: 'Size scale',
+    description: 'Raw dimensions shared by typography, controls, icons, data density, and spacing.',
     tokens: [
+      ['--fds-primitive-size-0', '0'],
+      ['--fds-primitive-size-2', '2px'],
+      ['--fds-primitive-size-4', '4px'],
+      ['--fds-primitive-size-6', '6px'],
+      ['--fds-primitive-size-8', '8px'],
+      ['--fds-primitive-size-10', '10px'],
       ['--fds-primitive-size-11', '11px'],
       ['--fds-primitive-size-12', '12px'],
       ['--fds-primitive-size-13', '13px'],
       ['--fds-primitive-size-14', '14px'],
+      ['--fds-primitive-size-15', '15px'],
       ['--fds-primitive-size-16', '16px'],
       ['--fds-primitive-size-18', '18px'],
       ['--fds-primitive-size-20', '20px'],
@@ -160,56 +176,47 @@ const primitiveGroups: readonly TokenGroupData[] = [
       ['--fds-primitive-size-32', '32px'],
       ['--fds-primitive-size-36', '36px'],
       ['--fds-primitive-size-40', '40px'],
-      ['--fds-primitive-size-520', '520px'],
-      ['--fds-primitive-size-540', '540px'],
-    ],
-  },
-  {
-    category: 'Responsive',
-    title: 'Breakpoints',
-    description: 'Primitive min-width references exported from breakpoints.json for build-time use.',
-    tokens: [
-      ['breakpoints.base', `${breakpoints.base.value} (${breakpoints.base.pixels}px)`],
-      ['breakpoints.small', `${breakpoints.small.value} (${breakpoints.small.pixels}px)`],
-      ['breakpoints.medium', `${breakpoints.medium.value} (${breakpoints.medium.pixels}px)`],
-      ['breakpoints.large', `${breakpoints.large.value} (${breakpoints.large.pixels}px)`],
-      ['breakpoints.wide', `${breakpoints.wide.value} (${breakpoints.wide.pixels}px)`],
-    ],
-  },
-  {
-    category: 'Layout',
-    title: 'Content measures',
-    description: 'Raw maximum widths for readable and structured content containers.',
-    tokens: [
-      ['--fds-primitive-size-768', '48rem'],
-      ['--fds-primitive-size-1280', '80rem'],
-      ['--fds-primitive-measure-72', '72ch'],
+      ['--fds-primitive-size-44', '44px'],
+      ['--fds-primitive-size-48', '48px'],
+      ['--fds-primitive-size-56', '56px'],
+      ['--fds-primitive-size-64', '64px'],
+      ['--fds-primitive-size-72', '72px'],
+      ['--fds-primitive-size-80', '80px'],
+      ['--fds-primitive-size-96', '96px'],
+      ['--fds-primitive-size-112', '112px'],
+      ['--fds-primitive-size-128', '128px'],
     ],
   },
   {
     category: 'Shape',
-    title: 'Radius and border',
-    description: 'Raw corner and stroke measurements.',
+    title: 'Base shape values',
+    description: 'Literal corner and stroke measurements.',
     tokens: [
-      ['--fds-primitive-radius-default', '4px'],
+      ['--fds-primitive-radius-4', '4px'],
       ['--fds-primitive-radius-full', '999px'],
-      ['--fds-primitive-border-width', '1px'],
-      ['--fds-primitive-border-width-strong', '2px'],
+      ['--fds-primitive-border-width-1', '1px'],
+      ['--fds-primitive-border-width-2', '2px'],
     ],
   },
   {
-    category: 'Interaction',
-    title: 'State, focus, motion, and elevation',
-    description: 'Raw focus, disabled-state, interaction timing, and control elevation values.',
+    category: 'Shape',
+    title: 'Functional shape primitives',
+    description: 'Reference measurements for border, radius, and focus outlines; they still have no product meaning.',
     tokens: [
-      ['--fds-primitive-opacity-disabled', '0.55'],
-      ['--fds-primitive-focus-width', '3px'],
-      ['--fds-primitive-focus-offset', '2px'],
+      ['--fds-primitive-radius-small', '4px'],
+      ['--fds-primitive-border-width-thin', '1px'],
+      ['--fds-primitive-border-width-thick', '2px'],
+      ['--fds-primitive-outline-focus-width', '3px'],
+      ['--fds-primitive-outline-focus-offset', '2px'],
+    ],
+  },
+  {
+    category: 'Motion',
+    title: 'Timing and easing',
+    description: 'Raw reusable timing and easing values.',
+    tokens: [
       ['--fds-primitive-motion-duration-fast', '150ms'],
-      ['--fds-primitive-motion-duration-spinner', '700ms'],
       ['--fds-primitive-motion-easing-standard', 'ease'],
-      ['--fds-primitive-shadow-control', '0 1px 1px rgb(91 125 160 / 4%), 0 1px 2px rgb(91 125 160 / 3%)'],
-      ['--fds-primitive-shadow-overlay', '0 0 0 1px rgb(0 0 0 / 6%), 0 4px 10px -2px rgb(0 0 0 / 10%), 0 12px 28px -8px rgb(0 0 0 / 14%)'],
     ],
   },
 ];
@@ -252,8 +259,8 @@ const semanticGroups: readonly TokenGroupData[] = [
     description: 'Default and disabled icon states.',
     preview: 'color',
     tokens: [
-      ['--fds-color-icon-default', '--fds-primitive-color-neutral-900-alpha-74'],
-      ['--fds-color-icon-disabled', '--fds-primitive-color-neutral-900-alpha-38'],
+      ['--fds-color-icon-default', '--fds-primitive-color-neutral-700'],
+      ['--fds-color-icon-disabled', '--fds-primitive-color-neutral-500'],
     ],
   },
   {
@@ -276,7 +283,7 @@ const semanticGroups: readonly TokenGroupData[] = [
       ['--fds-color-field-background', '--fds-color-surface-default'],
       ['--fds-color-field-background-disabled', '--fds-color-surface-subtle'],
       ['--fds-color-field-border', '--fds-primitive-color-neutral-600'],
-      ['--fds-color-field-border-error', '--fds-primitive-color-error-700'],
+      ['--fds-color-field-border-error', '--fds-primitive-color-red-700'],
     ],
   },
   {
@@ -295,12 +302,12 @@ const semanticGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-color-action-primary', '--fds-primitive-color-blue-600'],
-      ['--fds-color-action-primary-border', '--fds-primitive-color-neutral-900-alpha-16'],
-      ['--fds-color-action-primary-active', '--fds-primitive-color-blue-700'],
-      ['--fds-color-action-primary-hover', '--fds-primitive-color-blue-600-alpha-8'],
+      ['--fds-color-action-primary-border', '--fds-primitive-color-transparent'],
+      ['--fds-color-action-primary-hover', '--fds-primitive-color-blue-700'],
+      ['--fds-color-action-primary-active', '--fds-primitive-color-blue-800'],
       ['--fds-color-action-tertiary-background', '--fds-primitive-color-transparent'],
-      ['--fds-color-action-danger', '--fds-primitive-color-error-400'],
-      ['--fds-color-action-danger-active', '--fds-primitive-color-error-700'],
+      ['--fds-color-action-danger', '--fds-primitive-color-red-600'],
+      ['--fds-color-action-danger-active', '--fds-primitive-color-red-700'],
     ],
   },
   {
@@ -315,45 +322,53 @@ const semanticGroups: readonly TokenGroupData[] = [
   {
     category: 'Color',
     title: 'Feedback · Info',
-    description: 'Informational surface and readable foreground.',
+    description: 'Quiet informational surface, border, reading text, icon, and action.',
     preview: 'color',
     tokens: [
-      ['--fds-color-feedback-info-surface', '--fds-primitive-color-info-50'],
-      ['--fds-color-feedback-info-content-text', '--fds-primitive-color-info-600'],
-      ['--fds-color-feedback-info-text', '--fds-primitive-color-info-700'],
+      ['--fds-color-feedback-info-surface', '--fds-primitive-color-blue-50'],
+      ['--fds-color-feedback-info-border', '--fds-primitive-color-blue-200'],
+      ['--fds-color-feedback-info-content-text', '--fds-color-text-default'],
+      ['--fds-color-feedback-info-icon', '--fds-primitive-color-blue-600'],
+      ['--fds-color-feedback-info-text', '--fds-primitive-color-blue-700'],
     ],
   },
   {
     category: 'Color',
     title: 'Feedback · Success',
-    description: 'Successful outcome surface and foreground.',
+    description: 'Quiet success surface, border, reading text, icon, and action.',
     preview: 'color',
     tokens: [
-      ['--fds-color-feedback-success-surface', '--fds-primitive-color-success-100'],
-      ['--fds-color-feedback-success-content-text', '--fds-primitive-color-success-600'],
-      ['--fds-color-feedback-success-text', '--fds-primitive-color-success-700'],
+      ['--fds-color-feedback-success-surface', '--fds-primitive-color-green-50'],
+      ['--fds-color-feedback-success-border', '--fds-primitive-color-green-200'],
+      ['--fds-color-feedback-success-content-text', '--fds-color-text-default'],
+      ['--fds-color-feedback-success-icon', '--fds-primitive-color-green-700'],
+      ['--fds-color-feedback-success-text', '--fds-primitive-color-green-800'],
     ],
   },
   {
     category: 'Color',
     title: 'Feedback · Warning',
-    description: 'Cautionary surface and foreground.',
+    description: 'Quiet warning surface, border, reading text, icon, and action.',
     preview: 'color',
     tokens: [
-      ['--fds-color-feedback-warning-surface', '--fds-primitive-color-warning-100'],
-      ['--fds-color-feedback-warning-content-text', '--fds-primitive-color-warning-700'],
-      ['--fds-color-feedback-warning-text', '--fds-primitive-color-warning-800'],
+      ['--fds-color-feedback-warning-surface', '--fds-primitive-color-amber-50'],
+      ['--fds-color-feedback-warning-border', '--fds-primitive-color-amber-200'],
+      ['--fds-color-feedback-warning-content-text', '--fds-color-text-default'],
+      ['--fds-color-feedback-warning-icon', '--fds-primitive-color-amber-800'],
+      ['--fds-color-feedback-warning-text', '--fds-primitive-color-amber-900'],
     ],
   },
   {
     category: 'Color',
     title: 'Feedback · Error',
-    description: 'Error surface and foreground.',
+    description: 'Quiet error surface, border, reading text, icon, and action.',
     preview: 'color',
     tokens: [
-      ['--fds-color-feedback-error-surface', '--fds-primitive-color-error-100'],
-      ['--fds-color-feedback-error-content-text', '--fds-primitive-color-error-600'],
-      ['--fds-color-feedback-error-text', '--fds-primitive-color-error-700'],
+      ['--fds-color-feedback-error-surface', '--fds-primitive-color-red-50'],
+      ['--fds-color-feedback-error-border', '--fds-primitive-color-red-200'],
+      ['--fds-color-feedback-error-content-text', '--fds-color-text-default'],
+      ['--fds-color-feedback-error-icon', '--fds-primitive-color-red-600'],
+      ['--fds-color-feedback-error-text', '--fds-primitive-color-red-700'],
     ],
   },
   {
@@ -374,7 +389,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-color-status-warning-surface', '--fds-color-surface-default'],
-      ['--fds-color-status-warning-border', '--fds-primitive-color-amber-600'],
+      ['--fds-color-status-warning-border', '--fds-primitive-color-amber-800'],
       ['--fds-color-status-warning-text', '--fds-color-feedback-warning-text'],
     ],
   },
@@ -385,7 +400,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-color-status-success-surface', '--fds-color-surface-default'],
-      ['--fds-color-status-success-border', '--fds-primitive-color-green-500'],
+      ['--fds-color-status-success-border', '--fds-primitive-color-green-800'],
       ['--fds-color-status-success-text', '--fds-color-feedback-success-text'],
     ],
   },
@@ -396,8 +411,8 @@ const semanticGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-color-status-danger-surface', '--fds-color-surface-default'],
-      ['--fds-color-status-danger-border', '--fds-primitive-color-red-400'],
-      ['--fds-color-status-danger-text', '--fds-color-action-danger'],
+      ['--fds-color-status-danger-border', '--fds-primitive-color-red-600'],
+      ['--fds-color-status-danger-text', '--fds-color-feedback-error-text'],
     ],
   },
   {
@@ -499,44 +514,39 @@ const semanticGroups: readonly TokenGroupData[] = [
   },
   {
     category: 'Spacing',
-    title: 'Scale',
-    description: 'Stable layout roles used by components instead of raw measurements.',
+    title: 'Spacing scale',
+    description: 'T-shirt layout roles selected from the raw size scale.',
     tokens: [
-      ['--fds-space-1', '--fds-primitive-space-1'],
-      ['--fds-space-2', '--fds-primitive-space-2'],
-      ['--fds-space-3', '--fds-primitive-space-3'],
-      ['--fds-space-4', '--fds-primitive-space-4'],
-      ['--fds-space-5', '--fds-primitive-space-5'],
+      ['--fds-space-none', '--fds-primitive-size-0'],
+      ['--fds-space-2xs', '--fds-primitive-size-4'],
+      ['--fds-space-xs', '--fds-primitive-size-8'],
+      ['--fds-space-sm', '--fds-primitive-size-12'],
+      ['--fds-space-md', '--fds-primitive-size-16'],
+      ['--fds-space-lg', '--fds-primitive-size-20'],
+      ['--fds-space-xl', '--fds-primitive-size-24'],
+      ['--fds-space-2xl', '--fds-primitive-size-28'],
+      ['--fds-space-3xl', '--fds-primitive-size-32'],
     ],
   },
   {
     category: 'Size',
-    title: 'Control',
-    description: 'Compact, default, and action control dimensions.',
+    title: 'Control scale',
+    description: 'T-shirt dimensions for compact to large interactive controls.',
     tokens: [
-      ['--fds-size-control-default', '--fds-primitive-size-32'],
-      ['--fds-size-control-compact', '--fds-primitive-size-28'],
-      ['--fds-size-control-action', '--fds-primitive-size-40'],
-      ['--fds-size-control-action-small', '--fds-primitive-size-24'],
+      ['--fds-size-control-xs', '--fds-primitive-size-24'],
+      ['--fds-size-control-sm', '--fds-primitive-size-28'],
+      ['--fds-size-control-md', '--fds-primitive-size-32'],
+      ['--fds-size-control-lg', '--fds-primitive-size-40'],
     ],
   },
   {
     category: 'Size',
-    title: 'Icon',
-    description: 'Icon glyph dimensions and interactive hit targets.',
+    title: 'Icon scale',
+    description: 'T-shirt dimensions for icon glyphs and hit targets.',
     tokens: [
-      ['--fds-size-icon-16', '--fds-primitive-size-16'],
-      ['--fds-size-icon-20', '--fds-primitive-size-20'],
-      ['--fds-size-icon-24', '--fds-primitive-size-24'],
-    ],
-  },
-  {
-    category: 'Size',
-    title: 'Overlay',
-    description: 'Default dialog and drawer widths.',
-    tokens: [
-      ['--fds-size-overlay-dialog', '--fds-primitive-size-520'],
-      ['--fds-size-overlay-drawer', '--fds-primitive-size-540'],
+      ['--fds-size-icon-sm', '--fds-primitive-size-16'],
+      ['--fds-size-icon-md', '--fds-primitive-size-20'],
+      ['--fds-size-icon-lg', '--fds-primitive-size-24'],
     ],
   },
   {
@@ -544,9 +554,9 @@ const semanticGroups: readonly TokenGroupData[] = [
     title: 'Content containers',
     description: 'Maximum widths that prevent forms and readable content from stretching across wide viewports.',
     tokens: [
-      ['--fds-size-container-form', '--fds-primitive-size-768'],
-      ['--fds-size-container-reading', '--fds-primitive-measure-72'],
-      ['--fds-size-container-page', '--fds-primitive-size-1280'],
+      ['--fds-size-container-form', '48rem'],
+      ['--fds-size-container-reading', '72ch'],
+      ['--fds-size-container-page', '80rem'],
     ],
   },
   {
@@ -572,11 +582,11 @@ const semanticGroups: readonly TokenGroupData[] = [
     title: 'Radius and border',
     description: 'Stable corner and border roles used by components instead of raw measurements.',
     tokens: [
-      ['--fds-radius-control', '--fds-primitive-radius-default'],
-      ['--fds-radius-container', '--fds-primitive-radius-default'],
+      ['--fds-radius-control', '--fds-primitive-radius-small'],
+      ['--fds-radius-container', '--fds-primitive-radius-small'],
       ['--fds-radius-pill', '--fds-primitive-radius-full'],
-      ['--fds-border-default', '--fds-primitive-border-width'],
-      ['--fds-border-strong', '--fds-primitive-border-width-strong'],
+      ['--fds-border-default', '--fds-primitive-border-width-thin'],
+      ['--fds-border-strong', '--fds-primitive-border-width-thick'],
     ],
   },
   {
@@ -584,7 +594,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     title: 'State',
     description: 'Shared disabled-state opacity.',
     tokens: [
-      ['--fds-opacity-disabled', '--fds-primitive-opacity-disabled'],
+      ['--fds-opacity-disabled', '0.55'],
     ],
   },
   {
@@ -592,8 +602,8 @@ const semanticGroups: readonly TokenGroupData[] = [
     title: 'Focus',
     description: 'Visible keyboard focus width and offset.',
     tokens: [
-      ['--fds-focus-ring-width', '--fds-primitive-focus-width'],
-      ['--fds-focus-ring-offset', '--fds-primitive-focus-offset'],
+      ['--fds-focus-ring-width', '--fds-primitive-outline-focus-width'],
+      ['--fds-focus-ring-offset', '--fds-primitive-outline-focus-offset'],
     ],
   },
   {
@@ -602,7 +612,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     description: 'Shared durations and easing for UI feedback.',
     tokens: [
       ['--fds-motion-duration-fast', '--fds-primitive-motion-duration-fast'],
-      ['--fds-motion-duration-spinner', '--fds-primitive-motion-duration-spinner'],
+      ['--fds-motion-duration-spinner', '700ms'],
       ['--fds-motion-easing-standard', '--fds-primitive-motion-easing-standard'],
     ],
   },
@@ -611,8 +621,88 @@ const semanticGroups: readonly TokenGroupData[] = [
     title: 'Elevation',
     description: 'Elevation for interactive controls and floating surfaces.',
     tokens: [
-      ['--fds-shadow-control', '--fds-primitive-shadow-control'],
-      ['--fds-shadow-overlay', '--fds-primitive-shadow-overlay'],
+      ['--fds-shadow-control', '0 1px 1px rgb(91 125 160 / 4%), 0 1px 2px rgb(91 125 160 / 3%)'],
+      ['--fds-shadow-overlay', '0 0 0 1px rgb(0 0 0 / 6%), 0 4px 10px -2px rgb(0 0 0 / 10%), 0 12px 28px -8px rgb(0 0 0 / 14%)'],
+    ],
+  },
+];
+
+const componentGroups: readonly TokenGroupData[] = [
+  {
+    category: 'Component',
+    title: 'Button',
+    description: 'Internal sizing, layout, and tone mappings for the supported Button component.',
+    tokens: [
+      ['--fds-button-height-small', '--fds-size-control-sm'],
+      ['--fds-button-height-medium', '--fds-size-control-md'],
+      ['--fds-button-height-large', '--fds-size-control-lg'],
+      ['--fds-button-padding-inline-small', '--fds-space-12'],
+      ['--fds-button-padding-inline-medium', '--fds-space-12'],
+      ['--fds-button-padding-inline-large', '--fds-space-12'],
+      ['--fds-button-gap', '--fds-space-8'],
+      ['--fds-button-border-width', '--fds-border-default'],
+      ['--fds-button-radius', '--fds-radius-control'],
+      ['--fds-button-shadow', '--fds-shadow-control'],
+      ['--fds-button-primary-background', '--fds-color-action-primary'],
+      ['--fds-button-primary-border', '--fds-color-action-primary-border'],
+      ['--fds-button-primary-background-hover', '--fds-color-action-primary-hover'],
+      ['--fds-button-primary-background-active', '--fds-color-action-primary-active'],
+      ['--fds-button-primary-foreground', '--fds-color-text-inverse'],
+      ['--fds-button-secondary-background', '--fds-color-surface-subtle'],
+      ['--fds-button-secondary-background-hover', '--fds-color-surface-hover'],
+      ['--fds-button-secondary-border', '--fds-color-border-default'],
+      ['--fds-button-secondary-foreground', '--fds-color-text-default'],
+      ['--fds-button-tertiary-background', '--fds-color-action-tertiary-background'],
+      ['--fds-button-tertiary-background-hover', '--fds-color-surface-hover'],
+      ['--fds-button-tertiary-foreground', '--fds-color-text-default'],
+      ['--fds-button-danger-background', '--fds-color-surface-subtle'],
+      ['--fds-button-danger-background-hover', '--fds-color-feedback-error-surface'],
+      ['--fds-button-danger-border', '--fds-color-border-default'],
+      ['--fds-button-danger-border-hover', '--fds-color-action-danger'],
+      ['--fds-button-danger-foreground', '--fds-color-action-danger-active'],
+    ],
+  },
+  {
+    category: 'Component',
+    title: 'Controls',
+    description: 'Internal dimensions for shared controls and Switch.',
+    tokens: [
+      ['--fds-control-height', '--fds-size-control-md'],
+      ['--fds-control-height-compact', '--fds-size-control-sm'],
+      ['--fds-switch-track-width', '--fds-size-toggle-track'],
+      ['--fds-switch-thumb-size', '--fds-size-toggle-thumb'],
+    ],
+  },
+  {
+    category: 'Component',
+    title: 'Overlay surfaces',
+    description: 'Internal Dialog and Drawer dimensions.',
+    tokens: [
+      ['--fds-drawer-width', '540px'],
+      ['--fds-dialog-width', '520px'],
+    ],
+  },
+  {
+    category: 'Component',
+    title: 'Data table',
+    description: 'Internal density and cell layout for DataTable.',
+    tokens: [
+      ['--fds-table-header-height', '--fds-size-data-header'],
+      ['--fds-table-row-height', '--fds-size-data-row'],
+      ['--fds-table-cell-padding-inline', '--fds-space-8'],
+    ],
+  },
+  {
+    category: 'Component',
+    title: 'Status badge',
+    description: 'Internal size, shape, and type mappings for StatusBadge.',
+    tokens: [
+      ['--fds-status-height', '--fds-size-icon-md'],
+      ['--fds-status-padding-inline', '--fds-space-4'],
+      ['--fds-status-border-width', '--fds-border-default'],
+      ['--fds-status-radius', '--fds-radius-control'],
+      ['--fds-status-font-size', '--fds-font-size-metadata'],
+      ['--fds-status-line-height', '--fds-line-height-metadata'],
     ],
   },
 ];
@@ -627,23 +717,69 @@ function TokenGroup({group, valueHeading}: {group: TokenGroupData; valueHeading:
     <div className="fds-token-docs__table-wrap">
       <table>
         <colgroup>
-          {group.preview && <col className="fds-token-docs__preview-column" />}
           <col className="fds-token-docs__token-column" />
           <col className="fds-token-docs__value-column" />
+          {group.preview && <col className="fds-token-docs__preview-column" />}
         </colgroup>
         <thead><tr>
-          {group.preview && <th scope="col">Preview</th>}
           <th scope="col">Token</th>
           <th scope="col">{valueHeading}</th>
+          {group.preview && <th scope="col">Preview</th>}
         </tr></thead>
         <tbody>{group.tokens.map(([name, value]) => <tr key={name}>
-          {group.preview && <td className="fds-token-docs__preview" data-label="Preview"><span className="fds-token-docs__color" style={{background: `var(${name})`}} /></td>}
           <th className="fds-token-docs__token" scope="row" data-label="Token"><code>{name}</code></th>
           <td className="fds-token-docs__value" data-label={valueHeading}><code>{value}</code></td>
+          {group.preview && <td className="fds-token-docs__preview" data-label="Preview"><span className="fds-token-docs__color" style={{background: `var(${name})`}} /></td>}
         </tr>)}</tbody>
       </table>
     </div>
   </article>;
+}
+
+function matchesTokenSearch(query: string, ...values: readonly string[]) {
+  return values.join(' ').toLowerCase().includes(query.trim().toLowerCase());
+}
+
+function filterTokenGroups(groups: readonly TokenGroupData[], query: string) {
+  if (!query.trim()) return groups;
+  return groups.flatMap((group) => {
+    const groupMatches = matchesTokenSearch(query, group.category, group.title);
+    const tokens = groupMatches ? group.tokens : group.tokens.filter(([name, value]) => matchesTokenSearch(query, name, value));
+    return tokens.length ? [{...group, tokens}] : [];
+  });
+}
+
+function TokenSearch({query, onQueryChange, resultCount}: {query: string; onQueryChange: (query: string) => void; resultCount: number}) {
+  const id = useId();
+  const resultId = `${id}-results`;
+  return <div className="fds-token-docs__search">
+    <label htmlFor={id}>Search tokens</label>
+    <div className="fds-token-docs__search-control">
+      <input id={id} type="search" value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Search name or value" aria-describedby={resultId} />
+      {query && <button type="button" onClick={() => onQueryChange('')}>Clear</button>}
+    </div>
+    <p className="fds-token-docs__search-result" id={resultId} aria-live="polite">{resultCount} {resultCount === 1 ? 'token' : 'tokens'} {query ? 'match' : 'shown'}</p>
+  </div>;
+}
+
+function TokenCatalog({title, intro, groups, valueHeading, notice, note}: {title: string; intro: string; groups: readonly TokenGroupData[]; valueHeading: string; notice?: string; note?: string}) {
+  const [query, setQuery] = useState('');
+  const filteredGroups = filterTokenGroups(groups, query);
+  const resultCount = filteredGroups.reduce((count, group) => count + group.tokens.length, 0);
+  return <main className="fds-token-docs fds-token-docs--catalog">
+    <header>
+      <h2>{title}</h2>
+      <p className="fds-token-docs__intro">{intro}</p>
+      {notice && <aside className="fds-token-docs__usage-notice" aria-label="Component token usage"><strong>Internal FDS implementation tokens</strong><span>{notice}</span></aside>}
+      <TokenSearch query={query} onQueryChange={setQuery} resultCount={resultCount} />
+    </header>
+
+    <section aria-label={`${title} reference`}>
+      {filteredGroups.map((group) => <TokenGroup group={group} valueHeading={valueHeading} key={`${group.category}-${group.title}`} />)}
+      {resultCount === 0 && <p className="fds-token-docs__empty" role="status">No tokens match “{query}”. Try a token name, value, or category.</p>}
+      {note && <p className="fds-token-docs__note">{note}</p>}
+    </section>
+  </main>;
 }
 
 const meta = {
@@ -658,77 +794,71 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const breakpointGuidance = [
-  {name: 'Base', reference: 'breakpoints.base', ...breakpoints.base, use: 'Single-column and constrained layouts. Keep the core task and primary action visible.'},
-  {name: 'Small', reference: 'breakpoints.small', ...breakpoints.small, use: 'Narrow application windows. Add paired fields only when their content still fits.'},
-  {name: 'Medium', reference: 'breakpoints.medium', ...breakpoints.medium, use: 'Restore standard page regions and supporting controls when space allows.'},
-  {name: 'Large', reference: 'breakpoints.large', ...breakpoints.large, use: 'Required compact desktop baseline. Complete workflows must work without page-level horizontal scrolling.'},
-  {name: 'Wide', reference: 'breakpoints.wide', ...breakpoints.wide, use: 'Optional enhancement space. Never make required content or actions available only here.'},
+  {name: 'Base', token: '--fds-primitive-breakpoint-base', ...breakpoints.base, use: 'Single-column and constrained layouts. Keep the core task and primary action visible.'},
+  {name: 'Small', token: '--fds-primitive-breakpoint-small', ...breakpoints.small, use: 'Narrow application windows. Add paired fields only when their content still fits.'},
+  {name: 'Medium', token: '--fds-primitive-breakpoint-medium', ...breakpoints.medium, use: 'Restore standard page regions and supporting controls when space allows.'},
+  {name: 'Large', token: '--fds-primitive-breakpoint-large', ...breakpoints.large, use: 'Required compact desktop baseline. Complete workflows must work without page-level horizontal scrolling.'},
+  {name: 'Wide', token: '--fds-primitive-breakpoint-wide', ...breakpoints.wide, use: 'Optional enhancement space. Never make required content or actions available only here.'},
 ] as const;
+
+function BreakpointReference() {
+  const [query, setQuery] = useState('');
+  const matches = breakpointGuidance.filter(({name, token, value, pixels, use}) => matchesTokenSearch(query, name, token, value, String(pixels), use));
+  return <section aria-label="Breakpoint reference">
+    <TokenSearch query={query} onQueryChange={setQuery} resultCount={matches.length} />
+    <div className="fds-token-docs__table-wrap">
+      <table>
+        <thead><tr><th scope="col">Breakpoint</th><th scope="col">Primitive token</th><th scope="col">Output value</th><th scope="col">Source value</th><th scope="col">Layout intent</th></tr></thead>
+        <tbody>{matches.map(({name, value, pixels, token, use}) => <tr key={name}>
+          <th className="fds-breakpoint-docs__name" scope="row" data-label="Breakpoint"><span>{name}</span></th>
+          <td data-label="Primitive token"><code>{token}</code></td>
+          <td className="fds-breakpoint-docs__value" data-label="Output value"><code>{value}</code></td>
+          <td className="fds-breakpoint-docs__value" data-label="Source value"><span className="fds-breakpoint-docs__pixels">{pixels}px</span></td>
+          <td data-label="Layout intent">{use}</td>
+        </tr>)}</tbody>
+      </table>
+    </div>
+    {matches.length === 0 && <p className="fds-token-docs__empty" role="status">No breakpoints match “{query}”. Try a token name, value, or layout intent.</p>}
+    <p className="fds-token-docs__note">The CSS variables expose the shared scale, but CSS cannot use custom properties in <code>@media</code> conditions. Use the matching rem literal there. Use a component or container-specific threshold only when that component’s content needs one.</p>
+  </section>;
+}
 
 export const Primitives: Story = {
   parameters: {docs: {description: {story: 'All approved raw FDS values, grouped by visual property.'}}},
-  render: () => <main className="fds-token-docs fds-token-docs--catalog">
-    <header>
-      <p className="fds-token-docs__eyebrow">Layer 1 · Default FDS theme</p>
-      <h2>Primitive tokens</h2>
-      <p className="fds-token-docs__intro">Literal values with no product meaning. They form the source scales for color, spacing, size, shape, typography, motion, and elevation. Reference them only through a semantic token; product and component code must not select a primitive because its current value looks right.</p>
-    </header>
-
-    <section aria-label="Primitive token reference">
-      {primitiveGroups.map((group) => <TokenGroup group={group} valueHeading="Raw value" key={`${group.category}-${group.title}`} />)}
-    </section>
-  </main>,
+  render: () => <TokenCatalog title="Primitive tokens" intro="Reference values with no product meaning. They include raw scales and functional measurements for color, typography, size, shape, and motion; semantic spacing selects from the size scale. Product and component code must not select a primitive because its current value looks right." groups={primitiveGroups} valueHeading="Raw value" />,
 };
 
 export const Semantics: Story = {
   parameters: {docs: {description: {story: 'All approved purpose-based FDS roles and their source mappings.'}}},
-  render: () => <main className="fds-token-docs fds-token-docs--catalog">
-    <header>
-      <p className="fds-token-docs__eyebrow">Layer 2 · Default FDS theme</p>
-      <h2>Semantic tokens</h2>
-      <p className="fds-token-docs__intro">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from. Use the role that matches the interface meaning, state, or content—not another role that currently resolves to a similar value.</p>
-    </header>
+  render: () => <TokenCatalog title="Semantic tokens" intro="Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from. Use the role that matches the interface meaning, state, or content—not another role that currently resolves to a similar value." groups={semanticGroups} valueHeading="Resolves to" note="White on primary is 5.13:1; white on active is 9.90:1. Legacy accent remains a non-action role because white on it is 3.54:1." />,
+};
 
-    <section aria-label="Semantic token reference">
-      {semanticGroups.map((group) => <TokenGroup group={group} valueHeading="Resolves to" key={`${group.category}-${group.title}`} />)}
-      <p className="fds-token-docs__note">White on primary is 5.13:1; white on active is 9.90:1. Legacy accent remains a non-action role because white on it is 3.54:1.</p>
-    </section>
-  </main>,
+export const ComponentTokens: Story = {
+  name: 'Component tokens',
+  parameters: {docs: {description: {story: 'Internal FDS component mappings. Product CSS should use semantic roles or the supported component API instead.'}}},
+  render: () => <TokenCatalog title="Component tokens" intro="Internal FDS decisions grouped by their owning component. They make component behavior traceable." notice="Do not use or override these names in product CSS. Use a semantic token or the supported component API instead." groups={componentGroups} valueHeading="Source value" />,
 };
 
 export const Breakpoints: Story = {
   parameters: {docs: {description: {story: 'Shared viewport thresholds for compact, responsive FDS application layouts.'}}},
   render: () => <main className="fds-token-docs fds-breakpoint-docs">
     <header>
-      <p className="fds-token-docs__eyebrow">Responsive foundation</p>
       <h2>Breakpoints</h2>
-      <p className="fds-token-docs__intro">FDS starts compact and treats 1024 × 768 as the required desktop baseline. These min-width references coordinate page composition; wider screens add breathing room, not essential functionality.</p>
+      <p className="fds-token-docs__intro">Functional primitive tokens for FDS viewport thresholds. FDS starts compact and treats 1024 × 768 as the required desktop baseline; wider screens add breathing room, not essential functionality.</p>
     </header>
 
-    <section aria-label="Breakpoint reference">
-      <div className="fds-token-docs__table-wrap">
-        <table>
-          <thead><tr><th scope="col">Breakpoint</th><th scope="col">Starts at</th><th scope="col">Layout intent</th></tr></thead>
-          <tbody>{breakpointGuidance.map(({name, value, pixels, reference, use}) => <tr key={name}>
-            <th className="fds-breakpoint-docs__name" scope="row" data-label="Breakpoint"><span>{name}</span><code>{reference}</code></th>
-            <td className="fds-breakpoint-docs__value" data-label="Starts at"><code>{value}</code> <span className="fds-breakpoint-docs__pixels">({pixels}px)</span></td>
-            <td data-label="Layout intent">{use}</td>
-          </tr>)}</tbody>
-        </table>
-      </div>
-      <p className="fds-token-docs__note">Use a component or container-specific breakpoint when its own content breaks before or after one of these viewport thresholds.</p>
-    </section>
+    <BreakpointReference />
 
     <section aria-labelledby="container-widths">
       <h3 id="container-widths">Width behavior on large screens</h3>
       <div className="fds-token-docs__table-wrap">
         <table className="fds-breakpoint-docs__containers">
-          <thead><tr><th scope="col">Content</th><th scope="col">Maximum</th><th scope="col">Behavior</th></tr></thead>
+          <thead><tr><th scope="col">Content</th><th scope="col">Token</th><th scope="col">Maximum</th><th scope="col">Behavior</th></tr></thead>
           <tbody>
-            <tr><th scope="row" data-label="Content">Forms<br /><code>--fds-size-container-form</code></th><td data-label="Maximum"><code>48rem</code></td><td data-label="Behavior">Remain aligned to the page grid; inputs do not stretch across the viewport.</td></tr>
-            <tr><th scope="row" data-label="Content">Reading<br /><code>--fds-size-container-reading</code></th><td data-label="Maximum"><code>72ch</code></td><td data-label="Behavior">Keep paragraphs and guidance at a readable line length.</td></tr>
-            <tr><th scope="row" data-label="Content">Standard pages<br /><code>--fds-size-container-page</code></th><td data-label="Maximum"><code>80rem</code></td><td data-label="Behavior">Keep page regions related while the shell and background continue to fill the viewport.</td></tr>
-            <tr><th scope="row" data-label="Content">Data workspaces</th><td data-label="Maximum">Fluid</td><td data-label="Behavior">Use available width for tables and operational canvases; constrain their internal columns instead.</td></tr>
+            <tr><th scope="row" data-label="Content">Forms</th><td data-label="Token"><code>--fds-size-container-form</code></td><td data-label="Maximum"><code>48rem</code></td><td data-label="Behavior">Remain aligned to the page grid; inputs do not stretch across the viewport.</td></tr>
+            <tr><th scope="row" data-label="Content">Reading</th><td data-label="Token"><code>--fds-size-container-reading</code></td><td data-label="Maximum"><code>72ch</code></td><td data-label="Behavior">Keep paragraphs and guidance at a readable line length.</td></tr>
+            <tr><th scope="row" data-label="Content">Standard pages</th><td data-label="Token"><code>--fds-size-container-page</code></td><td data-label="Maximum"><code>80rem</code></td><td data-label="Behavior">Keep page regions related while the shell and background continue to fill the viewport.</td></tr>
+            <tr><th scope="row" data-label="Content">Data workspaces</th><td data-label="Token">—</td><td data-label="Maximum">Fluid</td><td data-label="Behavior">Use available width for tables and operational canvases; constrain their internal columns instead.</td></tr>
           </tbody>
         </table>
       </div>
@@ -742,7 +872,6 @@ export const Breakpoints: Story = {
         <li><strong>Keep 1024 × 768 complete.</strong><span>Dense freight workflows must remain usable without page-level horizontal scrolling.</span></li>
         <li><strong>Treat 1280px and above as enhancement.</strong><span>Add context or space; do not hide required controls below it.</span></li>
       </ul>
-      <pre className="fds-breakpoint-docs__code"><code>{`.page-content {\n  inline-size: min(100%, var(--fds-size-container-page));\n  margin-inline: auto;\n}\n\n.form-content {\n  inline-size: min(100%, var(--fds-size-container-form));\n}\n\n@media (min-width: 64rem) { /* breakpoints.large */\n  .shipment-workspace { grid-template-columns: 16rem minmax(0, 1fr); }\n}`}</code></pre>
     </section>
   </main>,
 };

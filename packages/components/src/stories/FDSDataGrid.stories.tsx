@@ -31,7 +31,7 @@ const columns: readonly FDSDataGridColumn<Shipment>[] = [
 
 function SelectableShipmentReview() {
   const [selected, setSelected] = useState<readonly Shipment[]>([]);
-  return <div style={{display: 'grid', gap: 'var(--fds-space-3)'}}>
+  return <div style={{display: 'grid', gap: 'var(--fds-space-12)'}}>
     <ActionGroup><span role="status">{selected.length} selected</span><Button size="small" tone="secondary" disabled={!selected.length}>Assign owner</Button></ActionGroup>
     <FDSDataGrid ariaLabel="Shipment review" columns={columns} rows={shipments} getRowId={(row) => row.id} selectable onSelectionChange={setSelected} />
   </div>;

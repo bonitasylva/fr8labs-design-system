@@ -4,23 +4,28 @@ import './Welcome.css';
 <Meta title="Getting Started/Changelog" />
 
 <main className="fds-root fds-welcome fds-changelog">
-  <p className="fds-welcome__version">Current release · components/tokens v0.3.0 · icons v0.1.1</p>
+  <p className="fds-welcome__version">Current release · components/tokens v0.4.0 · icons v0.1.1</p>
   <h1>Changelog</h1>
   <p className="fds-welcome__lede">See what changed in each package version.</p>
 
   <hr className="fds-welcome__rule" />
 
-  <section aria-labelledby="release-0-3-0">
-    <p><strong>19–21 Aug 2026</strong></p>
-    <h2 id="release-0-3-0">Components/tokens 0.3.0 · icons 0.1.1</h2>
+  <section aria-labelledby="release-0-4-0">
+    <p><strong>21 Aug 2026</strong></p>
+    <h2 id="release-0-4-0">Components/tokens 0.4.0 · icons 0.1.1</h2>
     <h3>Breaking changes</h3>
     <ul>
-      <li>Removed duplicate CSS token aliases. Replace aliases such as <code>--spacing-3</code> with their <code>--fds-*</code> semantic equivalent.</li>
+      <li>Replaced legacy primitive color, sizing, and functional aliases with the canonical primitive, semantic, and component token contract. Consumers that reference primitives directly must migrate to the documented replacement; product CSS should use semantic roles or the supported component API.</li>
+    </ul>
+    <h3>Added</h3>
+    <ul>
+      <li>Completed raw blue, neutral, green, amber, and red color ramps; added breakpoint, shape, and controlled-theme contract tokens.</li>
+      <li>Added searchable primitive, semantic, and component token references, with an explicit component-token usage boundary.</li>
     </ul>
     <h3>Changed</h3>
     <ul>
-      <li>Updated component styles to use canonical FDS tokens only.</li>
-      <li>Refined the Token Foundation documentation and added the Design Principles reference for operational workflows.</li>
+      <li>Reworked feedback/status roles and the supporting component states to use the new semantic color mappings.</li>
+      <li>Aligned the catalog, MCP output, package guides, and token documentation to the 0.4.0 contract.</li>
       <li>Kept <code>sandbox-fds-icons</code> at 0.1.1 because its package implementation did not change.</li>
     </ul>
   </section>

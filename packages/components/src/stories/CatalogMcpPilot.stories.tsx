@@ -10,7 +10,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const VersionedRecords: Story = {
-  render: () => <main style={{padding: 'var(--fds-space-5)'}}>
+  render: () => <main style={{padding: 'var(--fds-space-24)'}}>
     <h2>FDS catalog {catalog.currentApprovedVersion}</h2>
     <table>
       <thead><tr><th scope="col">ID</th><th scope="col">Kind</th><th scope="col">Status</th><th scope="col">Storybook source</th></tr></thead>

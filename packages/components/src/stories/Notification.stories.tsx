@@ -55,7 +55,7 @@ export const Overview: Story = {
 };
 
 export const Statuses: Story = {
-  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-4)', width: 'min(24rem, 100%)'}}>
+  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-16)', width: 'min(24rem, 100%)'}}>
     <Notification title="Carrier message received">A new carrier message is available for this shipment.</Notification>
     <Notification tone="success" title="Changes saved">Your changes were saved.</Notification>
     <Notification tone="warning" title="Connection interrupted">Updates will resume when the connection is restored.</Notification>
@@ -71,7 +71,7 @@ export const Statuses: Story = {
 };
 
 export const Examples: Story = {
-  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-4)', width: 'min(24rem, 100%)'}}>
+  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-16)', width: 'min(24rem, 100%)'}}>
     <Notification tone="success" title="Shipment invoice created" description={<>Quotation QTN-24071 was converted to <a href="#shipment-invoice-INV-24018">shipment invoice INV-24018</a>.</>} />
     <Notification tone="success" title="3 files duplicated" description="The copies were added to shipment SHP-260081." list={[
       <a href="#document-commercial-invoice">Commercial invoice.pdf</a>,

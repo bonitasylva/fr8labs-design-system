@@ -1,6 +1,6 @@
 {
   "name": "sandbox-fds-components",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Fr8Labs Design System testing components for browser-based React applications.",
   "license": "Apache-2.0",
   "homepage": "https://fr8labs-fds-storybook.vercel.app/",

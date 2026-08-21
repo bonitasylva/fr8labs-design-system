@@ -11,7 +11,7 @@ const meta = {
     fds: {approved: true, status: 'approved'},
     docs: {
       description: {
-        component: 'InlineAlert provides contextual information beside the visible workflow it affects. The title is optional. It supports a status icon, supporting message, list, non-primary direct action, three sizes, low or high emphasis, and dismissible or persistent behavior. Use a notification for completed background work, a banner for system-wide issues, and field help for one input. Errors announce assertively; info, success, and warning updates announce politely.',
+        component: 'InlineAlert provides contextual information beside the visible workflow it affects. The title is optional. It supports a status icon, supporting message, list, non-primary direct action, three sizes, and dismissible or persistent behavior. Use a notification for completed background work, a banner for system-wide issues, and field help for one input. Errors announce assertively; info, success, and warning updates announce politely.',
       },
     },
   },
@@ -53,18 +53,8 @@ export const CompleteMessage: Story = {
     await expect(canvas.getByRole('button', {name: 'Dismiss'})).toHaveFocus();
   },
 };
-export const HighEmphasis: Story = {
-  args: {
-    tone: 'success',
-    highEmphasis: true,
-    title: 'Report ready for review',
-    description: 'Download it from the dashboard or open it directly below.',
-    action: <Button size="small" tone="tertiary">View report</Button>,
-  },
-  parameters: {docs: {description: {story: 'Use high emphasis only when the message needs additional attention or stronger separation from nearby content.'}}},
-};
 export const Sizes: Story = {
-  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-4)'}}>
+  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-16)'}}>
     {(['small', 'medium', 'large'] as const).map((size) => <InlineAlert key={size} tone="warning" size={size} title={`${size[0].toUpperCase()}${size.slice(1)}`} persistent>Internal padding, text, and icon size scale together.</InlineAlert>)}
   </div>,
 };

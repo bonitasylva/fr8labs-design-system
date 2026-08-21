@@ -1,0 +1,53 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font-size",
+        "value": "2.5rem",
+        "files": [
+          "packages/components/src/stories/DesignPrinciples.css"
+        ],
+        "createdAt": "2026-08-21T04:44:46.896Z",
+        "reason": "Approved Storybook orientation-page display scale in DESIGN.md"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "1.5rem",
+        "files": [
+          "packages/components/src/stories/DesignPrinciples.css"
+        ],
+        "createdAt": "2026-08-21T04:44:46.935Z",
+        "reason": "Approved Storybook orientation-page section-heading scale in DESIGN.md"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2rem",
+        "files": [
+          "packages/components/src/stories/DesignPrinciples.css"
+        ],
+        "createdAt": "2026-08-21T04:44:46.973Z",
+        "reason": "Mobile floor preserves the approved Storybook orientation-page hierarchy"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2.5rem",
+        "files": [
+          "packages/components/.storybook/docs.css"
+        ],
+        "createdAt": "2026-08-21T08:08:44.048Z",
+        "reason": "Storybook docs title role reserved by DESIGN.md"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2rem",
+        "files": [
+          "packages/components/.storybook/docs.css"
+        ],
+        "createdAt": "2026-08-21T08:08:44.163Z",
+        "reason": "Responsive Storybook docs title role reserved by DESIGN.md"
+      }
+    ]
+  }
+}

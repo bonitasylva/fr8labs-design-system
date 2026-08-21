@@ -626,15 +626,20 @@ function TokenGroup({group, valueHeading}: {group: TokenGroupData; valueHeading:
     </div>
     <div className="fds-token-docs__table-wrap">
       <table>
+        <colgroup>
+          {group.preview && <col className="fds-token-docs__preview-column" />}
+          <col className="fds-token-docs__token-column" />
+          <col className="fds-token-docs__value-column" />
+        </colgroup>
         <thead><tr>
           {group.preview && <th scope="col">Preview</th>}
           <th scope="col">Token</th>
           <th scope="col">{valueHeading}</th>
         </tr></thead>
         <tbody>{group.tokens.map(([name, value]) => <tr key={name}>
-          {group.preview && <td data-label="Preview"><span className="fds-token-docs__color" style={{background: `var(${name})`}} /></td>}
-          <th scope="row" data-label="Token"><code>{name}</code></th>
-          <td data-label={valueHeading}><code>{value}</code></td>
+          {group.preview && <td className="fds-token-docs__preview" data-label="Preview"><span className="fds-token-docs__color" style={{background: `var(${name})`}} /></td>}
+          <th className="fds-token-docs__token" scope="row" data-label="Token"><code>{name}</code></th>
+          <td className="fds-token-docs__value" data-label={valueHeading}><code>{value}</code></td>
         </tr>)}</tbody>
       </table>
     </div>

@@ -7,3 +7,4 @@ node_modules/
 .agents/skills/hallmark/
 .hallmark/
 .impeccable/
+skills-lock.json

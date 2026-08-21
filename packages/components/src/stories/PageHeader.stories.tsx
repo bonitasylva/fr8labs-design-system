@@ -4,7 +4,7 @@ import {Button} from '../components/Button';
 import {PageHeader} from '../components/PageHeader';
 
 const actions = <ActionGroup><Button tone="secondary">Export</Button><Button>Create shipment</Button></ActionGroup>;
-const breadcrumbs = <ol style={{display: 'flex', gap: 8, margin: 0, padding: 0, listStyle: 'none'}}><li><a href="#operations">Operations</a></li><li aria-hidden="true">/</li><li aria-current="page">Shipment review</li></ol>;
+const breadcrumbs = <ol style={{display: 'flex', gap: 'var(--fds-space-2)', margin: 0, padding: 0, listStyle: 'none'}}><li><a href="#operations">Operations</a></li><li aria-hidden="true">/</li><li aria-current="page">Shipment review</li></ol>;
 
 const meta = {
   title: 'Components/Layout/PageHeader',

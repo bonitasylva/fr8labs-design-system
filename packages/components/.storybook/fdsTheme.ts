@@ -14,7 +14,7 @@ export const fdsTheme = create({
   appBorderColor: '#c8d2dc',
   appBorderRadius: 4,
   textColor: '#002245',
-  textMutedColor: '#525252',
+  textMutedColor: '#3f556b',
   barTextColor: '#5e758d',
   barSelectedColor: '#0067e7',
   barBg: '#ffffff',

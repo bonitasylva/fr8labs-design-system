@@ -1,0 +1,76 @@
+.sbdocs-wrapper.sbdocs-wrapper {
+  align-items: flex-start;
+  padding: var(--fds-space-5, 24px) var(--fds-space-5, 24px) calc(var(--fds-space-5, 24px) * 2);
+}
+
+.sbdocs-content.sbdocs-content {
+  width: 100%;
+  max-width: var(--fds-size-container-page, 80rem);
+}
+
+.sbdocs-content > main.fds-root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sbdocs-content > h1,
+.sbdocs-content > main.fds-root > h1,
+.sbdocs-content > main.fds-root > header:first-child h1 {
+  max-width: none;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: var(--fds-font-weight-heading, 600);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+  text-wrap: normal;
+}
+
+.sbdocs-content > h2,
+.sbdocs-content > main.fds-root h2 {
+  padding-block-end: 0;
+  border-block-end: 0;
+}
+
+.sbdocs-content.sbdocs-content hr {
+  height: 0;
+  margin: calc(var(--fds-space-5, 24px) * 2) 0 var(--fds-space-5, 24px);
+  border: 0;
+  background: none;
+}
+
+.sbdocs-content.sbdocs-content p:not(.docs-story *):not(.fds-component-overview__preview *) {
+  max-width: none;
+  text-wrap: normal;
+}
+
+.sbdocs-content .fds-installation__footer,
+.sbdocs-content .fds-welcome-home__footer,
+.sbdocs-content .fds-design-principles__gate {
+  border-block-start: 0;
+}
+
+.sbdocs-content div:has(> table.docblock-argstable) {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 48rem) {
+  .sbdocs-wrapper.sbdocs-wrapper {
+    padding: var(--fds-space-4, 16px);
+  }
+
+  .sbdocs-content main.fds-root :not(pre) > code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .sbdocs-content > h1,
+  .sbdocs-content > main.fds-root > h1,
+  .sbdocs-content > main.fds-root > header:first-child h1 {
+    font-size: 2rem;
+  }
+}

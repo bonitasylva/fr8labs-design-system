@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 const icon = (name: string) => <Icon name={name} />;
 const shortcut = (keys: string) => <kbd className="fds-keybinding-hint" aria-hidden="true">{keys}</kbd>;
-const row = {display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 8} as const;
+const row = {display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 'var(--fds-space-2)'} as const;
 
 export const Playground: Story = {};
 

@@ -29,7 +29,7 @@ export const ControlledNavigation: Story = {
 };
 
 export const BoundaryPages: Story = {
-  render: () => <div style={{display: 'grid', gap: 24}}><Pagination page={1} pageCount={6} onPageChange={() => {}} label="First-page boundary" /><Pagination page={6} pageCount={6} onPageChange={() => {}} label="Last-page boundary" /></div>,
+  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-5)'}}><Pagination page={1} pageCount={6} onPageChange={() => {}} label="First-page boundary" /><Pagination page={6} pageCount={6} onPageChange={() => {}} label="Last-page boundary" /></div>,
 };
 
 export const InvalidBoundsNormalize: Story = {

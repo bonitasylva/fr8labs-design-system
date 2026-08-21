@@ -1,5 +1,6 @@
 import {Meta} from '@storybook/addon-docs/blocks';
 import {Icon} from 'sandbox-fds-icons';
+import componentPackage from '../../package.json';
 import {
   ActionGroup,
   Avatar,
@@ -99,7 +100,7 @@ export function ComponentPreview({name}) {
 }
 
 <main className="fds-root fds-welcome fds-component-overview">
-  <p className="fds-welcome__version">sandbox-fds-components · v0.2.0</p>
+  <p className="fds-welcome__version">{componentPackage.name} · v{componentPackage.version}</p>
   <h1>Component overview</h1>
   <p className="fds-welcome__lede">Browse the current public FDS component surface by its approved category.</p>
 

@@ -31,7 +31,6 @@ const primitiveGroups: readonly TokenGroupData[] = [
       ['--fds-primitive-color-blue-500', '#008de4'],
       ['--fds-primitive-color-blue-600', '#0067e7'],
       ['--fds-primitive-color-blue-700', '#023c9b'],
-      ['--fds-primitive-color-primary-border', 'rgb(0 34 69 / 16%)'],
     ],
   },
   {
@@ -41,6 +40,7 @@ const primitiveGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-primitive-color-neutral-50', '#f6f8fb'],
+      ['--fds-primitive-color-neutral-100', '#eef2f6'],
       ['--fds-primitive-color-neutral-300', '#e3eaf1'],
       ['--fds-primitive-color-neutral-400', '#c8d2dc'],
       ['--fds-primitive-color-neutral-500', '#8496a8'],
@@ -96,26 +96,26 @@ const primitiveGroups: readonly TokenGroupData[] = [
   },
   {
     category: 'Color',
-    title: 'Status borders',
-    description: 'Distinct outlines for success, warning, and danger status badges.',
+    title: 'Supporting hues',
+    description: 'Raw hues used by semantic status borders.',
     preview: 'color',
     tokens: [
-      ['--fds-primitive-color-status-success-border', '#62a179'],
-      ['--fds-primitive-color-status-warning-border', '#a68d5b'],
-      ['--fds-primitive-color-status-danger-border', '#d36f69'],
+      ['--fds-primitive-color-green-500', '#62a179'],
+      ['--fds-primitive-color-amber-600', '#a68d5b'],
+      ['--fds-primitive-color-red-400', '#d36f69'],
     ],
   },
   {
     category: 'Color',
-    title: 'Interaction and overlay',
-    description: 'Alpha values for icons, hover feedback, and modal backdrops.',
+    title: 'Alpha colors',
+    description: 'Transparent neutral and blue values used by semantic interaction roles.',
     preview: 'color',
     tokens: [
-      ['--fds-primitive-color-icon-default', 'rgb(0 34 69 / 74%)'],
-      ['--fds-primitive-color-icon-disabled', 'rgb(0 34 69 / 38%)'],
-      ['--fds-primitive-color-icon-hover', 'rgb(0 34 69 / 4%)'],
-      ['--fds-primitive-color-action-hover', 'rgb(0 103 231 / 8%)'],
-      ['--fds-primitive-color-overlay', 'rgb(0 34 69 / 45%)'],
+      ['--fds-primitive-color-neutral-900-alpha-16', 'rgb(0 34 69 / 16%)'],
+      ['--fds-primitive-color-neutral-900-alpha-74', 'rgb(0 34 69 / 74%)'],
+      ['--fds-primitive-color-neutral-900-alpha-38', 'rgb(0 34 69 / 38%)'],
+      ['--fds-primitive-color-blue-600-alpha-8', 'rgb(0 103 231 / 8%)'],
+      ['--fds-primitive-color-neutral-900-alpha-45', 'rgb(0 34 69 / 45%)'],
     ],
   },
   {
@@ -157,11 +157,9 @@ const primitiveGroups: readonly TokenGroupData[] = [
       ['--fds-primitive-size-22', '22px'],
       ['--fds-primitive-size-24', '24px'],
       ['--fds-primitive-size-28', '28px'],
-      ['--fds-primitive-size-30', '30px'],
       ['--fds-primitive-size-32', '32px'],
       ['--fds-primitive-size-36', '36px'],
       ['--fds-primitive-size-40', '40px'],
-      ['--fds-primitive-size-48', '48px'],
       ['--fds-primitive-size-520', '520px'],
       ['--fds-primitive-size-540', '540px'],
     ],
@@ -234,6 +232,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     tokens: [
       ['--fds-color-surface-default', '--fds-primitive-color-white'],
       ['--fds-color-surface-subtle', '--fds-primitive-color-neutral-50'],
+      ['--fds-color-surface-hover', '--fds-primitive-color-neutral-100'],
     ],
   },
   {
@@ -253,8 +252,8 @@ const semanticGroups: readonly TokenGroupData[] = [
     description: 'Default and disabled icon states.',
     preview: 'color',
     tokens: [
-      ['--fds-color-icon-default', '--fds-primitive-color-icon-default'],
-      ['--fds-color-icon-disabled', '--fds-primitive-color-icon-disabled'],
+      ['--fds-color-icon-default', '--fds-primitive-color-neutral-900-alpha-74'],
+      ['--fds-color-icon-disabled', '--fds-primitive-color-neutral-900-alpha-38'],
     ],
   },
   {
@@ -286,18 +285,20 @@ const semanticGroups: readonly TokenGroupData[] = [
     description: 'Backdrop behind modal surfaces.',
     preview: 'color',
     tokens: [
-      ['--fds-color-overlay-backdrop', '--fds-primitive-color-overlay'],
+      ['--fds-color-overlay-backdrop', '--fds-primitive-color-neutral-900-alpha-45'],
     ],
   },
   {
     category: 'Color',
     title: 'Action',
-    description: 'Primary and danger interaction states.',
+    description: 'Primary, tertiary, and danger interaction states.',
     preview: 'color',
     tokens: [
       ['--fds-color-action-primary', '--fds-primitive-color-blue-600'],
+      ['--fds-color-action-primary-border', '--fds-primitive-color-neutral-900-alpha-16'],
       ['--fds-color-action-primary-active', '--fds-primitive-color-blue-700'],
-      ['--fds-color-action-primary-hover', '--fds-primitive-color-action-hover'],
+      ['--fds-color-action-primary-hover', '--fds-primitive-color-blue-600-alpha-8'],
+      ['--fds-color-action-tertiary-background', '--fds-primitive-color-transparent'],
       ['--fds-color-action-danger', '--fds-primitive-color-error-400'],
       ['--fds-color-action-danger-active', '--fds-primitive-color-error-700'],
     ],
@@ -373,7 +374,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-color-status-warning-surface', '--fds-color-surface-default'],
-      ['--fds-color-status-warning-border', '--fds-primitive-color-status-warning-border'],
+      ['--fds-color-status-warning-border', '--fds-primitive-color-amber-600'],
       ['--fds-color-status-warning-text', '--fds-color-feedback-warning-text'],
     ],
   },
@@ -384,7 +385,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-color-status-success-surface', '--fds-color-surface-default'],
-      ['--fds-color-status-success-border', '--fds-primitive-color-status-success-border'],
+      ['--fds-color-status-success-border', '--fds-primitive-color-green-500'],
       ['--fds-color-status-success-text', '--fds-color-feedback-success-text'],
     ],
   },
@@ -395,7 +396,7 @@ const semanticGroups: readonly TokenGroupData[] = [
     preview: 'color',
     tokens: [
       ['--fds-color-status-danger-surface', '--fds-color-surface-default'],
-      ['--fds-color-status-danger-border', '--fds-primitive-color-status-danger-border'],
+      ['--fds-color-status-danger-border', '--fds-primitive-color-red-400'],
       ['--fds-color-status-danger-text', '--fds-color-action-danger'],
     ],
   },
@@ -631,9 +632,9 @@ function TokenGroup({group, valueHeading}: {group: TokenGroupData; valueHeading:
           <th scope="col">{valueHeading}</th>
         </tr></thead>
         <tbody>{group.tokens.map(([name, value]) => <tr key={name}>
-          {group.preview && <td><span className="fds-token-docs__color" style={{background: `var(${name})`}} /></td>}
-          <th scope="row"><code>{name}</code></th>
-          <td><code>{value}</code></td>
+          {group.preview && <td data-label="Preview"><span className="fds-token-docs__color" style={{background: `var(${name})`}} /></td>}
+          <th scope="row" data-label="Token"><code>{name}</code></th>
+          <td data-label={valueHeading}><code>{value}</code></td>
         </tr>)}</tbody>
       </table>
     </div>
@@ -661,11 +662,11 @@ const breakpointGuidance = [
 
 export const Primitives: Story = {
   parameters: {docs: {description: {story: 'All approved raw FDS values, grouped by visual property.'}}},
-  render: () => <main className="fds-token-docs">
+  render: () => <main className="fds-token-docs fds-token-docs--catalog">
     <header>
       <p className="fds-token-docs__eyebrow">Layer 1 · Default FDS theme</p>
       <h2>Primitive tokens</h2>
-      <p className="fds-token-docs__intro">Literal values with no product meaning. They form the source scales for color, spacing, size, shape, typography, motion, and elevation.</p>
+      <p className="fds-token-docs__intro">Literal values with no product meaning. They form the source scales for color, spacing, size, shape, typography, motion, and elevation. Reference them only through a semantic token; product and component code must not select a primitive because its current value looks right.</p>
     </header>
 
     <section aria-label="Primitive token reference">
@@ -676,11 +677,11 @@ export const Primitives: Story = {
 
 export const Semantics: Story = {
   parameters: {docs: {description: {story: 'All approved purpose-based FDS roles and their source mappings.'}}},
-  render: () => <main className="fds-token-docs">
+  render: () => <main className="fds-token-docs fds-token-docs--catalog">
     <header>
       <p className="fds-token-docs__eyebrow">Layer 2 · Default FDS theme</p>
       <h2>Semantic tokens</h2>
-      <p className="fds-token-docs__intro">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from.</p>
+      <p className="fds-token-docs__intro">Purpose-based roles consumed by FDS components. Their names describe why a value is used; each mapping shows where that value comes from. Use the role that matches the interface meaning, state, or content—not another role that currently resolves to a similar value.</p>
     </header>
 
     <section aria-label="Semantic token reference">
@@ -704,9 +705,9 @@ export const Breakpoints: Story = {
         <table>
           <thead><tr><th scope="col">Breakpoint</th><th scope="col">Starts at</th><th scope="col">Layout intent</th></tr></thead>
           <tbody>{breakpointGuidance.map(({name, value, pixels, reference, use}) => <tr key={name}>
-            <th className="fds-breakpoint-docs__name" scope="row"><span>{name}</span><code>{reference}</code></th>
-            <td className="fds-breakpoint-docs__value"><code>{value}</code> <span className="fds-breakpoint-docs__pixels">({pixels}px)</span></td>
-            <td>{use}</td>
+            <th className="fds-breakpoint-docs__name" scope="row" data-label="Breakpoint"><span>{name}</span><code>{reference}</code></th>
+            <td className="fds-breakpoint-docs__value" data-label="Starts at"><code>{value}</code> <span className="fds-breakpoint-docs__pixels">({pixels}px)</span></td>
+            <td data-label="Layout intent">{use}</td>
           </tr>)}</tbody>
         </table>
       </div>
@@ -719,10 +720,10 @@ export const Breakpoints: Story = {
         <table className="fds-breakpoint-docs__containers">
           <thead><tr><th scope="col">Content</th><th scope="col">Maximum</th><th scope="col">Behavior</th></tr></thead>
           <tbody>
-            <tr><th scope="row">Forms<br /><code>--fds-size-container-form</code></th><td><code>48rem</code></td><td>Remain aligned to the page grid; inputs do not stretch across the viewport.</td></tr>
-            <tr><th scope="row">Reading<br /><code>--fds-size-container-reading</code></th><td><code>72ch</code></td><td>Keep paragraphs and guidance at a readable line length.</td></tr>
-            <tr><th scope="row">Standard pages<br /><code>--fds-size-container-page</code></th><td><code>80rem</code></td><td>Keep page regions related while the shell and background continue to fill the viewport.</td></tr>
-            <tr><th scope="row">Data workspaces</th><td>Fluid</td><td>Use available width for tables and operational canvases; constrain their internal columns instead.</td></tr>
+            <tr><th scope="row" data-label="Content">Forms<br /><code>--fds-size-container-form</code></th><td data-label="Maximum"><code>48rem</code></td><td data-label="Behavior">Remain aligned to the page grid; inputs do not stretch across the viewport.</td></tr>
+            <tr><th scope="row" data-label="Content">Reading<br /><code>--fds-size-container-reading</code></th><td data-label="Maximum"><code>72ch</code></td><td data-label="Behavior">Keep paragraphs and guidance at a readable line length.</td></tr>
+            <tr><th scope="row" data-label="Content">Standard pages<br /><code>--fds-size-container-page</code></th><td data-label="Maximum"><code>80rem</code></td><td data-label="Behavior">Keep page regions related while the shell and background continue to fill the viewport.</td></tr>
+            <tr><th scope="row" data-label="Content">Data workspaces</th><td data-label="Maximum">Fluid</td><td data-label="Behavior">Use available width for tables and operational canvases; constrain their internal columns instead.</td></tr>
           </tbody>
         </table>
       </div>

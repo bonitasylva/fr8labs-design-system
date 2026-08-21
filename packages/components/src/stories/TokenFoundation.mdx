@@ -1,38 +1,89 @@
 import {Meta} from '@storybook/addon-docs/blocks';
-import {Button, StatusBadge, TextInput} from '../index';
 import * as TokenStories from './TokenFoundation.stories';
 
 <Meta of={TokenStories} />
 
 # Tokens
 
-The approved default FDS v1 token foundation uses light mode, IBM Plex Sans Condensed, and compact desktop density. Components consume semantic roles; raw values remain in primitives, and component tokens exist only for stable repeated decisions. Dark mode is outside the current foundation.
+<p className="fds-token-docs__intro fds-token-docs__foundation-intro">FDS v1 is a light, compact foundation. Tokens resolve inside an <code>fds-root</code> subtree: product code uses semantic roles, while primitives supply raw values and component tokens stay internal. Dark mode and product overrides are outside this foundation.</p>
 
-<main className="fds-root fds-token-docs">
-  <section aria-labelledby="token-model">
-    <h2 id="token-model">How the token layers work</h2>
-    <ol className="fds-token-docs__layers">
-      <li><strong>Primitive</strong><span>Raw value</span><code>--fds-primitive-color-blue-600: #0067e7</code></li>
-      <li><strong>Semantic</strong><span>Purpose-based role</span><code>--fds-color-action-primary → blue-600</code></li>
-      <li><strong>Component</strong><span>Stable component decision</span><code>--fds-button-primary-background → action-primary</code></li>
-    </ol>
-    <p className="fds-token-docs__note">Product and component code should use semantic or component tokens. Primitive tokens are the source scale, not the consumer API.</p>
+{/*
+THESIS: The semantic token is the product decision; primitive and component tokens are supporting mappings owned by FDS.
+OWN-WORLD: FDS canvas, mist, navy data typography, flat borders, and Route Blue only for the active semantic path.
+STORY: The reader starts at the product-facing semantic API, then sees the primitive source and component implementation that FDS owns.
+FIRST VIEWPORT: One Route Blue semantic anchor leads; two quiet FDS-owned mappings support it before the reference table proves the rule.
+FORM: An asymmetric consumer-to-system map, seed 9e48d679.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+*/}
+
+<main className="fds-root fds-token-docs fds-token-docs--foundation">
+  <section className="fds-token-docs__cross-section" aria-labelledby="token-model">
+    <div className="fds-token-docs__cross-section-heading">
+      <h2 id="token-model">Product code starts with semantics.</h2>
+      <p>Choose the role that describes the job. FDS owns the primitive source and component mapping behind it.</p>
+    </div>
+
+    <div className="hallmark-token-map" role="list" aria-label="Token ownership flow">
+      <article className="hallmark-token-map__node hallmark-token-map__node--source" role="listitem">
+        <span className="hallmark-token-map__owner">Maintainer-owned</span>
+        <h3>Primitive source</h3>
+        <code>--fds-primitive-color-blue-600</code>
+        <p className="hallmark-token-map__value"><span className="hallmark-token-map__swatch" aria-hidden="true" />Raw value <code>#0067e7</code></p>
+        <span className="hallmark-token-map__connector" aria-hidden="true">→</span>
+      </article>
+      <article className="hallmark-token-map__node hallmark-token-map__node--choice" role="listitem">
+        <span className="hallmark-token-map__owner">Product-facing</span>
+        <h3>Semantic decision</h3>
+        <code>--fds-color-action-primary</code>
+        <p>The role product code consumes.</p>
+        <a href="/?path=/story/foundations-tokens--semantics" target="_top">Inspect semantic roles</a>
+        <span className="hallmark-token-map__connector" aria-hidden="true">→</span>
+      </article>
+      <article className="hallmark-token-map__node hallmark-token-map__node--implementation" role="listitem">
+        <span className="hallmark-token-map__owner">Component-owned</span>
+        <h3>Component mapping</h3>
+        <code>--fds-button-primary-background</code>
+        <p>Internal to the supported FDS component API.</p>
+      </article>
+    </div>
   </section>
 
-  <section aria-labelledby="token-states">
+  <section className="fds-token-docs__foundation-reference" aria-labelledby="token-quick-reference">
     <div className="fds-token-docs__section-heading">
-      <div><p className="fds-token-docs__kicker">In use</p><h2 id="token-states">Semantic roles in components</h2></div>
-      <p>Components consume the roles above so interaction and workflow meaning remain consistent.</p>
+      <div><h2 id="token-quick-reference">Choose by meaning</h2></div>
+      <p>Start with the semantic role that describes the job. Do not pick a primitive by its current visual value.</p>
     </div>
-    <div className="fds-token-docs__states">
-      <div><Button>Primary action</Button><Button tone="danger">Danger action</Button></div>
-      <div><StatusBadge status="approved" /><StatusBadge status="pending" /><StatusBadge status="blocked" /></div>
-      <div className="fds-token-docs__field"><TextInput label="Shipment reference" value="SHP-260081" onChange={() => {}} /><TextInput label="Invalid reference" value="" onChange={() => {}} error="Enter a shipment reference." /></div>
+    <div className="fds-token-docs__table-wrap fds-token-docs__quick-reference-table">
+      <table>
+        <thead><tr><th scope="col">I need a token for…</th><th scope="col">Use</th><th scope="col">Do not use</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">A primary next step</th><td className="fds-token-docs__recommendation" data-label="Use"><code>--fds-color-action-primary</code></td><td className="fds-token-docs__avoidance" data-label="Avoid"><code>--fds-primitive-color-blue-600</code></td></tr>
+          <tr><th scope="row">Default application text</th><td className="fds-token-docs__recommendation" data-label="Use"><code>--fds-color-text-default</code></td><td className="fds-token-docs__avoidance" data-label="Avoid"><code>--fds-primitive-color-neutral-900</code></td></tr>
+          <tr><th scope="row">Keyboard focus</th><td className="fds-token-docs__recommendation" data-label="Use"><code>--fds-color-focus-ring</code></td><td className="fds-token-docs__avoidance" data-label="Avoid"><code>--fds-color-action-primary</code> directly</td></tr>
+          <tr><th scope="row">Error feedback</th><td className="fds-token-docs__recommendation" data-label="Use"><code>{'--fds-color-feedback-error-*'}</code></td><td className="fds-token-docs__avoidance" data-label="Avoid"><code>--fds-color-action-danger</code> for non-action content</td></tr>
+          <tr><th scope="row">A button treatment</th><td className="fds-token-docs__recommendation" data-label="Use">the supported <code>Button</code> tone and size</td><td className="fds-token-docs__avoidance" data-label="Avoid">overriding <code>{'--fds-button-*'}</code> in product CSS</td></tr>
+        </tbody>
+      </table>
     </div>
+  </section>
+
+  <section className="fds-token-docs__governance fds-token-docs__foundation-governance" aria-labelledby="token-governance">
+    <div className="fds-token-docs__section-heading">
+      <div><h2 id="token-governance">When the catalog does not fit</h2></div>
+      <p>FDS maintainers own the token architecture. Propose a token only for a confirmed, reusable decision that existing semantics and component APIs cannot express.</p>
+    </div>
+    <ul className="fds-token-docs__decision-test" aria-label="Token proposal decision test">
+      <li>The decision repeats across confirmed consumers.</li>
+      <li>An existing semantic role or component API cannot express it.</li>
+      <li>The owner and source mapping are known.</li>
+    </ul>
+    <p className="fds-token-docs__note fds-token-docs__governance-note">If all three are true, record the role, source mapping, affected components, and why the current catalog does not fit. Run <code>npm run check:tokens</code>, then <a href="/?path=/story/foundations-tokens--token-names" target="_top">apply the naming guidance before FDS review</a>.</p>
   </section>
 
   <nav className="fds-token-docs__links" aria-label="Token references">
     <a href="/?path=/story/foundations-tokens--primitives" target="_top">Browse primitive tokens</a>
     <a href="/?path=/story/foundations-tokens--semantics" target="_top">Browse semantic tokens</a>
+    <a href="/?path=/story/foundations-tokens--breakpoints" target="_top">Browse breakpoints</a>
+    <a href="/?path=/story/foundations-tokens--token-names" target="_top">Read token naming guidance</a>
   </nav>
 </main>

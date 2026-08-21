@@ -6,7 +6,7 @@ const meta = {
   title: 'Components/Data display/InlineInput',
   component: InlineInput,
   tags: ['autodocs'],
-  decorators: [(Story) => <table aria-label="Editable invoice charge"><thead><tr><th scope="col" style={{padding: 8, textAlign: 'start'}}>Charge</th><th scope="col" style={{padding: 8, textAlign: 'end'}}>Amount</th></tr></thead><tbody><tr><th scope="row" style={{padding: 8, textAlign: 'start'}}>Ocean freight</th><td style={{minWidth: 180, padding: 8}}><Story /></td></tr></tbody></table>],
+  decorators: [(Story) => <table aria-label="Editable invoice charge"><thead><tr><th scope="col" style={{padding: 'var(--fds-space-2)', textAlign: 'start'}}>Charge</th><th scope="col" style={{padding: 'var(--fds-space-2)', textAlign: 'end'}}>Amount</th></tr></thead><tbody><tr><th scope="row" style={{padding: 'var(--fds-space-2)', textAlign: 'start'}}>Ocean freight</th><td style={{minWidth: 180, padding: 'var(--fds-space-2)'}}><Story /></td></tr></tbody></table>],
   parameters: {fds: {approved: true, status: 'approved'}, docs: {description: {component: 'InlineInput edits one dense value inside a table cell. Its label is an accessible name rather than visible field chrome; use TextInput for ordinary forms. It does not add editing behavior to DataTable or FDSDataGrid.'}}},
 } satisfies Meta<typeof InlineInput>;
 export default meta;

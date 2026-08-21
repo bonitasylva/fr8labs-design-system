@@ -14,10 +14,10 @@ type Story = StoryObj<typeof meta>;
 
 export const ImageAndInitials: Story = {
   args: {name: 'Sample Operator'},
-  render: () => <div style={{display: 'flex', alignItems: 'center', gap: 12}}><Avatar name="Sample Operator" src={portrait} /><Avatar name="Demo Reviewer" /><span>Image and initials preserve the person name.</span></div>,
+  render: () => <div style={{display: 'flex', alignItems: 'center', gap: 'var(--fds-space-3)'}}><Avatar name="Sample Operator" src={portrait} /><Avatar name="Demo Reviewer" /><span>Image and initials preserve the person name.</span></div>,
 };
 
 export const SizesAndFallbacks: Story = {
   args: {name: 'Sample Operator'},
-  render: () => <div style={{display: 'flex', alignItems: 'center', gap: 12}}><Avatar name="Sample Operator" size="small" /><Avatar name="Broken image" src="/missing-avatar.png" /><Avatar name="   " /><span>Small, failed-image, and missing-name boundaries.</span></div>,
+  render: () => <div style={{display: 'flex', alignItems: 'center', gap: 'var(--fds-space-3)'}}><Avatar name="Sample Operator" size="small" /><Avatar name="Broken image" src="/missing-avatar.png" /><Avatar name="   " /><span>Small, failed-image, and missing-name boundaries.</span></div>,
 };

@@ -44,5 +44,5 @@ export const Validation: Story = {
 };
 
 export const ReadOnlyAndDisabled: Story = {
-  render: () => <div style={{display: 'grid', gap: 16, minWidth: 320}}><Textarea label="Source instructions" value="Copied from the master job." onChange={() => {}} readOnly description="Read-only source value." /><Textarea label="Inherited instructions" value="Keep cargo dry." onChange={() => {}} isDisabled description="Inherited from the shipment." /></div>,
+  render: () => <div style={{display: 'grid', gap: 'var(--fds-space-4)', minWidth: 320}}><Textarea label="Source instructions" value="Copied from the master job." onChange={() => {}} readOnly description="Read-only source value." /><Textarea label="Inherited instructions" value="Keep cargo dry." onChange={() => {}} isDisabled description="Inherited from the shipment." /></div>,
 };

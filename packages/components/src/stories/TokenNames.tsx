@@ -107,7 +107,7 @@ export const renderTokenNamingGuide = () => <section className="fds-token-docs f
         <table>
           <thead><tr><th scope="col">Block</th><th scope="col">Purpose</th><th scope="col">Examples</th></tr></thead>
           <tbody>{vocabulary.map(([block, purpose, blockExamples]) => <tr key={block}>
-            <th scope="row">{block}</th><td>{purpose}</td><td><code>{blockExamples}</code></td>
+            <th scope="row" data-label="Block">{block}</th><td data-label="Purpose">{purpose}</td><td data-label="Examples"><code>{blockExamples}</code></td>
           </tr>)}</tbody>
         </table>
       </div>
@@ -149,7 +149,7 @@ export const renderTokenNamingGuide = () => <section className="fds-token-docs f
         <table>
           <thead><tr><th scope="col">Use</th><th scope="col">Avoid</th><th scope="col">Why</th></tr></thead>
           <tbody>{examples.map(([good, avoid, reason]) => <tr key={good}>
-            <th scope="row"><code>{good}</code></th><td><code>{avoid}</code></td><td>{reason}</td>
+            <th scope="row" data-label="Use"><code>{good}</code></th><td data-label="Avoid"><code>{avoid}</code></td><td data-label="Why">{reason}</td>
           </tr>)}</tbody>
         </table>
       </div>
